@@ -108,14 +108,14 @@ function Navbar() {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-[#0a0a0a]/80 backdrop-blur-2xl border-b border-white/5 shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
+          ? "bg-[#0C0C0C]/80 backdrop-blur-2xl border-b border-white/5 shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
           : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="text-xl font-bold tracking-tight cursor-pointer"
+          className="text-xl font-bold tracking-tight cursor-pointer font-[family-name:var(--font-display)]"
         >
           <span className="gradient-text">COACH</span>{" "}
           <span className="text-white">LUKI</span>
@@ -133,7 +133,7 @@ function Navbar() {
           ))}
           <button
             onClick={(e) => handleNavClick(e, "contact")}
-            className="bg-white text-black px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-accent hover:text-black transition-all duration-300 cursor-pointer"
+            className="bg-accent text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-accent-light hover:shadow-[0_0_30px_rgba(90,138,26,0.3)] transition-all duration-300 cursor-pointer"
           >
             Apply Now
           </button>
@@ -165,7 +165,7 @@ function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[#0a0a0a]/95 backdrop-blur-xl border-b border-white/5 overflow-hidden"
+            className="md:hidden bg-[#0C0C0C]/98 backdrop-blur-xl border-b border-white/5 overflow-hidden"
           >
             <div className="px-6 py-6 flex flex-col gap-4">
               {links.map((link) => (
@@ -179,7 +179,7 @@ function Navbar() {
               ))}
               <button
                 onClick={(e) => handleNavClick(e, "contact")}
-                className="bg-white text-black px-5 py-3 rounded-full text-center font-semibold mt-2 cursor-pointer"
+                className="bg-accent text-white px-5 py-3 rounded-full text-center font-semibold mt-2 cursor-pointer"
               >
                 Apply Now
               </button>
@@ -209,9 +209,9 @@ function Hero() {
         <motion.div
           animate={{ x: [0, 120, 0], y: [0, -60, 0] }}
           transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-accent/[0.04] rounded-full blur-[150px]"
+          className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-accent/[0.06] rounded-full blur-[150px]"
         />
-        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#0a0a0a] to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#0C0C0C] to-transparent" />
       </div>
 
       <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-6 pt-32 sm:pt-40 pb-20 min-h-screen flex flex-col justify-between">
@@ -223,13 +223,13 @@ function Hero() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="text-[clamp(3.5rem,10vw,9rem)] font-black tracking-tighter leading-[0.9] uppercase"
+              className="text-[clamp(1.75rem,5.8vw,9rem)] font-black tracking-[-0.05em] leading-[0.9] uppercase font-[family-name:var(--font-display)]"
             >
               <span className="text-white">Your</span>
               <br />
-              <span className="gradient-text">strongest</span>
+              <span className="text-outline">strongest</span>
               <br />
-              <span className="text-white">chapter</span>
+              <span className="gradient-text">chapter</span>
             </motion.h1>
 
             <motion.p
@@ -250,7 +250,7 @@ function Hero() {
             >
               <button
                 onClick={() => smoothScrollTo("contact")}
-                className="group relative px-10 py-4 bg-white text-black font-semibold rounded-full overflow-hidden transition-all duration-300 hover:bg-accent hover:shadow-[0_0_40px_rgba(74,222,128,0.25)] text-lg cursor-pointer"
+                className="group relative px-10 py-4 bg-accent text-white font-semibold rounded-full overflow-hidden transition-all duration-300 hover:bg-accent-light hover:shadow-[0_0_40px_rgba(90,138,26,0.3)] text-lg cursor-pointer"
               >
                 Let&apos;s Get Started
               </button>
@@ -279,7 +279,7 @@ function Hero() {
                 priority
                 className="w-full h-auto rounded-2xl grayscale contrast-110 brightness-90 object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent rounded-2xl" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0C] via-transparent to-transparent rounded-2xl" />
             </div>
           </motion.div>
         </div>
@@ -292,14 +292,14 @@ function Hero() {
           className="mt-12 flex flex-wrap items-center gap-8 sm:gap-16"
         >
           <div>
-            <div className="text-4xl sm:text-5xl font-bold text-white">
+            <div className="text-4xl md:text-5xl font-bold text-white">
               <CountUp target={100} suffix="+" />
             </div>
             <div className="text-sm text-zinc-500 mt-1">Clients</div>
           </div>
           <div className="w-px h-12 bg-zinc-800 hidden sm:block" />
           <div>
-            <div className="text-4xl sm:text-5xl font-bold text-white">
+            <div className="text-4xl md:text-5xl font-bold text-white">
               <CountUp target={5000} suffix="+" duration={2.5} />
             </div>
             <div className="text-sm text-zinc-500 mt-1">Hours Coached</div>
@@ -331,7 +331,7 @@ function About() {
   return (
     <section id="about" className="py-8 sm:py-12 px-4 sm:px-6">
       {/* Light container on dark page */}
-      <div ref={ref} className="max-w-7xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-16">
+      <div ref={ref} className="max-w-7xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           {/* Image side */}
           <motion.div
@@ -340,7 +340,7 @@ function About() {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-zinc-100">
+            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-stone-100">
               <Image
                 src="/luke.jpg"
                 alt="Luke Satterly - Coach Luki training on gymnastic rings in Berlin"
@@ -358,10 +358,12 @@ function About() {
             >
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
-                  <span className="text-lg">🌱</span>
+                  <svg className="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 21c0 0-8-3-8-10a8 8 0 0 1 8-8c0 5 3 8 8 8a8 8 0 0 1-8 10Z" />
+                  </svg>
                 </div>
                 <div>
-                  <div className="text-sm font-semibold text-zinc-800">Vegan Athlete</div>
+                  <div className="text-sm font-semibold text-stone-800">Vegan Athlete</div>
                   <div className="text-xs text-zinc-500">Plant-powered coaching</div>
                 </div>
               </div>
@@ -374,14 +376,14 @@ function About() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-zinc-900">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-stone-900">
               Hi, I&apos;m <span className="gradient-text">Luki</span>
             </h2>
             <div className="mt-8 space-y-5 text-zinc-600 leading-relaxed text-lg">
               <p>
                 I&apos;m Luke Satterly, but most people call me Coach Luki. I train out of{" "}
-                <strong className="text-zinc-900">John Reed Bötzow</strong> and{" "}
-                <strong className="text-zinc-900">EVO Spittelmarkt</strong> here in Berlin,
+                <strong className="text-stone-900">John Reed Bötzow</strong> and{" "}
+                <strong className="text-stone-900">EVO Spittelmarkt</strong> here in Berlin,
                 and I also coach people online. My thing is helping you get stronger, eat better,
                 and move without pain so you can actually enjoy your day-to-day life.
               </p>
@@ -401,7 +403,7 @@ function About() {
                 "In-person & online coaching available",
                 "Ring training & calisthenics focus",
               ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-zinc-700">
+                <li key={item} className="flex items-start gap-3 text-stone-700">
                   <svg className="w-5 h-5 text-accent-dark mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                   </svg>
@@ -466,7 +468,7 @@ function Services() {
           <span className="text-accent text-sm font-medium uppercase tracking-widest">
             Services
           </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mt-4">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4">
             How I can <span className="gradient-text">help you</span>
           </h2>
           <p className="text-zinc-400 mt-6 max-w-xl mx-auto text-lg">
@@ -482,7 +484,7 @@ function Services() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.15 }}
-              className="group relative bg-surface border border-white/[0.04] rounded-2xl p-8 hover:border-accent/20 transition-all duration-500 hover:shadow-[0_0_50px_rgba(74,222,128,0.06)]"
+              className="group relative bg-surface border border-white/[0.04] rounded-2xl p-8 hover:border-accent/20 transition-all duration-500 hover:shadow-[0_0_50px_rgba(90,138,26,0.06)]"
             >
               <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center text-accent mb-6 group-hover:bg-accent/20 transition-colors">
                 {service.icon}
@@ -552,7 +554,7 @@ function Pricing() {
 
   return (
     <section id="pricing" className="py-8 sm:py-12 px-4 sm:px-6">
-      <div ref={ref} className="max-w-7xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-16">
+      <div ref={ref} className="max-w-7xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -562,15 +564,15 @@ function Pricing() {
           <span className="text-accent-dark text-sm font-medium uppercase tracking-widest">
             Pricing
           </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mt-4 text-zinc-900">
-            Simple, honest <span className="gradient-text">pricing</span>
+          <h2 className="text-3xl lg:text-5xl font-bold mt-4 text-stone-900">
+            Simple, honest<br /> <span className="gradient-text">pricing</span>
           </h2>
           <p className="text-zinc-500 mt-6 max-w-lg mx-auto text-lg">
             No hidden fees, no long-term contracts. Pick what works for you and let&apos;s get to work.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto items-start">
+        <div className="grid lg:grid-cols-2 gap-6 max-w-4xl mx-auto items-start">
           {plans.map((plan, i) => (
             <motion.div
               key={plan.name}
@@ -579,23 +581,23 @@ function Pricing() {
               transition={{ duration: 0.5, delay: i * 0.12 }}
               className={`relative rounded-2xl p-8 sm:p-10 transition-all duration-500 ${
                 plan.popular
-                  ? "bg-zinc-900 text-white ring-2 ring-accent/50 shadow-[0_0_60px_rgba(74,222,128,0.1)] scale-[1.02]"
-                  : "bg-white border border-zinc-200 hover:border-zinc-300 hover:shadow-lg"
+                  ? "bg-stone-900 text-white ring-2 ring-accent/50 shadow-[0_0_60px_rgba(90,138,26,0.1)] lg:scale-[1.02]"
+                  : "bg-[#F7F5F0] border border-stone-200 hover:border-stone-300 hover:shadow-lg"
               }`}
             >
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span className="bg-accent text-black text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full">
+                  <span className="bg-accent text-white text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full">
                     Most Popular
                   </span>
                 </div>
               )}
 
-              <h3 className={`text-xl font-bold ${plan.popular ? "text-white" : "text-zinc-900"}`}>
+              <h3 className={`text-xl font-bold ${plan.popular ? "text-white" : "text-stone-900"}`}>
                 {plan.name}
               </h3>
               <div className="mt-4 flex items-baseline gap-1">
-                <span className={`text-5xl font-bold tracking-tight ${plan.popular ? "text-white" : "text-zinc-900"}`}>
+                <span className={`text-5xl font-bold tracking-tight ${plan.popular ? "text-white" : "text-stone-900"}`}>
                   &euro;{plan.price}
                 </span>
                 <span className={`text-sm ${plan.popular ? "text-zinc-400" : "text-zinc-500"}`}>
@@ -623,8 +625,8 @@ function Pricing() {
                 rel="noopener noreferrer"
                 className={`mt-8 block w-full py-4 rounded-xl text-center font-semibold transition-all duration-300 text-base ${
                   plan.popular
-                    ? "bg-accent text-black hover:bg-accent/90 hover:shadow-[0_0_30px_rgba(74,222,128,0.3)]"
-                    : "bg-zinc-900 text-white hover:bg-zinc-800"
+                    ? "bg-accent text-white hover:bg-accent-light hover:shadow-[0_0_30px_rgba(90,138,26,0.3)]"
+                    : "bg-stone-900 text-white hover:bg-stone-800"
                 }`}
               >
                 {plan.cta}
@@ -671,7 +673,7 @@ function Method() {
 
   return (
     <section id="method" className="py-8 sm:py-12 px-4 sm:px-6">
-      <div ref={ref} className="max-w-7xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-16 overflow-hidden">
+      <div ref={ref} className="max-w-7xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16 overflow-hidden">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -681,7 +683,7 @@ function Method() {
           <span className="text-accent-dark text-sm font-medium uppercase tracking-widest">
             The Process
           </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mt-4 text-zinc-900">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4 text-stone-900">
             The Luki Method
           </h2>
           <p className="text-zinc-500 mt-6 max-w-lg mx-auto text-lg">
@@ -700,12 +702,12 @@ function Method() {
             >
               {/* Connector line */}
               {i < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-10 left-[60%] w-[calc(100%-20%)] h-px bg-zinc-200" />
+                <div className="hidden lg:block absolute top-10 left-[60%] w-[calc(100%-20%)] h-px bg-stone-200" />
               )}
-              <div className="w-20 h-20 rounded-2xl bg-zinc-900 flex items-center justify-center mb-6">
+              <div className="w-20 h-20 rounded-2xl bg-stone-900 flex items-center justify-center mb-6">
                 <span className="text-2xl font-bold text-accent">{s.step}</span>
               </div>
-              <h3 className="text-xl font-semibold text-zinc-900 mb-3">{s.title}</h3>
+              <h3 className="text-xl font-semibold text-stone-900 mb-3">{s.title}</h3>
               <p className="text-zinc-500 leading-relaxed">{s.description}</p>
             </motion.div>
           ))}
@@ -759,7 +761,7 @@ function Philosophy() {
           <span className="text-accent text-sm font-medium uppercase tracking-widest">
             Philosophy
           </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mt-4">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4">
             How I <span className="gradient-text">train</span>
           </h2>
         </motion.div>
@@ -816,7 +818,7 @@ function FreeTemplate() {
         className="max-w-5xl mx-auto relative overflow-hidden rounded-2xl"
       >
         {/* Layered gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-emerald-600/10 to-cyan-500/20" />
+        <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-accent/10 to-accent-dark/20" />
         <div className="absolute inset-0 bg-grid opacity-20" />
         <div className="absolute inset-0 bg-black/60" />
 
@@ -845,7 +847,7 @@ function FreeTemplate() {
               href="https://linktr.ee/coachluki"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-semibold rounded-full hover:bg-accent hover:shadow-[0_0_40px_rgba(74,222,128,0.25)] transition-all duration-300 text-lg"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-accent text-white font-semibold rounded-full hover:bg-accent-light hover:shadow-[0_0_40px_rgba(90,138,26,0.3)] transition-all duration-300 text-lg cursor-pointer"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
@@ -887,7 +889,7 @@ function Experience() {
 
   return (
     <section id="experience" className="py-8 sm:py-12 px-4 sm:px-6">
-      <div ref={ref} className="max-w-7xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-16">
+      <div ref={ref} className="max-w-7xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -897,7 +899,7 @@ function Experience() {
           <span className="text-accent-dark text-sm font-medium uppercase tracking-widest">
             Background
           </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mt-4 text-zinc-900">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4 text-stone-900">
             My Experience
           </h2>
         </motion.div>
@@ -905,7 +907,7 @@ function Experience() {
         {/* Timeline */}
         <div className="relative max-w-3xl mx-auto">
           {/* Vertical line */}
-          <div className="absolute left-0 sm:left-1/2 top-0 bottom-0 w-px bg-zinc-200 sm:-translate-x-px" />
+          <div className="absolute left-0 sm:left-1/2 top-0 bottom-0 w-px bg-stone-200 sm:-translate-x-px" />
 
           {experiences.map((exp, i) => (
             <motion.div
@@ -918,12 +920,12 @@ function Experience() {
               }`}
             >
               {/* Dot */}
-              <div className="absolute left-0 sm:left-1/2 w-4 h-4 rounded-full bg-white border-[3px] border-zinc-900 -translate-x-[7px] sm:-translate-x-1/2 mt-1.5 z-10" />
+              <div className="absolute left-0 sm:left-1/2 w-4 h-4 rounded-full bg-white border-[3px] border-stone-900 -translate-x-[7px] sm:-translate-x-1/2 mt-1.5 z-10" />
 
               {/* Content */}
               <div className={`pl-8 sm:pl-0 sm:w-1/2 ${i % 2 === 0 ? "sm:pr-12 sm:text-right" : "sm:pl-12"}`}>
                 <span className="text-zinc-400 text-sm">{exp.period}</span>
-                <h3 className="text-xl font-bold text-zinc-900 mt-1">{exp.company}</h3>
+                <h3 className="text-xl font-bold text-stone-900 mt-1">{exp.company}</h3>
                 <p className="text-accent-dark font-medium text-sm mt-1">{exp.role}</p>
                 <p className="text-zinc-500 mt-3 leading-relaxed">{exp.description}</p>
               </div>
@@ -966,8 +968,8 @@ function Testimonials() {
     <section id="testimonials" className="py-24 sm:py-32 relative overflow-hidden">
       {/* Layered background */}
       <div className="absolute inset-0 bg-grid opacity-20" />
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#0a0a0a] to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a0a0a] to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#0C0C0C] to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0C0C0C] to-transparent" />
       <div className="absolute inset-0 radial-glow-green" />
 
       <div ref={ref} className="relative max-w-7xl mx-auto px-6">
@@ -980,7 +982,7 @@ function Testimonials() {
           <span className="text-accent text-sm font-medium uppercase tracking-widest">
             Testimonials
           </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mt-4">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4">
             What clients <span className="gradient-text">say</span>
           </h2>
           <p className="text-zinc-400 mt-6 max-w-lg mx-auto text-lg">
@@ -988,33 +990,41 @@ function Testimonials() {
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          {testimonials.map((t, i) => (
-            <motion.div
-              key={t.name}
-              initial={{ opacity: 0, y: 30, rotate: 0 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="testimonial-card bg-zinc-800/80 backdrop-blur-sm border border-white/[0.06] rounded-2xl p-8 transition-all duration-500 hover:bg-zinc-800"
-            >
-              <div className="flex items-center gap-1 mb-4">
-                {[...Array(5)].map((_, j) => (
-                  <svg key={j} className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-              <p className="text-zinc-300 leading-relaxed italic mb-6">
-                &ldquo;{t.text}&rdquo;
-              </p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
-                  <span className="text-accent font-semibold text-sm">{t.name[0]}</span>
+        {/* Horizontal marquee — two copies for seamless loop */}
+        <div className="relative">
+          {/* Fade edges */}
+          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
+
+          <motion.div
+            className="flex gap-6"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          >
+            {[...testimonials, ...testimonials].map((t, i) => (
+              <div
+                key={`${t.name}-${i}`}
+                className="flex-shrink-0 w-[340px] sm:w-[400px] bg-surface border border-white/[0.06] rounded-2xl p-8 hover:border-accent/20 transition-all duration-500"
+              >
+                <div className="flex items-center gap-1 mb-4">
+                  {[...Array(5)].map((_, j) => (
+                    <svg key={j} className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
                 </div>
-                <span className="font-semibold text-white">{t.name}</span>
+                <p className="text-zinc-300 leading-relaxed italic mb-6">
+                  &ldquo;{t.text}&rdquo;
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
+                    <span className="text-accent font-semibold text-sm">{t.name[0]}</span>
+                  </div>
+                  <span className="font-semibold text-white">{t.name}</span>
+                </div>
               </div>
-            </motion.div>
-          ))}
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>
@@ -1064,7 +1074,7 @@ function SocialCTA() {
           <span className="text-accent text-sm font-medium uppercase tracking-widest">
             Stay Connected
           </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mt-4">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4">
             Follow the <span className="gradient-text">journey</span>
           </h2>
           <p className="text-zinc-400 mt-6 max-w-lg mx-auto text-lg">
@@ -1082,7 +1092,7 @@ function SocialCTA() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.15 }}
-              className="group relative p-8 sm:p-10 rounded-2xl bg-surface border border-white/[0.04] hover:border-accent/20 transition-all duration-500 hover:shadow-[0_0_50px_rgba(74,222,128,0.06)]"
+              className="group relative p-8 sm:p-10 rounded-2xl bg-surface border border-white/[0.04] hover:border-accent/20 transition-all duration-500 hover:shadow-[0_0_50px_rgba(90,138,26,0.06)]"
             >
               <div className="flex items-start justify-between mb-6">
                 <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent/20 transition-colors">
@@ -1143,7 +1153,7 @@ function FAQ() {
 
   return (
     <section id="faq" className="py-8 sm:py-12 px-4 sm:px-6">
-      <div ref={ref} className="max-w-3xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-16">
+      <div ref={ref} className="max-w-3xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -1153,7 +1163,7 @@ function FAQ() {
           <span className="text-accent-dark text-sm font-medium uppercase tracking-widest">
             FAQ
           </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mt-4 text-zinc-900">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4 text-stone-900">
             Got questions?
           </h2>
           <p className="text-zinc-500 mt-6 text-lg">
@@ -1171,9 +1181,9 @@ function FAQ() {
             >
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="w-full flex items-center justify-between gap-4 p-5 sm:p-6 rounded-xl bg-zinc-50 hover:bg-zinc-100 transition-colors text-left group cursor-pointer"
+                className="w-full flex items-center justify-between gap-4 p-5 sm:p-6 rounded-xl bg-stone-50 hover:bg-stone-100 transition-colors text-left group cursor-pointer"
               >
-                <span className="text-base font-semibold text-zinc-900 group-hover:text-zinc-700 transition-colors">
+                <span className="text-base font-semibold text-stone-900 group-hover:text-stone-700 transition-colors">
                   {faq.question}
                 </span>
                 <motion.svg
@@ -1267,7 +1277,7 @@ function Contact() {
 
   return (
     <section id="contact" className="py-8 sm:py-12 px-4 sm:px-6">
-      <div ref={ref} className="max-w-5xl mx-auto dark-container py-20 sm:py-28 px-6 sm:px-16 relative overflow-hidden">
+      <div ref={ref} className="max-w-5xl mx-auto dark-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16 relative overflow-hidden">
         {/* Background layers inside container */}
         <div className="absolute inset-0 bg-grid opacity-30 rounded-[2rem]" />
         <div className="absolute inset-0 radial-glow-green rounded-[2rem]" />
@@ -1282,7 +1292,7 @@ function Contact() {
             <span className="text-accent text-sm font-medium uppercase tracking-widest">
               Get Started
             </span>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mt-4">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4">
               Ready to <span className="gradient-text">transform</span>?
             </h2>
             <p className="text-zinc-400 mt-6 max-w-lg mx-auto text-lg">
@@ -1370,7 +1380,7 @@ function Contact() {
 
                 <button
                   type="submit"
-                  className="w-full py-4 bg-white text-black font-semibold rounded-xl hover:bg-accent hover:shadow-[0_0_40px_rgba(74,222,128,0.2)] transition-all duration-300 text-lg"
+                  className="w-full py-4 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light hover:shadow-[0_0_40px_rgba(90,138,26,0.3)] transition-all duration-300 text-lg cursor-pointer"
                 >
                   Let&apos;s Work Together
                 </button>
@@ -1391,18 +1401,18 @@ function Contact() {
               </svg>
               @coachluki
             </a>
-            <span className="text-zinc-700">|</span>
+            <span className="text-stone-700">|</span>
             <a href="https://www.threads.com/@coachluki" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-white transition-colors">
               <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 16 16">
                 <path d="M6.321 6.016c-.27-.18-1.166-.802-1.166-.802.756-1.081 1.753-1.502 3.132-1.502.975 0 1.803.327 2.394.948s.928 1.509 1.005 2.644q.492.207.905.484c1.109.745 1.719 1.86 1.719 3.137 0 2.716-2.226 5.075-6.256 5.075C4.594 16 1 13.987 1 7.994 1 2.034 4.482 0 8.044 0 9.69 0 13.55.243 15 5.036l-1.36.353C12.516 1.974 10.163 1.43 8.006 1.43c-3.565 0-5.582 2.171-5.582 6.79 0 4.143 2.254 6.343 5.63 6.343 2.777 0 4.847-1.443 4.847-3.556 0-1.438-1.208-2.127-1.27-2.127-.236 1.234-.868 3.31-3.644 3.31-1.618 0-3.013-1.118-3.013-2.582 0-2.09 1.984-2.847 3.55-2.847.586 0 1.294.04 1.663.114 0-.637-.54-1.728-1.9-1.728-1.25 0-1.566.405-1.967.868ZM8.716 8.19c-2.04 0-2.304.87-2.304 1.416 0 .878 1.043 1.168 1.6 1.168 1.02 0 2.067-.282 2.232-2.423a6.2 6.2 0 0 0-1.528-.161" />
               </svg>
               Threads
             </a>
-            <span className="text-zinc-700">|</span>
+            <span className="text-stone-700">|</span>
             <a href="https://linktr.ee/coachluki" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-white transition-colors">
               Linktree
             </a>
-            <span className="text-zinc-700">|</span>
+            <span className="text-stone-700">|</span>
             <span className="flex items-center gap-2">
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
@@ -1472,7 +1482,7 @@ function Locations() {
           <span className="text-accent text-sm font-medium uppercase tracking-widest">
             Locations
           </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mt-4">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4">
             Where I <span className="gradient-text">train</span>
           </h2>
           <p className="text-zinc-400 mt-6 max-w-lg mx-auto text-lg">
