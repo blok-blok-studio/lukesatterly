@@ -218,12 +218,12 @@ function Hero() {
         {/* Big bold headline */}
         <div className="flex-1 flex flex-col lg:flex-row items-center lg:items-end gap-8 lg:gap-0">
           {/* Text + image layout */}
-          <div className="flex-1 w-full">
+          <div className="flex-1 w-full overflow-hidden">
             <motion.h1
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="text-[clamp(1.75rem,5.8vw,9rem)] font-black tracking-[-0.05em] leading-[0.9] uppercase font-[family-name:var(--font-display)]"
+              className="text-[clamp(1.75rem,5.8vw,7rem)] font-black tracking-[-0.05em] leading-[0.9] uppercase font-[family-name:var(--font-display)]"
             >
               <span className="text-white">Your</span>
               <br />
