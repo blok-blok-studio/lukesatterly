@@ -3,9 +3,9 @@
 :root {
   --background: #0C0C0C;
   --foreground: #F0EDE6;
-  --accent: #5A8A1A;
-  --accent-dark: #4A7515;
-  --accent-light: #6B9E25;
+  --accent: #006633;
+  --accent-dark: #005528;
+  --accent-light: #00803D;
   --surface: #161616;
   --surface-light: #EDEAE3;
   --muted: #8A8A85;
@@ -58,7 +58,7 @@ h1, h2, h3 {
 
 /* Gradient text utility — monochromatic lime, not generic green-to-cyan */
 .gradient-text {
-  background: linear-gradient(135deg, #6B9E25 0%, #5A8A1A 50%, #4A7515 100%);
+  background: linear-gradient(135deg, #00803D 0%, #006633 50%, #005528 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -66,7 +66,7 @@ h1, h2, h3 {
 
 /* Glow effect */
 .glow {
-  box-shadow: 0 0 60px rgba(90, 138, 26, 0.12);
+  box-shadow: 0 0 60px rgba(0, 102, 51, 0.12);
 }
 
 /* Background variations */
@@ -124,8 +124,8 @@ h1, h2, h3 {
 /* Animated background grid */
 .bg-grid {
   background-image:
-    linear-gradient(rgba(90, 138, 26, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(90, 138, 26, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(0, 102, 51, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 102, 51, 0.03) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
@@ -145,16 +145,16 @@ h1, h2, h3 {
 /* Section divider */
 .section-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(90, 138, 26, 0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(0, 102, 51, 0.2), transparent);
 }
 
 /* Radial glow backgrounds */
 .radial-glow-green {
-  background: radial-gradient(ellipse at 50% 0%, rgba(90, 138, 26, 0.08) 0%, transparent 60%);
+  background: radial-gradient(ellipse at 50% 0%, rgba(0, 102, 51, 0.08) 0%, transparent 60%);
 }
 
 .radial-glow-bottom {
-  background: radial-gradient(ellipse at 50% 100%, rgba(90, 138, 26, 0.06) 0%, transparent 50%);
+  background: radial-gradient(ellipse at 50% 100%, rgba(0, 102, 51, 0.06) 0%, transparent 50%);
 }
 
 /* Testimonial card tilt */
@@ -171,7 +171,7 @@ h1, h2, h3 {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(to bottom, transparent, rgba(90, 138, 26, 0.3), transparent);
+  background: linear-gradient(to bottom, transparent, rgba(0, 102, 51, 0.3), transparent);
   transform: translateX(-50%);
 }
 

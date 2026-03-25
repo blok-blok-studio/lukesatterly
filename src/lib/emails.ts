@@ -1,7 +1,7 @@
 /* ─────────────────── EMAIL TEMPLATES ─────────────────── */
 /* 5-email drip sequence for Coach Luki funnel subscribers */
 
-const BRAND_COLOR = "#5A8A1A";
+const BRAND_COLOR = "#006633";
 const SITE_URL = "https://coachluki.com";
 
 function layout(content: string) {

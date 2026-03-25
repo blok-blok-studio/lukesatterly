@@ -20,10 +20,13 @@ function FunnelNav() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
         <Link
           href="/"
-          className="text-xl font-bold tracking-tight font-[family-name:var(--font-display)] cursor-pointer"
+          className="flex items-center gap-2.5 cursor-pointer"
         >
-          <span className="gradient-text">COACH</span>{" "}
-          <span className="text-white">LUKI</span>
+          <img src="/logo-icon-green.png" alt="Coach Luki" className="w-8 h-8" />
+          <span className="text-xl font-bold tracking-tight font-[family-name:var(--font-display)]">
+            <span className="gradient-text">COACH</span>{" "}
+            <span className="text-white">LUKI</span>
+          </span>
         </Link>
         <Link
           href="/"
@@ -199,7 +202,7 @@ function FunnelForm() {
 
               <button
                 onClick={next}
-                className="w-full mt-8 py-4 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light hover:shadow-[0_0_30px_rgba(90,138,26,0.3)] transition-all duration-300 text-lg cursor-pointer"
+                className="w-full mt-8 py-4 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)] transition-all duration-300 text-lg cursor-pointer"
               >
                 Next &rarr;
               </button>
@@ -295,7 +298,7 @@ function FunnelForm() {
                 </button>
                 <button
                   onClick={next}
-                  className="flex-1 py-4 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light hover:shadow-[0_0_30px_rgba(90,138,26,0.3)] transition-all duration-300 text-lg cursor-pointer"
+                  className="flex-1 py-4 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)] transition-all duration-300 text-lg cursor-pointer"
                 >
                   Almost there &rarr;
                 </button>
@@ -350,7 +353,7 @@ function FunnelForm() {
                 </button>
                 <button
                   onClick={next}
-                  className="flex-1 py-4 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light hover:shadow-[0_0_30px_rgba(90,138,26,0.3)] transition-all duration-300 text-lg cursor-pointer"
+                  className="flex-1 py-4 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)] transition-all duration-300 text-lg cursor-pointer"
                 >
                   Get My Free Template
                 </button>
@@ -388,7 +391,7 @@ function FunnelForm() {
                 href="https://linktr.ee/coachluki"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-3 w-full py-4 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light hover:shadow-[0_0_30px_rgba(90,138,26,0.3)] transition-all duration-300 text-lg cursor-pointer mb-6"
+                className="inline-flex items-center justify-center gap-3 w-full py-4 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)] transition-all duration-300 text-lg cursor-pointer mb-6"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />

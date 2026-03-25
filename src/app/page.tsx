@@ -115,10 +115,13 @@ function Navbar() {
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="text-xl font-bold tracking-tight cursor-pointer font-[family-name:var(--font-display)]"
+          className="flex items-center gap-2.5 cursor-pointer"
         >
-          <span className="gradient-text">COACH</span>{" "}
-          <span className="text-white">LUKI</span>
+          <Image src="/logo-icon-green.png" alt="Coach Luki" width={32} height={32} className="w-8 h-8" />
+          <span className="text-xl font-bold tracking-tight font-[family-name:var(--font-display)]">
+            <span className="gradient-text">COACH</span>{" "}
+            <span className="text-white">LUKI</span>
+          </span>
         </button>
 
         <div className="hidden md:flex items-center gap-8">
@@ -133,7 +136,7 @@ function Navbar() {
           ))}
           <button
             onClick={(e) => handleNavClick(e, "contact")}
-            className="bg-accent text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-accent-light hover:shadow-[0_0_30px_rgba(90,138,26,0.3)] transition-all duration-300 cursor-pointer"
+            className="bg-accent text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)] transition-all duration-300 cursor-pointer"
           >
             Apply Now
           </button>
@@ -250,7 +253,7 @@ function Hero() {
             >
               <button
                 onClick={() => smoothScrollTo("contact")}
-                className="group relative px-10 py-4 bg-accent text-white font-semibold rounded-full overflow-hidden transition-all duration-300 hover:bg-accent-light hover:shadow-[0_0_40px_rgba(90,138,26,0.3)] text-lg cursor-pointer"
+                className="group relative px-10 py-4 bg-accent text-white font-semibold rounded-full overflow-hidden transition-all duration-300 hover:bg-accent-light hover:shadow-[0_0_40px_rgba(0,102,51,0.3)] text-lg cursor-pointer"
               >
                 Let&apos;s Get Started
               </button>
@@ -484,7 +487,7 @@ function Services() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.15 }}
-              className="group relative bg-surface border border-white/[0.04] rounded-2xl p-8 hover:border-accent/20 transition-all duration-500 hover:shadow-[0_0_50px_rgba(90,138,26,0.06)]"
+              className="group relative bg-surface border border-white/[0.04] rounded-2xl p-8 hover:border-accent/20 transition-all duration-500 hover:shadow-[0_0_50px_rgba(0,102,51,0.06)]"
             >
               <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center text-accent mb-6 group-hover:bg-accent/20 transition-colors">
                 {service.icon}
@@ -581,7 +584,7 @@ function Pricing() {
               transition={{ duration: 0.5, delay: i * 0.12 }}
               className={`relative rounded-2xl p-8 sm:p-10 transition-all duration-500 ${
                 plan.popular
-                  ? "bg-stone-900 text-white ring-2 ring-accent/50 shadow-[0_0_60px_rgba(90,138,26,0.1)] lg:scale-[1.02]"
+                  ? "bg-stone-900 text-white ring-2 ring-accent/50 shadow-[0_0_60px_rgba(0,102,51,0.1)] lg:scale-[1.02]"
                   : "bg-[#F7F5F0] border border-stone-200 hover:border-stone-300 hover:shadow-lg"
               }`}
             >
@@ -625,7 +628,7 @@ function Pricing() {
                 rel="noopener noreferrer"
                 className={`mt-8 block w-full py-4 rounded-xl text-center font-semibold transition-all duration-300 text-base ${
                   plan.popular
-                    ? "bg-accent text-white hover:bg-accent-light hover:shadow-[0_0_30px_rgba(90,138,26,0.3)]"
+                    ? "bg-accent text-white hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)]"
                     : "bg-stone-900 text-white hover:bg-stone-800"
                 }`}
               >
@@ -1035,7 +1038,7 @@ function SocialCTA() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.15 }}
-              className="group relative p-8 sm:p-10 rounded-2xl bg-surface border border-white/[0.04] hover:border-accent/20 transition-all duration-500 hover:shadow-[0_0_50px_rgba(90,138,26,0.06)]"
+              className="group relative p-8 sm:p-10 rounded-2xl bg-surface border border-white/[0.04] hover:border-accent/20 transition-all duration-500 hover:shadow-[0_0_50px_rgba(0,102,51,0.06)]"
             >
               <div className="flex items-start justify-between mb-6">
                 <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent/20 transition-colors">
@@ -1323,7 +1326,7 @@ function Contact() {
 
                 <button
                   type="submit"
-                  className="w-full py-4 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light hover:shadow-[0_0_40px_rgba(90,138,26,0.3)] transition-all duration-300 text-lg cursor-pointer"
+                  className="w-full py-4 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light hover:shadow-[0_0_40px_rgba(0,102,51,0.3)] transition-all duration-300 text-lg cursor-pointer"
                 >
                   Let&apos;s Work Together
                 </button>
