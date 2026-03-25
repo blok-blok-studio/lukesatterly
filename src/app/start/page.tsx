@@ -17,7 +17,7 @@ type FormData = {
 function FunnelNav() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0C0C0C]/80 backdrop-blur-2xl border-b border-white/5">
-      <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
         <Link
           href="/"
           className="text-xl font-bold tracking-tight font-[family-name:var(--font-display)] cursor-pointer"
@@ -125,7 +125,7 @@ function FunnelForm() {
     <div className="max-w-xl mx-auto">
       {step < 3 && <ProgressDots current={step} total={3} />}
 
-      <div className="relative overflow-hidden rounded-2xl bg-surface border border-white/[0.06] p-8 sm:p-10">
+      <div className="relative overflow-hidden rounded-2xl bg-surface border border-white/[0.06] p-5 sm:p-8 lg:p-10">
         <AnimatePresence mode="wait">
           {/* ── STEP 1: Name + Email ── */}
           {step === 0 && (
@@ -384,7 +384,7 @@ function FunnelForm() {
 
               {/* Conditional CTA based on qualification */}
               {isHighIntent && (
-                <div className="bg-accent/5 border border-accent/20 rounded-2xl p-6 text-left">
+                <div className="bg-accent/5 border border-accent/20 rounded-2xl p-5 sm:p-6 text-left">
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 mt-1">
                       <svg className="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -411,7 +411,7 @@ function FunnelForm() {
               )}
 
               {isOnlineReady && (
-                <div className="bg-accent/5 border border-accent/20 rounded-2xl p-6 text-left">
+                <div className="bg-accent/5 border border-accent/20 rounded-2xl p-5 sm:p-6 text-left">
                   <h4 className="font-bold text-white text-lg">Want personalized coaching online?</h4>
                   <p className="text-zinc-400 text-sm mt-1 mb-4">
                     I work with clients across Europe remotely. Same quality coaching, same results. Let&apos;s chat about your goals.
@@ -429,7 +429,7 @@ function FunnelForm() {
               )}
 
               {isMidIntent && (
-                <div className="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6 text-left">
+                <div className="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-5 sm:p-6 text-left">
                   <h4 className="font-bold text-white text-lg">When you&apos;re ready, I&apos;m here</h4>
                   <p className="text-zinc-400 text-sm mt-1 mb-4">
                     Start with the template and see how you feel. When you want hands-on coaching, book a free consultation.
@@ -447,7 +447,7 @@ function FunnelForm() {
               )}
 
               {isExploring && (
-                <div className="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6 text-left">
+                <div className="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-5 sm:p-6 text-left">
                   <h4 className="font-bold text-white">No rush at all</h4>
                   <p className="text-zinc-400 text-sm mt-1 mb-4">
                     Follow me for daily training tips and nutrition advice. When you&apos;re ready to level up, I&apos;m one message away.
@@ -489,7 +489,7 @@ export default function StartPage() {
       <div className="noise-overlay" />
 
       {/* Hero */}
-      <section className="relative min-h-[70vh] flex items-center overflow-hidden">
+      <section className="relative min-h-[60vh] sm:min-h-[70vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-30" />
         <motion.div
           animate={{ x: [0, 80, 0], y: [0, -40, 0] }}
@@ -497,7 +497,7 @@ export default function StartPage() {
           className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-accent/[0.05] rounded-full blur-[150px]"
         />
 
-        <div className="relative z-10 max-w-5xl mx-auto px-6 pt-28 pb-16 w-full">
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 pt-24 sm:pt-28 pb-12 sm:pb-16 w-full">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -510,11 +510,11 @@ export default function StartPage() {
               </svg>
               Free Download
             </span>
-            <h1 className="text-[clamp(2rem,5vw,4rem)] font-black tracking-[-0.03em] leading-[1.1] font-[family-name:var(--font-display)]">
+            <h1 className="text-[clamp(1.75rem,4.5vw,3.5rem)] font-black tracking-[-0.03em] leading-[1.1] font-[family-name:var(--font-display)]">
               Get Your Free<br />
               <span className="gradient-text">Workout Template</span>
             </h1>
-            <p className="text-zinc-400 mt-6 text-lg max-w-lg mx-auto leading-relaxed">
+            <p className="text-zinc-400 mt-4 sm:mt-6 text-base sm:text-lg max-w-lg mx-auto leading-relaxed">
               The same programming I use with my 1-on-1 coaching clients. Grab it free — no strings attached.
             </p>
 
@@ -539,14 +539,14 @@ export default function StartPage() {
       </section>
 
       {/* What's Inside */}
-      <section className="py-16 sm:py-20">
-        <div className="max-w-5xl mx-auto px-6">
+      <section className="py-10 sm:py-16 lg:py-20">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-2xl md:text-3xl font-bold text-center mb-12 font-[family-name:var(--font-display)]"
+            className="text-2xl md:text-3xl font-bold text-center mb-8 sm:mb-12 font-[family-name:var(--font-display)]"
           >
             What&apos;s inside the template
           </motion.h2>
@@ -564,7 +564,7 @@ export default function StartPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="p-6 rounded-2xl bg-surface border border-white/[0.04] text-center"
+                className="p-4 sm:p-6 rounded-2xl bg-surface border border-white/[0.04] text-center"
               >
                 <div className="w-12 h-12 mx-auto rounded-xl bg-accent/10 flex items-center justify-center text-accent mb-4">
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -579,8 +579,8 @@ export default function StartPage() {
       </section>
 
       {/* Social Proof */}
-      <section className="pb-16 sm:pb-20">
-        <div className="max-w-3xl mx-auto px-6">
+      <section className="pb-10 sm:pb-16 lg:pb-20">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6">
           <div className="grid sm:grid-cols-2 gap-4">
             {[
               { name: "Sarah M.", text: "I used to dread going to the gym. Now I actually look forward to it." },
@@ -592,7 +592,7 @@ export default function StartPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="p-6 rounded-2xl bg-surface border border-white/[0.04]"
+                className="p-5 sm:p-6 rounded-2xl bg-surface border border-white/[0.04]"
               >
                 <div className="flex items-center gap-1 mb-3">
                   {[...Array(5)].map((_, j) => (
@@ -615,14 +615,14 @@ export default function StartPage() {
       </section>
 
       {/* Form Section */}
-      <section id="form" className="py-16 sm:py-24 radial-glow-green">
-        <div className="max-w-5xl mx-auto px-6">
+      <section id="form" className="py-12 sm:py-16 lg:py-24 radial-glow-green">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-12"
+            className="text-center mb-8 sm:mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-display)]">
               Grab your <span className="gradient-text">free template</span>
@@ -637,8 +637,8 @@ export default function StartPage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-10 border-t border-white/5">
-        <div className="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-zinc-600">
+      <footer className="py-8 sm:py-10 border-t border-white/5">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-zinc-600">
           <p>&copy; {new Date().getFullYear()} Coach Luki. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <Link href="/" className="hover:text-white transition-colors cursor-pointer">Home</Link>
