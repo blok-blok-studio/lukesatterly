@@ -803,63 +803,6 @@ function Philosophy() {
   );
 }
 
-/* ─────────────────── FREE TEMPLATE CTA ─────────────────── */
-function FreeTemplate() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  return (
-    <section className="py-8 sm:py-12 px-4 sm:px-6">
-      <motion.div
-        ref={ref}
-        initial={{ opacity: 0, y: 30 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6 }}
-        className="max-w-5xl mx-auto relative overflow-hidden rounded-2xl"
-      >
-        {/* Layered gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-accent/10 to-accent-dark/20" />
-        <div className="absolute inset-0 bg-grid opacity-20" />
-        <div className="absolute inset-0 bg-black/60" />
-
-        <div className="relative px-8 sm:px-16 py-16 sm:py-20 flex flex-col lg:flex-row items-center gap-10">
-          {/* Left: text */}
-          <div className="flex-1 text-center lg:text-left">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-medium mb-6">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 10.5v6m3-3H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
-              </svg>
-              Free Download
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white leading-tight">
-              Get my free<br />
-              <span className="gradient-text">workout template</span>
-            </h2>
-            <p className="text-zinc-300 mt-4 max-w-md leading-relaxed">
-              This is the same kind of programming I use with my coaching clients.
-              Grab it, try it out, no sign-up needed.
-            </p>
-          </div>
-
-          {/* Right: CTA */}
-          <div className="flex-shrink-0">
-            <a
-              href="https://linktr.ee/coachluki"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-accent text-white font-semibold rounded-full hover:bg-accent-light hover:shadow-[0_0_40px_rgba(90,138,26,0.3)] transition-all duration-300 text-lg cursor-pointer"
-            >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
-              </svg>
-              Download Free Template
-            </a>
-          </div>
-        </div>
-      </motion.div>
-    </section>
-  );
-}
 
 /* ─────────────────── EXPERIENCE TIMELINE (light) ─────────────────── */
 function Experience() {
@@ -1528,7 +1471,7 @@ export default function Home() {
       <FadeInSection><Pricing /></FadeInSection>
       <FadeInSection><Method /></FadeInSection>
       <FadeInSection><Philosophy /></FadeInSection>
-      <FadeInSection><FreeTemplate /></FadeInSection>
+
       <FadeInSection><Experience /></FadeInSection>
       <FadeInSection><Locations /></FadeInSection>
       <FadeInSection><Testimonials /></FadeInSection>
