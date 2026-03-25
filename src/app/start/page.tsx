@@ -103,8 +103,32 @@ function FunnelForm() {
     return Object.keys(newErrors).length === 0;
   };
 
+  const [submitting, setSubmitting] = useState(false);
+
+  const submitToApi = async () => {
+    try {
+      setSubmitting(true);
+      await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+    } catch {
+      // Fail silently — don't block the user from getting the PDF
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   const next = () => {
-    if (validateStep()) setStep((s) => Math.min(s + 1, 3));
+    if (!validateStep()) return;
+    if (step === 2) {
+      // Final step — submit to API then show results
+      submitToApi();
+      setStep(3);
+    } else {
+      setStep((s) => Math.min(s + 1, 3));
+    }
   };
   const back = () => setStep((s) => Math.max(s - 1, 0));
 
