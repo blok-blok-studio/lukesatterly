@@ -935,9 +935,9 @@ function Testimonials() {
 
         {/* Horizontal marquee — two copies for seamless loop */}
         <div className="relative">
-          {/* Fade edges */}
-          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
+          {/* Fade edges — narrow to avoid clipping card content */}
+          <div className="absolute left-0 top-0 bottom-0 w-8 sm:w-12 bg-gradient-to-r from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-8 sm:w-12 bg-gradient-to-l from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
 
           <motion.div
             className="flex gap-6"
