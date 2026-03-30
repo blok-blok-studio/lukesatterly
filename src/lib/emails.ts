@@ -123,18 +123,19 @@ export function testimonialEmail(firstName: string) {
     </p>
     <div style="background: #f8f8f6; padding: 20px; border-radius: 12px; margin: 20px 0;">
       <p style="font-style: italic; margin: 0 0 8px 0; line-height: 1.6;">
-        "I used to dread going to the gym. Now I actually look forward to it.
-        Luke makes every session feel different and always checks in on how
-        I'm doing that day."
+        "Luke is what a personal trainer should be. He encourages, motivates
+        and pushes you. He has extensive physiological knowledge and has not
+        left a question unanswered. I can only recommend working with him!"
       </p>
-      <p style="margin: 0; font-weight: 600; color: ${BRAND_COLOR};">— Sarah M.</p>
+      <p style="margin: 0; font-weight: 600; color: ${BRAND_COLOR};">— Rasmus</p>
     </div>
     <div style="background: #f8f8f6; padding: 20px; border-radius: 12px; margin: 20px 0;">
       <p style="font-style: italic; margin: 0 0 8px 0; line-height: 1.6;">
-        "Six months of online coaching and I'm in the best shape of my life.
-        The weekly check-ins keep me on track even when motivation dips."
+        "Starting my training journey with Luke as my PT a year ago has been
+        the best investment I ever made for my health and fitness. He knows
+        just when to push me harder and when to take a step back."
       </p>
-      <p style="margin: 0; font-weight: 600; color: ${BRAND_COLOR};">— Anna K.</p>
+      <p style="margin: 0; font-weight: 600; color: ${BRAND_COLOR};">— Andreea</p>
     </div>
     <p style="line-height: 1.7;">
       Whether it's in-person at my Berlin gyms or online from anywhere — the

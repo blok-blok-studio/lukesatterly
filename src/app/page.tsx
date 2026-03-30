@@ -219,14 +219,14 @@ function Hero() {
 
       <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-6 pt-32 sm:pt-40 pb-20 min-h-screen flex flex-col justify-between">
         {/* Big bold headline */}
-        <div className="flex-1 flex flex-col lg:flex-row items-center lg:items-end gap-8 lg:gap-0">
+        <div className="flex-1 flex flex-col lg:flex-row items-center lg:items-end gap-8 lg:gap-12">
           {/* Text + image layout */}
-          <div className="flex-1 w-full overflow-hidden">
+          <div className="flex-1 w-full min-w-0" style={{ containerType: "inline-size" }}>
             <motion.h1
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="text-[clamp(1.75rem,5.8vw,7rem)] font-black tracking-[-0.05em] leading-[0.9] uppercase font-[family-name:var(--font-display)]"
+              className="text-[clamp(1.75rem,9.5cqi,5.25rem)] font-black tracking-[-0.05em] leading-[0.9] uppercase font-[family-name:var(--font-display)]"
             >
               <span className="text-white">Your</span>
               <br />
@@ -332,7 +332,7 @@ function About() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="about" className="py-8 sm:py-12 px-4 sm:px-6">
+    <section id="about" className="py-8 sm:py-12 px-4 sm:px-6 scroll-mt-20">
       {/* Light container on dark page */}
       <div ref={ref} className="max-w-7xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16">
         <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -361,8 +361,10 @@ function About() {
             >
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
-                  <svg className="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 21c0 0-8-3-8-10a8 8 0 0 1 8-8c0 5 3 8 8 8a8 8 0 0 1-8 10Z" />
+                  <svg className="w-6 h-6" viewBox="0 0 100 100" fill="none">
+                    <circle cx="50" cy="50" r="44" stroke="var(--accent)" strokeWidth="6" />
+                    <path d="M30 30 Q32 55 50 78 Q68 55 70 30" stroke="var(--accent)" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                    <path d="M58 38 C62 30 68 24 78 20 C74 30 68 36 62 42 Z" fill="var(--accent)" />
                   </svg>
                 </div>
                 <div>
@@ -460,7 +462,7 @@ function Services() {
   ];
 
   return (
-    <section id="services" className="py-24 sm:py-32 radial-glow-green">
+    <section id="services" className="py-24 sm:py-32 radial-glow-green scroll-mt-20">
       <div ref={ref} className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -533,7 +535,7 @@ function Pricing() {
         "At John Reed B\u00F6tzow or EVO Spittelmarkt",
       ],
       cta: "Get Started",
-      stripeLink: "#", // Replace with Stripe Payment Link
+      stripeLink: "/start",
       popular: false,
     },
     {
@@ -550,13 +552,13 @@ function Pricing() {
         "Program adjustments as you progress",
       ],
       cta: "Go All In",
-      stripeLink: "#", // Replace with Stripe Payment Link
+      stripeLink: "/start",
       popular: true,
     },
   ];
 
   return (
-    <section id="pricing" className="py-8 sm:py-12 px-4 sm:px-6">
+    <section id="pricing" className="py-8 sm:py-12 px-4 sm:px-6 scroll-mt-20">
       <div ref={ref} className="max-w-7xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -624,9 +626,7 @@ function Pricing() {
 
               <a
                 href={plan.stripeLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`mt-8 block w-full py-4 rounded-xl text-center font-semibold transition-all duration-300 text-base ${
+                className={`mt-8 block w-full py-4 rounded-xl text-center font-semibold transition-all duration-300 text-base cursor-pointer ${
                   plan.popular
                     ? "bg-accent text-white hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)]"
                     : "bg-stone-900 text-white hover:bg-stone-800"
@@ -893,31 +893,45 @@ function Testimonials() {
 
   const testimonials = [
     {
-      name: "Sarah M.",
-      text: "I used to dread going to the gym. Now I actually look forward to it. Luke makes every session feel different and always checks in on how I\u2019m doing that day.",
+      name: "Rasmus",
+      text: "Luke is what a personal trainer should be. He encourages, motivates and pushes you. He pushes you when you need it, and pushes you more when you don\u2019t know you need it. He has extensive physiological knowledge and has not left a question unanswered. I can only recommend working with him!",
     },
     {
-      name: "Marco T.",
-      text: "I had no idea what I was doing in the gym before working with Luki. He was patient, explained everything, and the nutrition tips alone changed how I feel day to day.",
+      name: "Ali",
+      text: "I worked with Luke in private coaching sessions. He was very curious about my goals and tailored a great coaching program for me where I started seeing results quickly. He provided great advice and helped me commit to my program and motivated me to keep going.",
     },
     {
-      name: "Anna K.",
-      text: "Six months of online coaching with Luki and I\u2019m in the best shape of my life. The weekly check-ins really keep me on track, even when motivation dips.",
+      name: "Marion",
+      text: "Luke hat mein Selbstvertrauen gest\u00E4rkt, indem er mich herausfordert und mich bei meinem Wunsch, trotz Arthrose fit und beweglich zu bleiben, durch gezielte \u00DCbungen unterst\u00FCtzt. Er zeigt mir, dass ich Kraft habe und diese auch steigern kann. Deshalb f\u00FChle ich mich gut aufgehoben bei ihm.",
     },
     {
-      name: "David R.",
-      text: "What I like about Luki is he doesn\u2019t just tell you what to do, he explains why. The training and nutrition work together and it all just clicks.",
+      name: "Andreea",
+      text: "Starting my training journey with Luke as my PT a year ago has been the best investment I ever made for my health and fitness. He knows just when to push me harder and when to take a step back. Our sessions are more than just workouts \u2014 they\u2019re a time where I can laugh, let out a bit of frustration, and achieve things I never thought I could.",
+    },
+    {
+      name: "Adriano",
+      text: "Luke Satterly ist ein wahnsinnig netter, aufmerksamer und am\u00FCsanter Mensch und Trainer. Sein Repertoire und sein Fachwissen sind gewaltig. Vor allem aber kriegt Luke es hin, dass ich jedes Mal besser gelaunt vom Training komme als ich hingegangen bin. Das ist die ganz gro\u00DFe Kunst.",
+    },
+    {
+      name: "\u00D8ystein",
+      text: "I\u2019ve worked with Luke periodically for over 8 months now, and it\u2019s been a great experience. He\u2019s very knowledgeable on both the practical and theoretical side of things, and always positive and friendly, while pushing me to do my best. The value of continuing working with Luke exceeded my expectations.",
+    },
+    {
+      name: "Jim",
+      text: "Luke takes the time to tailor my workouts to my goals, and changes it up to keep me interested and motivated. I really appreciate how he pushes me beyond my limits, to get the best results. I always leave our sessions feeling better than when I walked into the gym. He\u2019s great!",
+    },
+    {
+      name: "Andrius",
+      text: "Working with Luke was a game-changer. His challenging workouts push you beyond what you thought you were capable of, all while being enjoyable and motivating. Highly recommended!",
     },
   ];
 
   return (
-    <section id="testimonials" className="py-24 sm:py-32 relative overflow-hidden">
+    <section id="testimonials" className="py-24 sm:py-32 relative overflow-hidden scroll-mt-20">
       {/* Layered background */}
       <div className="absolute inset-0 bg-grid opacity-20" />
       <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#0C0C0C] to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0C0C0C] to-transparent" />
-      <div className="absolute inset-0 radial-glow-green" />
-
       <div ref={ref} className="relative max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -945,7 +959,7 @@ function Testimonials() {
           <motion.div
             className="flex gap-6"
             animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
           >
             {[...testimonials, ...testimonials].map((t, i) => (
               <div
@@ -1068,37 +1082,37 @@ function FAQ() {
 
   const faqs = [
     {
-      question: "Do I need gym experience to work with you?",
-      answer: "Not at all. A big chunk of my clients started from zero. I\u2019ll teach you everything from scratch and make sure you feel comfortable and confident in the gym. That\u2019s literally my job.",
+      question: "Is personal training right for me and my goals?",
+      answer: "Personal training is right for you if you don\u2019t just want to \u201Cwork out\u201D \u2014 you want a clear plan, structure, and measurable progress. Most people don\u2019t struggle because they\u2019re lazy, but because they\u2019re guessing. I remove that guesswork and give you a system tailored to your body, your schedule, and your goals. Whether you\u2019re just starting out, coming back from an injury, or looking to take your training to the next level \u2014 I meet you where you are and guide you forward.",
+    },
+    {
+      question: "Is online coaching effective for achieving real results?",
+      answer: "Yes \u2014 if it\u2019s done properly. Online coaching isn\u2019t just a PDF plan. It\u2019s ongoing guidance, structured programming, and regular adjustments based on your progress. You\u2019ll know exactly what to do, how to do it, and why you\u2019re doing it \u2014 while having accountability and support along the way. For many clients, online coaching actually works better because it integrates into real life instead of depending on fixed appointments.",
+    },
+    {
+      question: "Why should I work with a coach instead of training on my own?",
+      answer: "Because results come from consistency and direction \u2014 not just effort. Most people train hard, but not effectively. They repeat the same workouts, lack progression, or don\u2019t adjust when something isn\u2019t working. A coach gives you structure, holds you accountable, and makes sure every session moves you closer to your goal. It\u2019s the difference between being busy and actually making progress.",
+    },
+    {
+      question: "What makes you different from other personal trainers?",
+      answer: "I don\u2019t just coach workouts \u2014 I build systems that fit into your life. My approach is focused on long-term results, not quick fixes. That means smart programming, honest feedback, and adapting everything to your reality \u2014 not forcing you into a one-size-fits-all plan. I also place a strong emphasis on technique, injury prevention, and sustainable habits, so you don\u2019t just see progress \u2014 you keep it. You\u2019re not just getting a trainer. You\u2019re getting a structured, thought-out process.",
+    },
+    {
+      question: "How do you help me stay consistent and accountable?",
+      answer: "Motivation comes and goes \u2014 structure is what keeps you moving. I build your training in a way that fits your schedule and current lifestyle, so it\u2019s realistic to stick to. On top of that, you\u2019ll have regular check-ins, clear targets, and ongoing adjustments \u2014 so you always know where you stand and what\u2019s next. My role is to keep you on track, especially on the days you don\u2019t feel like it.",
     },
     {
       question: "I\u2019m vegan. Can you work with that?",
       answer: "Absolutely. I\u2019m vegan myself, so plant-based nutrition is kind of my thing. I\u2019ll help you hit your protein targets, optimize your meals, and make sure you\u2019re not just surviving on pasta and hummus.",
     },
     {
-      question: "How soon will I see results?",
-      answer: "Most clients start feeling stronger and more energized within the first 2 to 3 weeks. Visible changes usually show up around 6 to 8 weeks, depending on your consistency and where you\u2019re starting from.",
-    },
-    {
-      question: "What\u2019s the difference between in-person and online coaching?",
-      answer: "In-person, I\u2019m right there with you in the gym coaching every rep. Online, you get the same quality programming and nutrition plan, plus weekly video check-ins and direct message support. Both get results.",
-    },
-    {
-      question: "Can I cancel anytime?",
-      answer: "Yes. There are no long-term contracts. Monthly plans renew each month and you can cancel whenever you want. I\u2019d rather earn your loyalty than lock you in.",
-    },
-    {
       question: "What gyms do you train at?",
       answer: "I train clients at John Reed B\u00F6tzow in Prenzlauer Berg and EVO Spittelmarkt in Mitte. You pick whichever location is more convenient for you.",
-    },
-    {
-      question: "Do you offer trial sessions?",
-      answer: "You can start with the Essentials plan at \u20AC240/month and see how we work together. No long-term lock-in, so there\u2019s no risk. If you want the full experience, you can always upgrade.",
     },
   ];
 
   return (
-    <section id="faq" className="py-8 sm:py-12 px-4 sm:px-6">
+    <section id="faq" className="py-8 sm:py-12 px-4 sm:px-6 scroll-mt-20">
       <div ref={ref} className="max-w-3xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -1180,7 +1194,7 @@ function WhatsAppButton() {
     <AnimatePresence>
       {visible && (
         <motion.a
-          href="https://wa.me/4917XXXXXXXX"
+          href="https://wa.me/491234567890"
           target="_blank"
           rel="noopener noreferrer"
           initial={{ scale: 0, opacity: 0 }}
@@ -1222,7 +1236,7 @@ function Contact() {
   };
 
   return (
-    <section id="contact" className="py-8 sm:py-12 px-4 sm:px-6">
+    <section id="contact" className="py-8 sm:py-12 px-4 sm:px-6 scroll-mt-20">
       <div ref={ref} className="max-w-5xl mx-auto dark-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16 relative overflow-hidden">
         {/* Background layers inside container */}
         <div className="absolute inset-0 bg-grid opacity-30 rounded-[2rem]" />
@@ -1262,7 +1276,7 @@ function Contact() {
                 </div>
                 <h3 className="text-2xl font-bold text-white">Opening your email client!</h3>
                 <p className="text-zinc-400 mt-2">Complete sending the email to get in touch.</p>
-                <button onClick={() => setSubmitted(false)} className="mt-6 text-accent text-sm">
+                <button onClick={() => setSubmitted(false)} className="mt-6 text-accent text-sm cursor-pointer hover:underline">
                   Send another message
                 </button>
               </div>
@@ -1356,7 +1370,17 @@ function Contact() {
             </a>
             <span className="text-stone-700">|</span>
             <a href="https://linktr.ee/coachluki" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-white transition-colors">
+              <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M13.511 5.853l4.005-4.117 2.325 2.381-4.201 4.005h5.909v3.305h-5.937l4.229 4.108-2.325 2.334-5.741-5.769-5.741 5.769-2.325-2.325 4.229-4.108H2V8.122h5.909L3.708 4.117l2.325-2.381 4.005 4.117V0h3.473v5.853zM10.038 16.16h3.473v7.84h-3.473v-7.84z" />
+              </svg>
               Linktree
+            </a>
+            <span className="text-stone-700">|</span>
+            <a href="https://www.linkedin.com/in/coachluki/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-white transition-colors">
+              <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
+              LinkedIn
             </a>
             <span className="text-stone-700">|</span>
             <span className="flex items-center gap-2">
@@ -1380,14 +1404,17 @@ function Footer() {
       <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-zinc-600">
         <p>&copy; {new Date().getFullYear()} Coach Luki. All rights reserved.</p>
         <div className="flex items-center gap-6">
-          <a href="https://www.instagram.com/coachluki/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+          <a href="https://www.instagram.com/coachluki/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors cursor-pointer">
             Instagram
           </a>
-          <a href="https://www.threads.com/@coachluki" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+          <a href="https://www.threads.com/@coachluki" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors cursor-pointer">
             Threads
           </a>
-          <a href="https://linktr.ee/coachluki" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+          <a href="https://linktr.ee/coachluki" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors cursor-pointer">
             Linktree
+          </a>
+          <a href="https://www.linkedin.com/in/coachluki/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors cursor-pointer">
+            LinkedIn
           </a>
         </div>
       </div>
@@ -1416,7 +1443,7 @@ function Locations() {
   ];
 
   return (
-    <section id="locations" className="py-24 sm:py-32 relative">
+    <section id="locations" className="py-24 sm:py-32 relative scroll-mt-20">
       <div className="absolute inset-0 bg-grid opacity-20" />
       <div ref={ref} className="relative max-w-7xl mx-auto px-6">
         <motion.div
@@ -1481,7 +1508,7 @@ export default function Home() {
       <FadeInSection><FAQ /></FadeInSection>
       <FadeInSection><SocialCTA /></FadeInSection>
       <FadeInSection><Contact /></FadeInSection>
-      <WhatsAppButton />
+      {/* <WhatsAppButton /> — Enable when Luke provides his WhatsApp number */}
       <Footer />
     </>
   );

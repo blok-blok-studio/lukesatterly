@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 type FormData = {
   name: string;
   email: string;
-  goal: string;
+  goals: string[];
   preference: string;
   timeline: string;
 };
@@ -81,14 +81,15 @@ function FunnelForm() {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
-    goal: "",
+    goals: [],
     preference: "",
     timeline: "",
   });
-  const [errors, setErrors] = useState<Partial<FormData>>({});
+  const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
+  const [submitting, setSubmitting] = useState(false);
 
   const validateStep = () => {
-    const newErrors: Partial<FormData> = {};
+    const newErrors: Partial<Record<keyof FormData, string>> = {};
     if (step === 0) {
       if (!formData.name.trim()) newErrors.name = "Required";
       if (!formData.email.trim()) newErrors.email = "Required";
@@ -96,7 +97,7 @@ function FunnelForm() {
         newErrors.email = "Invalid email";
     }
     if (step === 1) {
-      if (!formData.goal) newErrors.goal = "Pick a goal";
+      if (formData.goals.length === 0) newErrors.goals = "Pick at least one goal";
       if (!formData.preference) newErrors.preference = "Pick one";
     }
     if (step === 2) {
@@ -106,15 +107,16 @@ function FunnelForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const [submitting, setSubmitting] = useState(false);
-
   const submitToApi = async () => {
     try {
       setSubmitting(true);
       await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          goal: formData.goals.join(", "),
+        }),
       });
     } catch {
       // Fail silently — don't block the user from getting the PDF
@@ -123,10 +125,9 @@ function FunnelForm() {
     }
   };
 
-  const next = () => {
+  const advance = () => {
     if (!validateStep()) return;
     if (step === 2) {
-      // Final step — submit to API then show results
       submitToApi();
       setStep(3);
     } else {
@@ -135,18 +136,14 @@ function FunnelForm() {
   };
   const back = () => setStep((s) => Math.max(s - 1, 0));
 
-  const goals = ["Build Muscle", "Lose Weight", "Get Stronger", "Move Pain-Free", "General Fitness"];
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    advance();
+  };
+
+  const goals = ["Build Muscle", "Lose Weight", "Get Stronger", "Move Pain-Free", "General Fitness", "Better Nutrition", "Injury Recovery", "Flexibility", "Mental Health"];
   const preferences = ["In-Person in Berlin", "Online", "Both"];
   const timelines = ["Ready to start now", "In the next month", "Just exploring"];
-
-  /* ── Conditional CTA logic ── */
-  const isHighIntent =
-    formData.timeline === "Ready to start now" &&
-    (formData.preference === "In-Person in Berlin" || formData.preference === "Both");
-  const isOnlineReady =
-    formData.timeline === "Ready to start now" && formData.preference === "Online";
-  const isExploring = formData.timeline === "Just exploring";
-  const isMidIntent = formData.timeline === "In the next month";
 
   return (
     <div className="max-w-xl mx-auto">
@@ -164,52 +161,54 @@ function FunnelForm() {
               exit="exit"
               transition={{ duration: 0.3 }}
             >
-              <h3 className="text-2xl font-bold text-white mb-2 font-[family-name:var(--font-display)]">
-                Let&apos;s get started
-              </h3>
-              <p className="text-zinc-400 text-sm mb-8">
-                Enter your details to grab the free template.
-              </p>
+              <form onSubmit={handleFormSubmit}>
+                <h3 className="text-2xl font-bold text-white mb-2 font-[family-name:var(--font-display)]">
+                  Let&apos;s get started
+                </h3>
+                <p className="text-zinc-400 text-sm mb-8">
+                  Enter your details to grab the free template.
+                </p>
 
-              <div className="space-y-5">
-                <div>
-                  <label className="block text-sm text-zinc-400 mb-2">Name</label>
-                  <input
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="Your name"
-                    className={`w-full px-4 py-3.5 bg-white/[0.04] border rounded-xl text-white placeholder-zinc-600 focus:outline-none focus:border-accent/50 transition-colors ${
-                      errors.name ? "border-red-500/50" : "border-white/[0.08]"
-                    }`}
-                  />
-                  {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
+                <div className="space-y-5">
+                  <div>
+                    <label className="block text-sm text-zinc-400 mb-2">Name</label>
+                    <input
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      placeholder="Your name"
+                      className={`w-full px-4 py-3.5 bg-white/[0.04] border rounded-xl text-white placeholder-zinc-600 focus:outline-none focus:border-accent/50 transition-colors ${
+                        errors.name ? "border-red-500/50" : "border-white/[0.08]"
+                      }`}
+                    />
+                    {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
+                  </div>
+                  <div>
+                    <label className="block text-sm text-zinc-400 mb-2">Email</label>
+                    <input
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      placeholder="your@email.com"
+                      className={`w-full px-4 py-3.5 bg-white/[0.04] border rounded-xl text-white placeholder-zinc-600 focus:outline-none focus:border-accent/50 transition-colors ${
+                        errors.email ? "border-red-500/50" : "border-white/[0.08]"
+                      }`}
+                    />
+                    {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
+                  </div>
                 </div>
-                <div>
-                  <label className="block text-sm text-zinc-400 mb-2">Email</label>
-                  <input
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="your@email.com"
-                    className={`w-full px-4 py-3.5 bg-white/[0.04] border rounded-xl text-white placeholder-zinc-600 focus:outline-none focus:border-accent/50 transition-colors ${
-                      errors.email ? "border-red-500/50" : "border-white/[0.08]"
-                    }`}
-                  />
-                  {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
-                </div>
-              </div>
 
-              <button
-                onClick={next}
-                className="w-full mt-8 py-4 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)] transition-all duration-300 text-lg cursor-pointer"
-              >
-                Next &rarr;
-              </button>
+                <button
+                  type="submit"
+                  className="w-full mt-8 py-4 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)] transition-all duration-300 text-lg cursor-pointer"
+                >
+                  Next &rarr;
+                </button>
 
-              <p className="text-zinc-600 text-xs text-center mt-4">
-                Your data is protected. No spam, ever.
-              </p>
+                <p className="text-zinc-600 text-xs text-center mt-4">
+                  Your data is protected. No spam, ever.
+                </p>
+              </form>
             </motion.div>
           )}
 
@@ -232,27 +231,33 @@ function FunnelForm() {
 
               <div className="space-y-6">
                 <div>
-                  <label className="block text-sm text-zinc-400 mb-3">Fitness Goal</label>
-                  <div className="grid grid-cols-2 gap-3">
-                    {goals.map((goal) => (
-                      <button
-                        key={goal}
-                        type="button"
-                        onClick={() => {
-                          setFormData({ ...formData, goal });
-                          setErrors({ ...errors, goal: undefined });
-                        }}
-                        className={`px-4 py-3 rounded-xl border text-sm transition-all duration-200 cursor-pointer text-left ${
-                          formData.goal === goal
-                            ? "border-accent/50 bg-accent/10 text-accent"
-                            : "border-white/[0.08] text-zinc-400 hover:border-white/20 hover:text-zinc-300"
-                        }`}
-                      >
-                        {goal}
-                      </button>
-                    ))}
+                  <label className="block text-sm text-zinc-400 mb-3">Fitness Goals <span className="text-zinc-600">(select all that apply)</span></label>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                    {goals.map((goal) => {
+                      const isSelected = formData.goals.includes(goal);
+                      return (
+                        <button
+                          key={goal}
+                          type="button"
+                          onClick={() => {
+                            const updated = isSelected
+                              ? formData.goals.filter((g) => g !== goal)
+                              : [...formData.goals, goal];
+                            setFormData({ ...formData, goals: updated });
+                            setErrors({ ...errors, goals: undefined });
+                          }}
+                          className={`px-3 py-3 rounded-xl border text-sm transition-colors duration-150 cursor-pointer text-center ${
+                            isSelected
+                              ? "border-accent/50 bg-accent/10 text-accent"
+                              : "border-white/[0.08] text-zinc-400 hover:border-white/20 hover:text-zinc-300"
+                          }`}
+                        >
+                          {goal}
+                        </button>
+                      );
+                    })}
                   </div>
-                  {errors.goal && <p className="text-red-400 text-xs mt-2">{errors.goal}</p>}
+                  {errors.goals && <p className="text-red-400 text-xs mt-2">{errors.goals}</p>}
                 </div>
 
                 <div>
@@ -266,7 +271,7 @@ function FunnelForm() {
                           setFormData({ ...formData, preference: pref });
                           setErrors({ ...errors, preference: undefined });
                         }}
-                        className={`w-full px-4 py-3.5 rounded-xl border text-sm transition-all duration-200 cursor-pointer text-left flex items-center gap-3 ${
+                        className={`w-full px-4 py-3.5 rounded-xl border text-sm transition-colors duration-150 cursor-pointer text-left flex items-center gap-3 ${
                           formData.preference === pref
                             ? "border-accent/50 bg-accent/10 text-accent"
                             : "border-white/[0.08] text-zinc-400 hover:border-white/20 hover:text-zinc-300"
@@ -292,12 +297,13 @@ function FunnelForm() {
               <div className="flex gap-3 mt-8">
                 <button
                   onClick={back}
-                  className="px-6 py-4 border border-white/10 text-zinc-400 rounded-xl hover:bg-white/5 transition-all duration-300 cursor-pointer"
+                  aria-label="Go back"
+                  className="px-6 py-4 border border-white/10 text-zinc-400 rounded-xl hover:bg-white/5 transition-colors duration-150 cursor-pointer"
                 >
                   &larr;
                 </button>
                 <button
-                  onClick={next}
+                  onClick={advance}
                   className="flex-1 py-4 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)] transition-all duration-300 text-lg cursor-pointer"
                 >
                   Almost there &rarr;
@@ -332,7 +338,7 @@ function FunnelForm() {
                       setFormData({ ...formData, timeline: tl });
                       setErrors({ ...errors, timeline: undefined });
                     }}
-                    className={`w-full px-5 py-4 rounded-xl border text-left transition-all duration-200 cursor-pointer ${
+                    className={`w-full px-5 py-4 rounded-xl border text-left transition-colors duration-150 cursor-pointer ${
                       formData.timeline === tl
                         ? "border-accent/50 bg-accent/10 text-accent"
                         : "border-white/[0.08] text-zinc-400 hover:border-white/20 hover:text-zinc-300"
@@ -347,15 +353,17 @@ function FunnelForm() {
               <div className="flex gap-3 mt-8">
                 <button
                   onClick={back}
-                  className="px-6 py-4 border border-white/10 text-zinc-400 rounded-xl hover:bg-white/5 transition-all duration-300 cursor-pointer"
+                  aria-label="Go back"
+                  className="px-6 py-4 border border-white/10 text-zinc-400 rounded-xl hover:bg-white/5 transition-colors duration-150 cursor-pointer"
                 >
                   &larr;
                 </button>
                 <button
-                  onClick={next}
-                  className="flex-1 py-4 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)] transition-all duration-300 text-lg cursor-pointer"
+                  onClick={advance}
+                  disabled={submitting}
+                  className="flex-1 py-4 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)] transition-all duration-300 text-lg cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Get My Free Template
+                  {submitting ? "Submitting\u2026" : "Get My Free Template"}
                 </button>
               </div>
             </motion.div>
@@ -370,136 +378,52 @@ function FunnelForm() {
               animate="center"
               exit="exit"
               transition={{ duration: 0.4 }}
-              className="text-center"
             >
-              {/* Success icon */}
-              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-accent/10 flex items-center justify-center">
-                <svg className="w-8 h-8 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                </svg>
+              {/* Small template download */}
+              <div className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.04] border border-white/[0.08] mb-6">
+                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                  <svg className="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                  </svg>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-white text-sm font-medium">Your template is ready</p>
+                  <p className="text-zinc-500 text-xs">Free 4-week workout program</p>
+                </div>
+                <a
+                  href="https://linktr.ee/coachluki"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-accent border border-accent/30 rounded-lg hover:bg-accent/10 transition-colors duration-150 cursor-pointer flex-shrink-0"
+                >
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                  </svg>
+                  Download
+                </a>
               </div>
 
-              <h3 className="text-2xl font-bold text-white mb-2 font-[family-name:var(--font-display)]">
-                You&apos;re in, {formData.name.split(" ")[0]}!
-              </h3>
-              <p className="text-zinc-400 mb-8">
-                Your free workout template is ready to download.
-              </p>
-
-              {/* PDF Download — always shown */}
-              <a
-                href="https://linktr.ee/coachluki"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-3 w-full py-4 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)] transition-all duration-300 text-lg cursor-pointer mb-6"
-              >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                </svg>
-                Download Free Template
-              </a>
-
-              {/* Divider */}
-              <div className="relative my-8">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full h-px bg-white/10" />
-                </div>
-                <div className="relative flex justify-center">
-                  <span className="bg-surface px-4 text-zinc-500 text-sm">Want more?</span>
-                </div>
+              {/* Push to book a call */}
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-bold text-white mb-2 font-[family-name:var(--font-display)]">
+                  Now let&apos;s talk about <span className="gradient-text">your goals</span>
+                </h3>
+                <p className="text-zinc-400 text-sm">
+                  {formData.name.split(" ")[0]}, a template is a great start &mdash; but real results come from coaching tailored to you. Book a free 15-min call and let&apos;s build your plan together.
+                </p>
               </div>
 
-              {/* Conditional CTA based on qualification */}
-              {isHighIntent && (
-                <div className="bg-accent/5 border border-accent/20 rounded-2xl p-5 sm:p-6 text-left">
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 mt-1">
-                      <svg className="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 0 0-2.455 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-white text-lg">You&apos;re a great fit for 1-on-1 coaching</h4>
-                      <p className="text-zinc-400 text-sm mt-1 mb-4">
-                        You&apos;re ready to start, and I train clients just like you in Berlin every week. Let&apos;s talk about your goals.
-                      </p>
-                      <a
-                        href="#"
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-white text-stone-900 font-semibold rounded-xl hover:bg-zinc-100 transition-all duration-300 cursor-pointer"
-                      >
-                        Book Your Free Consultation
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {isOnlineReady && (
-                <div className="bg-accent/5 border border-accent/20 rounded-2xl p-5 sm:p-6 text-left">
-                  <h4 className="font-bold text-white text-lg">Want personalized coaching online?</h4>
-                  <p className="text-zinc-400 text-sm mt-1 mb-4">
-                    I work with clients across Europe remotely. Same quality coaching, same results. Let&apos;s chat about your goals.
-                  </p>
-                  <a
-                    href="#"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-white text-stone-900 font-semibold rounded-xl hover:bg-zinc-100 transition-all duration-300 cursor-pointer"
-                  >
-                    Book a Quick Call
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                    </svg>
-                  </a>
-                </div>
-              )}
-
-              {isMidIntent && (
-                <div className="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-5 sm:p-6 text-left">
-                  <h4 className="font-bold text-white text-lg">When you&apos;re ready, I&apos;m here</h4>
-                  <p className="text-zinc-400 text-sm mt-1 mb-4">
-                    Start with the template and see how you feel. When you want hands-on coaching, book a free consultation.
-                  </p>
-                  <a
-                    href="#"
-                    className="inline-flex items-center gap-2 px-6 py-3 border border-white/10 text-white rounded-xl hover:bg-white/5 transition-all duration-300 cursor-pointer"
-                  >
-                    Book a Call When Ready
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                    </svg>
-                  </a>
-                </div>
-              )}
-
-              {isExploring && (
-                <div className="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-5 sm:p-6 text-left">
-                  <h4 className="font-bold text-white">No rush at all</h4>
-                  <p className="text-zinc-400 text-sm mt-1 mb-4">
-                    Follow me for daily training tips and nutrition advice. When you&apos;re ready to level up, I&apos;m one message away.
-                  </p>
-                  <div className="flex flex-wrap gap-3">
-                    <a
-                      href="https://www.instagram.com/coachluki/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 border border-white/10 text-zinc-300 rounded-xl hover:bg-white/5 transition-all text-sm cursor-pointer"
-                    >
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                      </svg>
-                      Follow on Instagram
-                    </a>
-                    <a
-                      href="#"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 border border-white/10 text-zinc-300 rounded-xl hover:bg-white/5 transition-all text-sm cursor-pointer"
-                    >
-                      Book a Call Later
-                    </a>
-                  </div>
-                </div>
-              )}
+              {/* Google Calendar Scheduler embed */}
+              <div className="rounded-xl overflow-hidden border border-white/[0.08] bg-white">
+                <iframe
+                  src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2v3xRsZStR2Wtk8dr_F8kwEq4WGWu0FM548fk45LXMHonM5FwIUFHmuTTp0Ph6eVpcM1ZeM2PC?gv=true"
+                  style={{ border: 0 }}
+                  width="100%"
+                  height="600"
+                  className="min-h-[500px] sm:min-h-[600px]"
+                  title="Book a free consultation with Coach Luki"
+                />
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -515,8 +439,8 @@ export default function StartPage() {
       <FunnelNav />
       <div className="noise-overlay" />
 
-      {/* Hero */}
-      <section className="relative min-h-[60vh] sm:min-h-[70vh] flex items-center overflow-hidden">
+      {/* Hero + Form */}
+      <section className="relative overflow-hidden radial-glow-green">
         <div className="absolute inset-0 bg-grid opacity-30" />
         <motion.div
           animate={{ x: [0, 80, 0], y: [0, -40, 0] }}
@@ -529,7 +453,7 @@ export default function StartPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="text-center max-w-2xl mx-auto"
+            className="text-center max-w-2xl mx-auto mb-10 sm:mb-14"
           >
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-medium mb-6">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -542,7 +466,7 @@ export default function StartPage() {
               <span className="gradient-text">Workout Template</span>
             </h1>
             <p className="text-zinc-400 mt-4 sm:mt-6 text-base sm:text-lg max-w-lg mx-auto leading-relaxed">
-              The same programming I use with my 1-on-1 coaching clients. Grab it free — no strings attached.
+              The same programming I use with my 1-on-1 coaching clients. Answer a few quick questions and download instantly.
             </p>
 
             {/* Trust stats */}
@@ -562,6 +486,8 @@ export default function StartPage() {
               </div>
             </div>
           </motion.div>
+
+          <FunnelForm />
         </div>
       </section>
 
@@ -610,8 +536,8 @@ export default function StartPage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
           <div className="grid sm:grid-cols-2 gap-4">
             {[
-              { name: "Sarah M.", text: "I used to dread going to the gym. Now I actually look forward to it." },
-              { name: "Marco T.", text: "The nutrition tips alone changed how I feel day to day." },
+              { name: "Rasmus", text: "Luke is what a personal trainer should be. He encourages, motivates and pushes you. I can only recommend working with him!" },
+              { name: "Andrius", text: "Working with Luke was a game-changer. His challenging workouts push you beyond what you thought you were capable of. Highly recommended!" },
             ].map((t, i) => (
               <motion.div
                 key={t.name}
@@ -638,28 +564,6 @@ export default function StartPage() {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Form Section */}
-      <section id="form" className="py-12 sm:py-16 lg:py-24 radial-glow-green">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-8 sm:mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-display)]">
-              Grab your <span className="gradient-text">free template</span>
-            </h2>
-            <p className="text-zinc-400 mt-4 max-w-md mx-auto">
-              Answer a few quick questions and download instantly.
-            </p>
-          </motion.div>
-
-          <FunnelForm />
         </div>
       </section>
 
