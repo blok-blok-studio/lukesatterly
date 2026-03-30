@@ -1194,7 +1194,7 @@ function WhatsAppButton() {
     <AnimatePresence>
       {visible && (
         <motion.a
-          href="https://wa.me/491234567890"
+          href="https://wa.me/4917642695936"
           target="_blank"
           rel="noopener noreferrer"
           initial={{ scale: 0, opacity: 0 }}
@@ -1508,7 +1508,7 @@ export default function Home() {
       <FadeInSection><FAQ /></FadeInSection>
       <FadeInSection><SocialCTA /></FadeInSection>
       <FadeInSection><Contact /></FadeInSection>
-      {/* <WhatsAppButton /> — Enable when Luke provides his WhatsApp number */}
+      <WhatsAppButton />
       <Footer />
     </>
   );
