@@ -38,10 +38,10 @@ function CountUp({ target, suffix = "", duration = 2 }: { target: number; suffix
 function FadeInSection({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
+      viewport={{ once: true, margin: "50px" }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
       className={className}
     >
       {children}
@@ -227,7 +227,7 @@ function Hero() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-[clamp(2.5rem,12vw,7rem)] font-black tracking-[-0.05em] leading-[0.9] uppercase font-[family-name:var(--font-display)]"
+            className="text-[clamp(1.75rem,8.5vw,7rem)] font-black tracking-[-0.04em] leading-[0.9] uppercase font-[family-name:var(--font-display)] px-2"
           >
             <span className="text-white">Your</span>
             <br />
@@ -237,7 +237,7 @@ function Hero() {
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.35 }}
             className="mt-8 text-base sm:text-lg text-zinc-300 max-w-lg leading-relaxed"
@@ -309,7 +309,7 @@ function Hero() {
 /* ─────────────────── ABOUT (light bg) ─────────────────── */
 function About() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "100px" });
 
   return (
     <section id="about" className="py-8 sm:py-12 px-4 sm:px-6 scroll-mt-20">
@@ -406,7 +406,7 @@ function About() {
 /* ─────────────────── SERVICES (dark container) ─────────────────── */
 function Services() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "100px" });
 
   const services = [
     {
@@ -466,7 +466,7 @@ function Services() {
           {services.map((service, i) => (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.15 }}
               className="group relative bg-surface border border-white/[0.04] rounded-2xl p-8 hover:border-accent/20 transition-all duration-500 hover:shadow-[0_0_50px_rgba(0,102,51,0.06)]"
@@ -499,7 +499,7 @@ function Services() {
 /* ─────────────────── PRICING ─────────────────── */
 function Pricing() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "100px" });
   const [tab, setTab] = useState<"online" | "personal">("personal");
 
   const onlinePlans = [
@@ -667,7 +667,7 @@ function Pricing() {
                 {onlinePlans.map((plan, i) => (
                   <motion.div
                     key={plan.name}
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 12 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.5, delay: i * 0.12 }}
                     className={`relative rounded-2xl p-8 sm:p-10 transition-all duration-500 ${
@@ -737,7 +737,7 @@ function Pricing() {
                 {personalPlans.map((plan, i) => (
                   <motion.div
                     key={plan.name}
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 12 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.5, delay: i * 0.12 }}
                     className={`relative rounded-2xl p-8 sm:p-10 transition-all duration-500 ${
@@ -800,7 +800,7 @@ function Pricing() {
               {/* Flexible packages */}
               <div className="max-w-4xl mx-auto mt-8">
                 <motion.div
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 12 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.3 }}
                   className="rounded-2xl bg-[#F7F5F0] border border-stone-200 p-8 sm:p-10"
@@ -847,7 +847,7 @@ function Pricing() {
 /* ─────────────────── THE LUKI METHOD (light section) ─────────────────── */
 function Method() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "100px" });
 
   const steps = [
     {
@@ -896,7 +896,7 @@ function Method() {
           {steps.map((s, i) => (
             <motion.div
               key={s.step}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.12 }}
               className="relative"
@@ -921,7 +921,7 @@ function Method() {
 /* ─────────────────── PHILOSOPHY (dark, layered) ─────────────────── */
 function Philosophy() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "100px" });
 
   const principles = [
     {
@@ -971,7 +971,7 @@ function Philosophy() {
           {principles.map((p, i) => (
             <motion.div
               key={p.number}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="group relative p-8 sm:p-10 rounded-2xl border border-white/[0.04] bg-surface/80 hover:border-accent/20 transition-all duration-500"
@@ -1008,7 +1008,7 @@ function Philosophy() {
 /* ─────────────────── EXPERIENCE TIMELINE (light) ─────────────────── */
 function Experience() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "100px" });
 
   const experiences = [
     {
@@ -1068,7 +1068,7 @@ function Experience() {
           {experiences.map((exp, i) => (
             <motion.div
               key={exp.company}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.15 }}
               className={`relative flex flex-col sm:flex-row gap-8 mb-16 last:mb-0 ${
@@ -1099,7 +1099,7 @@ function Experience() {
 /* ─────────────────── TESTIMONIALS (dark, tilted cards) ─────────────────── */
 function Testimonials() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "100px" });
 
   const testimonials = [
     {
@@ -1205,7 +1205,7 @@ function Testimonials() {
 /* ─────────────────── SOCIAL CTA ─────────────────── */
 function SocialCTA() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "100px" });
 
   const socials = [
     {
@@ -1260,7 +1260,7 @@ function SocialCTA() {
               href={social.url}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.15 }}
               className="group relative p-8 sm:p-10 rounded-2xl bg-surface border border-white/[0.04] hover:border-accent/20 transition-all duration-500 hover:shadow-[0_0_50px_rgba(0,102,51,0.06)]"
@@ -1288,7 +1288,7 @@ function SocialCTA() {
 /* ─────────────────── FAQ ─────────────────── */
 function FAQ() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "100px" });
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const faqs = [
@@ -1427,7 +1427,7 @@ function WhatsAppButton() {
 /* ─────────────────── CONTACT CTA (dark container on dark bg) ─────────────────── */
 function Contact() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "100px" });
   const [formState, setFormState] = useState({
     name: "",
     email: "",
@@ -1473,7 +1473,7 @@ function Contact() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="max-w-2xl mx-auto"
@@ -1636,7 +1636,7 @@ function Footer() {
 /* ─────────────────── LOCATIONS ─────────────────── */
 function Locations() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "100px" });
 
   const gyms = [
     {
@@ -1678,7 +1678,7 @@ function Locations() {
           {gyms.map((gym, i) => (
             <motion.div
               key={gym.name}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.15 }}
               className="group p-8 sm:p-10 rounded-2xl bg-surface border border-white/[0.04] hover:border-accent/20 transition-all duration-500"
@@ -1704,7 +1704,7 @@ function Locations() {
 /* ─────────────────── ACTION BANNER (conversion CTA) ─────────────────── */
 function ActionBanner() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "100px" });
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
@@ -1736,7 +1736,7 @@ function ActionBanner() {
           Stop waiting. Start moving.
         </motion.p>
         <motion.h2
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white max-w-3xl leading-tight"
@@ -1764,7 +1764,7 @@ function ActionBanner() {
 /* ─────────────────── TRUST BANNER (final push before contact) ─────────────────── */
 function TrustBanner() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "100px" });
 
   return (
     <section ref={ref} className="py-8 sm:py-12 px-4 sm:px-6">
@@ -1794,7 +1794,7 @@ function TrustBanner() {
                 Let&apos;s work together
               </motion.p>
               <motion.h2
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight"
