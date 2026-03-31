@@ -206,84 +206,64 @@ function Hero() {
 
   return (
     <section ref={ref} className="relative min-h-screen overflow-hidden">
-      {/* Background layers */}
+      {/* Full-bleed background image */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-grid opacity-30" />
-        <motion.div
-          animate={{ x: [0, 120, 0], y: [0, -60, 0] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-accent/[0.06] rounded-full blur-[150px]"
+        <Image
+          src="/luke-running.jpeg"
+          alt="Coach Luki running through Berlin at night"
+          fill
+          priority
+          className="object-cover object-center"
         />
-        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#0C0C0C] to-transparent" />
+        {/* Dark overlays for text readability */}
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute bottom-0 left-0 right-0 h-60 bg-gradient-to-t from-[#0C0C0C] to-transparent" />
       </div>
 
       <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-6 pt-32 sm:pt-40 pb-20 min-h-screen flex flex-col justify-between">
-        {/* Big bold headline */}
-        <div className="flex-1 flex flex-col lg:flex-row items-center lg:items-end gap-8 lg:gap-12">
-          {/* Text + image layout */}
-          <div className="flex-1 w-full min-w-0" style={{ containerType: "inline-size" }}>
-            <motion.h1
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              className="text-[clamp(1.75rem,9.5cqi,5.25rem)] font-black tracking-[-0.05em] leading-[0.9] uppercase font-[family-name:var(--font-display)]"
-            >
-              <span className="text-white">Your</span>
-              <br />
-              <span className="text-outline">strongest</span>
-              <br />
-              <span className="gradient-text">chapter</span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.35 }}
-              className="mt-8 text-base sm:text-lg text-zinc-400 max-w-md leading-relaxed"
-            >
-              I work with people who want to feel stronger, move better, and actually
-              enjoy the process. Training and nutrition coaching right here in Berlin.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="mt-8 flex flex-col sm:flex-row items-start gap-4"
-            >
-              <button
-                onClick={() => smoothScrollTo("contact")}
-                className="group relative px-10 py-4 bg-accent text-white font-semibold rounded-full overflow-hidden transition-all duration-300 hover:bg-accent-light hover:shadow-[0_0_40px_rgba(0,102,51,0.3)] text-lg cursor-pointer"
-              >
-                Let&apos;s Get Started
-              </button>
-              <button
-                onClick={() => smoothScrollTo("about")}
-                className="px-10 py-4 border border-white/10 text-white rounded-full hover:bg-white/5 transition-all duration-300 text-lg cursor-pointer"
-              >
-                Learn More
-              </button>
-            </motion.div>
-          </div>
-
-          {/* Hero image */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="relative w-full max-w-sm lg:max-w-md flex-shrink-0"
+        {/* Centered headline overlaying the image */}
+        <div className="flex-1 flex flex-col justify-center items-center text-center">
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="text-[clamp(2.5rem,12vw,7rem)] font-black tracking-[-0.05em] leading-[0.9] uppercase font-[family-name:var(--font-display)]"
           >
-            <div className="relative">
-              <Image
-                src="/luke.jpg"
-                alt="Coach Luki - Personal Trainer and Nutritionist in Berlin, Germany"
-                width={500}
-                height={600}
-                priority
-                className="w-full h-auto rounded-2xl grayscale contrast-110 brightness-90 object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0C] via-transparent to-transparent rounded-2xl" />
-            </div>
+            <span className="text-white">Your</span>
+            <br />
+            <span className="text-outline">strongest</span>
+            <br />
+            <span className="gradient-text">chapter</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.35 }}
+            className="mt-8 text-base sm:text-lg text-zinc-300 max-w-lg leading-relaxed"
+          >
+            I work with people who want to feel stronger, move better, and actually
+            enjoy the process. Training and nutrition coaching right here in Berlin.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="mt-8 flex flex-col sm:flex-row items-center gap-4"
+          >
+            <button
+              onClick={() => smoothScrollTo("contact")}
+              className="group relative px-10 py-4 bg-accent text-white font-semibold rounded-full overflow-hidden transition-all duration-300 hover:bg-accent-light hover:shadow-[0_0_40px_rgba(0,102,51,0.3)] text-lg cursor-pointer"
+            >
+              Let&apos;s Get Started
+            </button>
+            <button
+              onClick={() => smoothScrollTo("about")}
+              className="px-10 py-4 border border-white/20 text-white rounded-full hover:bg-white/10 transition-all duration-300 text-lg cursor-pointer"
+            >
+              Learn More
+            </button>
           </motion.div>
         </div>
 
@@ -298,21 +278,21 @@ function Hero() {
             <div className="text-4xl md:text-5xl font-bold text-white">
               <CountUp target={100} suffix="+" />
             </div>
-            <div className="text-sm text-zinc-500 mt-1">Clients</div>
+            <div className="text-sm text-zinc-400 mt-1">Clients</div>
           </div>
-          <div className="w-px h-12 bg-zinc-800 hidden sm:block" />
+          <div className="w-px h-12 bg-white/20 hidden sm:block" />
           <div>
             <div className="text-4xl md:text-5xl font-bold text-white">
               <CountUp target={5000} suffix="+" duration={2.5} />
             </div>
-            <div className="text-sm text-zinc-500 mt-1">Hours Coached</div>
+            <div className="text-sm text-zinc-400 mt-1">Hours Coached</div>
           </div>
-          <div className="w-px h-12 bg-zinc-800 hidden sm:block" />
+          <div className="w-px h-12 bg-white/20 hidden sm:block" />
           <motion.button
             animate={{ y: [0, 6, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
             onClick={() => smoothScrollTo("about")}
-            className="flex items-center gap-2 text-zinc-600 text-sm cursor-pointer hover:text-zinc-400 transition-colors ml-auto"
+            className="flex items-center gap-2 text-zinc-400 text-sm cursor-pointer hover:text-zinc-200 transition-colors ml-auto"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
@@ -345,8 +325,8 @@ function About() {
           >
             <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-stone-100">
               <Image
-                src="/luke.jpg"
-                alt="Luke Satterly - Coach Luki training on gymnastic rings in Berlin"
+                src="/luke-profile.jpeg"
+                alt="Luke Satterly - Coach Luki, Personal Trainer in Berlin"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
@@ -387,16 +367,16 @@ function About() {
             <div className="mt-8 space-y-5 text-zinc-600 leading-relaxed text-lg">
               <p>
                 I&apos;m Luke Satterly, but most people call me Coach Luki. I train out of{" "}
-                <strong className="text-stone-900">John Reed Bötzow</strong> and{" "}
-                <strong className="text-stone-900">EVO Spittelmarkt</strong> here in Berlin,
-                and I also coach people online. My thing is helping you get stronger, eat better,
-                and move without pain so you can actually enjoy your day-to-day life.
+                <strong className="text-stone-900">Holmes Place</strong> and{" "}
+                <strong className="text-stone-900">John Reed</strong> here in Berlin,
+                and I also coach people online. I believe that physical and mental well-being
+                are interconnected, and my approach to personal training reflects this philosophy.
               </p>
               <p>
-                I&apos;m a certified personal trainer and nutritionist, and I keep things simple.
-                No gimmicks, no cookie-cutter plans. Whether you&apos;re brand new to the gym or
-                you&apos;ve been at it for years and feel stuck, I&apos;ll meet you where you are
-                and we&apos;ll figure it out together.
+                My mission is to guide my clients towards their fitness goals by providing a safe,
+                supportive, and challenging environment. I empower my clients to push beyond their
+                limits and unleash their full potential — so they don&apos;t just look good but
+                feel good from the inside out. Happiness is derived through progress. Enjoy the progress!
               </p>
             </div>
 
@@ -436,7 +416,7 @@ function Services() {
         </svg>
       ),
       title: "1-on-1 Personal Training",
-      description: "We train together at John Reed Bötzow or EVO Spittelmarkt. Every session is built around your goals, your body, and what actually fits your life.",
+      description: "We train together at Holmes Place or John Reed here in Berlin. Every session is built around your goals, your body, and what actually fits your life.",
       features: ["Custom workout plans", "Form correction", "Progressive overload tracking", "Flexible scheduling"],
     },
     {
@@ -520,42 +500,115 @@ function Services() {
 function Pricing() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [tab, setTab] = useState<"online" | "personal">("personal");
 
-  const plans = [
+  const onlinePlans = [
     {
-      name: "Essentials",
-      price: "240",
-      period: "per month",
-      description: "Train with me in person, once a week. Perfect if you want hands-on coaching and a program built around you.",
+      name: "Remote Program",
+      price: "60",
+      period: "/month",
+      note: "Min. 6 months",
+      description: "Structured online coaching with monthly guidance. Perfect if you want a solid plan and regular accountability.",
       features: [
-        "4 in-person sessions per month",
-        "Custom training program",
-        "Basic nutrition guidance",
-        "Progress tracking",
-        "At John Reed B\u00F6tzow or EVO Spittelmarkt",
+        "Goal analysis",
+        "Custom training plan",
+        "Custom nutrition plan",
+        "Monthly check-in & feedback",
+        "Monthly workout updates & adjustments",
       ],
       cta: "Get Started",
-      stripeLink: "/start",
+      href: "/start",
       popular: false,
+      dark: false,
     },
     {
-      name: "All In",
-      price: "480",
-      period: "per month",
-      description: "Twice a week, in person. For people who are serious about results and want the full coaching experience.",
+      name: "Advanced",
+      price: "240",
+      period: "/month",
+      note: "Starter pack: \u20AC1,097 for 3 months (everything included)",
+      description: "The full remote coaching experience. Weekly check-ins, WhatsApp access, and a video library to keep your form on point.",
       features: [
-        "8 in-person sessions per month",
-        "Fully custom training program",
-        "Complete nutrition coaching",
-        "Weekly check-ins and progress tracking",
-        "WhatsApp support between sessions",
-        "Program adjustments as you progress",
+        "Goal analysis",
+        "Custom training plan",
+        "Custom nutrition plan",
+        "Weekly check-in with technique feedback",
+        "Ongoing WhatsApp support",
+        "Access to exercise library",
       ],
-      cta: "Go All In",
-      stripeLink: "/start",
+      cta: "Go Advanced",
+      href: "/start",
       popular: true,
+      dark: true,
+    },
+    {
+      name: "Elite",
+      price: "480",
+      period: "/month",
+      note: null,
+      description: "Everything from Advanced plus a weekly 1-on-1 coaching call. The closest thing to in-person training, from anywhere.",
+      features: [
+        "Everything from Advanced",
+        "Weekly 60 min coaching call (consultation/training)",
+      ],
+      cta: "Go Elite",
+      href: "/start",
+      popular: false,
+      dark: false,
     },
   ];
+
+  const personalPlans = [
+    {
+      name: "Elevate",
+      price: "390",
+      period: "/month",
+      note: "Min. 3 months",
+      sessions: "4 sessions / month",
+      description: "Once a week, in person. For people who want hands-on coaching with a plan built around them.",
+      features: [
+        "Goal analysis",
+        "Custom training plan",
+        "Custom nutrition plan",
+        "Weekly check-in",
+        "Ongoing WhatsApp support",
+      ],
+      cta: "Get Started",
+      href: "/start",
+      popular: true,
+      dark: true,
+    },
+    {
+      name: "Intensive",
+      price: "780",
+      period: "/month",
+      note: "Min. 3 months",
+      sessions: "8 sessions / month",
+      description: "Twice a week for serious results. The full coaching experience with maximum hands-on support.",
+      features: [
+        "Goal analysis",
+        "Custom training plan",
+        "Custom nutrition plan",
+        "Weekly check-in",
+        "Ongoing WhatsApp support",
+      ],
+      cta: "Go Intensive",
+      href: "/start",
+      popular: false,
+      dark: false,
+    },
+  ];
+
+  const packages = [
+    { sessions: 6, price: "630" },
+    { sessions: 12, price: "1,260" },
+    { sessions: 24, price: "2,260" },
+  ];
+
+  const CheckIcon = ({ dark }: { dark: boolean }) => (
+    <svg className={`w-5 h-5 mt-0.5 flex-shrink-0 ${dark ? "text-accent" : "text-accent-dark"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+    </svg>
+  );
 
   return (
     <section id="pricing" className="py-8 sm:py-12 px-4 sm:px-6 scroll-mt-20">
@@ -567,79 +620,224 @@ function Pricing() {
           className="text-center mb-16"
         >
           <span className="text-accent-dark text-sm font-medium uppercase tracking-widest">
-            Pricing
+            Services & Pricing
           </span>
           <h2 className="text-3xl lg:text-5xl font-bold mt-4 text-stone-900">
-            Simple, honest<br /> <span className="gradient-text">pricing</span>
+            Find the right <span className="gradient-text">plan</span>
           </h2>
           <p className="text-zinc-500 mt-6 max-w-lg mx-auto text-lg">
-            No hidden fees, no long-term contracts. Pick what works for you and let&apos;s get to work.
+            Whether we train in person or online, every plan is built around your goals.
           </p>
-        </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-6 max-w-4xl mx-auto items-start">
-          {plans.map((plan, i) => (
-            <motion.div
-              key={plan.name}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.12 }}
-              className={`relative rounded-2xl p-8 sm:p-10 transition-all duration-500 ${
-                plan.popular
-                  ? "bg-stone-900 text-white ring-2 ring-accent/50 shadow-[0_0_60px_rgba(0,102,51,0.1)] lg:scale-[1.02]"
-                  : "bg-[#F7F5F0] border border-stone-200 hover:border-stone-300 hover:shadow-lg"
+          {/* Tab toggle */}
+          <div className="mt-10 inline-flex rounded-full bg-stone-100 p-1">
+            <button
+              onClick={() => setTab("personal")}
+              className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer ${
+                tab === "personal"
+                  ? "bg-stone-900 text-white shadow-md"
+                  : "text-stone-500 hover:text-stone-700"
               }`}
             >
-              {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span className="bg-accent text-white text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full">
-                    Most Popular
-                  </span>
-                </div>
-              )}
+              Personal Training
+            </button>
+            <button
+              onClick={() => setTab("online")}
+              className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer ${
+                tab === "online"
+                  ? "bg-stone-900 text-white shadow-md"
+                  : "text-stone-500 hover:text-stone-700"
+              }`}
+            >
+              Online Coaching
+            </button>
+          </div>
+        </motion.div>
 
-              <h3 className={`text-xl font-bold ${plan.popular ? "text-white" : "text-stone-900"}`}>
-                {plan.name}
-              </h3>
-              <div className="mt-4 flex items-baseline gap-1">
-                <span className={`text-5xl font-bold tracking-tight ${plan.popular ? "text-white" : "text-stone-900"}`}>
-                  &euro;{plan.price}
-                </span>
-                <span className={`text-sm ${plan.popular ? "text-zinc-400" : "text-zinc-500"}`}>
-                  {plan.period}
-                </span>
-              </div>
-              <p className={`mt-4 text-sm leading-relaxed ${plan.popular ? "text-zinc-300" : "text-zinc-500"}`}>
-                {plan.description}
-              </p>
-
-              <ul className="mt-8 space-y-3">
-                {plan.features.map((feature) => (
-                  <li key={feature} className={`flex items-start gap-3 text-sm ${plan.popular ? "text-zinc-200" : "text-zinc-600"}`}>
-                    <svg className={`w-5 h-5 mt-0.5 flex-shrink-0 ${plan.popular ? "text-accent" : "text-accent-dark"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                    </svg>
-                    {feature}
-                  </li>
+        <AnimatePresence mode="wait">
+          {tab === "online" ? (
+            <motion.div
+              key="online"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="grid lg:grid-cols-3 gap-6 max-w-5xl mx-auto items-start">
+                {onlinePlans.map((plan, i) => (
+                  <motion.div
+                    key={plan.name}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.5, delay: i * 0.12 }}
+                    className={`relative rounded-2xl p-8 sm:p-10 transition-all duration-500 ${
+                      plan.dark
+                        ? "bg-stone-900 text-white ring-2 ring-accent/50 shadow-[0_0_60px_rgba(0,102,51,0.1)] lg:scale-[1.02]"
+                        : "bg-[#F7F5F0] border border-stone-200 hover:border-stone-300 hover:shadow-lg"
+                    }`}
+                  >
+                    {plan.popular && (
+                      <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                        <span className="bg-accent text-white text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full whitespace-nowrap">
+                          Most Popular
+                        </span>
+                      </div>
+                    )}
+                    <h3 className={`text-xl font-bold ${plan.dark ? "text-white" : "text-stone-900"}`}>
+                      {plan.name}
+                    </h3>
+                    <div className="mt-4 flex items-baseline gap-1">
+                      <span className={`text-5xl font-bold tracking-tight ${plan.dark ? "text-white" : "text-stone-900"}`}>
+                        &euro;{plan.price}
+                      </span>
+                      <span className={`text-sm ${plan.dark ? "text-zinc-400" : "text-zinc-500"}`}>
+                        {plan.period}
+                      </span>
+                    </div>
+                    {plan.note && (
+                      <p className={`mt-2 text-xs font-medium ${plan.dark ? "text-accent" : "text-accent-dark"}`}>
+                        {plan.note}
+                      </p>
+                    )}
+                    <p className={`mt-4 text-sm leading-relaxed ${plan.dark ? "text-zinc-300" : "text-zinc-500"}`}>
+                      {plan.description}
+                    </p>
+                    <ul className="mt-8 space-y-3">
+                      {plan.features.map((f) => (
+                        <li key={f} className={`flex items-start gap-3 text-sm ${plan.dark ? "text-zinc-200" : "text-zinc-600"}`}>
+                          <CheckIcon dark={plan.dark} />
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+                    <a
+                      href={plan.href}
+                      className={`mt-8 block w-full py-4 rounded-xl text-center font-semibold transition-all duration-300 text-base cursor-pointer ${
+                        plan.dark
+                          ? "bg-accent text-white hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)]"
+                          : "bg-stone-900 text-white hover:bg-stone-800"
+                      }`}
+                    >
+                      {plan.cta}
+                    </a>
+                  </motion.div>
                 ))}
-              </ul>
-
-              <a
-                href={plan.stripeLink}
-                className={`mt-8 block w-full py-4 rounded-xl text-center font-semibold transition-all duration-300 text-base cursor-pointer ${
-                  plan.popular
-                    ? "bg-accent text-white hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)]"
-                    : "bg-stone-900 text-white hover:bg-stone-800"
-                }`}
-              >
-                {plan.cta}
-              </a>
+              </div>
             </motion.div>
-          ))}
-        </div>
+          ) : (
+            <motion.div
+              key="personal"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              {/* Monthly plans */}
+              <div className="grid lg:grid-cols-2 gap-6 max-w-4xl mx-auto items-start">
+                {personalPlans.map((plan, i) => (
+                  <motion.div
+                    key={plan.name}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.5, delay: i * 0.12 }}
+                    className={`relative rounded-2xl p-8 sm:p-10 transition-all duration-500 ${
+                      plan.dark
+                        ? "bg-stone-900 text-white ring-2 ring-accent/50 shadow-[0_0_60px_rgba(0,102,51,0.1)] lg:scale-[1.02]"
+                        : "bg-[#F7F5F0] border border-stone-200 hover:border-stone-300 hover:shadow-lg"
+                    }`}
+                  >
+                    {plan.popular && (
+                      <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                        <span className="bg-accent text-white text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full whitespace-nowrap">
+                          Most Popular
+                        </span>
+                      </div>
+                    )}
+                    <h3 className={`text-xl font-bold ${plan.dark ? "text-white" : "text-stone-900"}`}>
+                      {plan.name}
+                    </h3>
+                    <div className="mt-4 flex items-baseline gap-1">
+                      <span className={`text-5xl font-bold tracking-tight ${plan.dark ? "text-white" : "text-stone-900"}`}>
+                        &euro;{plan.price}
+                      </span>
+                      <span className={`text-sm ${plan.dark ? "text-zinc-400" : "text-zinc-500"}`}>
+                        {plan.period}
+                      </span>
+                    </div>
+                    <div className={`mt-2 inline-block rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider ${
+                      plan.dark ? "bg-accent text-white" : "bg-accent-dark/10 text-accent-dark"
+                    }`}>
+                      {plan.sessions}
+                    </div>
+                    <p className={`mt-1 text-xs font-medium ${plan.dark ? "text-zinc-400" : "text-zinc-500"}`}>
+                      {plan.note}
+                    </p>
+                    <p className={`mt-4 text-sm leading-relaxed ${plan.dark ? "text-zinc-300" : "text-zinc-500"}`}>
+                      {plan.description}
+                    </p>
+                    <ul className="mt-8 space-y-3">
+                      {plan.features.map((f) => (
+                        <li key={f} className={`flex items-start gap-3 text-sm ${plan.dark ? "text-zinc-200" : "text-zinc-600"}`}>
+                          <CheckIcon dark={plan.dark} />
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+                    <a
+                      href={plan.href}
+                      className={`mt-8 block w-full py-4 rounded-xl text-center font-semibold transition-all duration-300 text-base cursor-pointer ${
+                        plan.dark
+                          ? "bg-accent text-white hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)]"
+                          : "bg-stone-900 text-white hover:bg-stone-800"
+                      }`}
+                    >
+                      {plan.cta}
+                    </a>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Flexible packages */}
+              <div className="max-w-4xl mx-auto mt-8">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  className="rounded-2xl bg-[#F7F5F0] border border-stone-200 p-8 sm:p-10"
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+                    <div>
+                      <h3 className="text-xl font-bold text-stone-900">Flexible Packages</h3>
+                      <p className="text-zinc-500 text-sm mt-1">No commitment. Buy sessions and use them at your own pace.</p>
+                    </div>
+                    <span className="text-xs font-medium uppercase tracking-wider text-accent-dark bg-accent-dark/10 rounded-full px-4 py-1.5 self-start">
+                      No minimum
+                    </span>
+                  </div>
+                  <div className="grid sm:grid-cols-3 gap-4">
+                    {packages.map((pkg) => (
+                      <a
+                        key={pkg.sessions}
+                        href="/start"
+                        className="group flex flex-col items-center rounded-xl border border-stone-200 bg-white p-6 hover:border-accent-dark/30 hover:shadow-lg transition-all duration-300 cursor-pointer"
+                      >
+                        <span className="text-3xl font-bold text-stone-900 group-hover:text-accent-dark transition-colors">
+                          &euro;{pkg.price}
+                        </span>
+                        <span className="mt-2 text-xs font-bold uppercase tracking-wider bg-stone-900 text-white rounded-full px-4 py-1.5">
+                          {pkg.sessions} sessions
+                        </span>
+                      </a>
+                    ))}
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <p className="text-center text-zinc-400 text-sm mt-10">
-          Secure payments. Cancel anytime.
+          Secure payments. All plans include a free initial consultation.
         </p>
       </div>
     </section>
@@ -814,22 +1012,34 @@ function Experience() {
 
   const experiences = [
     {
-      company: "John Reed Bötzow & EVO Spittelmarkt",
-      period: "2023 - Present",
-      role: "Personal Trainer & Nutritionist",
-      description: "This is where I do most of my work. I train clients one-on-one at both locations, helping them get stronger and feel better about how they look and move.",
+      company: "Holmes Place & John Reed, Berlin",
+      period: "2022 - Present",
+      role: "Personal Trainer",
+      description: "Helping clients reach their fitness goals in a structured and supportive environment. One-on-one coaching focused on strength, mobility, and lasting results.",
     },
     {
-      company: "Online Coaching",
-      period: "2021 - Present",
-      role: "Remote Fitness & Nutrition Coach",
-      description: "I also work with clients across Europe online. Same level of attention, just through a screen. Custom programs, nutrition plans, and weekly accountability.",
+      company: "Surf & Strength, Morocco",
+      period: "2022",
+      role: "Strength Coach",
+      description: "Led strength classes with surfers, combining functional training with an active outdoor lifestyle.",
     },
     {
-      company: "Certifications",
-      period: "Ongoing",
-      role: "Personal Trainer & Nutrition Certification",
-      description: "I\u2019m always learning. I stay up to date on training science, sports nutrition, and how the body moves so I can give my clients the best coaching possible.",
+      company: "TUI Cruises",
+      period: "2022",
+      role: "Personal Trainer Abroad",
+      description: "Supported guests in staying active and healthy while traveling, delivering personal training sessions aboard cruise ships.",
+    },
+    {
+      company: "Rehabilitation Center",
+      period: "2019 - 2021",
+      role: "Back & Neck Pain Therapist",
+      description: "Helped clients reduce discomfort, improve mobility, and restore functional movement through targeted rehabilitation programs.",
+    },
+    {
+      company: "Duale Hochschule für Prävention und Gesundheit",
+      period: "2019 - 2021",
+      role: "Degree in Prevention & Health",
+      description: "Earned my degree in prevention and health management, building the scientific foundation behind my coaching approach.",
     },
   ];
 
@@ -927,44 +1137,45 @@ function Testimonials() {
   ];
 
   return (
-    <section id="testimonials" className="py-24 sm:py-32 relative overflow-hidden scroll-mt-20">
+    <section id="testimonials" className="py-24 sm:py-32 relative scroll-mt-20">
       {/* Layered background */}
       <div className="absolute inset-0 bg-grid opacity-20" />
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#0C0C0C] to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0C0C0C] to-transparent" />
-      <div ref={ref} className="relative max-w-7xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-20"
-        >
-          <span className="text-accent text-sm font-medium uppercase tracking-widest">
-            Testimonials
-          </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4">
-            What clients <span className="gradient-text">say</span>
-          </h2>
-          <p className="text-zinc-400 mt-6 max-w-lg mx-auto text-lg">
-            Real people, real results. Here&apos;s what they have to say.
-          </p>
-        </motion.div>
 
-        {/* Horizontal marquee — two copies for seamless loop */}
-        <div className="relative">
-          {/* Fade edges — narrow to avoid clipping card content */}
-          <div className="absolute left-0 top-0 bottom-0 w-8 sm:w-12 bg-gradient-to-r from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-8 sm:w-12 bg-gradient-to-l from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
+      <div ref={ref} className="relative">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-20"
+          >
+            <span className="text-accent text-sm font-medium uppercase tracking-widest">
+              Testimonials
+            </span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4">
+              What clients <span className="gradient-text">say</span>
+            </h2>
+            <p className="text-zinc-400 mt-6 max-w-lg mx-auto text-lg">
+              Real people, real results. Here&apos;s what they have to say.
+            </p>
+          </motion.div>
+        </div>
+
+        {/* Horizontal marquee — full width with overflow hidden */}
+        <div className="relative overflow-hidden">
+          {/* Fade edges — responsive width for smooth transition at all sizes */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 md:w-40 lg:w-60 bg-gradient-to-r from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 md:w-40 lg:w-60 bg-gradient-to-l from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
 
           <motion.div
-            className="flex gap-6"
+            className="flex gap-6 px-6"
             animate={{ x: ["0%", "-50%"] }}
             transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
           >
             {[...testimonials, ...testimonials].map((t, i) => (
               <div
                 key={`${t.name}-${i}`}
-                className="flex-shrink-0 w-[340px] sm:w-[400px] bg-surface border border-white/[0.06] rounded-2xl p-8 hover:border-accent/20 transition-all duration-500"
+                className="flex-shrink-0 w-[300px] sm:w-[380px] lg:w-[420px] bg-surface border border-white/[0.06] rounded-2xl p-8 hover:border-accent/20 transition-all duration-500"
               >
                 <div className="flex items-center gap-1 mb-4">
                   {[...Array(5)].map((_, j) => (
@@ -1107,7 +1318,7 @@ function FAQ() {
     },
     {
       question: "What gyms do you train at?",
-      answer: "I train clients at John Reed B\u00F6tzow in Prenzlauer Berg and EVO Spittelmarkt in Mitte. You pick whichever location is more convenient for you.",
+      answer: "I train clients at Holmes Place and John Reed here in Berlin. You pick whichever location is more convenient for you.",
     },
   ];
 
@@ -1429,16 +1640,16 @@ function Locations() {
 
   const gyms = [
     {
-      name: "John Reed Bötzow",
+      name: "Holmes Place",
       type: "Premium Fitness Club",
-      address: "Bötzowstraße, Prenzlauer Berg",
-      description: "Great vibe, great equipment. This place mixes fitness with music, art, and design. Perfect for strength work, functional training, and ring sessions.",
+      address: "Berlin",
+      description: "A premium fitness environment with top-tier equipment. Ideal for focused strength work, functional training, and personal coaching sessions.",
     },
     {
-      name: "EVO Spittelmarkt",
-      type: "Boutique Fitness Studio",
-      address: "Spittelmarkt, Mitte",
-      description: "Clean, focused, no distractions. Right in the center of Berlin and ideal for getting serious work done in our 1-on-1 sessions.",
+      name: "John Reed",
+      type: "Boutique Fitness Club",
+      address: "Berlin",
+      description: "Where fitness meets music, art, and design. Great atmosphere and equipment for strength work, functional training, and ring sessions.",
     },
   ];
 
@@ -1490,6 +1701,144 @@ function Locations() {
   );
 }
 
+/* ─────────────────── ACTION BANNER (conversion CTA) ─────────────────── */
+function ActionBanner() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const imgY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+
+  return (
+    <section ref={ref} className="py-8 sm:py-12 px-4 sm:px-6">
+      <div className="relative h-[60vh] sm:h-[70vh] overflow-hidden rounded-[1.25rem] lg:rounded-[2rem] max-w-7xl mx-auto">
+      {/* Parallax background image */}
+      <motion.div style={{ y: imgY }} className="absolute inset-0 scale-110">
+        <Image
+          src="/luke-running-street.jpeg"
+          alt="Coach Luki running through the streets of Berlin at night"
+          fill
+          className="object-cover object-center"
+        />
+      </motion.div>
+      <div className="absolute inset-0 bg-black/60" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40" />
+
+      <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-accent text-sm font-medium uppercase tracking-widest mb-4"
+        >
+          Stop waiting. Start moving.
+        </motion.p>
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white max-w-3xl leading-tight"
+        >
+          Your body is capable of more than you think
+        </motion.h2>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <button
+            onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })}
+            className="mt-8 px-10 py-4 bg-accent text-white font-semibold rounded-full hover:bg-accent-light hover:shadow-[0_0_40px_rgba(0,102,51,0.3)] transition-all duration-300 text-lg cursor-pointer"
+          >
+            See Plans & Pricing
+          </button>
+        </motion.div>
+      </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────── TRUST BANNER (final push before contact) ─────────────────── */
+function TrustBanner() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  return (
+    <section ref={ref} className="py-8 sm:py-12 px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto rounded-[1.25rem] lg:rounded-[2rem] overflow-hidden">
+        <div className="grid lg:grid-cols-2 min-h-[500px]">
+          {/* Image side */}
+          <div className="relative h-[400px] lg:h-auto">
+            <Image
+              src="/luke-urban.jpeg"
+              alt="Coach Luki in Berlin — Personal Trainer ready to help you reach your goals"
+              fill
+              className="object-cover object-top"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/30 lg:to-stone-900/90" />
+            <div className="absolute inset-0 bg-gradient-to-t from-stone-900 via-transparent to-transparent lg:hidden" />
+          </div>
+
+          {/* Text side */}
+          <div className="bg-stone-900 flex items-center px-8 sm:px-12 lg:px-16 py-16 lg:py-20">
+            <div>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6 }}
+                className="text-accent text-sm font-medium uppercase tracking-widest mb-4"
+              >
+                Let&apos;s work together
+              </motion.p>
+              <motion.h2
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight"
+              >
+                The best time to start was yesterday. The next best time is{" "}
+                <span className="gradient-text">right now.</span>
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-zinc-400 mt-6 text-lg leading-relaxed"
+              >
+                A free consultation is all it takes. No commitment, no pressure — just an honest conversation about your goals and how I can help.
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="mt-8 flex flex-col sm:flex-row gap-4"
+              >
+                <button
+                  onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                  className="px-10 py-4 bg-accent text-white font-semibold rounded-full hover:bg-accent-light hover:shadow-[0_0_40px_rgba(0,102,51,0.3)] transition-all duration-300 text-lg cursor-pointer"
+                >
+                  Book Free Consultation
+                </button>
+                <a
+                  href="https://wa.me/4917657550542"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-10 py-4 border border-white/10 text-white rounded-full hover:bg-white/5 transition-all duration-300 text-lg cursor-pointer text-center"
+                >
+                  WhatsApp Me
+                </a>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ─────────────────── MAIN PAGE ─────────────────── */
 export default function Home() {
   return (
@@ -1498,6 +1847,7 @@ export default function Home() {
       <Hero />
       <FadeInSection><About /></FadeInSection>
       <FadeInSection><Services /></FadeInSection>
+      <ActionBanner />
       <FadeInSection><Pricing /></FadeInSection>
       <FadeInSection><Method /></FadeInSection>
       <FadeInSection><Philosophy /></FadeInSection>
@@ -1505,6 +1855,7 @@ export default function Home() {
       <FadeInSection><Experience /></FadeInSection>
       <FadeInSection><Locations /></FadeInSection>
       <FadeInSection><Testimonials /></FadeInSection>
+      <TrustBanner />
       <FadeInSection><FAQ /></FadeInSection>
       <FadeInSection><SocialCTA /></FadeInSection>
       <FadeInSection><Contact /></FadeInSection>

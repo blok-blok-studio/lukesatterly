@@ -69,6 +69,13 @@ Standard Sanity schemas. SEO meta on every page. Lighthouse 90+ performance, 95+
 - Solid white or solid dark backgrounds without texture/depth
 - Reusing the same design system across different clients
 
+### Spacing & Layout (Universal)
+- Full-bleed sections (heroes, banners, image CTAs) must have ZERO outer padding/margin — they span edge to edge
+- Contained sections (cards, forms, text blocks) use consistent outer padding: `py-8 sm:py-12 px-4 sm:px-6` with inner containers capped at `max-w-7xl mx-auto`
+- Never wrap a full-bleed visual section in a padded container — it creates visible gaps between the content and viewport edges
+- Adjacent dark-on-dark sections must not have visible seams; use matching backgrounds or gradients to blend
+- Section vertical rhythm: use consistent spacing tokens, never mix arbitrary values between adjacent sections
+
 ### Required
 - cursor-pointer on all clickable elements
 - Hover states with smooth transitions (150-300ms)
