@@ -1090,6 +1090,30 @@ function Experience() {
   );
 }
 
+/* ─────────────────── TESTIMONIAL CARD ─────────────────── */
+function TestimonialCard({ t, className = "" }: { t: { name: string; text: string }; className?: string }) {
+  return (
+    <div className={`flex-shrink-0 bg-surface border border-white/[0.06] rounded-2xl p-8 hover:border-accent/20 transition-all duration-500 ${className}`}>
+      <div className="flex items-center gap-1 mb-4">
+        {[...Array(5)].map((_, j) => (
+          <svg key={j} className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+          </svg>
+        ))}
+      </div>
+      <p className="text-zinc-300 leading-relaxed italic mb-6">
+        &ldquo;{t.text}&rdquo;
+      </p>
+      <div className="flex items-center gap-3">
+        <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
+          <span className="text-accent font-semibold text-sm">{t.name[0]}</span>
+        </div>
+        <span className="font-semibold text-white">{t.name}</span>
+      </div>
+    </div>
+  );
+}
+
 /* ─────────────────── TESTIMONIALS (dark, tilted cards) ─────────────────── */
 function Testimonials() {
   const ref = useRef(null);
@@ -1155,41 +1179,42 @@ function Testimonials() {
           </motion.div>
         </div>
 
-        {/* Horizontal marquee — full width with overflow hidden */}
-        <div className="relative overflow-hidden">
-          {/* Fade edges — responsive width for smooth transition at all sizes */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 md:w-40 lg:w-60 bg-gradient-to-r from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 md:w-40 lg:w-60 bg-gradient-to-l from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
+        {/* Desktop: auto-scrolling marquee */}
+        <div className="hidden md:block relative overflow-hidden">
+          <div className="absolute left-0 top-0 bottom-0 w-40 lg:w-60 bg-gradient-to-r from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-40 lg:w-60 bg-gradient-to-l from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
 
           <motion.div
             className="flex gap-6 px-6"
             animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+            transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
           >
             {[...testimonials, ...testimonials].map((t, i) => (
-              <div
-                key={`${t.name}-${i}`}
-                className="flex-shrink-0 w-[300px] sm:w-[380px] lg:w-[420px] bg-surface border border-white/[0.06] rounded-2xl p-8 hover:border-accent/20 transition-all duration-500"
-              >
-                <div className="flex items-center gap-1 mb-4">
-                  {[...Array(5)].map((_, j) => (
-                    <svg key={j} className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-                <p className="text-zinc-300 leading-relaxed italic mb-6">
-                  &ldquo;{t.text}&rdquo;
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
-                    <span className="text-accent font-semibold text-sm">{t.name[0]}</span>
-                  </div>
-                  <span className="font-semibold text-white">{t.name}</span>
-                </div>
-              </div>
+              <TestimonialCard key={`desktop-${t.name}-${i}`} t={t} className="w-[380px] lg:w-[420px]" />
             ))}
           </motion.div>
+        </div>
+
+        {/* Mobile: swipeable carousel */}
+        <div className="md:hidden relative">
+          <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
+
+          <motion.div
+            className="flex gap-4 px-6 cursor-grab active:cursor-grabbing"
+            drag="x"
+            dragConstraints={{ left: -(testimonials.length - 1) * 290, right: 0 }}
+            dragElastic={0.1}
+            dragTransition={{ bounceStiffness: 300, bounceDamping: 30 }}
+          >
+            {testimonials.map((t, i) => (
+              <TestimonialCard key={`mobile-${t.name}-${i}`} t={t} className="w-[280px]" />
+            ))}
+          </motion.div>
+
+          <p className="text-center text-zinc-600 text-xs mt-6 uppercase tracking-wider">
+            Swipe to see more
+          </p>
         </div>
       </div>
     </section>
