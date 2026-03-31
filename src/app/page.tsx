@@ -231,7 +231,7 @@ function Hero() {
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.35 }}
             className="mt-8 text-base sm:text-lg text-zinc-300 max-w-lg leading-relaxed"
@@ -241,7 +241,7 @@ function Hero() {
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
             className="mt-8 flex flex-col sm:flex-row items-center gap-4"
@@ -263,7 +263,7 @@ function Hero() {
 
         {/* Bottom stats row */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
           className="mt-12 flex flex-wrap items-center gap-8 sm:gap-16"
@@ -312,8 +312,8 @@ function About() {
         <div className="grid md:grid-cols-2 gap-16 items-center">
           {/* Image side */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            initial={{ x: -20 }}
+            animate={isInView ? { x: 0 } : {}}
             transition={{ duration: 0.8 }}
             className="relative"
           >
@@ -351,8 +351,8 @@ function About() {
 
           {/* Text side */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            initial={{ x: 20 }}
+            animate={isInView ? { x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-stone-900">
@@ -439,8 +439,8 @@ function Services() {
     <section id="services" className="py-24 sm:py-32 radial-glow-green scroll-mt-20">
       <div ref={ref} className="max-w-7xl mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ y: 10 }}
+          animate={isInView ? { y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
@@ -460,8 +460,8 @@ function Services() {
           {services.map((service, i) => (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 12 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              initial={{ y: 10 }}
+              animate={isInView ? { y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.15 }}
               className="group relative bg-surface border border-white/[0.04] rounded-2xl p-8 hover:border-accent/20 transition-all duration-500 hover:shadow-[0_0_50px_rgba(0,102,51,0.06)]"
             >
@@ -608,8 +608,8 @@ function Pricing() {
     <section id="pricing" className="py-8 sm:py-12 px-4 sm:px-6 scroll-mt-20">
       <div ref={ref} className="max-w-7xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ y: 10 }}
+          animate={isInView ? { y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
@@ -652,7 +652,7 @@ function Pricing() {
           {tab === "online" ? (
             <motion.div
               key="online"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
@@ -661,8 +661,8 @@ function Pricing() {
                 {onlinePlans.map((plan, i) => (
                   <motion.div
                     key={plan.name}
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    initial={{ y: 10 }}
+                    animate={isInView ? { y: 0 } : {}}
                     transition={{ duration: 0.5, delay: i * 0.12 }}
                     className={`relative rounded-2xl p-8 sm:p-10 transition-all duration-500 ${
                       plan.dark
@@ -721,7 +721,7 @@ function Pricing() {
           ) : (
             <motion.div
               key="personal"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
@@ -731,8 +731,8 @@ function Pricing() {
                 {personalPlans.map((plan, i) => (
                   <motion.div
                     key={plan.name}
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    initial={{ y: 10 }}
+                    animate={isInView ? { y: 0 } : {}}
                     transition={{ duration: 0.5, delay: i * 0.12 }}
                     className={`relative rounded-2xl p-8 sm:p-10 transition-all duration-500 ${
                       plan.dark
@@ -794,8 +794,8 @@ function Pricing() {
               {/* Flexible packages */}
               <div className="max-w-4xl mx-auto mt-8">
                 <motion.div
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  initial={{ y: 10 }}
+                  animate={isInView ? { y: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.3 }}
                   className="rounded-2xl bg-[#F7F5F0] border border-stone-200 p-8 sm:p-10"
                 >
@@ -870,8 +870,8 @@ function Method() {
     <section id="method" className="py-8 sm:py-12 px-4 sm:px-6">
       <div ref={ref} className="max-w-7xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16 overflow-hidden">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ y: 10 }}
+          animate={isInView ? { y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
@@ -890,8 +890,8 @@ function Method() {
           {steps.map((s, i) => (
             <motion.div
               key={s.step}
-              initial={{ opacity: 0, y: 12 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              initial={{ y: 10 }}
+              animate={isInView ? { y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.12 }}
               className="relative"
             >
@@ -948,8 +948,8 @@ function Philosophy() {
 
       <div ref={ref} className="relative max-w-7xl mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ y: 10 }}
+          animate={isInView ? { y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
@@ -965,8 +965,8 @@ function Philosophy() {
           {principles.map((p, i) => (
             <motion.div
               key={p.number}
-              initial={{ opacity: 0, y: 12 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              initial={{ y: 10 }}
+              animate={isInView ? { y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="group relative p-8 sm:p-10 rounded-2xl border border-white/[0.04] bg-surface/80 hover:border-accent/20 transition-all duration-500"
             >
@@ -981,8 +981,8 @@ function Philosophy() {
 
         {/* Quote */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={isInView ? { opacity: 1, scale: 1 } : {}}
+          initial={{ scale: 0.98 }}
+          animate={isInView ? { scale: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.5 }}
           className="mt-20 text-center"
         >
@@ -1041,8 +1041,8 @@ function Experience() {
     <section id="experience" className="py-8 sm:py-12 px-4 sm:px-6">
       <div ref={ref} className="max-w-7xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ y: 10 }}
+          animate={isInView ? { y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
@@ -1062,8 +1062,8 @@ function Experience() {
           {experiences.map((exp, i) => (
             <motion.div
               key={exp.company}
-              initial={{ opacity: 0, y: 12 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              initial={{ y: 10 }}
+              animate={isInView ? { y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.15 }}
               className={`relative flex flex-col sm:flex-row gap-8 mb-16 last:mb-0 ${
                 i % 2 === 0 ? "sm:flex-row" : "sm:flex-row-reverse"
@@ -1138,8 +1138,8 @@ function Testimonials() {
       <div ref={ref} className="relative">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            initial={{ y: 10 }}
+            animate={isInView ? { y: 0 } : {}}
             transition={{ duration: 0.6 }}
             className="text-center mb-20"
           >
@@ -1231,8 +1231,8 @@ function SocialCTA() {
       <div className="absolute inset-0 bg-grid opacity-20" />
       <div ref={ref} className="relative max-w-5xl mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ y: 10 }}
+          animate={isInView ? { y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
@@ -1254,8 +1254,8 @@ function SocialCTA() {
               href={social.url}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 12 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              initial={{ y: 10 }}
+              animate={isInView ? { y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.15 }}
               className="group relative p-8 sm:p-10 rounded-2xl bg-surface border border-white/[0.04] hover:border-accent/20 transition-all duration-500 hover:shadow-[0_0_50px_rgba(0,102,51,0.06)]"
             >
@@ -1320,8 +1320,8 @@ function FAQ() {
     <section id="faq" className="py-8 sm:py-12 px-4 sm:px-6 scroll-mt-20">
       <div ref={ref} className="max-w-3xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ y: 10 }}
+          animate={isInView ? { y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
@@ -1340,8 +1340,8 @@ function FAQ() {
           {faqs.map((faq, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              initial={{ y: 10 }}
+              animate={isInView ? { y: 0 } : {}}
               transition={{ duration: 0.4, delay: i * 0.06 }}
             >
               <button
@@ -1449,8 +1449,8 @@ function Contact() {
 
         <div className="relative">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            initial={{ y: 10 }}
+            animate={isInView ? { y: 0 } : {}}
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
@@ -1467,8 +1467,8 @@ function Contact() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            initial={{ y: 10 }}
+            animate={isInView ? { y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="max-w-2xl mx-auto"
           >
@@ -1554,10 +1554,7 @@ function Contact() {
           </motion.div>
 
           {/* Social links */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.4 }}
+          <div
             className="mt-10 flex flex-wrap items-center justify-center gap-6 text-sm text-zinc-500"
           >
             <a href="https://www.instagram.com/coachluki/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-white transition-colors">
@@ -1595,7 +1592,7 @@ function Contact() {
               </svg>
               Berlin, Germany
             </span>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
@@ -1652,8 +1649,8 @@ function Locations() {
       <div className="absolute inset-0 bg-grid opacity-20" />
       <div ref={ref} className="relative max-w-7xl mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ y: 10 }}
+          animate={isInView ? { y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
@@ -1672,8 +1669,8 @@ function Locations() {
           {gyms.map((gym, i) => (
             <motion.div
               key={gym.name}
-              initial={{ opacity: 0, y: 12 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              initial={{ y: 10 }}
+              animate={isInView ? { y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.15 }}
               className="group p-8 sm:p-10 rounded-2xl bg-surface border border-white/[0.04] hover:border-accent/20 transition-all duration-500"
             >
@@ -1722,24 +1719,24 @@ function ActionBanner() {
 
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ y: 10 }}
+          animate={isInView ? { y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-accent text-sm font-medium uppercase tracking-widest mb-4"
         >
           Stop waiting. Start moving.
         </motion.p>
         <motion.h2
-          initial={{ opacity: 0, y: 12 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ y: 10 }}
+          animate={isInView ? { y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white max-w-3xl leading-tight"
         >
           Your body is capable of more than you think
         </motion.h2>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ y: 10 }}
+          animate={isInView ? { y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           <button
@@ -1780,16 +1777,16 @@ function TrustBanner() {
           <div className="bg-stone-900 flex items-center px-8 sm:px-12 lg:px-16 py-16 lg:py-20">
             <div>
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                initial={{ y: 10 }}
+                animate={isInView ? { y: 0 } : {}}
                 transition={{ duration: 0.6 }}
                 className="text-accent text-sm font-medium uppercase tracking-widest mb-4"
               >
                 Let&apos;s work together
               </motion.p>
               <motion.h2
-                initial={{ opacity: 0, y: 12 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                initial={{ y: 10 }}
+                animate={isInView ? { y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight"
               >
@@ -1797,16 +1794,16 @@ function TrustBanner() {
                 <span className="gradient-text">right now.</span>
               </motion.h2>
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                initial={{ y: 10 }}
+                animate={isInView ? { y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="text-zinc-400 mt-6 text-lg leading-relaxed"
               >
                 A free consultation is all it takes. No commitment, no pressure — just an honest conversation about your goals and how I can help.
               </motion.p>
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                initial={{ y: 10 }}
+                animate={isInView ? { y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="mt-8 flex flex-col sm:flex-row gap-4"
               >
