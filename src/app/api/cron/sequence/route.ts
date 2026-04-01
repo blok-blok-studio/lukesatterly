@@ -52,6 +52,7 @@ export async function GET(request: Request) {
 
         await resend.emails.send({
           from: `Coach Luki <${fromEmail}>`,
+          replyTo: fromEmail,
           to: sub.email,
           subject: seq.subject,
           html: seq.template(firstName),

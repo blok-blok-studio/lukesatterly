@@ -43,6 +43,7 @@ export async function POST(request: Request) {
 
       await resend.emails.send({
         from: `Coach Luki <${fromEmail}>`,
+        replyTo: fromEmail,
         to: email,
         subject: "Your Free Workout Template",
         html: welcomeEmail(firstName, timeline),
