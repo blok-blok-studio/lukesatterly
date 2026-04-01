@@ -464,53 +464,34 @@ function BeforeAfter() {
           transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-lg mx-auto"
         >
-          {/* Side-by-side comparison */}
           <div className="grid grid-cols-2 gap-3">
-            {/* Before */}
-            <div className="relative">
-              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-white/[0.08]">
-                <Image
-                  src="/transformation-before.jpg"
-                  alt="Before coaching with Coach Luki"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 50vw, 256px"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                <div className="absolute bottom-3 left-3 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-sm text-xs font-semibold text-white">
-                  Before
-                </div>
+            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-white/[0.08]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/transformation-before.jpg"
+                alt="Before coaching with Coach Luki"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+              <div className="absolute bottom-3 left-3 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-sm text-xs font-semibold text-white">
+                Before
               </div>
             </div>
-
-            {/* After */}
-            <div className="relative">
-              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-accent/20">
-                <Image
-                  src="/transformation-after.jpg"
-                  alt="After coaching with Coach Luki"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 50vw, 256px"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                <div className="absolute bottom-3 left-3 px-3 py-1.5 rounded-full bg-accent/80 backdrop-blur-sm text-xs font-semibold text-white">
-                  After
-                </div>
+            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-accent/20">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/transformation-after.jpg"
+                alt="After coaching with Coach Luki"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+              <div className="absolute bottom-3 left-3 px-3 py-1.5 rounded-full bg-accent/80 backdrop-blur-sm text-xs font-semibold text-white">
+                After
               </div>
             </div>
           </div>
 
-          {/* Arrow between */}
-          <div className="flex items-center justify-center -mt-[calc(50%+12px)] relative z-10 pointer-events-none mb-[calc(50%-12px)]">
-            <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center shadow-lg shadow-accent/30">
-              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-              </svg>
-            </div>
-          </div>
-
-          {/* Stats beneath */}
+          {/* Stats */}
           <div className="grid grid-cols-3 gap-3 mt-6">
             {[
               { label: "Body Fat Lost", value: "12%" },
