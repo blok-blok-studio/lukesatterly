@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 
 /* ─────────────────── TYPES ─────────────────── */
 type FormData = {
@@ -432,6 +433,224 @@ function FunnelForm() {
   );
 }
 
+/* ─────────────────── BEFORE & AFTER ─────────────────── */
+function BeforeAfter() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+
+  return (
+    <section className="py-12 sm:py-20">
+      <div ref={ref} className="max-w-5xl mx-auto px-4 sm:px-6">
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={isInView ? { y: 0, opacity: 1 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-8 sm:mb-12"
+        >
+          <span className="text-accent text-sm font-medium uppercase tracking-widest">
+            Real Results
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold mt-3 font-[family-name:var(--font-display)]">
+            The <span className="gradient-text">transformation</span> speaks for itself
+          </h2>
+          <p className="text-zinc-400 mt-4 max-w-lg mx-auto">
+            Consistent training. Proper nutrition. Real coaching.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ y: 30, opacity: 0, scale: 0.95 }}
+          animate={isInView ? { y: 0, opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-lg mx-auto"
+        >
+          {/* Side-by-side comparison */}
+          <div className="grid grid-cols-2 gap-3">
+            {/* Before */}
+            <div className="relative">
+              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-white/[0.08]">
+                <Image
+                  src="/transformation-before.jpg"
+                  alt="Before coaching with Coach Luki"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 256px"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                <div className="absolute bottom-3 left-3 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-sm text-xs font-semibold text-white">
+                  Before
+                </div>
+              </div>
+            </div>
+
+            {/* After */}
+            <div className="relative">
+              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-accent/20">
+                <Image
+                  src="/transformation-after.jpg"
+                  alt="After coaching with Coach Luki"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 256px"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                <div className="absolute bottom-3 left-3 px-3 py-1.5 rounded-full bg-accent/80 backdrop-blur-sm text-xs font-semibold text-white">
+                  After
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Arrow between */}
+          <div className="flex items-center justify-center -mt-[calc(50%+12px)] relative z-10 pointer-events-none mb-[calc(50%-12px)]">
+            <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center shadow-lg shadow-accent/30">
+              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+              </svg>
+            </div>
+          </div>
+
+          {/* Stats beneath */}
+          <div className="grid grid-cols-3 gap-3 mt-6">
+            {[
+              { label: "Body Fat Lost", value: "12%" },
+              { label: "Muscle Gained", value: "8kg" },
+              { label: "Duration", value: "6 mo" },
+            ].map((stat) => (
+              <div key={stat.label} className="text-center p-3 rounded-xl bg-surface border border-white/[0.04]">
+                <div className="text-lg font-bold text-accent">{stat.value}</div>
+                <div className="text-xs text-zinc-500 mt-0.5">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────── VIDEO SECTION ─────────────────── */
+function VideoSection() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+
+  return (
+    <section className="py-12 sm:py-20 radial-glow-green">
+      <div ref={ref} className="max-w-5xl mx-auto px-4 sm:px-6">
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={isInView ? { y: 0, opacity: 1 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-8 sm:mb-12"
+        >
+          <span className="text-accent text-sm font-medium uppercase tracking-widest">
+            Watch This First
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold mt-3 font-[family-name:var(--font-display)]">
+            60 seconds that could <span className="gradient-text">change everything</span>
+          </h2>
+          <p className="text-zinc-400 mt-4 max-w-lg mx-auto">
+            Hear directly from me about what makes this program different and how I can help you reach your goals.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={isInView ? { y: 0, opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="max-w-2xl mx-auto"
+        >
+          {/* Video embed placeholder — replace src with actual video URL */}
+          <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/[0.08] bg-surface">
+            {/* Placeholder — swap this div for an iframe or video element when ready */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
+              <div className="w-20 h-20 rounded-full bg-accent/20 flex items-center justify-center border-2 border-accent/40">
+                <svg className="w-8 h-8 text-accent ml-1" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+              <p className="text-zinc-500 text-sm">Video coming soon</p>
+            </div>
+            {/* When you have the video URL, uncomment and replace: */}
+            {/* <iframe
+              src="YOUR_VIDEO_EMBED_URL"
+              className="absolute inset-0 w-full h-full"
+              allow="autoplay; fullscreen"
+              allowFullScreen
+              title="Coach Luki — 1 Minute Introduction"
+            /> */}
+          </div>
+
+          {/* Quick CTA below video */}
+          <div className="mt-6 text-center">
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="inline-flex items-center gap-2 px-8 py-3.5 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)] transition-all duration-300 cursor-pointer"
+            >
+              Get Your Free Template
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
+              </svg>
+            </button>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────── PROBLEM CARDS ─────────────────── */
+function ProblemCards() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+
+  const problems = [
+    { icon: "M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126Z", title: "No clear plan", desc: "You show up to the gym and improvise. Some days you feel great, most days you wonder if you're wasting your time." },
+    { icon: "M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75Z", title: "Plateau after plateau", desc: "You were making progress, then it stopped. Same weight, same reps, same body, month after month." },
+    { icon: "M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z", title: "Nutrition confusion", desc: "Every app says something different. You've tried counting macros, cutting carbs, going keto — nothing sticks." },
+    { icon: "M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z", title: "Zero accountability", desc: "You start strong on Monday, skip Wednesday, and by Friday you've convinced yourself next week will be different." },
+  ];
+
+  return (
+    <section className="py-12 sm:py-20">
+      <div ref={ref} className="max-w-5xl mx-auto px-4 sm:px-6">
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={isInView ? { y: 0, opacity: 1 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-8 sm:mb-12"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-display)]">
+            Sound <span className="gradient-text">familiar?</span>
+          </h2>
+        </motion.div>
+
+        <div className="grid sm:grid-cols-2 gap-4">
+          {problems.map((p, i) => (
+            <motion.div
+              key={p.title}
+              initial={{ y: 20, opacity: 0 }}
+              animate={isInView ? { y: 0, opacity: 1 } : {}}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="p-5 sm:p-6 rounded-2xl bg-surface border border-white/[0.04] flex gap-4"
+            >
+              <div className="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center flex-shrink-0">
+                <svg className="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d={p.icon} />
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-semibold text-white text-sm mb-1">{p.title}</h3>
+                <p className="text-zinc-500 text-sm leading-relaxed">{p.desc}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ─────────────────── MAIN PAGE ─────────────────── */
 export default function StartPage() {
   return (
@@ -453,7 +672,7 @@ export default function StartPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="text-center max-w-2xl mx-auto mb-10 sm:mb-14"
+            className="text-center max-w-2xl mx-auto"
           >
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-medium mb-6">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -487,9 +706,38 @@ export default function StartPage() {
             </div>
           </motion.div>
 
+        </div>
+      </section>
+
+      {/* 1-Minute Video */}
+      <VideoSection />
+
+      {/* Before & After Transformation */}
+      <BeforeAfter />
+
+      {/* Form */}
+      <section className="py-12 sm:py-20">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center max-w-2xl mx-auto mb-10"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-display)]">
+              Ready? Grab your <span className="gradient-text">free template</span>
+            </h2>
+            <p className="text-zinc-400 mt-4">
+              Answer a few quick questions and download instantly.
+            </p>
+          </motion.div>
           <FunnelForm />
         </div>
       </section>
+
+      {/* Problem identification */}
+      <ProblemCards />
 
       {/* What's Inside */}
       <section className="py-10 sm:py-16 lg:py-20">
@@ -564,6 +812,27 @@ export default function StartPage() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-12 sm:py-16">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 font-[family-name:var(--font-display)]">
+            Ready to start your <span className="gradient-text">transformation?</span>
+          </h2>
+          <p className="text-zinc-400 mb-8">
+            Grab the free template now — no commitment, just a proven plan to get you moving.
+          </p>
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="inline-flex items-center gap-2 px-10 py-4 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)] transition-all duration-300 text-lg cursor-pointer"
+          >
+            Get Your Free Template
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
+            </svg>
+          </button>
         </div>
       </section>
 

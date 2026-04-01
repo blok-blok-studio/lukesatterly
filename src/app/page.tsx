@@ -34,12 +34,32 @@ function CountUp({ target, suffix = "", duration = 2 }: { target: number; suffix
   return <span ref={ref}>{count}{suffix}</span>;
 }
 
-/* ─────────────────── FADE IN/OUT SECTION WRAPPER ─────────────────── */
+/* ─────────────────── SCROLL-DRIVEN ZOOM WRAPPER ─────────────────── */
+function ScrollZoom({ children, className = "", intensity = 0.75 }: { children: React.ReactNode; className?: string; intensity?: number }) {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "start 0.3"],
+  });
+  const scale = useTransform(scrollYProgress, [0, 1], [intensity, 1]);
+  const y = useTransform(scrollYProgress, [0, 1], [80 * (1 - intensity), 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 1], [0, 1, 1]);
+
+  return (
+    <div ref={ref} className={className}>
+      <motion.div style={{ scale, y, opacity }} className="will-change-transform">
+        {children}
+      </motion.div>
+    </div>
+  );
+}
+
+/* ─────────────────── LEGACY WRAPPER (passthrough) ─────────────────── */
 function FadeInSection({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={className}>
+    <ScrollZoom className={className}>
       {children}
-    </div>
+    </ScrollZoom>
   );
 }
 
@@ -198,10 +218,21 @@ function Hero() {
   const y = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
+  const heroWords = [
+    { text: "Your", className: "text-white", delay: 0.1 },
+    { text: "strongest", className: "text-outline", delay: 0.3 },
+    { text: "chapter", className: "gradient-text", delay: 0.5 },
+  ];
+
   return (
     <section ref={ref} className="relative min-h-screen overflow-hidden">
-      {/* Full-bleed background image */}
-      <div className="absolute inset-0">
+      {/* Full-bleed background image with zoom-in on load */}
+      <motion.div
+        initial={{ scale: 1.15 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1.8, ease: "easeOut" }}
+        className="absolute inset-0"
+      >
         <Image
           src="/luke-running.jpeg"
           alt="Coach Luki running through Berlin at night"
@@ -212,28 +243,29 @@ function Hero() {
         {/* Dark overlays for text readability */}
         <div className="absolute inset-0 bg-black/50" />
         <div className="absolute bottom-0 left-0 right-0 h-60 bg-gradient-to-t from-[#0C0C0C] to-transparent" />
-      </div>
+      </motion.div>
 
       <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-6 pt-32 sm:pt-40 pb-20 min-h-screen flex flex-col justify-between">
         {/* Centered headline overlaying the image */}
         <div className="flex-1 flex flex-col justify-center items-center text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-[clamp(1.75rem,8.5vw,7rem)] font-black tracking-[-0.04em] leading-[0.9] uppercase font-[family-name:var(--font-display)] px-2"
-          >
-            <span className="text-white">Your</span>
-            <br />
-            <span className="text-outline">strongest</span>
-            <br />
-            <span className="gradient-text">chapter</span>
-          </motion.h1>
+          <h1 className="text-[clamp(1.75rem,8.5vw,7rem)] font-black tracking-[-0.04em] leading-[0.9] uppercase font-[family-name:var(--font-display)] px-2">
+            {heroWords.map((word) => (
+              <motion.span
+                key={word.text}
+                initial={{ opacity: 1, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: word.delay, ease: "easeOut" }}
+                className={`${word.className} block`}
+              >
+                {word.text}
+              </motion.span>
+            ))}
+          </h1>
 
           <motion.p
-            initial={{ y: 10 }}
+            initial={{ opacity: 1, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.35 }}
+            transition={{ duration: 0.4, delay: 0.7, ease: "easeOut" }}
             className="mt-8 text-base sm:text-lg text-zinc-300 max-w-lg leading-relaxed"
           >
             I work with people who want to feel stronger, move better, and actually
@@ -241,46 +273,58 @@ function Hero() {
           </motion.p>
 
           <motion.div
-            initial={{ y: 10 }}
+            initial={{ opacity: 1, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            transition={{ duration: 0.4, delay: 0.9, ease: "easeOut" }}
             className="mt-8 flex flex-col sm:flex-row items-center gap-4"
           >
-            <button
+            <motion.button
+              whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(0,102,51,0.4)" }}
+              whileTap={{ scale: 0.97 }}
               onClick={() => smoothScrollTo("contact")}
-              className="group relative px-10 py-4 bg-accent text-white font-semibold rounded-full overflow-hidden transition-all duration-300 hover:bg-accent-light hover:shadow-[0_0_40px_rgba(0,102,51,0.3)] text-lg cursor-pointer"
+              className="group relative px-10 py-4 bg-accent text-white font-semibold rounded-full overflow-hidden transition-colors duration-300 hover:bg-accent-light text-lg cursor-pointer"
             >
               Let&apos;s Get Started
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
               onClick={() => smoothScrollTo("about")}
               className="px-10 py-4 border border-white/20 text-white rounded-full hover:bg-white/10 transition-all duration-300 text-lg cursor-pointer"
             >
               Learn More
-            </button>
+            </motion.button>
           </motion.div>
         </div>
 
         {/* Bottom stats row */}
         <motion.div
-          initial={{ y: 10 }}
+          initial={{ opacity: 1, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
+          transition={{ duration: 0.4, delay: 1.1, ease: "easeOut" }}
           className="mt-12 flex flex-wrap items-center gap-8 sm:gap-16"
         >
-          <div>
+          <motion.div
+            initial={{ opacity: 1, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 1.2, ease: "easeOut" }}
+          >
             <div className="text-4xl md:text-5xl font-bold text-white">
               <CountUp target={100} suffix="+" />
             </div>
             <div className="text-sm text-zinc-400 mt-1">Clients</div>
-          </div>
+          </motion.div>
           <div className="w-px h-12 bg-white/20 hidden sm:block" />
-          <div>
+          <motion.div
+            initial={{ opacity: 1, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 1.35, ease: "easeOut" }}
+          >
             <div className="text-4xl md:text-5xl font-bold text-white">
               <CountUp target={5000} suffix="+" duration={2.5} />
             </div>
             <div className="text-sm text-zinc-400 mt-1">Hours Coached</div>
-          </div>
+          </motion.div>
           <div className="w-px h-12 bg-white/20 hidden sm:block" />
           <motion.button
             animate={{ y: [0, 6, 0] }}
@@ -303,7 +347,6 @@ function Hero() {
 /* ─────────────────── ABOUT (light bg) ─────────────────── */
 function About() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "100px" });
 
   return (
     <section id="about" className="py-8 sm:py-12 px-4 sm:px-6 scroll-mt-20">
@@ -312,9 +355,10 @@ function About() {
         <div className="grid md:grid-cols-2 gap-16 items-center">
           {/* Image side */}
           <motion.div
-            initial={{ x: -20 }}
-            animate={isInView ? { x: 0 } : {}}
-            transition={{ duration: 0.8 }}
+            initial={{ x: -15 }}
+            whileInView={{ x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="relative"
           >
             <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-stone-100">
@@ -351,9 +395,10 @@ function About() {
 
           {/* Text side */}
           <motion.div
-            initial={{ x: 20 }}
-            animate={isInView ? { x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ x: 15 }}
+            whileInView={{ x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
           >
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-stone-900">
               Hi, I&apos;m <span className="gradient-text">Luki</span>
@@ -381,13 +426,20 @@ function About() {
                 "Plant-based / vegan fitness specialist",
                 "In-person & online coaching available",
                 "Ring training & calisthenics focus",
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-stone-700">
+              ].map((item, i) => (
+                <motion.li
+                  key={item}
+                  initial={{ x: 10 }}
+                  whileInView={{ x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.2 + i * 0.06, ease: "easeOut" }}
+                  className="flex items-start gap-3 text-stone-700"
+                >
                   <svg className="w-5 h-5 text-accent-dark mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                   </svg>
                   {item}
-                </li>
+                </motion.li>
               ))}
             </ul>
           </motion.div>
@@ -400,7 +452,6 @@ function About() {
 /* ─────────────────── SERVICES (dark container) ─────────────────── */
 function Services() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "100px" });
 
   const services = [
     {
@@ -439,9 +490,10 @@ function Services() {
     <section id="services" className="py-24 sm:py-32 radial-glow-green scroll-mt-20">
       <div ref={ref} className="max-w-7xl mx-auto px-6">
         <motion.div
-          initial={{ y: 10 }}
-          animate={isInView ? { y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={{ y: 40, scale: 0.85 }}
+          whileInView={{ y: 0, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-20"
         >
           <span className="text-accent text-sm font-medium uppercase tracking-widest">
@@ -460,14 +512,20 @@ function Services() {
           {services.map((service, i) => (
             <motion.div
               key={service.title}
-              initial={{ y: 10 }}
-              animate={isInView ? { y: 0 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.15 }}
-              className="group relative bg-surface border border-white/[0.04] rounded-2xl p-8 hover:border-accent/20 transition-all duration-500 hover:shadow-[0_0_50px_rgba(0,102,51,0.06)]"
+              initial={{ y: 50, scale: 0.8 }}
+              whileInView={{ y: 0, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -6, scale: 1.02 }}
+              className="group relative bg-surface border border-white/[0.04] rounded-2xl p-8 hover:border-accent/20 transition-shadow duration-500 hover:shadow-[0_0_50px_rgba(0,102,51,0.06)]"
             >
-              <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center text-accent mb-6 group-hover:bg-accent/20 transition-colors">
+              <motion.div
+                whileHover={{ scale: 1.15, rotate: 3 }}
+                transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center text-accent mb-6 group-hover:bg-accent/20 transition-colors cursor-pointer"
+              >
                 {service.icon}
-              </div>
+              </motion.div>
               <h3 className="text-xl font-semibold text-white mb-3">{service.title}</h3>
               <p className="text-zinc-400 text-sm leading-relaxed mb-6">{service.description}</p>
               <ul className="space-y-2.5">
@@ -490,10 +548,113 @@ function Services() {
   );
 }
 
+/* ─────────────────── BEFORE & AFTER ─────────────────── */
+function BeforeAfter() {
+  const ref = useRef(null);
+
+  const transformations = [
+    { before: "/transformation-before.jpg", after: "/transformation-after.jpg", name: "Luki", duration: "6 months", result: "Complete body recomposition" },
+    // Add more pairs here as Luke sends them:
+    // { before: "/transform-2-before.jpg", after: "/transform-2-after.jpg", name: "Client Name", duration: "X months", result: "Result description" },
+  ];
+
+  return (
+    <section className="py-8 sm:py-12 px-4 sm:px-6 scroll-mt-20">
+      <div ref={ref} className="max-w-7xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16">
+        <motion.div
+          initial={{ y: 40, scale: 0.85 }}
+          whileInView={{ y: 0, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center mb-12 sm:mb-16"
+        >
+          <span className="text-accent-dark text-sm font-medium uppercase tracking-widest">
+            Real Results
+          </span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4 text-stone-900">
+            The proof is in the <span className="gradient-text">progress</span>
+          </h2>
+          <p className="text-zinc-500 mt-6 max-w-xl mx-auto text-lg">
+            Real clients, real transformations. No filters, no shortcuts — just consistent work and proper coaching.
+          </p>
+        </motion.div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {transformations.map((t, i) => (
+            <motion.div
+              key={t.name}
+              initial={{ y: 50, scale: 0.8 }}
+              whileInView={{ y: 0, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+              className="group"
+            >
+              <div className="grid grid-cols-2 gap-3 mb-4">
+                <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-stone-200">
+                  <Image
+                    src={t.before}
+                    alt={`${t.name} before training`}
+                    fill
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                  />
+                  <div className="absolute bottom-2 left-2 px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-sm text-[11px] font-medium text-white">
+                    Before
+                  </div>
+                </div>
+                <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-stone-200">
+                  <Image
+                    src={t.after}
+                    alt={`${t.name} after training`}
+                    fill
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                  />
+                  <div className="absolute bottom-2 left-2 px-2.5 py-1 rounded-md bg-accent/80 backdrop-blur-sm text-[11px] font-medium text-white">
+                    After
+                  </div>
+                </div>
+              </div>
+              <div className="text-center">
+                <p className="font-semibold text-stone-800">{t.name}</p>
+                <p className="text-sm text-zinc-500">{t.duration} &mdash; {t.result}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ y: 40, scale: 0.85 }}
+
+          whileInView={{ y: 0, scale: 1 }}
+
+          viewport={{ once: true }}
+
+          transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center mt-12"
+        >
+          <button
+            onClick={() => {
+              const el = document.getElementById("contact");
+              if (el) el.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-white font-semibold rounded-full hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)] transition-all duration-300 cursor-pointer"
+          >
+            Start Your Transformation
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </button>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 /* ─────────────────── PRICING ─────────────────── */
 function Pricing() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "100px" });
   const [tab, setTab] = useState<"online" | "personal">("personal");
 
   const onlinePlans = [
@@ -608,9 +769,13 @@ function Pricing() {
     <section id="pricing" className="py-8 sm:py-12 px-4 sm:px-6 scroll-mt-20">
       <div ref={ref} className="max-w-7xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16">
         <motion.div
-          initial={{ y: 10 }}
-          animate={isInView ? { y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={{ y: 40, scale: 0.85 }}
+
+          whileInView={{ y: 0, scale: 1 }}
+
+          viewport={{ once: true }}
+
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
         >
           <span className="text-accent-dark text-sm font-medium uppercase tracking-widest">
@@ -661,9 +826,13 @@ function Pricing() {
                 {onlinePlans.map((plan, i) => (
                   <motion.div
                     key={plan.name}
-                    initial={{ y: 10 }}
-                    animate={isInView ? { y: 0 } : {}}
-                    transition={{ duration: 0.5, delay: i * 0.12 }}
+                    initial={{ y: 40, scale: 0.85 }}
+
+                    whileInView={{ y: 0, scale: 1 }}
+
+                    viewport={{ once: true }}
+
+                    transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                     className={`relative rounded-2xl p-8 sm:p-10 transition-all duration-500 ${
                       plan.dark
                         ? "bg-stone-900 text-white ring-2 ring-accent/50 shadow-[0_0_60px_rgba(0,102,51,0.1)] lg:scale-[1.02]"
@@ -731,9 +900,13 @@ function Pricing() {
                 {personalPlans.map((plan, i) => (
                   <motion.div
                     key={plan.name}
-                    initial={{ y: 10 }}
-                    animate={isInView ? { y: 0 } : {}}
-                    transition={{ duration: 0.5, delay: i * 0.12 }}
+                    initial={{ y: 40, scale: 0.85 }}
+
+                    whileInView={{ y: 0, scale: 1 }}
+
+                    viewport={{ once: true }}
+
+                    transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                     className={`relative rounded-2xl p-8 sm:p-10 transition-all duration-500 ${
                       plan.dark
                         ? "bg-stone-900 text-white ring-2 ring-accent/50 shadow-[0_0_60px_rgba(0,102,51,0.1)] lg:scale-[1.02]"
@@ -794,9 +967,13 @@ function Pricing() {
               {/* Flexible packages */}
               <div className="max-w-4xl mx-auto mt-8">
                 <motion.div
-                  initial={{ y: 10 }}
-                  animate={isInView ? { y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.3 }}
+                  initial={{ y: 40, scale: 0.85 }}
+
+                  whileInView={{ y: 0, scale: 1 }}
+
+                  viewport={{ once: true }}
+
+                  transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                   className="rounded-2xl bg-[#F7F5F0] border border-stone-200 p-8 sm:p-10"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
@@ -841,7 +1018,6 @@ function Pricing() {
 /* ─────────────────── THE LUKI METHOD (light section) ─────────────────── */
 function Method() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "100px" });
 
   const steps = [
     {
@@ -870,9 +1046,13 @@ function Method() {
     <section id="method" className="py-8 sm:py-12 px-4 sm:px-6">
       <div ref={ref} className="max-w-7xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16 overflow-hidden">
         <motion.div
-          initial={{ y: 10 }}
-          animate={isInView ? { y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={{ y: 40, scale: 0.85 }}
+
+          whileInView={{ y: 0, scale: 1 }}
+
+          viewport={{ once: true }}
+
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-20"
         >
           <span className="text-accent-dark text-sm font-medium uppercase tracking-widest">
@@ -890,9 +1070,13 @@ function Method() {
           {steps.map((s, i) => (
             <motion.div
               key={s.step}
-              initial={{ y: 10 }}
-              animate={isInView ? { y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.12 }}
+              initial={{ y: 40, scale: 0.85 }}
+
+              whileInView={{ y: 0, scale: 1 }}
+
+              viewport={{ once: true }}
+
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className="relative"
             >
               {/* Connector line */}
@@ -915,7 +1099,6 @@ function Method() {
 /* ─────────────────── PHILOSOPHY (dark, layered) ─────────────────── */
 function Philosophy() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "100px" });
 
   const principles = [
     {
@@ -948,9 +1131,13 @@ function Philosophy() {
 
       <div ref={ref} className="relative max-w-7xl mx-auto px-6">
         <motion.div
-          initial={{ y: 10 }}
-          animate={isInView ? { y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={{ y: 40, scale: 0.85 }}
+
+          whileInView={{ y: 0, scale: 1 }}
+
+          viewport={{ once: true }}
+
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
         >
           <span className="text-accent text-sm font-medium uppercase tracking-widest">
@@ -965,9 +1152,13 @@ function Philosophy() {
           {principles.map((p, i) => (
             <motion.div
               key={p.number}
-              initial={{ y: 10 }}
-              animate={isInView ? { y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              initial={{ y: 40, scale: 0.85 }}
+
+              whileInView={{ y: 0, scale: 1 }}
+
+              viewport={{ once: true }}
+
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className="group relative p-8 sm:p-10 rounded-2xl border border-white/[0.04] bg-surface/80 hover:border-accent/20 transition-all duration-500"
             >
               <span className="text-6xl font-bold text-accent/[0.07] absolute top-6 right-8 group-hover:text-accent/15 transition-colors">
@@ -981,9 +1172,13 @@ function Philosophy() {
 
         {/* Quote */}
         <motion.div
-          initial={{ scale: 0.98 }}
-          animate={isInView ? { scale: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
+          initial={{ y: 40, scale: 0.85 }}
+
+          whileInView={{ y: 0, scale: 1 }}
+
+          viewport={{ once: true }}
+
+          transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="mt-20 text-center"
         >
           <div className="inline-block px-10 py-8 rounded-2xl bg-surface border border-accent/10 glow">
@@ -1002,7 +1197,6 @@ function Philosophy() {
 /* ─────────────────── EXPERIENCE TIMELINE (light) ─────────────────── */
 function Experience() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "100px" });
 
   const experiences = [
     {
@@ -1041,9 +1235,13 @@ function Experience() {
     <section id="experience" className="py-8 sm:py-12 px-4 sm:px-6">
       <div ref={ref} className="max-w-7xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16">
         <motion.div
-          initial={{ y: 10 }}
-          animate={isInView ? { y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={{ y: 40, scale: 0.85 }}
+
+          whileInView={{ y: 0, scale: 1 }}
+
+          viewport={{ once: true }}
+
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-20"
         >
           <span className="text-accent-dark text-sm font-medium uppercase tracking-widest">
@@ -1062,9 +1260,13 @@ function Experience() {
           {experiences.map((exp, i) => (
             <motion.div
               key={exp.company}
-              initial={{ y: 10 }}
-              animate={isInView ? { y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.15 }}
+              initial={{ y: 40, scale: 0.85 }}
+
+              whileInView={{ y: 0, scale: 1 }}
+
+              viewport={{ once: true }}
+
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className={`relative flex flex-col sm:flex-row gap-8 mb-16 last:mb-0 ${
                 i % 2 === 0 ? "sm:flex-row" : "sm:flex-row-reverse"
               }`}
@@ -1117,7 +1319,6 @@ function TestimonialCard({ t, className = "" }: { t: { name: string; text: strin
 /* ─────────────────── TESTIMONIALS (dark, tilted cards) ─────────────────── */
 function Testimonials() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "100px" });
 
   const testimonials = [
     {
@@ -1162,9 +1363,13 @@ function Testimonials() {
       <div ref={ref} className="relative">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
-            initial={{ y: 10 }}
-            animate={isInView ? { y: 0 } : {}}
-            transition={{ duration: 0.6 }}
+            initial={{ y: 40, scale: 0.85 }}
+
+            whileInView={{ y: 0, scale: 1 }}
+
+            viewport={{ once: true }}
+
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="text-center mb-20"
           >
             <span className="text-accent text-sm font-medium uppercase tracking-widest">
@@ -1224,7 +1429,6 @@ function Testimonials() {
 /* ─────────────────── SOCIAL CTA ─────────────────── */
 function SocialCTA() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "100px" });
 
   const socials = [
     {
@@ -1256,9 +1460,13 @@ function SocialCTA() {
       <div className="absolute inset-0 bg-grid opacity-20" />
       <div ref={ref} className="relative max-w-5xl mx-auto px-6">
         <motion.div
-          initial={{ y: 10 }}
-          animate={isInView ? { y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={{ y: 40, scale: 0.85 }}
+
+          whileInView={{ y: 0, scale: 1 }}
+
+          viewport={{ once: true }}
+
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
         >
           <span className="text-accent text-sm font-medium uppercase tracking-widest">
@@ -1279,9 +1487,13 @@ function SocialCTA() {
               href={social.url}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ y: 10 }}
-              animate={isInView ? { y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.15 }}
+              initial={{ y: 40, scale: 0.85 }}
+
+              whileInView={{ y: 0, scale: 1 }}
+
+              viewport={{ once: true }}
+
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className="group relative p-8 sm:p-10 rounded-2xl bg-surface border border-white/[0.04] hover:border-accent/20 transition-all duration-500 hover:shadow-[0_0_50px_rgba(0,102,51,0.06)]"
             >
               <div className="flex items-start justify-between mb-6">
@@ -1307,7 +1519,6 @@ function SocialCTA() {
 /* ─────────────────── FAQ ─────────────────── */
 function FAQ() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "100px" });
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const faqs = [
@@ -1345,9 +1556,13 @@ function FAQ() {
     <section id="faq" className="py-8 sm:py-12 px-4 sm:px-6 scroll-mt-20">
       <div ref={ref} className="max-w-3xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16">
         <motion.div
-          initial={{ y: 10 }}
-          animate={isInView ? { y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={{ y: 40, scale: 0.85 }}
+
+          whileInView={{ y: 0, scale: 1 }}
+
+          viewport={{ once: true }}
+
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
         >
           <span className="text-accent-dark text-sm font-medium uppercase tracking-widest">
@@ -1365,9 +1580,13 @@ function FAQ() {
           {faqs.map((faq, i) => (
             <motion.div
               key={i}
-              initial={{ y: 10 }}
-              animate={isInView ? { y: 0 } : {}}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
+              initial={{ y: 40, scale: 0.85 }}
+
+              whileInView={{ y: 0, scale: 1 }}
+
+              viewport={{ once: true }}
+
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
@@ -1446,7 +1665,6 @@ function WhatsAppButton() {
 /* ─────────────────── CONTACT CTA (dark container on dark bg) ─────────────────── */
 function Contact() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "100px" });
   const [formState, setFormState] = useState({
     name: "",
     email: "",
@@ -1474,9 +1692,13 @@ function Contact() {
 
         <div className="relative">
           <motion.div
-            initial={{ y: 10 }}
-            animate={isInView ? { y: 0 } : {}}
-            transition={{ duration: 0.6 }}
+            initial={{ y: 40, scale: 0.85 }}
+
+            whileInView={{ y: 0, scale: 1 }}
+
+            viewport={{ once: true }}
+
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="text-center mb-12"
           >
             <span className="text-accent text-sm font-medium uppercase tracking-widest">
@@ -1492,9 +1714,13 @@ function Contact() {
           </motion.div>
 
           <motion.div
-            initial={{ y: 10 }}
-            animate={isInView ? { y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            initial={{ y: 40, scale: 0.85 }}
+
+            whileInView={{ y: 0, scale: 1 }}
+
+            viewport={{ once: true }}
+
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-2xl mx-auto"
           >
             {submitted ? (
@@ -1652,7 +1878,6 @@ function Footer() {
 /* ─────────────────── LOCATIONS ─────────────────── */
 function Locations() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "100px" });
 
   const gyms = [
     {
@@ -1674,9 +1899,13 @@ function Locations() {
       <div className="absolute inset-0 bg-grid opacity-20" />
       <div ref={ref} className="relative max-w-7xl mx-auto px-6">
         <motion.div
-          initial={{ y: 10 }}
-          animate={isInView ? { y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={{ y: 40, scale: 0.85 }}
+
+          whileInView={{ y: 0, scale: 1 }}
+
+          viewport={{ once: true }}
+
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
         >
           <span className="text-accent text-sm font-medium uppercase tracking-widest">
@@ -1694,9 +1923,13 @@ function Locations() {
           {gyms.map((gym, i) => (
             <motion.div
               key={gym.name}
-              initial={{ y: 10 }}
-              animate={isInView ? { y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.15 }}
+              initial={{ y: 40, scale: 0.85 }}
+
+              whileInView={{ y: 0, scale: 1 }}
+
+              viewport={{ once: true }}
+
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className="group p-8 sm:p-10 rounded-2xl bg-surface border border-white/[0.04] hover:border-accent/20 transition-all duration-500"
             >
               <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent mb-5">
@@ -1720,7 +1953,6 @@ function Locations() {
 /* ─────────────────── ACTION BANNER (conversion CTA) ─────────────────── */
 function ActionBanner() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "100px" });
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
@@ -1744,25 +1976,37 @@ function ActionBanner() {
 
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
         <motion.p
-          initial={{ y: 10 }}
-          animate={isInView ? { y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={{ y: 40, scale: 0.85 }}
+
+          whileInView={{ y: 0, scale: 1 }}
+
+          viewport={{ once: true }}
+
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-accent text-sm font-medium uppercase tracking-widest mb-4"
         >
           Stop waiting. Start moving.
         </motion.p>
         <motion.h2
-          initial={{ y: 10 }}
-          animate={isInView ? { y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          initial={{ y: 40, scale: 0.85 }}
+
+          whileInView={{ y: 0, scale: 1 }}
+
+          viewport={{ once: true }}
+
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white max-w-3xl leading-tight"
         >
           Your body is capable of more than you think
         </motion.h2>
         <motion.div
-          initial={{ y: 10 }}
-          animate={isInView ? { y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          initial={{ y: 40, scale: 0.85 }}
+
+          whileInView={{ y: 0, scale: 1 }}
+
+          viewport={{ once: true }}
+
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
           <button
             onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })}
@@ -1780,7 +2024,6 @@ function ActionBanner() {
 /* ─────────────────── TRUST BANNER (final push before contact) ─────────────────── */
 function TrustBanner() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "100px" });
 
   return (
     <section ref={ref} className="py-8 sm:py-12 px-4 sm:px-6">
@@ -1802,34 +2045,50 @@ function TrustBanner() {
           <div className="bg-stone-900 flex items-center px-8 sm:px-12 lg:px-16 py-16 lg:py-20">
             <div>
               <motion.p
-                initial={{ y: 10 }}
-                animate={isInView ? { y: 0 } : {}}
-                transition={{ duration: 0.6 }}
+                initial={{ y: 40, scale: 0.85 }}
+
+                whileInView={{ y: 0, scale: 1 }}
+
+                viewport={{ once: true }}
+
+                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                 className="text-accent text-sm font-medium uppercase tracking-widest mb-4"
               >
                 Let&apos;s work together
               </motion.p>
               <motion.h2
-                initial={{ y: 10 }}
-                animate={isInView ? { y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.1 }}
+                initial={{ y: 40, scale: 0.85 }}
+
+                whileInView={{ y: 0, scale: 1 }}
+
+                viewport={{ once: true }}
+
+                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight"
               >
                 The best time to start was yesterday. The next best time is{" "}
                 <span className="gradient-text">right now.</span>
               </motion.h2>
               <motion.p
-                initial={{ y: 10 }}
-                animate={isInView ? { y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                initial={{ y: 40, scale: 0.85 }}
+
+                whileInView={{ y: 0, scale: 1 }}
+
+                viewport={{ once: true }}
+
+                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                 className="text-zinc-400 mt-6 text-lg leading-relaxed"
               >
                 A free consultation is all it takes. No commitment, no pressure — just an honest conversation about your goals and how I can help.
               </motion.p>
               <motion.div
-                initial={{ y: 10 }}
-                animate={isInView ? { y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.3 }}
+                initial={{ y: 40, scale: 0.85 }}
+
+                whileInView={{ y: 0, scale: 1 }}
+
+                viewport={{ once: true }}
+
+                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                 className="mt-8 flex flex-col sm:flex-row gap-4"
               >
                 <button
@@ -1863,6 +2122,7 @@ export default function Home() {
       <Hero />
       <FadeInSection><About /></FadeInSection>
       <FadeInSection><Services /></FadeInSection>
+      <FadeInSection><BeforeAfter /></FadeInSection>
       <ActionBanner />
       <FadeInSection><Pricing /></FadeInSection>
       <FadeInSection><Method /></FadeInSection>
