@@ -672,7 +672,7 @@ function Pricing() {
         "Monthly workout updates & adjustments",
       ],
       cta: "Get Started",
-      href: "/start",
+      href: "https://buy.stripe.com/test_28EfZi3lb8dZ6z62T94F205",
       popular: false,
       dark: false,
     },
@@ -691,7 +691,7 @@ function Pricing() {
         "Access to exercise library",
       ],
       cta: "Go Advanced",
-      href: "/start",
+      href: "https://buy.stripe.com/test_aFaeVe5tjcuf5v28dt4F204",
       popular: true,
       dark: true,
     },
@@ -706,7 +706,7 @@ function Pricing() {
         "Weekly 60 min coaching call (consultation/training)",
       ],
       cta: "Go Elite",
-      href: "/start",
+      href: "https://buy.stripe.com/test_4gM14odZP1PBf5CalB4F203",
       popular: false,
       dark: false,
     },
@@ -728,7 +728,7 @@ function Pricing() {
         "Ongoing WhatsApp support",
       ],
       cta: "Get Started",
-      href: "/start",
+      href: "https://buy.stripe.com/test_4gM28s2h7am72iQalB4F207",
       popular: true,
       dark: true,
     },
@@ -747,16 +747,16 @@ function Pricing() {
         "Ongoing WhatsApp support",
       ],
       cta: "Go Intensive",
-      href: "/start",
+      href: "https://buy.stripe.com/test_8x200kaND0Lx8HebpF4F206",
       popular: false,
       dark: false,
     },
   ];
 
   const packages = [
-    { sessions: 6, price: "630" },
-    { sessions: 12, price: "1,260" },
-    { sessions: 24, price: "2,260" },
+    { sessions: 6, price: "630", href: "https://buy.stripe.com/test_dRm6oIg7Xdyj9LictJ4F202" },
+    { sessions: 12, price: "1,260", href: "https://buy.stripe.com/test_9B64gA6xn0Lx2iQ9hx4F201" },
+    { sessions: 24, price: "2,260", href: "https://buy.stripe.com/test_8x25kEf3T1PBbTq9hx4F200" },
   ];
 
   const CheckIcon = ({ dark }: { dark: boolean }) => (
@@ -875,6 +875,8 @@ function Pricing() {
                     </ul>
                     <a
                       href={plan.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className={`mt-8 block w-full py-4 rounded-xl text-center font-semibold transition-all duration-300 text-base cursor-pointer ${
                         plan.dark
                           ? "bg-accent text-white hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)]"
@@ -952,6 +954,8 @@ function Pricing() {
                     </ul>
                     <a
                       href={plan.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className={`mt-8 block w-full py-4 rounded-xl text-center font-semibold transition-all duration-300 text-base cursor-pointer ${
                         plan.dark
                           ? "bg-accent text-white hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)]"
@@ -989,7 +993,9 @@ function Pricing() {
                     {packages.map((pkg) => (
                       <a
                         key={pkg.sessions}
-                        href="/start"
+                        href={pkg.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="group flex flex-col items-center rounded-xl border border-stone-200 bg-white p-6 hover:border-accent-dark/30 hover:shadow-lg transition-all duration-300 cursor-pointer"
                       >
                         <span className="text-3xl font-bold text-stone-900 group-hover:text-accent-dark transition-colors">
