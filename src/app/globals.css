@@ -62,6 +62,10 @@ h1, h2, h3 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  /* Prevent descenders (g, y, p, q) from being clipped by background-clip: text */
+  padding-bottom: 0.12em;
+  display: inline-block;
+  line-height: 1.15;
 }
 
 /* Glow effect */
@@ -127,6 +131,9 @@ h1, h2, h3 {
     linear-gradient(rgba(0, 102, 51, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 102, 51, 0.03) 1px, transparent 1px);
   background-size: 60px 60px;
+  /* Fade out at edges so the grid doesn't create a hard seam against the next section */
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
 }
 
 /* Noise texture overlay */
