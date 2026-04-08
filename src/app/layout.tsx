@@ -114,7 +114,7 @@ const jsonLd = {
         "Personal training and nutrition coaching in Berlin. In-person sessions at John Reed Bötzow and EVO Spittelmarkt, plus online coaching worldwide.",
       url: siteUrl,
       image: `${siteUrl}/luke.jpg`,
-      telephone: "", // Add Luke's phone when available
+      telephone: "+4915129633927",
       email: "luke.satterly@icloud.com",
       address: [
         {

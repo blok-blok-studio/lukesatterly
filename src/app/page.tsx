@@ -1643,7 +1643,7 @@ function WhatsAppButton() {
     <AnimatePresence>
       {visible && (
         <motion.a
-          href="https://wa.me/4917642695936"
+          href="https://wa.me/4915129633927"
           target="_blank"
           rel="noopener noreferrer"
           initial={{ scale: 0, opacity: 0 }}
@@ -2098,7 +2098,7 @@ function TrustBanner() {
                   Book Free Consultation
                 </button>
                 <a
-                  href="https://wa.me/4917657550542"
+                  href="https://wa.me/4915129633927"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-10 py-4 border border-white/10 text-white rounded-full hover:bg-white/5 transition-all duration-300 text-lg cursor-pointer text-center"
