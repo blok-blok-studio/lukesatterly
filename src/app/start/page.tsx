@@ -604,17 +604,15 @@ export default function StartPage() {
             className="text-center max-w-2xl mx-auto"
           >
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-medium mb-6">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 10.5v6m3-3H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
-              </svg>
-              Free Download
+              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+              Personal Training & Nutrition Coaching
             </span>
             <h1 className="text-[clamp(1.75rem,4.5vw,3.5rem)] font-black tracking-[-0.03em] leading-[1.1] font-[family-name:var(--font-display)]">
-              Get Your Free<br />
-              <span className="gradient-text">Workout Template</span>
+              Build the body you&apos;ve been<br />
+              <span className="gradient-text">putting off for years</span>
             </h1>
             <p className="text-zinc-400 mt-4 sm:mt-6 text-base sm:text-lg max-w-lg mx-auto leading-relaxed">
-              The same programming I use with my 1-on-1 coaching clients. Answer a few quick questions and download instantly.
+              I&apos;m Coach Luki. I help people in Berlin and online get stronger, leaner, and actually enjoy training again — with a plan built for your body and your life.
             </p>
 
             {/* Trust stats */}
