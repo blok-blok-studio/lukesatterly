@@ -2,6 +2,7 @@ import { Resend } from "resend";
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { welcomeEmail } from "@/lib/emails";
+import { buildUnsubscribeUrl } from "@/lib/unsubscribe";
 
 // ─────────── CONSTANTS ───────────
 // Hard caps to prevent DoS / DB bloat. Tune if needed.
@@ -149,14 +150,26 @@ export async function POST(request: Request) {
     const resend = getResend();
     if (resend && subscriber.sequenceStep === 0) {
       const fromEmail = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
+      const replyToEmail = process.env.RESEND_REPLY_TO || "luke.satterly@icloud.com";
       const firstName = name.split(" ")[0];
+
+      // Build per-subscriber unsubscribe URL (HMAC-signed, no DB lookup needed)
+      const unsubscribeUrl = buildUnsubscribeUrl(email);
+      const { html, text } = welcomeEmail(firstName, unsubscribeUrl, timeline);
 
       await resend.emails.send({
         from: `Coach Luki <${fromEmail}>`,
-        replyTo: fromEmail,
+        replyTo: replyToEmail,
         to: email,
         subject: "Your Free Workout Template",
-        html: welcomeEmail(firstName, timeline),
+        html,
+        text,
+        // RFC 8058 one-click unsubscribe — required by Gmail bulk sender
+        // guidelines (Feb 2024) to avoid being flagged as spam.
+        headers: {
+          "List-Unsubscribe": `<${unsubscribeUrl}>, <mailto:${replyToEmail}?subject=unsubscribe>`,
+          "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+        },
       });
 
       const audienceId = process.env.RESEND_AUDIENCE_ID;
