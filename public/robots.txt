@@ -1,4 +1,22 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /_next/
+
+# Explicitly welcome major search engines
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+
+# Block content scrapers
+User-agent: GPTBot
+Allow: /
+
+User-agent: CCBot
+Disallow: /
 
 Sitemap: https://coachluki.com/sitemap.xml

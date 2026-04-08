@@ -36,6 +36,42 @@ body {
   min-width: 280px;
 }
 
+/* ─────────────── ACCESSIBILITY ─────────────── */
+
+/* Screen-reader-only utility (visually hidden but available to assistive tech) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Strong, consistent focus indicator for keyboard users across all interactive
+   elements. Uses :focus-visible so mouse clicks don't show the ring. */
+*:focus-visible {
+  outline: 2px solid var(--accent-light);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Respect users who prefer reduced motion: disable animations and transitions.
+   Required by WCAG 2.3.3 and CLAUDE.md design rules. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* Display font for headings */
 h1, h2, h3 {
   font-family: var(--font-display), system-ui, sans-serif;
