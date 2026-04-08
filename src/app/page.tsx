@@ -811,6 +811,16 @@ function Pricing() {
           <p className="text-zinc-500 mt-6 max-w-lg mx-auto text-lg">
             Whether we train in person or online, every plan is built around your goals.
           </p>
+          <p className="text-zinc-500 mt-4 max-w-xl mx-auto text-sm">
+            Every plan starts with a free consultation call.{" "}
+            <button
+              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+              className="text-accent-dark font-semibold underline underline-offset-2 hover:text-accent transition-colors cursor-pointer"
+            >
+              Book yours here
+            </button>{" "}
+            and we&apos;ll get you set up.
+          </p>
 
           {/* Tab toggle */}
           <div className="mt-10 inline-flex rounded-full bg-stone-100 p-1">
