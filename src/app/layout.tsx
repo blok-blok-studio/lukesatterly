@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Syne, Outfit } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 const syne = Syne({
@@ -242,6 +244,107 @@ const jsonLd = {
         availability: "https://schema.org/InStock",
       },
     },
+    // Rich Q&A snippet for the FAQ section — Google can render expandable
+    // Q&A directly in search results when this is present.
+    {
+      "@type": "FAQPage",
+      "@id": `${siteUrl}/#faq`,
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "Is personal training right for me and my goals?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Personal training is right for you if you want a clear plan, structure, and measurable progress. Most people don't struggle because they're lazy — they're guessing. I remove that guesswork and give you a system tailored to your body, your schedule, and your goals.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Is online coaching effective for achieving real results?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes, if it's done properly. Online coaching is ongoing guidance, structured programming, and regular adjustments based on your progress. For many clients online coaching actually works better because it integrates into real life instead of depending on fixed appointments.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Why should I work with a coach instead of training on my own?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Results come from consistency and direction, not just effort. A coach gives you structure, holds you accountable, and makes sure every session moves you closer to your goal. It's the difference between being busy and actually making progress.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What makes you different from other personal trainers?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "I don't just coach workouts. I build systems that fit into your life. My approach is focused on long-term results, not quick fixes. I place a strong emphasis on technique, injury prevention, and sustainable habits.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "How do you help me stay consistent and accountable?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Motivation comes and goes. Structure is what keeps you moving. I build your training to fit your schedule, with regular check-ins, clear targets, and ongoing adjustments so you always know where you stand.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "I'm vegan. Can you work with that?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Absolutely. I'm vegan myself, so plant-based nutrition is one of my specialties. I'll help you hit your protein targets, optimize your meals, and build a sustainable plant-based approach.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What gyms do you train at?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "I train clients at Holmes Place and John Reed in Berlin. You pick whichever location is more convenient for you.",
+          },
+        },
+      ],
+    },
+    // Aggregate rating + testimonials for star-rating rich result.
+    // Review count reflects the 8 testimonials shown on the page.
+    {
+      "@type": "LocalBusiness",
+      "@id": `${siteUrl}/#business-reviews`,
+      name: "Coach Luki - Personal Training & Nutrition",
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "5.0",
+        bestRating: "5",
+        worstRating: "1",
+        reviewCount: "8",
+      },
+      review: [
+        {
+          "@type": "Review",
+          reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+          author: { "@type": "Person", name: "Rasmus" },
+          reviewBody:
+            "Luke is what a personal trainer should be. He encourages, motivates and pushes you. He has extensive physiological knowledge and has not left a question unanswered. I can only recommend working with him.",
+        },
+        {
+          "@type": "Review",
+          reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+          author: { "@type": "Person", name: "Andreea" },
+          reviewBody:
+            "Starting my training journey with Luke as my PT a year ago has been the best investment I ever made for my health and fitness. He knows just when to push me harder and when to take a step back.",
+        },
+        {
+          "@type": "Review",
+          reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+          author: { "@type": "Person", name: "Ali" },
+          reviewBody:
+            "Luke was very curious about my goals and tailored a great coaching program for me where I started seeing results quickly. He provided great advice and motivated me to keep going.",
+        },
+      ],
+    },
   ],
 };
 
@@ -275,6 +378,8 @@ export default function RootLayout({
         </a>
         <div className="noise-overlay" aria-hidden="true" />
         <main id="main">{children}</main>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

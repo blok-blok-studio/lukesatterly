@@ -35,7 +35,31 @@ function CountUp({ target, suffix = "", duration = 2 }: { target: number; suffix
 }
 
 /* ─────────────────── SCROLL-DRIVEN ZOOM WRAPPER ─────────────────── */
+/**
+ * Wraps a section with a scroll-driven scale + fade-in animation.
+ * Disabled on mobile (< 768px) and when `prefers-reduced-motion` is set
+ * to avoid jank and respect user preferences. On those configurations
+ * the children render as a plain block with no motion hooks attached.
+ */
 function ScrollZoom({ children, className = "", intensity = 0.75 }: { children: React.ReactNode; className?: string; intensity?: number }) {
+  const [enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(min-width: 768px) and (prefers-reduced-motion: no-preference)");
+    const update = () => setEnabled(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  if (!enabled) {
+    return <div className={className}>{children}</div>;
+  }
+  return <ScrollZoomInner className={className} intensity={intensity}>{children}</ScrollZoomInner>;
+}
+
+function ScrollZoomInner({ children, className, intensity }: { children: React.ReactNode; className: string; intensity: number }) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -1678,15 +1702,35 @@ function Contact() {
     goal: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Coaching Inquiry from ${formState.name}`);
-    const body = encodeURIComponent(
-      `Hi Coach Luki,\n\nName: ${formState.name}\nGoal: ${formState.goal}\n\n${formState.message}`
-    );
-    window.location.href = `mailto:luke.satterly@icloud.com?subject=${subject}&body=${body}`;
-    setSubmitted(true);
+    setError(null);
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formState.name,
+          email: formState.email,
+          goal: formState.goal || "General inquiry",
+          preference: "Main site contact form",
+          timeline: formState.message || "No message provided",
+        }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Something went wrong. Please try again.");
+      }
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -1736,9 +1780,9 @@ function Contact() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold text-white">Opening your email client!</h3>
-                <p className="text-zinc-400 mt-2">Complete sending the email to get in touch.</p>
-                <button onClick={() => setSubmitted(false)} className="mt-6 text-accent text-sm cursor-pointer hover:underline">
+                <h3 className="text-2xl font-bold text-white">Message sent!</h3>
+                <p className="text-zinc-400 mt-2">Thanks for reaching out — I&apos;ll get back to you within 24 hours.</p>
+                <button onClick={() => { setSubmitted(false); setFormState({ name: "", email: "", message: "", goal: "" }); }} className="mt-6 text-accent text-sm cursor-pointer hover:underline">
                   Send another message
                 </button>
               </div>
@@ -1800,11 +1844,15 @@ function Contact() {
                   />
                 </div>
 
+                {error && (
+                  <p className="text-sm text-red-400 text-center" role="alert">{error}</p>
+                )}
                 <button
                   type="submit"
-                  className="w-full py-4 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light hover:shadow-[0_0_40px_rgba(0,102,51,0.3)] transition-all duration-300 text-lg cursor-pointer"
+                  disabled={submitting}
+                  className="w-full py-4 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light hover:shadow-[0_0_40px_rgba(0,102,51,0.3)] transition-all duration-300 text-lg cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Let&apos;s Work Together
+                  {submitting ? "Sending..." : "Let's Work Together"}
                 </button>
               </form>
             )}

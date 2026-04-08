@@ -23,7 +23,7 @@ function FunnelNav() {
           href="/"
           className="flex items-center gap-2.5 cursor-pointer"
         >
-          <img src="/logo-icon-green.png" alt="Coach Luki" className="w-8 h-8" />
+          <Image src="/logo-icon-green.png" alt="Coach Luki logo" width={32} height={32} className="w-8 h-8" priority />
           <span className="text-xl font-bold tracking-tight font-[family-name:var(--font-display)]">
             <span className="gradient-text">COACH</span>{" "}
             <span className="text-white">LUKI</span>
@@ -466,11 +466,12 @@ function BeforeAfter() {
         >
           <div className="grid grid-cols-2 gap-3">
             <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-white/[0.08]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src="/transformation-before.jpg"
-                alt="Before coaching with Coach Luki"
-                className="absolute inset-0 w-full h-full object-cover"
+                alt="Coach Luki client before training — starting point"
+                fill
+                sizes="(max-width: 768px) 50vw, 300px"
+                className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
               <div className="absolute bottom-3 left-3 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-sm text-xs font-semibold text-white">
@@ -478,11 +479,12 @@ function BeforeAfter() {
               </div>
             </div>
             <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-accent/20">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src="/transformation-after.jpg"
-                alt="After coaching with Coach Luki"
-                className="absolute inset-0 w-full h-full object-cover"
+                alt="Coach Luki client after training — transformation results"
+                fill
+                sizes="(max-width: 768px) 50vw, 300px"
+                className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
               <div className="absolute bottom-3 left-3 px-3 py-1.5 rounded-full bg-accent/80 backdrop-blur-sm text-xs font-semibold text-white">
