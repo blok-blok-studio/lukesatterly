@@ -358,6 +358,53 @@ Coach Luki`,
   return { html, text };
 }
 
+/* ── Contact form confirmation (main site, no drip sequence) ── */
+export function contactConfirmationEmail(firstName: string): EmailContent {
+  const html = `<!doctype html>
+<html lang="en">
+  <body style="margin:0; padding:0; background:#f6f6f4;">
+    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 560px; margin: 0 auto; padding: 40px 20px; color: #333; background:#ffffff;">
+      <h1 style="font-size: 24px; color: #1a1a1a;">Hey ${firstName},</h1>
+      <p style="line-height: 1.7;">
+        Thanks for reaching out — I got your message and I'll get back to you
+        within 24 hours.
+      </p>
+      <p style="line-height: 1.7;">
+        In the meantime, if you want to book a call directly, you can
+        pick a time that works for you here:
+      </p>
+      ${buttonHtml("Book a call", SITE_URL + "/start")}
+      <p style="line-height: 1.7;">
+        Talk soon,<br /><strong>Coach Luki</strong>
+      </p>
+      <hr style="border: none; border-top: 1px solid #eee; margin: 32px 0;" />
+      <p style="color: #999; font-size: 12px; line-height: 1.6;">
+        <strong>${BUSINESS_NAME}</strong><br />
+        ${BUSINESS_LOCATION}<br />
+        <a href="${SITE_URL}" style="color: #999;">coachluki.com</a> ·
+        <a href="https://instagram.com/coachluki" style="color: #999;">@coachluki</a>
+      </p>
+    </div>
+  </body>
+</html>`;
+
+  const text = `Hey ${firstName},
+
+Thanks for reaching out — I got your message and I'll get back to you within 24 hours.
+
+In the meantime, if you want to book a call directly, you can pick a time here: ${SITE_URL}/start
+
+Talk soon,
+Coach Luki
+
+---
+${BUSINESS_NAME}
+${BUSINESS_LOCATION}
+${SITE_URL}`;
+
+  return { html, text };
+}
+
 /* ── Sequence config ── */
 /* Subject lines avoid spam triggers: no "Free", no all-caps, no excessive punctuation. */
 export const SEQUENCE = [
