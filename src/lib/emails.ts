@@ -62,11 +62,19 @@ Don't want these emails? Unsubscribe here: ${unsubscribeUrl}
 }
 
 function buttonHtml(text: string, href: string) {
+  // Table-based button — renders reliably in Apple Mail, Gmail, Outlook.
+  // Inline-only <a> tags lose their background in many email clients.
   return `
-    <a href="${href}"
-       style="display: inline-block; background: ${BRAND_COLOR}; color: white; padding: 14px 28px; border-radius: 10px; text-decoration: none; font-weight: 600; margin: 20px 0;">
-      ${text}
-    </a>`;
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0;">
+      <tr>
+        <td align="center" bgcolor="${BRAND_COLOR}" style="background:${BRAND_COLOR};border-radius:10px;">
+          <a href="${href}"
+             style="display:inline-block;background:${BRAND_COLOR};color:#ffffff;padding:14px 28px;border-radius:10px;text-decoration:none;font-weight:600;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:16px;">
+            ${text}
+          </a>
+        </td>
+      </tr>
+    </table>`;
 }
 
 /* ── Email 1: Welcome + PDF (sent immediately on signup) ── */
@@ -351,9 +359,10 @@ Coach Luki`,
 }
 
 /* ── Sequence config ── */
+/* Subject lines avoid spam triggers: no "Free", no all-caps, no excessive punctuation. */
 export const SEQUENCE = [
-  { step: 1, delayDays: 0, subject: "Your Free Workout Template", template: welcomeEmail },
-  { step: 2, delayDays: 2, subject: "Quick training tip that changes everything", template: trainingTipEmail },
+  { step: 1, delayDays: 0, subject: "Your workout template is ready", template: welcomeEmail },
+  { step: 2, delayDays: 2, subject: "A training tip that changes everything", template: trainingTipEmail },
   { step: 3, delayDays: 5, subject: "The simplest nutrition framework that works", template: nutritionEmail },
   { step: 4, delayDays: 7, subject: "Real results from real people", template: testimonialEmail },
   { step: 5, delayDays: 14, subject: "Ready for the next level?", template: coachingPitchEmail },

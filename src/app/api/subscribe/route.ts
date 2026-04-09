@@ -161,7 +161,7 @@ export async function POST(request: Request) {
         from: `Coach Luki <${fromEmail}>`,
         replyTo: replyToEmail,
         to: email,
-        subject: "Your Free Workout Template",
+        subject: "Your workout template is ready",
         html,
         text,
         // RFC 8058 one-click unsubscribe — required by Gmail bulk sender
