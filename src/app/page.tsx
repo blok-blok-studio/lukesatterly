@@ -1720,15 +1720,14 @@ function Contact() {
     setError(null);
     setSubmitting(true);
     try {
-      const res = await fetch("/api/subscribe", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: formState.name,
           email: formState.email,
           goal: formState.goal || "General inquiry",
-          preference: "Main site contact form",
-          timeline: formState.message || "No message provided",
+          message: formState.message || "",
         }),
       });
       if (!res.ok) {
