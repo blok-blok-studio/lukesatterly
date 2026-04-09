@@ -29,7 +29,7 @@ function layoutHtml(content: string, unsubscribeUrl: string) {
       ${content}
       <hr style="border: none; border-top: 1px solid #eee; margin: 32px 0;" />
       <p style="color: #999; font-size: 12px; line-height: 1.6;">
-        You're receiving this because you signed up for Coach Luki's free workout template at
+        You're receiving this because you signed up for Coach Luki's workout template at
         <a href="${SITE_URL}" style="color: #999;">coachluki.com</a>.
       </p>
       <p style="color: #999; font-size: 12px; line-height: 1.6;">
@@ -51,7 +51,7 @@ function layoutText(content: string, unsubscribeUrl: string) {
   return `${content}
 
 ---
-You're receiving this because you signed up for Coach Luki's free workout template at ${SITE_URL}.
+You're receiving this because you signed up for Coach Luki's workout template at ${SITE_URL}.
 
 ${BUSINESS_NAME}
 ${BUSINESS_LOCATION}
@@ -104,7 +104,7 @@ export function welcomeEmail(
     `
     <h1 style="font-size: 24px; color: #1a1a1a;">Hey ${firstName},</h1>
     <p style="line-height: 1.7;">
-      Thanks for grabbing the free workout template. This is the same kind of
+      Thanks for grabbing the workout template. This is the same kind of
       programming I use with my 1-on-1 coaching clients — real structure, real
       progressive overload, no fluff.
     </p>
@@ -123,7 +123,7 @@ export function welcomeEmail(
   const text = layoutText(
     `Hey ${firstName},
 
-Thanks for grabbing the free workout template. This is the same kind of programming I use with my 1-on-1 coaching clients — real structure, real progressive overload, no fluff.
+Thanks for grabbing the workout template. This is the same kind of programming I use with my 1-on-1 coaching clients — real structure, real progressive overload, no fluff.
 
 Download your template: https://linktr.ee/coachluki
 
@@ -159,7 +159,7 @@ export function trainingTipEmail(firstName: string, unsubscribeUrl: string): Ema
       immediately.
     </p>
     <p style="line-height: 1.7;">
-      Try this with the exercises in your free template this week and see how
+      Try this with the exercises in your template this week and see how
       much harder they get with proper tempo.
     </p>
     <p style="line-height: 1.7;">Keep at it,<br /><strong>Coach Luki</strong></p>
@@ -176,7 +176,7 @@ One of the biggest mistakes I see with new clients: they go too heavy too fast a
 
 The eccentric (lowering) phase is where most of your muscle growth happens. Slow it down to a 3-second count on every rep. You'll feel the difference immediately.
 
-Try this with the exercises in your free template this week and see how much harder they get with proper tempo.
+Try this with the exercises in your template this week and see how much harder they get with proper tempo.
 
 Keep at it,
 Coach Luki`,
@@ -302,7 +302,7 @@ export function coachingPitchEmail(firstName: string, unsubscribeUrl: string): E
     `
     <h1 style="font-size: 24px; color: #1a1a1a;">${firstName}, ready for the next level?</h1>
     <p style="line-height: 1.7;">
-      You've had the free template for a couple weeks now. If you've been
+      You've had the template for a couple weeks now. If you've been
       following it, you're probably starting to feel a difference — stronger,
       more energized, more confident in the gym.
     </p>
@@ -321,7 +321,7 @@ export function coachingPitchEmail(firstName: string, unsubscribeUrl: string): E
       <li>Direct WhatsApp support between sessions</li>
       <li>In-person at John Reed Bötzow or EVO Spittelmarkt, or online</li>
     </ul>
-    ${buttonHtml("Book Your Free Consultation", SITE_URL + "/start")}
+    ${buttonHtml("Book your consultation", SITE_URL + "/start")}
     <p style="line-height: 1.7;">
       No pressure, no pitch. We just talk about your goals and I'll tell you
       honestly if I think I can help. If we're a good fit, we start. If not,
@@ -335,7 +335,7 @@ export function coachingPitchEmail(firstName: string, unsubscribeUrl: string): E
   const text = layoutText(
     `${firstName}, ready for the next level?
 
-You've had the free template for a couple weeks now. If you've been following it, you're probably starting to feel a difference — stronger, more energized, more confident in the gym.
+You've had the template for a couple weeks now. If you've been following it, you're probably starting to feel a difference — stronger, more energized, more confident in the gym.
 
 But here's the thing: a template can only take you so far. It doesn't know your body, your schedule, your weak points, or what you had for breakfast. That's where coaching comes in.
 
@@ -346,7 +346,7 @@ Here's what 1-on-1 coaching with me looks like:
 - Direct WhatsApp support between sessions
 - In-person at John Reed Bötzow or EVO Spittelmarkt, or online
 
-Book your free consultation: ${SITE_URL}/start
+Book your consultation: ${SITE_URL}/start
 
 No pressure, no pitch. We just talk about your goals and I'll tell you honestly if I think I can help. If we're a good fit, we start. If not, you keep the template and my best advice.
 

@@ -167,7 +167,7 @@ function FunnelForm() {
                   Let&apos;s get started
                 </h3>
                 <p className="text-zinc-400 text-sm mb-8">
-                  Enter your details to grab the free template.
+                  Enter your details to grab your template.
                 </p>
 
                 <div className="space-y-5">
@@ -364,7 +364,7 @@ function FunnelForm() {
                   disabled={submitting}
                   className="flex-1 py-4 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)] transition-all duration-300 text-lg cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  {submitting ? "Submitting\u2026" : "Get My Free Template"}
+                  {submitting ? "Submitting\u2026" : "Get My Template"}
                 </button>
               </div>
             </motion.div>
@@ -389,7 +389,7 @@ function FunnelForm() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-white text-sm font-medium">Your template is ready</p>
-                  <p className="text-zinc-500 text-xs">Free 4-week workout program</p>
+                  <p className="text-zinc-500 text-xs">4-week workout program — check spam if you don&apos;t see the email</p>
                 </div>
                 <a
                   href="https://linktr.ee/coachluki"
@@ -410,7 +410,7 @@ function FunnelForm() {
                   Now let&apos;s talk about <span className="gradient-text">your goals</span>
                 </h3>
                 <p className="text-zinc-400 text-sm">
-                  {formData.name.split(" ")[0]}, a template is a great start &mdash; but real results come from coaching tailored to you. Book a free 15-min call and let&apos;s build your plan together.
+                  {formData.name.split(" ")[0]}, a template is a great start &mdash; but real results come from coaching tailored to you. Book a 15-min call and let&apos;s build your plan together.
                 </p>
               </div>
 
@@ -570,7 +570,7 @@ function VideoSection() {
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               className="inline-flex items-center gap-2 px-8 py-3.5 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)] transition-all duration-300 cursor-pointer"
             >
-              Get Your Free Template
+              Get Your Template
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
               </svg>
@@ -655,7 +655,7 @@ export default function StartPage() {
             className="text-center max-w-2xl mx-auto mb-10"
           >
             <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-display)]">
-              Ready? Grab your <span className="gradient-text">free template</span>
+              Ready? Grab your <span className="gradient-text">workout template</span>
             </h2>
             <p className="text-zinc-400 mt-4">
               Answer a few quick questions and download instantly.
