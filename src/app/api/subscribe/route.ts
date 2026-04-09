@@ -1,7 +1,8 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { welcomeEmail } from "@/lib/emails";
+import { welcomeEmail, welcomeEmailText } from "@/lib/emails";
+import { unsubscribeUrl as buildUnsubscribeUrl } from "@/lib/unsubscribe";
 
 function getResend() {
   const key = process.env.RESEND_API_KEY;
@@ -40,13 +41,19 @@ export async function POST(request: Request) {
     if (resend && subscriber.sequenceStep === 0) {
       const fromEmail = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
       const firstName = name.split(" ")[0];
+      const unsubUrl = buildUnsubscribeUrl(email);
 
       await resend.emails.send({
         from: `Coach Luki <${fromEmail}>`,
         replyTo: fromEmail,
         to: email,
-        subject: "Your Free Workout Template",
-        html: welcomeEmail(firstName, timeline),
+        subject: "Your workout template is ready",
+        html: welcomeEmail(firstName, unsubUrl, timeline),
+        text: welcomeEmailText(firstName, unsubUrl, timeline),
+        headers: {
+          "List-Unsubscribe": `<${unsubUrl}>, <mailto:${fromEmail}?subject=unsubscribe>`,
+          "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+        },
       });
 
       // Also add to Resend Audience if configured

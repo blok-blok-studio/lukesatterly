@@ -2,6 +2,7 @@ import { Resend } from "resend";
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { SEQUENCE } from "@/lib/emails";
+import { unsubscribeUrl as buildUnsubscribeUrl } from "@/lib/unsubscribe";
 
 function getResend() {
   const key = process.env.RESEND_API_KEY;
@@ -49,13 +50,19 @@ export async function GET(request: Request) {
     for (const sub of subscribers) {
       try {
         const firstName = sub.name.split(" ")[0];
+        const unsubUrl = buildUnsubscribeUrl(sub.email);
 
         await resend.emails.send({
           from: `Coach Luki <${fromEmail}>`,
           replyTo: fromEmail,
           to: sub.email,
           subject: seq.subject,
-          html: seq.template(firstName),
+          html: (seq.template as (n: string, u: string) => string)(firstName, unsubUrl),
+          text: (seq.text as (n: string, u: string) => string)(firstName, unsubUrl),
+          headers: {
+            "List-Unsubscribe": `<${unsubUrl}>, <mailto:${fromEmail}?subject=unsubscribe>`,
+            "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+          },
         });
 
         await prisma.subscriber.update({
