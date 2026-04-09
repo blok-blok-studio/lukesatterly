@@ -373,7 +373,7 @@ export function contactConfirmationEmail(firstName: string): EmailContent {
         In the meantime, if you want to book a call directly, you can
         pick a time that works for you here:
       </p>
-      ${buttonHtml("Book a call", "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2v3xRsZStR2Wtk8dr_F8kwEq4WGWu0FM548fk45LXMHonM5FwIUFHmuTTp0Ph6eVpcM1ZeM2PC")}
+      ${buttonHtml("Book a call", "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2BcPolqYY6kExPDaGmQ2mf5nUTdTcvH7qbehfyEcaAFpXfDma0kDAfOwm8NyZKb0mYXIcu_-T5")}
       <p style="line-height: 1.7;">
         Talk soon,<br /><strong>Coach Luki</strong>
       </p>
@@ -392,7 +392,7 @@ export function contactConfirmationEmail(firstName: string): EmailContent {
 
 Thanks for reaching out — I got your message and I'll get back to you within 24 hours.
 
-In the meantime, if you want to book a call directly, you can pick a time here: https://calendar.google.com/calendar/appointments/schedules/AcZssZ2v3xRsZStR2Wtk8dr_F8kwEq4WGWu0FM548fk45LXMHonM5FwIUFHmuTTp0Ph6eVpcM1ZeM2PC
+In the meantime, if you want to book a call directly, you can pick a time here: https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2BcPolqYY6kExPDaGmQ2mf5nUTdTcvH7qbehfyEcaAFpXfDma0kDAfOwm8NyZKb0mYXIcu_-T5
 
 Talk soon,
 Coach Luki
