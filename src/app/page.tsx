@@ -1260,8 +1260,13 @@ function Method() {
               <div key={s.step} className="relative flex gap-5 sm:gap-6 pb-8 sm:pb-10">
                 {/* Node */}
                 <div className="shrink-0 z-10">
-                  <div
-                    className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center transition-all duration-500 ${
+                  <motion.div
+                    animate={isActive ? {
+                      scale: [1, 1.3, 0.9, 1.1, 1],
+                      rotate: [0, -5, 5, -3, 0],
+                    } : {}}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                    className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center transition-colors duration-500 ${
                       isActive
                         ? "bg-stone-900 shadow-[0_0_20px_rgba(0,102,51,0.4)]"
                         : "bg-stone-200"
@@ -1272,7 +1277,7 @@ function Method() {
                     }`}>
                       {s.step}
                     </span>
-                  </div>
+                  </motion.div>
                 </div>
 
                 {/* Content */}
@@ -1491,8 +1496,13 @@ function Experience() {
                 {/* ── Mobile layout: flex row with dot + content ── */}
                 <div className="flex gap-5 sm:hidden">
                   <div className="shrink-0 w-4 flex justify-center z-10">
-                    <div
-                      className={`w-4 h-4 rounded-full mt-1 transition-all duration-500 ${
+                    <motion.div
+                      animate={isActive ? {
+                        scale: [1, 1.5, 0.8, 1.2, 1],
+                        rotate: [0, -8, 8, -4, 0],
+                      } : {}}
+                      transition={{ duration: 0.5, ease: "easeOut" }}
+                      className={`w-4 h-4 rounded-full mt-1 transition-colors duration-500 ${
                         isActive
                           ? "bg-stone-900 border-[3px] border-accent shadow-[0_0_12px_rgba(0,102,51,0.4)]"
                           : "bg-white border-[3px] border-stone-300"
@@ -1535,8 +1545,13 @@ function Experience() {
 
                   {/* Center dot */}
                   <div className="shrink-0 w-4 flex justify-center z-10">
-                    <div
-                      className={`w-4 h-4 rounded-full mt-1 transition-all duration-500 ${
+                    <motion.div
+                      animate={isActive ? {
+                        scale: [1, 1.5, 0.8, 1.2, 1],
+                        rotate: [0, -8, 8, -4, 0],
+                      } : {}}
+                      transition={{ duration: 0.5, ease: "easeOut" }}
+                      className={`w-4 h-4 rounded-full mt-1 transition-colors duration-500 ${
                         isActive
                           ? "bg-stone-900 border-[3px] border-accent shadow-[0_0_12px_rgba(0,102,51,0.4)]"
                           : "bg-white border-[3px] border-stone-300"
