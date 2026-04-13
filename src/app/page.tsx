@@ -1263,32 +1263,45 @@ function Method() {
           </p>
         </motion.div>
 
-        {/* ── Desktop: horizontal with static green connectors ── */}
-        <div className="hidden lg:grid lg:grid-cols-4 gap-8">
-          {steps.map((s, i) => (
-            <motion.div
-              key={s.step}
-              initial={{ y: 40, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="relative text-center"
-            >
-              {/* Static green connector line */}
-              {i < steps.length - 1 && (
-                <div className="absolute top-10 left-[60%] w-[calc(100%-20%)] h-0.5">
-                  <div className="absolute inset-0 bg-gradient-to-r from-accent to-accent-dark rounded-full shadow-[0_0_6px_rgba(0,102,51,0.3)]" />
-                </div>
-              )}
-              <div className="flex justify-center mb-6">
-                <div className="w-20 h-20 rounded-2xl bg-stone-900 flex items-center justify-center shadow-[0_0_25px_rgba(0,102,51,0.2)]">
-                  <span className="text-2xl font-bold text-accent">{s.step}</span>
-                </div>
-              </div>
-              <h3 className="text-xl font-semibold text-stone-900 mb-3">{s.title}</h3>
-              <p className="text-zinc-500 leading-relaxed">{s.description}</p>
-            </motion.div>
-          ))}
+        {/* ── Desktop: nodes row with connectors, then text below ── */}
+        <div className="hidden lg:block">
+          {/* Nodes + connector line */}
+          <div className="relative flex items-center justify-between max-w-3xl mx-auto mb-12">
+            {/* Background track spanning between first and last node centers */}
+            <div className="absolute top-1/2 left-[10px] right-[10px] h-0.5 -translate-y-1/2 bg-stone-200 rounded-full" />
+            {/* Green filled line */}
+            <div className="absolute top-1/2 left-[10px] right-[10px] h-0.5 -translate-y-1/2 bg-gradient-to-r from-accent via-accent-dark to-accent rounded-full shadow-[0_0_8px_rgba(0,102,51,0.3)]" />
+
+            {steps.map((s, i) => (
+              <motion.div
+                key={s.step}
+                initial={{ scale: 0, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                className="relative z-10 w-20 h-20 rounded-2xl bg-stone-900 flex items-center justify-center shadow-[0_0_25px_rgba(0,102,51,0.2)]"
+              >
+                <span className="text-2xl font-bold text-accent">{s.step}</span>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Text content row */}
+          <div className="grid grid-cols-4 gap-8">
+            {steps.map((s, i) => (
+              <motion.div
+                key={s.step}
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="text-center"
+              >
+                <h3 className="text-xl font-semibold text-stone-900 mb-3">{s.title}</h3>
+                <p className="text-zinc-500 leading-relaxed">{s.description}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         {/* ── Mobile / Tablet: vertical timeline, each step scroll-tracked ── */}
