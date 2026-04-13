@@ -1399,6 +1399,22 @@ function Philosophy() {
 /* ─────────────────── EXPERIENCE TIMELINE (light) ─────────────────── */
 function Experience() {
   const ref = useRef(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
+
+  /* Single scroll tracker for the entire experience timeline */
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 60%", "end 50%"],
+  });
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
+  /* 5 items: thresholds spaced so each node lights up as the line reaches it */
+  const node1 = useScrollThreshold(scrollYProgress, 0);
+  const node2 = useScrollThreshold(scrollYProgress, 0.2);
+  const node3 = useScrollThreshold(scrollYProgress, 0.42);
+  const node4 = useScrollThreshold(scrollYProgress, 0.64);
+  const node5 = useScrollThreshold(scrollYProgress, 0.84);
+  const nodeStates = [node1, node2, node3, node4, node5];
 
   const experiences = [
     {
@@ -1438,11 +1454,8 @@ function Experience() {
       <div ref={ref} className="max-w-7xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16">
         <motion.div
           initial={{ y: 40, scale: 0.85 }}
-
           whileInView={{ y: 0, scale: 1 }}
-
           viewport={{ once: true }}
-
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-20"
         >
@@ -1455,39 +1468,54 @@ function Experience() {
         </motion.div>
 
         {/* Timeline */}
-        <div className="relative max-w-3xl mx-auto">
-          {/* Vertical line */}
-          <div className="absolute left-0 sm:left-1/2 top-0 bottom-0 w-px bg-stone-200 sm:-translate-x-px" />
+        <div ref={timelineRef} className="relative max-w-3xl mx-auto">
+          {/* Gray background track */}
+          <div className="absolute left-[7px] sm:left-1/2 top-0 bottom-0 w-0.5 bg-stone-200 sm:-translate-x-px" />
+          {/* Green scroll-driven fill */}
+          <motion.div
+            style={{ height: lineHeight }}
+            className="absolute left-[7px] sm:left-1/2 top-0 w-0.5 bg-gradient-to-b from-accent to-accent-dark origin-top sm:-translate-x-px"
+          />
 
-          {experiences.map((exp, i) => (
-            <motion.div
-              key={exp.company}
-              initial={{ y: 40, scale: 0.85 }}
+          {experiences.map((exp, i) => {
+            const isActive = nodeStates[i];
+            return (
+              <div
+                key={exp.company}
+                className={`relative flex flex-col sm:flex-row gap-8 mb-16 last:mb-0 ${
+                  i % 2 === 0 ? "sm:flex-row" : "sm:flex-row-reverse"
+                }`}
+              >
+                {/* Node */}
+                <div
+                  className={`absolute left-0 sm:left-1/2 w-4 h-4 rounded-full -translate-x-[1px] sm:-translate-x-1/2 mt-1.5 z-10 transition-all duration-500 ${
+                    isActive
+                      ? "bg-stone-900 border-[3px] border-accent shadow-[0_0_12px_rgba(0,102,51,0.4)]"
+                      : "bg-white border-[3px] border-stone-300"
+                  }`}
+                />
 
-              whileInView={{ y: 0, scale: 1 }}
+                {/* Content */}
+                <div className={`pl-8 sm:pl-0 sm:w-1/2 transition-opacity duration-500 ${
+                  isActive ? "opacity-100" : "opacity-30"
+                } ${i % 2 === 0 ? "sm:pr-12 sm:text-right" : "sm:pl-12"}`}>
+                  <span className="text-zinc-400 text-sm">{exp.period}</span>
+                  <h3 className={`text-xl font-bold mt-1 transition-colors duration-500 ${
+                    isActive ? "text-stone-900" : "text-stone-300"
+                  }`}>{exp.company}</h3>
+                  <p className={`font-medium text-sm mt-1 transition-colors duration-500 ${
+                    isActive ? "text-accent-dark" : "text-stone-300"
+                  }`}>{exp.role}</p>
+                  <p className={`mt-3 leading-relaxed transition-colors duration-500 ${
+                    isActive ? "text-zinc-500" : "text-zinc-300"
+                  }`}>{exp.description}</p>
+                </div>
 
-              viewport={{ once: true }}
-
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className={`relative flex flex-col sm:flex-row gap-8 mb-16 last:mb-0 ${
-                i % 2 === 0 ? "sm:flex-row" : "sm:flex-row-reverse"
-              }`}
-            >
-              {/* Dot */}
-              <div className="absolute left-0 sm:left-1/2 w-4 h-4 rounded-full bg-white border-[3px] border-stone-900 -translate-x-[7px] sm:-translate-x-1/2 mt-1.5 z-10" />
-
-              {/* Content */}
-              <div className={`pl-8 sm:pl-0 sm:w-1/2 ${i % 2 === 0 ? "sm:pr-12 sm:text-right" : "sm:pl-12"}`}>
-                <span className="text-zinc-400 text-sm">{exp.period}</span>
-                <h3 className="text-xl font-bold text-stone-900 mt-1">{exp.company}</h3>
-                <p className="text-accent-dark font-medium text-sm mt-1">{exp.role}</p>
-                <p className="text-zinc-500 mt-3 leading-relaxed">{exp.description}</p>
+                {/* Spacer for the other side */}
+                <div className="hidden sm:block sm:w-1/2" />
               </div>
-
-              {/* Spacer for the other side */}
-              <div className="hidden sm:block sm:w-1/2" />
-            </motion.div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
