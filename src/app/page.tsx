@@ -679,12 +679,12 @@ function BeforeAfter() {
 /* ─────────────────── PRICING ─────────────────── */
 function Pricing() {
   const ref = useRef(null);
-  const [tab, setTab] = useState<"online" | "personal">("personal");
+  const [tab, setTab] = useState<"online" | "personal" | "corporate">("personal");
 
   const onlinePlans = [
     {
       name: "Remote Program",
-      price: "60",
+      price: "95",
       period: "/month",
       note: "Min. 6 months",
       description: "Structured online coaching with monthly guidance. Perfect if you want a solid plan and regular accountability.",
@@ -844,11 +844,89 @@ function Pricing() {
             >
               Online Coaching
             </button>
+            <button
+              onClick={() => setTab("corporate")}
+              className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer ${
+                tab === "corporate"
+                  ? "bg-stone-900 text-white shadow-md"
+                  : "text-stone-500 hover:text-stone-700"
+              }`}
+            >
+              Corporate Fitness
+            </button>
           </div>
         </motion.div>
 
         <AnimatePresence mode="wait">
-          {tab === "online" ? (
+          {tab === "corporate" ? (
+            <motion.div
+              key="corporate"
+              initial={{ y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="max-w-3xl mx-auto">
+                <motion.div
+                  initial={{ y: 40, scale: 0.85 }}
+                  whileInView={{ y: 0, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative rounded-2xl bg-stone-900 text-white p-8 sm:p-12"
+                >
+                  <div className="text-center">
+                    <h3 className="text-2xl sm:text-3xl font-bold">
+                      Corporate Fitness Programs
+                    </h3>
+                    <p className="mt-4 text-zinc-300 leading-relaxed max-w-xl mx-auto">
+                      Invest in your team&apos;s health, performance, and morale. I design tailored fitness programs for companies of all sizes &mdash; from startups to established organizations.
+                    </p>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-4 mt-10">
+                    {[
+                      {
+                        title: "On-Site Group Training",
+                        desc: "Energizing team sessions at your office or a nearby gym, scheduled around your workday.",
+                      },
+                      {
+                        title: "Wellness Workshops",
+                        desc: "Interactive sessions on movement, nutrition, stress management, and recovery for your team.",
+                      },
+                      {
+                        title: "Ongoing Programs",
+                        desc: "Weekly or bi-weekly recurring sessions to build long-term health habits across your company.",
+                      },
+                      {
+                        title: "Team Challenges",
+                        desc: "Custom fitness challenges that bring your team together and boost engagement.",
+                      },
+                    ].map((item) => (
+                      <div
+                        key={item.title}
+                        className="rounded-xl border border-zinc-700 bg-zinc-800/50 p-5"
+                      >
+                        <h4 className="font-semibold text-white">{item.title}</h4>
+                        <p className="mt-2 text-sm text-zinc-400 leading-relaxed">{item.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-10 text-center">
+                    <p className="text-sm text-zinc-400 mb-6">
+                      Every program is customized to your team size, goals, and schedule. Get in touch and let&apos;s build something that works for your company.
+                    </p>
+                    <button
+                      onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                      className="inline-block bg-accent text-white px-8 py-4 rounded-xl font-semibold hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)] transition-all duration-300 cursor-pointer"
+                    >
+                      Contact for More Info
+                    </button>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+          ) : tab === "online" ? (
             <motion.div
               key="online"
               initial={{ y: 10 }}
