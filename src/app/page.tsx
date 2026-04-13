@@ -1135,89 +1135,36 @@ function Pricing() {
 
 /* ─────────────────── THE LUKI METHOD (light section) ─────────────────── */
 
-/* Mobile/Tablet step: each step tracks its OWN scroll position */
-function MethodStepMobile({
-  step,
-  title,
-  description,
-  index,
-  total,
-}: {
-  step: string;
-  title: string;
-  description: string;
-  index: number;
-  total: number;
-}) {
-  const nodeRef = useRef(null);
-  const connectorRef = useRef(null);
-
-  /* Node lights up only when it hits the middle 40% of the viewport */
-  const isActive = useInView(nodeRef, { once: true, margin: "-30% 0px -30% 0px" });
-
-  /* Connector fills based on its own scroll position — smooth, not binary */
-  const { scrollYProgress: connectorProgress } = useScroll({
-    target: connectorRef,
-    offset: ["start center", "end center"],
-  });
-  const connectorScale = useTransform(connectorProgress, [0, 1], [0, 1]);
-
-  return (
-    <div className="relative flex gap-5 sm:gap-6">
-      {/* ── Timeline rail: node + connector ── */}
-      <div className="flex flex-col items-center shrink-0">
-        <motion.div
-          ref={nodeRef}
-          initial={{ scale: 0.5, opacity: 0 }}
-          animate={isActive ? { scale: 1, opacity: 1 } : { scale: 0.5, opacity: 0.3 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center z-10 transition-colors duration-700 ${
-            isActive
-              ? "bg-stone-900 shadow-[0_0_20px_rgba(0,102,51,0.4)]"
-              : "bg-stone-200"
-          }`}
-        >
-          <span className={`text-base sm:text-lg font-bold transition-colors duration-700 ${
-            isActive ? "text-accent" : "text-stone-400"
-          }`}>
-            {step}
-          </span>
-        </motion.div>
-
-        {index < total - 1 && (
-          <div ref={connectorRef} className="relative w-0.5 flex-1 min-h-6 bg-stone-200 overflow-hidden">
-            <motion.div
-              style={{ scaleY: connectorScale }}
-              className="absolute inset-0 origin-top bg-gradient-to-b from-accent to-accent-dark"
-            />
-          </div>
-        )}
-      </div>
-
-      {/* ── Content ── */}
-      <motion.div
-        initial={{ opacity: 0, x: 20 }}
-        animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
-        transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-        className="pb-8 sm:pb-10 flex-1 pt-1"
-      >
-        <h3 className={`text-lg sm:text-xl font-semibold mb-2 transition-colors duration-700 ${
-          isActive ? "text-stone-900" : "text-stone-300"
-        }`}>
-          {title}
-        </h3>
-        <p className={`text-sm sm:text-base leading-relaxed transition-colors duration-700 ${
-          isActive ? "text-zinc-500" : "text-zinc-300"
-        }`}>
-          {description}
-        </p>
-      </motion.div>
-    </div>
-  );
+/* Hook: returns true once scroll progress passes a threshold, stays true */
+function useScrollThreshold(progress: ReturnType<typeof useTransform<number, number>>, threshold: number) {
+  const [reached, setReached] = useState(false);
+  useEffect(() => {
+    const unsubscribe = progress.on("change", (v: number) => {
+      if (v >= threshold && !reached) setReached(true);
+    });
+    return unsubscribe;
+  }, [progress, threshold, reached]);
+  return reached;
 }
 
 function Method() {
-  const ref = useRef(null);
+  const sectionRef = useRef(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
+
+  /* Single scroll tracker for the entire mobile timeline */
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 60%", "end 50%"],
+  });
+  /* Map scroll progress to height percentage for the green fill */
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
+  /* Each node activates when scroll reaches its fraction of the timeline */
+  const node1Active = useScrollThreshold(scrollYProgress, 0);
+  const node2Active = useScrollThreshold(scrollYProgress, 0.28);
+  const node3Active = useScrollThreshold(scrollYProgress, 0.56);
+  const node4Active = useScrollThreshold(scrollYProgress, 0.82);
+  const nodeStates = [node1Active, node2Active, node3Active, node4Active];
 
   const steps = [
     {
@@ -1244,7 +1191,7 @@ function Method() {
 
   return (
     <section id="method" className="py-8 sm:py-12 px-4 sm:px-6">
-      <div ref={ref} className="max-w-7xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16 overflow-hidden">
+      <div ref={sectionRef} className="max-w-7xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16 overflow-hidden">
         <motion.div
           initial={{ y: 40, scale: 0.85 }}
           whileInView={{ y: 0, scale: 1 }}
@@ -1265,13 +1212,9 @@ function Method() {
 
         {/* ── Desktop: nodes row with connectors, then text below ── */}
         <div className="hidden lg:block">
-          {/* Nodes + connector line */}
           <div className="relative flex items-center justify-between max-w-3xl mx-auto mb-12">
-            {/* Background track spanning between first and last node centers */}
             <div className="absolute top-1/2 left-[10px] right-[10px] h-0.5 -translate-y-1/2 bg-stone-200 rounded-full" />
-            {/* Green filled line */}
             <div className="absolute top-1/2 left-[10px] right-[10px] h-0.5 -translate-y-1/2 bg-gradient-to-r from-accent via-accent-dark to-accent rounded-full shadow-[0_0_8px_rgba(0,102,51,0.3)]" />
-
             {steps.map((s, i) => (
               <motion.div
                 key={s.step}
@@ -1285,8 +1228,6 @@ function Method() {
               </motion.div>
             ))}
           </div>
-
-          {/* Text content row */}
           <div className="grid grid-cols-4 gap-8">
             {steps.map((s, i) => (
               <motion.div
@@ -1304,18 +1245,53 @@ function Method() {
           </div>
         </div>
 
-        {/* ── Mobile / Tablet: vertical timeline, each step scroll-tracked ── */}
-        <div className="lg:hidden max-w-md mx-auto">
-          {steps.map((s, i) => (
-            <MethodStepMobile
-              key={s.step}
-              step={s.step}
-              title={s.title}
-              description={s.description}
-              index={i}
-              total={steps.length}
-            />
-          ))}
+        {/* ── Mobile / Tablet: single continuous timeline ── */}
+        <div ref={timelineRef} className="lg:hidden relative max-w-md mx-auto">
+          {/* Continuous background track */}
+          <div className="absolute left-6 sm:left-7 top-0 bottom-0 w-0.5 bg-stone-200" />
+          {/* Continuous green fill driven by scroll */}
+          <motion.div
+            style={{ height: lineHeight }}
+            className="absolute left-6 sm:left-7 top-0 w-0.5 bg-gradient-to-b from-accent to-accent-dark origin-top"
+          />
+
+          {steps.map((s, i) => {
+            const isActive = nodeStates[i];
+            return (
+              <div key={s.step} className="relative flex gap-5 sm:gap-6 pb-8 sm:pb-10">
+                {/* Node */}
+                <div className="shrink-0 z-10">
+                  <div
+                    className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center transition-all duration-500 ${
+                      isActive
+                        ? "bg-stone-900 shadow-[0_0_20px_rgba(0,102,51,0.4)]"
+                        : "bg-stone-200"
+                    }`}
+                  >
+                    <span className={`text-base sm:text-lg font-bold transition-colors duration-500 ${
+                      isActive ? "text-accent" : "text-stone-400"
+                    }`}>
+                      {s.step}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className={`flex-1 pt-1 transition-opacity duration-500 ${isActive ? "opacity-100" : "opacity-30"}`}>
+                  <h3 className={`text-lg sm:text-xl font-semibold mb-2 transition-colors duration-500 ${
+                    isActive ? "text-stone-900" : "text-stone-300"
+                  }`}>
+                    {s.title}
+                  </h3>
+                  <p className={`text-sm sm:text-base leading-relaxed transition-colors duration-500 ${
+                    isActive ? "text-zinc-500" : "text-zinc-300"
+                  }`}>
+                    {s.description}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
