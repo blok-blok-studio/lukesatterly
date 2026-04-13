@@ -1247,12 +1247,11 @@ function Method() {
 
         {/* ── Mobile / Tablet: single continuous timeline ── */}
         <div ref={timelineRef} className="lg:hidden relative max-w-md mx-auto">
-          {/* Continuous background track */}
-          <div className="absolute left-6 sm:left-7 top-0 bottom-0 w-0.5 bg-stone-200" />
-          {/* Continuous green fill driven by scroll */}
+          {/* Line centered on node: w-12 = 48px → center at 23px (48/2 - 1px for line width) */}
+          <div className="absolute left-[23px] sm:left-[27px] top-0 bottom-0 w-0.5 bg-stone-200" />
           <motion.div
             style={{ height: lineHeight }}
-            className="absolute left-6 sm:left-7 top-0 w-0.5 bg-gradient-to-b from-accent to-accent-dark origin-top"
+            className="absolute left-[23px] sm:left-[27px] top-0 w-0.5 bg-gradient-to-b from-accent to-accent-dark origin-top"
           />
 
           {steps.map((s, i) => {
@@ -1469,12 +1468,17 @@ function Experience() {
 
         {/* Timeline */}
         <div ref={timelineRef} className="relative max-w-3xl mx-auto">
-          {/* Gray background track */}
-          <div className="absolute left-[7px] sm:left-1/2 top-0 bottom-0 w-0.5 bg-stone-200 sm:-translate-x-px" />
-          {/* Green scroll-driven fill */}
+          {/* ── Mobile: line centered on 16px dot → center at 7px ── */}
+          <div className="sm:hidden absolute left-[7px] top-0 bottom-0 w-0.5 bg-stone-200" />
           <motion.div
             style={{ height: lineHeight }}
-            className="absolute left-[7px] sm:left-1/2 top-0 w-0.5 bg-gradient-to-b from-accent to-accent-dark origin-top sm:-translate-x-px"
+            className="sm:hidden absolute left-[7px] top-0 w-0.5 bg-gradient-to-b from-accent to-accent-dark origin-top"
+          />
+          {/* ── Desktop: line centered at 50% ── */}
+          <div className="hidden sm:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-stone-200 -translate-x-px" />
+          <motion.div
+            style={{ height: lineHeight }}
+            className="hidden sm:block absolute left-1/2 top-0 w-0.5 bg-gradient-to-b from-accent to-accent-dark origin-top -translate-x-px"
           />
 
           {experiences.map((exp, i) => {
@@ -1482,37 +1486,67 @@ function Experience() {
             return (
               <div
                 key={exp.company}
-                className={`relative flex flex-col sm:flex-row gap-8 mb-16 last:mb-0 ${
-                  i % 2 === 0 ? "sm:flex-row" : "sm:flex-row-reverse"
-                }`}
+                className={`relative mb-16 last:mb-0`}
               >
-                {/* Node */}
-                <div
-                  className={`absolute left-0 sm:left-1/2 w-4 h-4 rounded-full -translate-x-[1px] sm:-translate-x-1/2 mt-1.5 z-10 transition-all duration-500 ${
-                    isActive
-                      ? "bg-stone-900 border-[3px] border-accent shadow-[0_0_12px_rgba(0,102,51,0.4)]"
-                      : "bg-white border-[3px] border-stone-300"
-                  }`}
-                />
-
-                {/* Content */}
-                <div className={`pl-8 sm:pl-0 sm:w-1/2 transition-opacity duration-500 ${
-                  isActive ? "opacity-100" : "opacity-30"
-                } ${i % 2 === 0 ? "sm:pr-12 sm:text-right" : "sm:pl-12"}`}>
-                  <span className="text-zinc-400 text-sm">{exp.period}</span>
-                  <h3 className={`text-xl font-bold mt-1 transition-colors duration-500 ${
-                    isActive ? "text-stone-900" : "text-stone-300"
-                  }`}>{exp.company}</h3>
-                  <p className={`font-medium text-sm mt-1 transition-colors duration-500 ${
-                    isActive ? "text-accent-dark" : "text-stone-300"
-                  }`}>{exp.role}</p>
-                  <p className={`mt-3 leading-relaxed transition-colors duration-500 ${
-                    isActive ? "text-zinc-500" : "text-zinc-300"
-                  }`}>{exp.description}</p>
+                {/* ── Mobile layout: flex row with dot + content ── */}
+                <div className="flex gap-5 sm:hidden">
+                  <div className="shrink-0 w-4 flex justify-center z-10">
+                    <div
+                      className={`w-4 h-4 rounded-full mt-1 transition-all duration-500 ${
+                        isActive
+                          ? "bg-stone-900 border-[3px] border-accent shadow-[0_0_12px_rgba(0,102,51,0.4)]"
+                          : "bg-white border-[3px] border-stone-300"
+                      }`}
+                    />
+                  </div>
+                  <div className={`flex-1 transition-opacity duration-500 ${isActive ? "opacity-100" : "opacity-30"}`}>
+                    <span className="text-zinc-400 text-sm">{exp.period}</span>
+                    <h3 className={`text-xl font-bold mt-1 transition-colors duration-500 ${
+                      isActive ? "text-stone-900" : "text-stone-300"
+                    }`}>{exp.company}</h3>
+                    <p className={`font-medium text-sm mt-1 transition-colors duration-500 ${
+                      isActive ? "text-accent-dark" : "text-stone-300"
+                    }`}>{exp.role}</p>
+                    <p className={`mt-3 leading-relaxed transition-colors duration-500 ${
+                      isActive ? "text-zinc-500" : "text-zinc-300"
+                    }`}>{exp.description}</p>
+                  </div>
                 </div>
 
-                {/* Spacer for the other side */}
-                <div className="hidden sm:block sm:w-1/2" />
+                {/* ── Desktop layout: alternating sides with centered dot ── */}
+                <div className={`hidden sm:flex items-start ${
+                  i % 2 === 0 ? "flex-row" : "flex-row-reverse"
+                }`}>
+                  {/* Content side */}
+                  <div className={`flex-1 transition-opacity duration-500 ${
+                    isActive ? "opacity-100" : "opacity-30"
+                  } ${i % 2 === 0 ? "text-right pr-8" : "text-left pl-8"}`}>
+                    <span className="text-zinc-400 text-sm">{exp.period}</span>
+                    <h3 className={`text-xl font-bold mt-1 transition-colors duration-500 ${
+                      isActive ? "text-stone-900" : "text-stone-300"
+                    }`}>{exp.company}</h3>
+                    <p className={`font-medium text-sm mt-1 transition-colors duration-500 ${
+                      isActive ? "text-accent-dark" : "text-stone-300"
+                    }`}>{exp.role}</p>
+                    <p className={`mt-3 leading-relaxed transition-colors duration-500 ${
+                      isActive ? "text-zinc-500" : "text-zinc-300"
+                    }`}>{exp.description}</p>
+                  </div>
+
+                  {/* Center dot */}
+                  <div className="shrink-0 w-4 flex justify-center z-10">
+                    <div
+                      className={`w-4 h-4 rounded-full mt-1 transition-all duration-500 ${
+                        isActive
+                          ? "bg-stone-900 border-[3px] border-accent shadow-[0_0_12px_rgba(0,102,51,0.4)]"
+                          : "bg-white border-[3px] border-stone-300"
+                      }`}
+                    />
+                  </div>
+
+                  {/* Spacer side */}
+                  <div className="flex-1" />
+                </div>
               </div>
             );
           })}
