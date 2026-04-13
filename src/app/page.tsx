@@ -1134,6 +1134,119 @@ function Pricing() {
 }
 
 /* ─────────────────── THE LUKI METHOD (light section) ─────────────────── */
+function MethodStep({
+  step,
+  title,
+  description,
+  index,
+  total,
+}: {
+  step: string;
+  title: string;
+  description: string;
+  index: number;
+  total: number;
+}) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  return (
+    <div ref={ref} className="relative flex gap-6 lg:block lg:text-center group">
+      {/* ── Mobile / Tablet: vertical timeline node + connector ── */}
+      <div className="flex flex-col items-center lg:hidden shrink-0">
+        {/* Node */}
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={isInView ? { scale: 1 } : { scale: 0 }}
+          transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className={`w-14 h-14 rounded-full flex items-center justify-center z-10 transition-all duration-700 ${
+            isInView
+              ? "bg-stone-900 shadow-[0_0_20px_rgba(0,102,51,0.3)]"
+              : "bg-stone-300"
+          }`}
+        >
+          <span className={`text-lg font-bold transition-colors duration-700 ${isInView ? "text-accent" : "text-stone-500"}`}>
+            {step}
+          </span>
+        </motion.div>
+        {/* Vertical connector */}
+        {index < total - 1 && (
+          <div className="relative w-0.5 flex-1 min-h-8 bg-stone-200 overflow-hidden">
+            <motion.div
+              initial={{ scaleY: 0 }}
+              animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+              className="absolute inset-0 origin-top bg-gradient-to-b from-accent to-accent-dark"
+            />
+          </div>
+        )}
+      </div>
+
+      {/* ── Content card ── */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+        transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        className="pb-10 lg:pb-0 flex-1"
+      >
+        {/* Desktop node (hidden on mobile) */}
+        <div className="hidden lg:flex justify-center mb-6">
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={isInView ? { scale: 1 } : { scale: 0 }}
+            transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className={`w-20 h-20 rounded-2xl flex items-center justify-center transition-all duration-700 ${
+              isInView
+                ? "bg-stone-900 shadow-[0_0_25px_rgba(0,102,51,0.3)]"
+                : "bg-stone-300"
+            }`}
+          >
+            <span className={`text-2xl font-bold transition-colors duration-700 ${isInView ? "text-accent" : "text-stone-500"}`}>
+              {step}
+            </span>
+          </motion.div>
+        </div>
+        <h3 className={`text-xl font-semibold mb-3 transition-colors duration-700 ${
+          isInView ? "text-stone-900" : "text-stone-400"
+        }`}>
+          {title}
+        </h3>
+        <p className={`leading-relaxed transition-colors duration-700 ${
+          isInView ? "text-zinc-500" : "text-zinc-300"
+        }`}>
+          {description}
+        </p>
+      </motion.div>
+    </div>
+  );
+}
+
+function MethodConnectorLine() {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 80%", "end 40%"],
+  });
+  const width = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
+  return (
+    <div ref={ref} className="hidden lg:block absolute top-10 left-[60%] w-[calc(100%-20%)] h-0.5">
+      {/* Background track */}
+      <div className="absolute inset-0 bg-stone-200 rounded-full" />
+      {/* Animated fill */}
+      <motion.div
+        style={{ width }}
+        className="absolute inset-y-0 left-0 bg-gradient-to-r from-accent to-accent-dark rounded-full shadow-[0_0_8px_rgba(0,102,51,0.4)]"
+      />
+      {/* Glow dot at the end */}
+      <motion.div
+        style={{ left: width }}
+        className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-accent shadow-[0_0_12px_rgba(0,102,51,0.6)]"
+      />
+    </div>
+  );
+}
+
 function Method() {
   const ref = useRef(null);
 
@@ -1165,11 +1278,8 @@ function Method() {
       <div ref={ref} className="max-w-7xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16 overflow-hidden">
         <motion.div
           initial={{ y: 40, scale: 0.85 }}
-
           whileInView={{ y: 0, scale: 1 }}
-
           viewport={{ once: true }}
-
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-20"
         >
@@ -1184,29 +1294,33 @@ function Method() {
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Desktop: horizontal grid with scroll-driven connector lines */}
+        <div className="hidden lg:grid lg:grid-cols-4 gap-8">
           {steps.map((s, i) => (
-            <motion.div
+            <div key={s.step} className="relative">
+              {i < steps.length - 1 && <MethodConnectorLine />}
+              <MethodStep
+                step={s.step}
+                title={s.title}
+                description={s.description}
+                index={i}
+                total={steps.length}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile / Tablet: vertical timeline */}
+        <div className="lg:hidden max-w-md mx-auto">
+          {steps.map((s, i) => (
+            <MethodStep
               key={s.step}
-              initial={{ y: 40, scale: 0.85 }}
-
-              whileInView={{ y: 0, scale: 1 }}
-
-              viewport={{ once: true }}
-
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="relative"
-            >
-              {/* Connector line */}
-              {i < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-10 left-[60%] w-[calc(100%-20%)] h-px bg-stone-200" />
-              )}
-              <div className="w-20 h-20 rounded-2xl bg-stone-900 flex items-center justify-center mb-6">
-                <span className="text-2xl font-bold text-accent">{s.step}</span>
-              </div>
-              <h3 className="text-xl font-semibold text-stone-900 mb-3">{s.title}</h3>
-              <p className="text-zinc-500 leading-relaxed">{s.description}</p>
-            </motion.div>
+              step={s.step}
+              title={s.title}
+              description={s.description}
+              index={i}
+              total={steps.length}
+            />
           ))}
         </div>
       </div>
