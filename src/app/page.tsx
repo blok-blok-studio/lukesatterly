@@ -270,7 +270,7 @@ function Hero() {
       </motion.div>
 
       {/* Bottom fade so section blends into next */}
-      <div className="absolute bottom-0 left-0 right-0 h-60 bg-gradient-to-t from-[#0C0C0C] to-transparent z-30 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-60 bg-gradient-to-t from-[#0C0C0C] to-transparent z-[35] pointer-events-none" />
 
       {/* Layer 2: Headline text — sits on top of background but BEHIND the cutout */}
       <motion.div style={{ y, opacity }} className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
@@ -288,7 +288,7 @@ function Hero() {
 
       {/* Layer 3: Luke cutout — on top of text */}
       <div
-        className="absolute inset-0 z-20 flex items-end justify-center pointer-events-none pt-12 sm:pt-16"
+        className="absolute inset-0 z-30 flex items-end justify-center pointer-events-none pt-12 sm:pt-16"
       >
         {/* The cutout wrapper holds the buttons too so they stay aligned with the rings */}
         <div className="relative h-full max-h-[88vh] aspect-square">
@@ -324,7 +324,7 @@ function Hero() {
       </div>
 
       {/* Foreground content — subtitle + stats below */}
-      <motion.div style={{ y, opacity }} className="relative z-30 max-w-7xl mx-auto px-6 pt-24 sm:pt-28 pb-16 min-h-screen flex flex-col justify-end pointer-events-none">
+      <motion.div style={{ y, opacity }} className="relative z-40 max-w-7xl mx-auto px-6 pt-24 sm:pt-28 pb-16 min-h-screen flex flex-col justify-end pointer-events-none">
         <p className="text-center text-sm sm:text-base lg:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed px-4 pointer-events-auto">
           I work with people who want to feel stronger, understand and learn to move
           better, and actually enjoy the progress doing so. Training and nutrition
