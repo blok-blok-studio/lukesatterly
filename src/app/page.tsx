@@ -276,24 +276,18 @@ function Hero() {
       <motion.div style={{ y, opacity }} className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
         <h1 className="text-[clamp(3.5rem,15vw,13rem)] font-black tracking-[-0.04em] leading-[0.82] uppercase font-[family-name:var(--font-display)] text-center w-full px-4">
           {heroWords.map((word) => (
-            <motion.span
+            <span
               key={word.text}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: word.delay, ease: "easeOut" }}
               className={`${word.className} block`}
             >
               {word.text}
-            </motion.span>
+            </span>
           ))}
         </h1>
       </motion.div>
 
       {/* Layer 3: Luke cutout — on top of text */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+      <div
         className="absolute inset-0 z-20 flex items-end justify-center pointer-events-none pt-12 sm:pt-16"
       >
         {/* The cutout wrapper holds the buttons too so they stay aligned with the rings */}
@@ -309,9 +303,6 @@ function Hero() {
 
           {/* Left button — tucked into the left ring */}
           <motion.button
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 1.0, ease: "easeOut" }}
             whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(0,180,90,0.4)" }}
             whileTap={{ scale: 0.97 }}
             onClick={() => smoothScrollTo("contact")}
@@ -322,9 +313,6 @@ function Hero() {
 
           {/* Right button — tucked into the right ring */}
           <motion.button
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 1.1, ease: "easeOut" }}
             whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(0,180,90,0.4)" }}
             whileTap={{ scale: 0.97 }}
             onClick={() => smoothScrollTo("about")}
@@ -333,20 +321,15 @@ function Hero() {
             Learn More
           </motion.button>
         </div>
-      </motion.div>
+      </div>
 
       {/* Foreground content — subtitle + stats below */}
       <motion.div style={{ y, opacity }} className="relative z-30 max-w-7xl mx-auto px-6 pt-24 sm:pt-28 pb-16 min-h-screen flex flex-col justify-end pointer-events-none">
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.7, ease: "easeOut" }}
-          className="text-center text-sm sm:text-base lg:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed px-4 pointer-events-auto"
-        >
+        <p className="text-center text-sm sm:text-base lg:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed px-4 pointer-events-auto">
           I work with people who want to feel stronger, understand and learn to move
           better, and actually enjoy the progress doing so. Training and nutrition
           online or right here in Berlin.
-        </motion.p>
+        </p>
 
         {/* Bottom stats row */}
         <motion.div
