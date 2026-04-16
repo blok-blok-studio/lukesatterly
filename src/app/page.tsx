@@ -249,36 +249,23 @@ function Hero() {
   ];
 
   return (
-    <section ref={ref} className="relative min-h-screen overflow-hidden">
-      {/* Full-bleed background image with zoom-in on load */}
-      <motion.div
-        initial={{ scale: 1.15 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 1.8, ease: "easeOut" }}
-        className="absolute inset-0"
-      >
-        <Image
-          src="/luke.jpg"
-          alt="Coach Luki training on gymnastic rings in Berlin"
-          fill
-          priority
-          className="object-cover object-center"
-        />
-        {/* Dark overlays for text readability */}
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="absolute bottom-0 left-0 right-0 h-60 bg-gradient-to-t from-[#0C0C0C] to-transparent" />
-      </motion.div>
+    <section ref={ref} className="relative min-h-screen overflow-hidden bg-[#0C0C0C]">
+      {/* Background gradient/texture */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#141a26] via-[#0e1218] to-[#0C0C0C]" />
+      <div className="absolute inset-0 opacity-30 mix-blend-overlay" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E\")" }} />
+      <div className="absolute bottom-0 left-0 right-0 h-60 bg-gradient-to-t from-[#0C0C0C] to-transparent z-20" />
 
-      <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-6 pt-32 sm:pt-40 pb-20 min-h-screen flex flex-col justify-between">
-        {/* Centered headline overlaying the image */}
-        <div className="flex-1 flex flex-col justify-center items-center text-center">
-          <h1 className="text-[clamp(1.75rem,8.5vw,7rem)] font-black tracking-[-0.04em] leading-[0.9] uppercase font-[family-name:var(--font-display)] px-2">
+      <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-6 pt-24 sm:pt-28 pb-16 min-h-screen flex flex-col">
+        {/* Image + overlaid headline + buttons */}
+        <div className="relative flex-1 flex items-center justify-center">
+          {/* Headline behind the image */}
+          <h1 className="absolute inset-0 z-0 flex flex-col items-center justify-center text-[clamp(3rem,13vw,11rem)] font-black tracking-[-0.04em] leading-[0.85] uppercase font-[family-name:var(--font-display)] pointer-events-none select-none text-center">
             {heroWords.map((word) => (
               <motion.span
                 key={word.text}
-                initial={{ opacity: 1, y: 20 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: word.delay, ease: "easeOut" }}
+                transition={{ duration: 0.5, delay: word.delay, ease: "easeOut" }}
                 className={`${word.className} block`}
               >
                 {word.text}
@@ -286,47 +273,68 @@ function Hero() {
             ))}
           </h1>
 
-          <motion.p
-            initial={{ opacity: 1, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.7, ease: "easeOut" }}
-            className="mt-8 text-base sm:text-lg text-zinc-300 max-w-lg leading-relaxed"
-          >
-            I work with people who want to feel stronger, move better, and actually
-            enjoy the process. Training and nutrition coaching right here in Berlin.
-          </motion.p>
-
+          {/* Image wrapper — buttons are positioned relative to the image */}
           <motion.div
-            initial={{ opacity: 1, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.9, ease: "easeOut" }}
-            className="mt-8 flex flex-col sm:flex-row items-center gap-4"
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+            className="relative z-10 w-full max-w-[640px] aspect-square mx-auto"
           >
+            <Image
+              src="/luke.jpg"
+              alt="Coach Luki training on gymnastic rings in Berlin"
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 640px"
+              className="object-contain"
+            />
+
+            {/* Left button — tucked into the left ring */}
             <motion.button
-              whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(0,102,51,0.4)" }}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.9, ease: "easeOut" }}
+              whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(0,180,90,0.4)" }}
               whileTap={{ scale: 0.97 }}
               onClick={() => smoothScrollTo("contact")}
-              className="group relative px-10 py-4 bg-accent text-white font-semibold rounded-full overflow-hidden transition-colors duration-300 hover:bg-accent-light text-lg cursor-pointer"
+              className="absolute z-20 top-[20%] left-[18%] -translate-x-1/3 px-4 sm:px-5 py-1.5 sm:py-2 bg-accent text-white text-xs sm:text-sm font-semibold rounded-full shadow-lg cursor-pointer hover:bg-accent-light transition-colors whitespace-nowrap"
             >
               Let&apos;s Get Started
             </motion.button>
+
+            {/* Right button — tucked into the right ring */}
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 1.0, ease: "easeOut" }}
+              whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(0,180,90,0.4)" }}
               whileTap={{ scale: 0.97 }}
               onClick={() => smoothScrollTo("about")}
-              className="px-10 py-4 border border-white/20 text-white rounded-full hover:bg-white/10 transition-all duration-300 text-lg cursor-pointer"
+              className="absolute z-20 top-[22%] right-[18%] translate-x-1/3 px-4 sm:px-5 py-1.5 sm:py-2 bg-accent text-white text-xs sm:text-sm font-semibold rounded-full shadow-lg cursor-pointer hover:bg-accent-light transition-colors whitespace-nowrap"
             >
               Learn More
             </motion.button>
           </motion.div>
         </div>
 
+        {/* Subtitle below the image */}
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.7, ease: "easeOut" }}
+          className="relative z-10 mt-6 sm:mt-8 text-center text-sm sm:text-base lg:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed px-4"
+        >
+          I work with people who want to feel stronger, understand and learn to move
+          better, and actually enjoy the progress doing so. Training and nutrition
+          online or right here in Berlin.
+        </motion.p>
+
         {/* Bottom stats row */}
         <motion.div
           initial={{ opacity: 1, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 1.1, ease: "easeOut" }}
-          className="mt-12 flex flex-wrap items-center gap-8 sm:gap-16"
+          className="mt-10 flex flex-wrap items-center justify-center gap-8 sm:gap-16"
         >
           <motion.div
             initial={{ opacity: 1, y: 10 }}
