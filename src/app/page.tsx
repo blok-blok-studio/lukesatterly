@@ -258,8 +258,8 @@ function Hero() {
         className="absolute inset-0"
       >
         <Image
-          src="/luke-running.jpeg"
-          alt="Coach Luki running through Berlin at night"
+          src="/luke.jpg"
+          alt="Coach Luki training on gymnastic rings in Berlin"
           fill
           priority
           className="object-cover object-center"
