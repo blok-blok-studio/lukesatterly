@@ -338,7 +338,7 @@ function Hero() {
               whileHover={{ scale: 1.12, boxShadow: "0 0 40px rgba(0,180,90,0.6)" }}
               whileTap={{ scale: 0.95 }}
               onClick={() => smoothScrollTo("contact")}
-              className="absolute z-20 top-[14%] left-[22%] -translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 bg-accent text-white text-xs sm:text-sm font-semibold rounded-full cursor-pointer hover:bg-accent-light flex items-center justify-center text-center leading-tight px-2"
+              className="absolute z-20 top-[14%] left-[22%] -translate-x-1/2 -translate-y-1/2 w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 bg-accent text-white text-[0.6rem] sm:text-xs md:text-sm font-semibold rounded-full cursor-pointer hover:bg-accent-light flex items-center justify-center text-center leading-tight px-2"
             >
               Let&apos;s Get<br />Started
             </motion.button>
@@ -357,7 +357,7 @@ function Hero() {
               whileHover={{ scale: 1.12, boxShadow: "0 0 40px rgba(255,255,255,0.5)" }}
               whileTap={{ scale: 0.95 }}
               onClick={() => smoothScrollTo("about")}
-              className="absolute z-20 top-[18%] right-[22%] translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 bg-white text-black text-xs sm:text-sm font-semibold rounded-full cursor-pointer hover:bg-zinc-200 flex items-center justify-center text-center leading-tight px-2"
+              className="absolute z-20 top-[18%] right-[22%] translate-x-1/2 -translate-y-1/2 w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 bg-white text-black text-[0.6rem] sm:text-xs md:text-sm font-semibold rounded-full cursor-pointer hover:bg-zinc-200 flex items-center justify-center text-center leading-tight px-2"
             >
               Learn<br />More
             </motion.button>

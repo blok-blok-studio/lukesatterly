@@ -147,7 +147,7 @@ function FunnelForm() {
   const timelines = ["Ready to start now", "In the next month", "Just exploring"];
 
   return (
-    <div className="max-w-xl mx-auto">
+    <div id="template-form" className="max-w-xl mx-auto scroll-mt-24">
       {step < 3 && <ProgressDots current={step} total={3} />}
 
       <div className="relative overflow-hidden rounded-2xl bg-surface border border-white/[0.06] p-5 sm:p-8 lg:p-10">
@@ -381,21 +381,22 @@ function FunnelForm() {
               transition={{ duration: 0.4 }}
             >
               {/* Small template download */}
-              <div className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.04] border border-white/[0.08] mb-6">
-                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
-                  <svg className="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                  </svg>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-white text-sm font-medium">Your template is ready</p>
-                  <p className="text-zinc-500 text-xs">4-week workout program — check spam if you don&apos;t see the email</p>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 rounded-xl bg-white/[0.04] border border-white/[0.08] mb-6">
+                <div className="flex items-center gap-3 flex-1 min-w-0">
+                  <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                    </svg>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-white text-sm font-medium">Your template is ready</p>
+                    <p className="text-zinc-500 text-xs">4-week workout program — also sent to your email</p>
+                  </div>
                 </div>
                 <a
-                  href="https://linktr.ee/coachluki"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-accent border border-accent/30 rounded-lg hover:bg-accent/10 transition-colors duration-150 cursor-pointer flex-shrink-0"
+                  href="/coach-luki-training-guide.pdf"
+                  download="Coach-Luki-Training-Guide.pdf"
+                  className="inline-flex items-center justify-center gap-1.5 px-4 py-2 text-sm font-medium text-accent border border-accent/30 rounded-lg hover:bg-accent/10 transition-colors duration-150 cursor-pointer flex-shrink-0 w-full sm:w-auto"
                 >
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
@@ -564,15 +565,18 @@ function VideoSection() {
             /> */}
           </div>
 
-          {/* Quick CTA below video */}
+          {/* Quick CTA below video — scrolls DOWN to the form */}
           <div className="mt-6 text-center">
             <button
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="inline-flex items-center gap-2 px-8 py-3.5 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)] transition-all duration-300 cursor-pointer"
+              onClick={() => {
+                const el = document.getElementById("template-form");
+                if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+              className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)] transition-all duration-300 cursor-pointer text-sm sm:text-base"
             >
               Get Your Template
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
               </svg>
             </button>
           </div>
