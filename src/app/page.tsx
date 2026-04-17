@@ -382,7 +382,7 @@ function Hero() {
         </div>
 
         {/* Subtitle below the image — pulled up close to Luke's legs */}
-        <p className="relative z-10 -mt-6 sm:-mt-10 text-center text-sm sm:text-base lg:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed px-4">
+        <p className="relative z-10 -mt-14 sm:-mt-10 text-center text-sm sm:text-base lg:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed px-4">
           I work with people who want to feel stronger, understand and learn to move
           better, and actually enjoy the progress doing so. Training and nutrition
           online or right&nbsp;here&nbsp;in&nbsp;Berlin.
