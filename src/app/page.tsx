@@ -326,18 +326,39 @@ function Hero() {
 
           {/* Cutout wrapper — buttons positioned relative to it */}
           <div className="relative z-10 w-full max-w-[320px] sm:max-w-[340px] lg:max-w-[380px] aspect-[2/3] mx-auto">
+            {/* Base cutout (z-10) */}
             <Image
               src="/luke-cutout-full.png"
               alt="Coach Luki training on gymnastic rings in Berlin"
               fill
               priority
               sizes="(max-width: 768px) 100vw, 400px"
-              className="object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]"
+              className="object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] z-10"
               style={{
                 maskImage:
                   "linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)",
                 WebkitMaskImage:
                   "linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)",
+              }}
+            />
+
+            {/* Hands + rings overlay (z-30) — same image, masked to ONLY show
+                the top portion (rings + hands + forearms) so they appear IN FRONT
+                of the buttons. The mask fades out below the rings so nothing else
+                doubles up. */}
+            <Image
+              src="/luke-cutout-full.png"
+              alt=""
+              aria-hidden
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 400px"
+              className="object-contain z-30 pointer-events-none"
+              style={{
+                maskImage:
+                  "linear-gradient(to bottom, transparent 0%, black 10%, black 35%, transparent 48%)",
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, transparent 0%, black 10%, black 35%, transparent 48%)",
               }}
             />
 
@@ -348,7 +369,7 @@ function Hero() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => smoothScrollTo("contact")}
-              className="absolute z-20 top-[14%] left-[22%] -translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-28 lg:h-28 rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-accent/45 border border-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(0,0,0,0.2),0_8px_24px_rgba(0,102,51,0.35),0_2px_6px_rgba(0,0,0,0.3)]"
+              className="absolute z-20 top-[22%] left-[23%] -translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-24 lg:h-24 rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-accent/45 border border-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(0,0,0,0.2),0_8px_24px_rgba(0,102,51,0.35),0_2px_6px_rgba(0,0,0,0.3)]"
             >
               {/* Top glossy highlight */}
               <span className="pointer-events-none absolute inset-x-2 top-1 h-1/2 rounded-full bg-gradient-to-b from-white/55 via-white/10 to-transparent" />
@@ -368,7 +389,7 @@ function Hero() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => smoothScrollTo("about")}
-              className="absolute z-20 top-[18%] right-[22%] translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-28 lg:h-28 rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-white/25 border border-white/40 shadow-[inset_0_1px_0_rgba(255,255,255,0.6),inset_0_-1px_0_rgba(0,0,0,0.1),0_8px_24px_rgba(255,255,255,0.18),0_2px_6px_rgba(0,0,0,0.25)]"
+              className="absolute z-20 top-[26%] right-[22%] translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-24 lg:h-24 rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-white/25 border border-white/40 shadow-[inset_0_1px_0_rgba(255,255,255,0.6),inset_0_-1px_0_rgba(0,0,0,0.1),0_8px_24px_rgba(255,255,255,0.18),0_2px_6px_rgba(0,0,0,0.25)]"
             >
               <span className="pointer-events-none absolute inset-x-2 top-1 h-1/2 rounded-full bg-gradient-to-b from-white/70 via-white/15 to-transparent" />
               <span className="pointer-events-none absolute inset-x-3 bottom-1 h-1/3 rounded-full bg-gradient-to-t from-white/35 to-transparent blur-[2px]" />
