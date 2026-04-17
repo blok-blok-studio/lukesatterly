@@ -333,6 +333,12 @@ function Hero() {
               priority
               sizes="(max-width: 768px) 100vw, 400px"
               className="object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]"
+              style={{
+                maskImage:
+                  "linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)",
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)",
+              }}
             />
 
             {/* Left round button — inside the left ring (green), breathing */}
