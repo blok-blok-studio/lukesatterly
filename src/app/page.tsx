@@ -341,42 +341,41 @@ function Hero() {
               }}
             />
 
-            {/* Left round button — inside the left ring (green), breathing */}
+            {/* Left liquid-glass CTA — green tinted */}
             <motion.button
-              animate={{
-                scale: [1, 1.06, 1],
-                boxShadow: [
-                  "0 10px 25px rgba(0,0,0,0.3), 0 0 0 0 rgba(0,180,90,0.6)",
-                  "0 10px 25px rgba(0,0,0,0.3), 0 0 0 14px rgba(0,180,90,0)",
-                  "0 10px 25px rgba(0,0,0,0.3), 0 0 0 0 rgba(0,180,90,0)",
-                ],
-              }}
-              transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
-              whileHover={{ scale: 1.12, boxShadow: "0 0 40px rgba(0,180,90,0.6)" }}
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
+              whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => smoothScrollTo("contact")}
-              className="absolute z-20 top-[14%] left-[22%] -translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-28 lg:h-28 bg-accent text-white text-[0.7rem] sm:text-sm md:text-sm font-semibold rounded-full cursor-pointer hover:bg-accent-light flex items-center justify-center text-center leading-tight px-2"
+              className="absolute z-20 top-[14%] left-[22%] -translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-28 lg:h-28 rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-accent/45 border border-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(0,0,0,0.2),0_8px_24px_rgba(0,102,51,0.35),0_2px_6px_rgba(0,0,0,0.3)]"
             >
-              Let&apos;s Get<br />Started
+              {/* Top glossy highlight */}
+              <span className="pointer-events-none absolute inset-x-2 top-1 h-1/2 rounded-full bg-gradient-to-b from-white/55 via-white/10 to-transparent" />
+              {/* Bottom edge glow */}
+              <span className="pointer-events-none absolute inset-x-3 bottom-1 h-1/3 rounded-full bg-gradient-to-t from-accent-light/40 to-transparent blur-[2px]" />
+              {/* Specular shine */}
+              <span className="pointer-events-none absolute -top-1 left-3 right-3 h-2 rounded-full bg-white/40 blur-[2px]" />
+              <span className="relative z-10 flex items-center justify-center w-full h-full text-white text-[0.7rem] sm:text-sm md:text-sm font-semibold text-center leading-tight px-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]">
+                Let&apos;s Get<br />Started
+              </span>
             </motion.button>
 
-            {/* Right round button — inside the right ring (white), breathing offset */}
+            {/* Right liquid-glass CTA — clear / white tinted */}
             <motion.button
-              animate={{
-                scale: [1, 1.06, 1],
-                boxShadow: [
-                  "0 10px 25px rgba(0,0,0,0.3), 0 0 0 0 rgba(255,255,255,0.5)",
-                  "0 10px 25px rgba(0,0,0,0.3), 0 0 0 14px rgba(255,255,255,0)",
-                  "0 10px 25px rgba(0,0,0,0.3), 0 0 0 0 rgba(255,255,255,0)",
-                ],
-              }}
-              transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut", delay: 1.3 }}
-              whileHover={{ scale: 1.12, boxShadow: "0 0 40px rgba(255,255,255,0.5)" }}
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: 1.4 }}
+              whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => smoothScrollTo("about")}
-              className="absolute z-20 top-[18%] right-[22%] translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-28 lg:h-28 bg-white text-black text-[0.7rem] sm:text-sm md:text-sm font-semibold rounded-full cursor-pointer hover:bg-zinc-200 flex items-center justify-center text-center leading-tight px-2"
+              className="absolute z-20 top-[18%] right-[22%] translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-28 lg:h-28 rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-white/25 border border-white/40 shadow-[inset_0_1px_0_rgba(255,255,255,0.6),inset_0_-1px_0_rgba(0,0,0,0.1),0_8px_24px_rgba(255,255,255,0.18),0_2px_6px_rgba(0,0,0,0.25)]"
             >
-              Learn<br />More
+              <span className="pointer-events-none absolute inset-x-2 top-1 h-1/2 rounded-full bg-gradient-to-b from-white/70 via-white/15 to-transparent" />
+              <span className="pointer-events-none absolute inset-x-3 bottom-1 h-1/3 rounded-full bg-gradient-to-t from-white/35 to-transparent blur-[2px]" />
+              <span className="pointer-events-none absolute -top-1 left-3 right-3 h-2 rounded-full bg-white/50 blur-[2px]" />
+              <span className="relative z-10 flex items-center justify-center w-full h-full text-white text-[0.7rem] sm:text-sm md:text-sm font-semibold text-center leading-tight px-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)]">
+                Learn<br />More
+              </span>
             </motion.button>
           </div>
         </div>
