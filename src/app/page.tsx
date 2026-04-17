@@ -300,9 +300,9 @@ function Hero() {
       {/* Bottom fade into next section */}
       <div className="absolute bottom-0 left-0 right-0 h-60 bg-gradient-to-t from-[#0C0C0C] to-transparent z-20 pointer-events-none" />
 
-      <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-6 pt-24 sm:pt-28 pb-16 min-h-screen flex flex-col">
+      <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-6 pt-20 sm:pt-24 pb-10 min-h-screen flex flex-col justify-center gap-6 sm:gap-8">
         {/* Image + overlaid headline + buttons */}
-        <div className="relative flex-1 flex items-center justify-center">
+        <div className="relative flex items-center justify-center">
           {/* Headline behind the image */}
           <h1 className="absolute inset-0 z-0 flex flex-col items-center justify-center text-[clamp(3rem,13vw,11rem)] font-black tracking-[-0.04em] leading-[0.85] uppercase font-[family-name:var(--font-display)] pointer-events-none select-none text-center">
             {heroWords.map((word) => (
@@ -314,7 +314,7 @@ function Hero() {
 
           {/* Cutout wrapper — buttons are positioned relative to it so they sit on the rings.
               Aspect ratio matches the full photo (3413x5120 ≈ 2/3). */}
-          <div className="relative z-10 w-full max-w-[420px] sm:max-w-[520px] aspect-[2/3] mx-auto">
+          <div className="relative z-10 w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[440px] aspect-[2/3] mx-auto">
             <Image
               src="/luke-cutout-full.png"
               alt="Coach Luki training on gymnastic rings in Berlin"
@@ -347,7 +347,7 @@ function Hero() {
         </div>
 
         {/* Subtitle below the image */}
-        <p className="relative z-10 mt-6 sm:mt-8 text-center text-sm sm:text-base lg:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed px-4">
+        <p className="relative z-10 text-center text-sm sm:text-base lg:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed px-4">
           I work with people who want to feel stronger, understand and learn to move
           better, and actually enjoy the progress doing so. Training and nutrition
           online or right here in Berlin.
@@ -358,7 +358,7 @@ function Hero() {
           initial={{ opacity: 1, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 1.1, ease: "easeOut" }}
-          className="mt-10 flex flex-wrap items-center justify-center gap-8 sm:gap-16 pointer-events-auto"
+          className="flex flex-wrap items-center justify-center gap-8 sm:gap-16 pointer-events-auto"
         >
           <motion.div
             initial={{ opacity: 1, y: 10 }}
