@@ -300,21 +300,19 @@ function Hero() {
       {/* Bottom fade into next section */}
       <div className="absolute bottom-0 left-0 right-0 h-60 bg-gradient-to-t from-[#0C0C0C] to-transparent z-20 pointer-events-none" />
 
-      <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-6 pt-20 sm:pt-24 pb-10 min-h-screen flex flex-col justify-center gap-3 sm:gap-4">
-        {/* Headline — stacked ABOVE Luke for maximum legibility on every breakpoint */}
-        <h1 className="text-[clamp(2rem,9vw,6rem)] sm:text-[clamp(3rem,8vw,7rem)] font-black tracking-[-0.04em] leading-[0.9] uppercase font-[family-name:var(--font-display)] text-center">
-          {heroWords.map((word) => (
-            <span key={word.text} className={`${word.className} block`}>
-              {word.text}
-            </span>
-          ))}
-        </h1>
-
-        {/* Image + buttons */}
-        <div className="relative flex items-center justify-center -mt-2 sm:-mt-4">
-          {/* Cutout wrapper — buttons are positioned relative to it so they sit on the rings.
-              Aspect ratio matches the full photo (3413x5120 ≈ 2/3). */}
-          <div className="relative z-10 w-full max-w-[260px] sm:max-w-[340px] lg:max-w-[400px] aspect-[2/3] mx-auto">
+      <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-6 pt-20 sm:pt-24 pb-10 min-h-screen flex flex-col justify-center gap-0">
+        {/* Image + overlaid headline + buttons */}
+        <div className="relative flex items-center justify-center">
+          {/* Cutout wrapper — buttons and headline positioned relative to it */}
+          <div className="relative z-10 w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[440px] aspect-[2/3] mx-auto">
+            {/* Headline overlaid ON TOP of Luke — z-30 puts it above the cutout */}
+            <h1 className="absolute inset-x-0 top-[-10%] sm:top-[-8%] z-30 text-[clamp(1.75rem,8vw,5rem)] sm:text-[clamp(2.75rem,7vw,6rem)] font-black tracking-[-0.04em] leading-[0.9] uppercase font-[family-name:var(--font-display)] text-center pointer-events-none select-none drop-shadow-[0_4px_16px_rgba(0,0,0,0.7)]">
+              {heroWords.map((word) => (
+                <span key={word.text} className={`${word.className} block`}>
+                  {word.text}
+                </span>
+              ))}
+            </h1>
             <Image
               src="/luke-cutout-full.png"
               alt="Coach Luki training on gymnastic rings in Berlin"
@@ -365,7 +363,7 @@ function Hero() {
         </div>
 
         {/* Subtitle below the image — pulled up close to Luke's legs */}
-        <p className="relative z-10 -mt-8 sm:-mt-12 text-center text-sm sm:text-base lg:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed px-4">
+        <p className="relative z-10 -mt-6 sm:-mt-10 text-center text-sm sm:text-base lg:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed px-4">
           I work with people who want to feel stronger, understand and learn to move
           better, and actually enjoy the progress doing so. Training and nutrition
           online or right here in Berlin.
