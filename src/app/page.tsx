@@ -250,82 +250,58 @@ function Hero() {
 
   return (
     <section ref={ref} className="relative min-h-screen overflow-hidden bg-[#0C0C0C]">
-      {/* Layer 1: Full-bleed background photo (heavily darkened to read as texture) */}
-      <motion.div
-        initial={{ scale: 1.08 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 1.8, ease: "easeOut" }}
-        className="absolute inset-0 z-0"
-      >
-        <Image
-          src="/luke.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center scale-[1.4] blur-md"
-        />
-        <div className="absolute inset-0 bg-[#0C0C0C]/80" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#141a26]/60 via-transparent to-[#0C0C0C]" />
-      </motion.div>
+      {/* Background gradient/texture */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#141a26] via-[#0e1218] to-[#0C0C0C]" />
+      <div className="absolute inset-0 opacity-30 mix-blend-overlay" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E\")" }} />
+      <div className="absolute bottom-0 left-0 right-0 h-60 bg-gradient-to-t from-[#0C0C0C] to-transparent z-20" />
 
-      {/* Bottom fade so section blends into next */}
-      <div className="absolute bottom-0 left-0 right-0 h-60 bg-gradient-to-t from-[#0C0C0C] to-transparent z-[35] pointer-events-none" />
+      <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-6 pt-24 sm:pt-28 pb-16 min-h-screen flex flex-col">
+        {/* Image + overlaid headline + buttons */}
+        <div className="relative flex-1 flex items-center justify-center">
+          {/* Headline behind the image */}
+          <h1 className="absolute inset-0 z-0 flex flex-col items-center justify-center text-[clamp(3rem,13vw,11rem)] font-black tracking-[-0.04em] leading-[0.85] uppercase font-[family-name:var(--font-display)] pointer-events-none select-none text-center">
+            {heroWords.map((word) => (
+              <span key={word.text} className={`${word.className} block`}>
+                {word.text}
+              </span>
+            ))}
+          </h1>
 
-      {/* Layer 2: Headline text — sits on top of background but BEHIND the cutout */}
-      <motion.div style={{ y, opacity }} className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
-        <h1 className="text-[clamp(3.5rem,15vw,13rem)] font-black tracking-[-0.04em] leading-[0.82] uppercase font-[family-name:var(--font-display)] text-center w-full px-4">
-          {heroWords.map((word) => (
-            <span
-              key={word.text}
-              className={`${word.className} block`}
+          {/* Cutout wrapper — buttons are positioned relative to it so they sit on the rings */}
+          <div className="relative z-10 w-full max-w-[640px] aspect-square mx-auto">
+            <Image
+              src="/luke-cutout.png"
+              alt="Coach Luki training on gymnastic rings in Berlin"
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 640px"
+              className="object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]"
+            />
+
+            {/* Left round button — inside the left ring (green) */}
+            <motion.button
+              whileHover={{ scale: 1.08, boxShadow: "0 0 30px rgba(0,180,90,0.5)" }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => smoothScrollTo("contact")}
+              className="absolute z-20 top-[17%] left-[22%] -translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 bg-accent text-white text-[0.65rem] sm:text-xs font-semibold rounded-full shadow-xl cursor-pointer hover:bg-accent-light transition-colors flex items-center justify-center text-center leading-tight px-2"
             >
-              {word.text}
-            </span>
-          ))}
-        </h1>
-      </motion.div>
+              Let&apos;s Get<br />Started
+            </motion.button>
 
-      {/* Layer 3: Luke cutout — on top of text */}
-      <div
-        className="absolute inset-0 z-30 flex items-end justify-center pointer-events-none pt-12 sm:pt-16"
-      >
-        {/* The cutout wrapper holds the buttons too so they stay aligned with the rings */}
-        <div className="relative h-full max-h-[88vh] aspect-square">
-          <Image
-            src="/luke-cutout.png"
-            alt="Coach Luki training on gymnastic rings in Berlin"
-            fill
-            priority
-            sizes="(max-width: 768px) 100vw, 88vh"
-            className="object-contain object-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]"
-          />
-
-          {/* Left button — tucked into the left ring */}
-          <motion.button
-            whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(0,180,90,0.4)" }}
-            whileTap={{ scale: 0.97 }}
-            onClick={() => smoothScrollTo("contact")}
-            className="absolute z-40 top-[12%] left-[18%] -translate-x-1/3 pointer-events-auto px-4 sm:px-5 py-1.5 sm:py-2 bg-accent text-white text-xs sm:text-sm font-semibold rounded-full shadow-lg cursor-pointer hover:bg-accent-light transition-colors whitespace-nowrap"
-          >
-            Let&apos;s Get Started
-          </motion.button>
-
-          {/* Right button — tucked into the right ring */}
-          <motion.button
-            whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(0,180,90,0.4)" }}
-            whileTap={{ scale: 0.97 }}
-            onClick={() => smoothScrollTo("about")}
-            className="absolute z-40 top-[14%] right-[18%] translate-x-1/3 pointer-events-auto px-4 sm:px-5 py-1.5 sm:py-2 bg-accent text-white text-xs sm:text-sm font-semibold rounded-full shadow-lg cursor-pointer hover:bg-accent-light transition-colors whitespace-nowrap"
-          >
-            Learn More
-          </motion.button>
+            {/* Right round button — inside the right ring (white) */}
+            <motion.button
+              whileHover={{ scale: 1.08, boxShadow: "0 0 30px rgba(255,255,255,0.35)" }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => smoothScrollTo("about")}
+              className="absolute z-20 top-[20%] right-[22%] translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 bg-white text-black text-[0.65rem] sm:text-xs font-semibold rounded-full shadow-xl cursor-pointer hover:bg-zinc-200 transition-colors flex items-center justify-center text-center leading-tight px-2"
+            >
+              Learn<br />More
+            </motion.button>
+          </div>
         </div>
-      </div>
 
-      {/* Foreground content — subtitle + stats below */}
-      <motion.div style={{ y, opacity }} className="relative z-40 max-w-7xl mx-auto px-6 pt-24 sm:pt-28 pb-16 min-h-screen flex flex-col justify-end pointer-events-none">
-        <p className="text-center text-sm sm:text-base lg:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed px-4 pointer-events-auto">
+        {/* Subtitle below the image */}
+        <p className="relative z-10 mt-6 sm:mt-8 text-center text-sm sm:text-base lg:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed px-4">
           I work with people who want to feel stronger, understand and learn to move
           better, and actually enjoy the progress doing so. Training and nutrition
           online or right here in Berlin.
