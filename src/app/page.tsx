@@ -300,7 +300,7 @@ function Hero() {
       {/* Bottom fade into next section */}
       <div className="absolute bottom-0 left-0 right-0 h-60 bg-gradient-to-t from-[#0C0C0C] to-transparent z-20 pointer-events-none" />
 
-      <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-6 pt-20 sm:pt-24 pb-10 min-h-screen flex flex-col justify-center gap-3 sm:gap-4">
+      <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-6 pt-20 sm:pt-24 pb-10 min-h-screen flex flex-col justify-center gap-0">
         {/* Image + overlaid headline + buttons */}
         <div className="relative flex items-center justify-center">
           {/* Headline behind the image */}
@@ -364,8 +364,8 @@ function Hero() {
           </div>
         </div>
 
-        {/* Subtitle below the image */}
-        <p className="relative z-10 text-center text-sm sm:text-base lg:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed px-4">
+        {/* Subtitle below the image — pulled up close to Luke's legs */}
+        <p className="relative z-10 -mt-8 sm:-mt-12 text-center text-sm sm:text-base lg:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed px-4">
           I work with people who want to feel stronger, understand and learn to move
           better, and actually enjoy the progress doing so. Training and nutrition
           online or right here in Berlin.
@@ -376,7 +376,7 @@ function Hero() {
           initial={{ opacity: 1, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 1.1, ease: "easeOut" }}
-          className="flex flex-wrap items-center justify-center gap-8 sm:gap-16 pointer-events-auto"
+          className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-8 sm:gap-16 pointer-events-auto"
         >
           <motion.div
             initial={{ opacity: 1, y: 10 }}
