@@ -312,7 +312,7 @@ function Hero() {
         </span>
       </h1>
 
-      <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-6 pt-4 sm:pt-24 pb-10 min-h-screen flex flex-col justify-start sm:justify-center gap-0">
+      <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-6 pt-24 sm:pt-24 pb-10 min-h-screen flex flex-col justify-start sm:justify-center gap-0">
         {/* Image + overlaid headline + buttons */}
         <div className="relative flex items-center justify-center">
           {/* Mobile-only overlay headline — sits on Luke's chest */}
