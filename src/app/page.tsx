@@ -250,10 +250,55 @@ function Hero() {
 
   return (
     <section ref={ref} className="relative min-h-screen overflow-hidden bg-[#0C0C0C]">
-      {/* Background gradient/texture */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#141a26] via-[#0e1218] to-[#0C0C0C]" />
-      <div className="absolute inset-0 opacity-30 mix-blend-overlay" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E\")" }} />
-      <div className="absolute bottom-0 left-0 right-0 h-60 bg-gradient-to-t from-[#0C0C0C] to-transparent z-20" />
+      {/* Background: layered atmosphere — deep base, green radial glows, grid, noise, vignette */}
+      {/* Base gradient — deep forest-tinged dark */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_#0f1f18_0%,_#0a110d_40%,_#080807_100%)]" />
+
+      {/* Large green aurora glow — behind Luke */}
+      <motion.div
+        animate={{ scale: [1, 1.08, 1], opacity: [0.55, 0.7, 0.55] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[1100px] rounded-full bg-[radial-gradient(circle,_rgba(0,200,100,0.28)_0%,_rgba(0,102,51,0.10)_40%,_transparent_70%)] blur-3xl pointer-events-none"
+      />
+
+      {/* Secondary side accents — add depth */}
+      <motion.div
+        animate={{ x: [-20, 30, -20], y: [-10, 20, -10] }}
+        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,_rgba(74,222,128,0.12)_0%,_transparent_70%)] blur-3xl pointer-events-none"
+      />
+      <motion.div
+        animate={{ x: [20, -30, 20], y: [10, -20, 10] }}
+        transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -bottom-40 -right-40 w-[650px] h-[650px] rounded-full bg-[radial-gradient(circle,_rgba(0,128,61,0.18)_0%,_transparent_70%)] blur-3xl pointer-events-none"
+      />
+
+      {/* Subtle grid pattern */}
+      <div
+        className="absolute inset-0 opacity-[0.07] pointer-events-none"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(74,222,128,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(74,222,128,0.5) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+          maskImage: "radial-gradient(ellipse at center, black 30%, transparent 75%)",
+          WebkitMaskImage: "radial-gradient(ellipse at center, black 30%, transparent 75%)",
+        }}
+      />
+
+      {/* Noise overlay for film-grain texture */}
+      <div
+        className="absolute inset-0 opacity-[0.15] mix-blend-overlay pointer-events-none"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E\")",
+        }}
+      />
+
+      {/* Vignette — darkens edges so center/content pops */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_40%,_rgba(0,0,0,0.6)_100%)] pointer-events-none" />
+
+      {/* Bottom fade into next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-60 bg-gradient-to-t from-[#0C0C0C] to-transparent z-20 pointer-events-none" />
 
       <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-6 pt-24 sm:pt-28 pb-16 min-h-screen flex flex-col">
         {/* Image + overlaid headline + buttons */}
