@@ -303,8 +303,10 @@ function Hero() {
       <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-6 pt-20 sm:pt-24 pb-10 min-h-screen flex flex-col justify-center gap-0">
         {/* Image + overlaid headline + buttons */}
         <div className="relative flex items-center justify-center">
-          {/* Headline behind the image — scales down on narrow viewports to prevent clipping */}
-          <h1 className="absolute inset-0 z-0 flex flex-col items-center justify-center text-[clamp(2rem,10vw,11rem)] font-black tracking-[-0.03em] leading-[0.85] uppercase font-[family-name:var(--font-display)] pointer-events-none select-none text-center px-4">
+          {/* Headline behind the image — sized to fit "strongest" (longest word, ~10.4em wide
+              in Syne Black) inside the container at every breakpoint. Mobile uses a tighter
+              clamp so letters never touch screen edges. */}
+          <h1 className="absolute inset-0 z-0 flex flex-col items-center justify-center text-[clamp(1.125rem,6.5vw,4rem)] sm:text-[clamp(3rem,7.5vw,6.5rem)] font-black tracking-[-0.03em] leading-[0.88] uppercase font-[family-name:var(--font-display)] pointer-events-none select-none text-center px-4 overflow-hidden">
             {heroWords.map((word) => (
               <span key={word.text} className={`${word.className} block`}>
                 {word.text}
