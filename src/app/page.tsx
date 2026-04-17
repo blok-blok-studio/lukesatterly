@@ -382,7 +382,7 @@ function Hero() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => smoothScrollTo("contact")}
-              className="absolute z-20 top-[22%] left-[23%] -translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-24 lg:h-24 rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-accent/45 border border-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(0,0,0,0.2),0_8px_24px_rgba(0,102,51,0.35),0_2px_6px_rgba(0,0,0,0.3)]"
+              className="absolute z-20 top-[19%] left-[29%] -translate-x-1/2 -translate-y-1/2 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-[70px] lg:h-[70px] rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-accent/45 border border-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(0,0,0,0.2),0_8px_24px_rgba(0,102,51,0.35),0_2px_6px_rgba(0,0,0,0.3)]"
             >
               {/* Top glossy highlight */}
               <span className="pointer-events-none absolute inset-x-2 top-1 h-1/2 rounded-full bg-gradient-to-b from-white/55 via-white/10 to-transparent" />
@@ -390,7 +390,7 @@ function Hero() {
               <span className="pointer-events-none absolute inset-x-3 bottom-1 h-1/3 rounded-full bg-gradient-to-t from-accent-light/40 to-transparent blur-[2px]" />
               {/* Specular shine */}
               <span className="pointer-events-none absolute -top-1 left-3 right-3 h-2 rounded-full bg-white/40 blur-[2px]" />
-              <span className="relative z-10 flex items-center justify-center w-full h-full text-white text-[0.7rem] sm:text-sm md:text-sm font-semibold text-center leading-tight px-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]">
+              <span className="relative z-10 flex items-center justify-center w-full h-full text-white text-[0.55rem] sm:text-[0.65rem] md:text-xs font-semibold text-center leading-tight px-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]">
                 Let&apos;s Get<br />Started
               </span>
             </motion.button>
@@ -402,12 +402,12 @@ function Hero() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => smoothScrollTo("about")}
-              className="absolute z-20 top-[26%] right-[22%] translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-24 lg:h-24 rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-accent/30 border border-white/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.4),inset_0_-1px_0_rgba(0,0,0,0.2),0_8px_24px_rgba(0,102,51,0.3),0_2px_6px_rgba(0,0,0,0.3)]"
+              className="absolute z-20 top-[24%] right-[28%] translate-x-1/2 -translate-y-1/2 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-[70px] lg:h-[70px] rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-accent/30 border border-white/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.4),inset_0_-1px_0_rgba(0,0,0,0.2),0_8px_24px_rgba(0,102,51,0.3),0_2px_6px_rgba(0,0,0,0.3)]"
             >
               <span className="pointer-events-none absolute inset-x-2 top-1 h-1/2 rounded-full bg-gradient-to-b from-white/45 via-white/10 to-transparent" />
               <span className="pointer-events-none absolute inset-x-3 bottom-1 h-1/3 rounded-full bg-gradient-to-t from-accent-light/30 to-transparent blur-[2px]" />
               <span className="pointer-events-none absolute -top-1 left-3 right-3 h-2 rounded-full bg-white/35 blur-[2px]" />
-              <span className="relative z-10 flex items-center justify-center w-full h-full text-white text-[0.7rem] sm:text-sm md:text-sm font-semibold text-center leading-tight px-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)]">
+              <span className="relative z-10 flex items-center justify-center w-full h-full text-white text-[0.55rem] sm:text-[0.65rem] md:text-xs font-semibold text-center leading-tight px-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)]">
                 Learn<br />More
               </span>
             </motion.button>
