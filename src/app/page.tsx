@@ -269,7 +269,7 @@ function Hero() {
 
           {/* Cutout wrapper — buttons are positioned relative to it so they sit on the rings.
               Aspect ratio matches the full photo (3413x5120 ≈ 2/3). */}
-          <div className="relative z-10 w-full max-w-[340px] sm:max-w-[400px] aspect-[2/3] mx-auto">
+          <div className="relative z-10 w-full max-w-[420px] sm:max-w-[520px] aspect-[2/3] mx-auto">
             <Image
               src="/luke-cutout-full.png"
               alt="Coach Luki training on gymnastic rings in Berlin"
