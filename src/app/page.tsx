@@ -300,12 +300,11 @@ function Hero() {
       {/* Bottom fade into next section */}
       <div className="absolute bottom-0 left-0 right-0 h-60 bg-gradient-to-t from-[#0C0C0C] to-transparent z-20 pointer-events-none" />
 
-      {/* Wide desktop headline — sits OUTSIDE the padded container so it can span
-          edge-to-edge on desktop. On mobile this is hidden; the overlay headline
-          renders inside the image wrapper below. */}
+      {/* Desktop headline — constrained to the SAME max-w-7xl container as the nav
+          so the text aligns with the logo (left) and Apply Now (right). */}
       <h1 className="hidden sm:flex absolute inset-0 z-0 items-center justify-center pointer-events-none select-none">
-        <span className="block w-full text-center text-[clamp(3rem,10vw,11rem)] font-black tracking-[-0.05em] leading-[0.88] uppercase font-[family-name:var(--font-display)] px-4">
-          {heroWords.map((word, i) => (
+        <span className="block w-full max-w-7xl mx-auto px-6 text-center text-[clamp(3rem,8.5vw,8rem)] font-black tracking-[-0.05em] leading-[0.88] uppercase font-[family-name:var(--font-display)]">
+          {heroWords.map((word) => (
             <span key={word.text} className={`${word.className} block`}>
               {word.text}
             </span>
