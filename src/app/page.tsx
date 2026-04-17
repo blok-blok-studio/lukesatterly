@@ -1451,26 +1451,109 @@ function Philosophy() {
 
 
 /* ─────────────────── EXPERIENCE TIMELINE (light) ─────────────────── */
+/* Single timeline entry — activates when its dot enters the viewport */
+function ExperienceItem({
+  exp,
+  index,
+}: {
+  exp: { company: string; period: string; role: string; description: string };
+  index: number;
+}) {
+  const itemRef = useRef<HTMLDivElement>(null);
+  const isActive = useInView(itemRef, { once: true, margin: "0px 0px -35% 0px" });
+
+  return (
+    <div ref={itemRef} className="relative mb-16 last:mb-0">
+      {/* ── Mobile layout ── */}
+      <div className="flex gap-5 sm:hidden">
+        <div className="shrink-0 w-4 flex justify-center z-10">
+          <motion.div
+            animate={
+              isActive
+                ? { scale: [1, 1.5, 0.8, 1.2, 1], rotate: [0, -8, 8, -4, 0] }
+                : {}
+            }
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className={`w-4 h-4 rounded-full mt-1 transition-colors duration-500 ${
+              isActive
+                ? "bg-stone-900 border-[3px] border-accent shadow-[0_0_12px_rgba(0,102,51,0.4)]"
+                : "bg-white border-[3px] border-stone-300"
+            }`}
+          />
+        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0.25, y: 10 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="flex-1"
+        >
+          <span className="text-zinc-400 text-sm">{exp.period}</span>
+          <h3 className={`text-xl font-bold mt-1 transition-colors duration-500 ${
+            isActive ? "text-stone-900" : "text-stone-300"
+          }`}>{exp.company}</h3>
+          <p className={`font-medium text-sm mt-1 transition-colors duration-500 ${
+            isActive ? "text-accent-dark" : "text-stone-300"
+          }`}>{exp.role}</p>
+          <p className={`mt-3 leading-relaxed transition-colors duration-500 ${
+            isActive ? "text-zinc-500" : "text-zinc-300"
+          }`}>{exp.description}</p>
+        </motion.div>
+      </div>
+
+      {/* ── Desktop layout: alternating sides, dot absolutely centered on line ── */}
+      <div className="hidden sm:block relative min-h-[140px]">
+        <motion.div
+          initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30, y: 10 }}
+          animate={isActive ? { opacity: 1, x: 0, y: 0 } : { opacity: 0.25 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className={`w-[calc(50%-28px)] ${
+            index % 2 === 0 ? "pr-2 text-right" : "ml-auto pl-2 text-left"
+          }`}
+        >
+          <span className="text-zinc-400 text-sm">{exp.period}</span>
+          <h3 className={`text-xl font-bold mt-1 transition-colors duration-500 ${
+            isActive ? "text-stone-900" : "text-stone-300"
+          }`}>{exp.company}</h3>
+          <p className={`font-medium text-sm mt-1 transition-colors duration-500 ${
+            isActive ? "text-accent-dark" : "text-stone-300"
+          }`}>{exp.role}</p>
+          <p className={`mt-3 leading-relaxed transition-colors duration-500 ${
+            isActive ? "text-zinc-500" : "text-zinc-300"
+          }`}>{exp.description}</p>
+        </motion.div>
+
+        {/* Dot — absolute, centered on the timeline */}
+        <div className="absolute left-1/2 top-2 -translate-x-1/2 z-10">
+          <motion.div
+            animate={
+              isActive
+                ? { scale: [1, 1.5, 0.8, 1.2, 1], rotate: [0, -8, 8, -4, 0] }
+                : {}
+            }
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className={`w-4 h-4 rounded-full transition-colors duration-500 ${
+              isActive
+                ? "bg-stone-900 border-[3px] border-accent shadow-[0_0_12px_rgba(0,102,51,0.4)]"
+                : "bg-white border-[3px] border-stone-300"
+            }`}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Experience() {
   const ref = useRef(null);
   const timelineRef = useRef<HTMLDivElement>(null);
 
-  /* Single scroll tracker — starts when the timeline enters the viewport and
-     fills as the user scrolls through it. "start 80%" => starts filling earlier;
-     "end 60%" => reaches full before the last item leaves screen */
+  /* Scroll tracker drives ONLY the central line fill. Node activation is per-item
+     via useInView so each entry reliably lights up when its dot is in view. */
   const { scrollYProgress } = useScroll({
     target: timelineRef,
-    offset: ["start 80%", "end 60%"],
+    offset: ["start 75%", "end 60%"],
   });
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-
-  /* 5 items: thresholds evenly spaced — each node lights up as the line reaches it */
-  const node1 = useScrollThreshold(scrollYProgress, 0.05);
-  const node2 = useScrollThreshold(scrollYProgress, 0.25);
-  const node3 = useScrollThreshold(scrollYProgress, 0.45);
-  const node4 = useScrollThreshold(scrollYProgress, 0.65);
-  const node5 = useScrollThreshold(scrollYProgress, 0.85);
-  const nodeStates = [node1, node2, node3, node4, node5];
 
   const experiences = [
     {
@@ -1538,95 +1621,9 @@ function Experience() {
             className="hidden sm:block absolute left-1/2 top-0 w-0.5 bg-gradient-to-b from-accent to-accent-dark origin-top -translate-x-px"
           />
 
-          {experiences.map((exp, i) => {
-            const isActive = nodeStates[i];
-            return (
-              <div
-                key={exp.company}
-                className={`relative mb-16 last:mb-0`}
-              >
-                {/* ── Mobile layout: flex row with dot + content ── */}
-                <div className="flex gap-5 sm:hidden">
-                  <div className="shrink-0 w-4 flex justify-center z-10">
-                    <motion.div
-                      animate={isActive ? {
-                        scale: [1, 1.5, 0.8, 1.2, 1],
-                        rotate: [0, -8, 8, -4, 0],
-                      } : {}}
-                      transition={{ duration: 0.5, ease: "easeOut" }}
-                      className={`w-4 h-4 rounded-full mt-1 transition-colors duration-500 ${
-                        isActive
-                          ? "bg-stone-900 border-[3px] border-accent shadow-[0_0_12px_rgba(0,102,51,0.4)]"
-                          : "bg-white border-[3px] border-stone-300"
-                      }`}
-                    />
-                  </div>
-                  <div className={`flex-1 transition-opacity duration-500 ${isActive ? "opacity-100" : "opacity-30"}`}>
-                    <span className="text-zinc-400 text-sm">{exp.period}</span>
-                    <h3 className={`text-xl font-bold mt-1 transition-colors duration-500 ${
-                      isActive ? "text-stone-900" : "text-stone-300"
-                    }`}>{exp.company}</h3>
-                    <p className={`font-medium text-sm mt-1 transition-colors duration-500 ${
-                      isActive ? "text-accent-dark" : "text-stone-300"
-                    }`}>{exp.role}</p>
-                    <p className={`mt-3 leading-relaxed transition-colors duration-500 ${
-                      isActive ? "text-zinc-500" : "text-zinc-300"
-                    }`}>{exp.description}</p>
-                  </div>
-                </div>
-
-                {/* ── Desktop layout: alternating sides, dot absolutely centered on line ── */}
-                <div className="hidden sm:block relative min-h-[140px]">
-                  {/* Content — positioned on left or right half */}
-                  <div
-                    className={`w-[calc(50%-28px)] transition-opacity duration-500 ${
-                      isActive ? "opacity-100" : "opacity-30"
-                    } ${i % 2 === 0 ? "pr-2 text-right" : "ml-auto pl-2 text-left"}`}
-                  >
-                    <span className="text-zinc-400 text-sm">{exp.period}</span>
-                    <h3
-                      className={`text-xl font-bold mt-1 transition-colors duration-500 ${
-                        isActive ? "text-stone-900" : "text-stone-300"
-                      }`}
-                    >
-                      {exp.company}
-                    </h3>
-                    <p
-                      className={`font-medium text-sm mt-1 transition-colors duration-500 ${
-                        isActive ? "text-accent-dark" : "text-stone-300"
-                      }`}
-                    >
-                      {exp.role}
-                    </p>
-                    <p
-                      className={`mt-3 leading-relaxed transition-colors duration-500 ${
-                        isActive ? "text-zinc-500" : "text-zinc-300"
-                      }`}
-                    >
-                      {exp.description}
-                    </p>
-                  </div>
-
-                  {/* Dot — absolute, centered on the timeline */}
-                  <div className="absolute left-1/2 top-2 -translate-x-1/2 z-10">
-                    <motion.div
-                      animate={
-                        isActive
-                          ? { scale: [1, 1.5, 0.8, 1.2, 1], rotate: [0, -8, 8, -4, 0] }
-                          : {}
-                      }
-                      transition={{ duration: 0.6, ease: "easeOut" }}
-                      className={`w-4 h-4 rounded-full transition-colors duration-500 ${
-                        isActive
-                          ? "bg-stone-900 border-[3px] border-accent shadow-[0_0_12px_rgba(0,102,51,0.4)]"
-                          : "bg-white border-[3px] border-stone-300"
-                      }`}
-                    />
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+          {experiences.map((exp, i) => (
+            <ExperienceItem key={exp.company} exp={exp} index={i} />
+          ))}
         </div>
       </div>
     </section>
