@@ -303,10 +303,11 @@ function Hero() {
       <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-6 pt-20 sm:pt-24 pb-10 min-h-screen flex flex-col justify-center gap-0">
         {/* Image + overlaid headline + buttons */}
         <div className="relative flex items-center justify-center">
-          {/* Headline behind the image — sized so the longest word ("strongest",
-              ~10em wide at this weight+tracking) fits inside the viewport at every
-              breakpoint from 320px to 2560px. */}
-          <h1 className="absolute inset-0 z-0 flex flex-col items-center justify-center text-[clamp(1.75rem,9vw,5rem)] sm:text-[clamp(3rem,8vw,7rem)] font-black tracking-[-0.05em] leading-[0.88] uppercase font-[family-name:var(--font-display)] pointer-events-none select-none text-center px-2 sm:px-4 overflow-hidden">
+          {/* Headline behind the image — sized so the longest word ("strongest")
+              stays inside the px-6 parent at every breakpoint.
+              Longest word is ~10.2em wide at tracking-[-0.05em]; parent has 48px
+              horizontal padding so available width = vw - 48. */}
+          <h1 className="absolute inset-0 z-0 flex flex-col items-center justify-center text-[clamp(1.5rem,7.5vw,4.5rem)] sm:text-[clamp(3rem,8vw,7rem)] font-black tracking-[-0.05em] leading-[0.9] uppercase font-[family-name:var(--font-display)] pointer-events-none select-none text-center overflow-hidden">
             {heroWords.map((word) => (
               <span key={word.text} className={`${word.className} block`}>
                 {word.text}
