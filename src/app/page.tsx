@@ -273,15 +273,16 @@ function Hero() {
         className="absolute -bottom-40 -right-40 w-[650px] h-[650px] rounded-full bg-[radial-gradient(circle,_rgba(0,128,61,0.18)_0%,_transparent_70%)] blur-3xl pointer-events-none"
       />
 
-      {/* Subtle grid pattern */}
+      {/* Subtle grid pattern — pushed to the edges so it doesn't show through
+          the area behind Luke (was making him look like a pasted sticker) */}
       <div
-        className="absolute inset-0 opacity-[0.07] pointer-events-none"
+        className="absolute inset-0 opacity-[0.05] pointer-events-none"
         style={{
           backgroundImage:
             "linear-gradient(rgba(74,222,128,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(74,222,128,0.5) 1px, transparent 1px)",
           backgroundSize: "60px 60px",
-          maskImage: "radial-gradient(ellipse at center, black 30%, transparent 75%)",
-          WebkitMaskImage: "radial-gradient(ellipse at center, black 30%, transparent 75%)",
+          maskImage: "radial-gradient(ellipse at center, transparent 20%, black 65%, black 80%, transparent 100%)",
+          WebkitMaskImage: "radial-gradient(ellipse at center, transparent 20%, black 65%, black 80%, transparent 100%)",
         }}
       />
 
@@ -297,8 +298,8 @@ function Hero() {
       {/* Vignette — darkens edges so center/content pops */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_40%,_rgba(0,0,0,0.6)_100%)] pointer-events-none" />
 
-      {/* Bottom fade into next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-60 bg-gradient-to-t from-[#0C0C0C] to-transparent z-20 pointer-events-none" />
+      {/* Bottom fade into next section — taller + smoother for clean transition */}
+      <div className="absolute bottom-0 left-0 right-0 h-96 bg-gradient-to-t from-[#0C0C0C] via-[#0C0C0C]/80 to-transparent z-20 pointer-events-none" />
 
       {/* Desktop headline — constrained to the SAME max-w-7xl container as the nav
           so the text aligns with the logo (left) and Apply Now (right). */}
@@ -336,9 +337,9 @@ function Hero() {
               className="object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] z-10"
               style={{
                 maskImage:
-                  "linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)",
+                  "linear-gradient(to bottom, transparent 0%, black 12%, black 70%, transparent 100%)",
                 WebkitMaskImage:
-                  "linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)",
+                  "linear-gradient(to bottom, transparent 0%, black 12%, black 70%, transparent 100%)",
               }}
             />
 
@@ -382,18 +383,18 @@ function Hero() {
               </span>
             </motion.button>
 
-            {/* Right liquid-glass CTA — clear / white tinted */}
+            {/* Right liquid-glass CTA — green tinted to match brand */}
             <motion.button
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: 1.4 }}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => smoothScrollTo("about")}
-              className="absolute z-20 top-[26%] right-[22%] translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-24 lg:h-24 rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-white/25 border border-white/40 shadow-[inset_0_1px_0_rgba(255,255,255,0.6),inset_0_-1px_0_rgba(0,0,0,0.1),0_8px_24px_rgba(255,255,255,0.18),0_2px_6px_rgba(0,0,0,0.25)]"
+              className="absolute z-20 top-[26%] right-[22%] translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-24 lg:h-24 rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-accent/30 border border-white/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.4),inset_0_-1px_0_rgba(0,0,0,0.2),0_8px_24px_rgba(0,102,51,0.3),0_2px_6px_rgba(0,0,0,0.3)]"
             >
-              <span className="pointer-events-none absolute inset-x-2 top-1 h-1/2 rounded-full bg-gradient-to-b from-white/70 via-white/15 to-transparent" />
-              <span className="pointer-events-none absolute inset-x-3 bottom-1 h-1/3 rounded-full bg-gradient-to-t from-white/35 to-transparent blur-[2px]" />
-              <span className="pointer-events-none absolute -top-1 left-3 right-3 h-2 rounded-full bg-white/50 blur-[2px]" />
+              <span className="pointer-events-none absolute inset-x-2 top-1 h-1/2 rounded-full bg-gradient-to-b from-white/45 via-white/10 to-transparent" />
+              <span className="pointer-events-none absolute inset-x-3 bottom-1 h-1/3 rounded-full bg-gradient-to-t from-accent-light/30 to-transparent blur-[2px]" />
+              <span className="pointer-events-none absolute -top-1 left-3 right-3 h-2 rounded-full bg-white/35 blur-[2px]" />
               <span className="relative z-10 flex items-center justify-center w-full h-full text-white text-[0.7rem] sm:text-sm md:text-sm font-semibold text-center leading-tight px-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)]">
                 Learn<br />More
               </span>
@@ -402,7 +403,7 @@ function Hero() {
         </div>
 
         {/* Subtitle below the image — pulled up close to Luke's legs */}
-        <p className="relative z-10 -mt-14 sm:-mt-10 text-center text-sm sm:text-base lg:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed px-4">
+        <p className="relative z-10 -mt-4 sm:-mt-6 text-center text-sm sm:text-base lg:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed px-4">
           I work with people who want to feel stronger, understand and learn to move
           better, and actually enjoy the progress doing so. Training and nutrition
           online or right&nbsp;here&nbsp;in&nbsp;Berlin.
