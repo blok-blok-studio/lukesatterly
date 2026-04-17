@@ -104,6 +104,15 @@ h1, h2, h3 {
   line-height: 1.15;
 }
 
+/* Brighter gradient on desktop for improved legibility when text sits behind Luke */
+@media (min-width: 640px) {
+  .gradient-text {
+    background: linear-gradient(135deg, #1AA651 0%, #00803D 50%, #006633 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+}
+
 /* Glow effect */
 .glow {
   box-shadow: 0 0 60px rgba(0, 102, 51, 0.12);
@@ -238,12 +247,13 @@ h1, h2, h3 {
 
 @media (min-width: 640px) {
   .text-outline {
-    -webkit-text-stroke: 2px var(--accent);
+    /* Brighter, thicker stroke on desktop for better legibility */
+    -webkit-text-stroke: 3px var(--accent-light);
   }
 }
 
 @media (min-width: 1024px) {
   .text-outline {
-    -webkit-text-stroke: 3px var(--accent);
+    -webkit-text-stroke: 4px var(--accent-light);
   }
 }

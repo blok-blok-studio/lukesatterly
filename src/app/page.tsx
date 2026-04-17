@@ -315,7 +315,7 @@ function Hero() {
           </h1>
 
           {/* Cutout wrapper — buttons positioned relative to it */}
-          <div className="relative z-10 w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[440px] aspect-[2/3] mx-auto">
+          <div className="relative z-10 w-full max-w-[320px] sm:max-w-[340px] lg:max-w-[380px] aspect-[2/3] mx-auto">
             <Image
               src="/luke-cutout-full.png"
               alt="Coach Luki training on gymnastic rings in Berlin"
