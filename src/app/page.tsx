@@ -304,7 +304,7 @@ function Hero() {
         {/* Image + overlaid headline + buttons */}
         <div className="relative flex items-center justify-center">
           {/* Headline behind the image — scales down on narrow viewports to prevent clipping */}
-          <h1 className="absolute inset-0 z-0 flex flex-col items-center justify-center text-[clamp(2.25rem,11.5vw,11rem)] font-black tracking-[-0.04em] leading-[0.85] uppercase font-[family-name:var(--font-display)] pointer-events-none select-none text-center px-2">
+          <h1 className="absolute inset-0 z-0 flex flex-col items-center justify-center text-[clamp(2rem,10vw,11rem)] font-black tracking-[-0.03em] leading-[0.85] uppercase font-[family-name:var(--font-display)] pointer-events-none select-none text-center px-4">
             {heroWords.map((word) => (
               <span key={word.text} className={`${word.className} block`}>
                 {word.text}
