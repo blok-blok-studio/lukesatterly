@@ -303,9 +303,8 @@ function Hero() {
       <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-6 pt-20 sm:pt-24 pb-10 min-h-screen flex flex-col justify-center gap-0">
         {/* Image + overlaid headline + buttons */}
         <div className="relative flex items-center justify-center">
-          {/* Headline overlaid ON TOP of Luke — spans full section width so it never
-              gets constrained by the image wrapper. z-30 puts it above the cutout. */}
-          <h1 className="absolute left-1/2 top-[6%] sm:top-[8%] -translate-x-1/2 z-30 w-full max-w-5xl text-[clamp(1.75rem,7.5vw,5.5rem)] sm:text-[clamp(2.75rem,7vw,6.5rem)] font-black tracking-[-0.04em] leading-[0.9] uppercase font-[family-name:var(--font-display)] text-center pointer-events-none select-none drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)]">
+          {/* Headline overlays Luke's torso — z-30 above the cutout, full section width */}
+          <h1 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-full max-w-5xl text-[clamp(1.75rem,7.5vw,5.5rem)] sm:text-[clamp(2.75rem,7vw,6.5rem)] font-black tracking-[-0.04em] leading-[0.9] uppercase font-[family-name:var(--font-display)] text-center pointer-events-none select-none drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]">
             {heroWords.map((word) => (
               <span key={word.text} className={`${word.className} block`}>
                 {word.text}
@@ -314,7 +313,7 @@ function Hero() {
           </h1>
 
           {/* Cutout wrapper — buttons positioned relative to it */}
-          <div className="relative z-10 w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[440px] aspect-[2/3] mx-auto mt-20 sm:mt-24">
+          <div className="relative z-10 w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[440px] aspect-[2/3] mx-auto">
             <Image
               src="/luke-cutout-full.png"
               alt="Coach Luki training on gymnastic rings in Berlin"
