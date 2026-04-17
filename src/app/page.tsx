@@ -300,13 +300,24 @@ function Hero() {
       {/* Bottom fade into next section */}
       <div className="absolute bottom-0 left-0 right-0 h-60 bg-gradient-to-t from-[#0C0C0C] to-transparent z-20 pointer-events-none" />
 
+      {/* Wide desktop headline — sits OUTSIDE the padded container so it can span
+          edge-to-edge on desktop. On mobile this is hidden; the overlay headline
+          renders inside the image wrapper below. */}
+      <h1 className="hidden sm:flex absolute inset-0 z-0 items-center justify-center pointer-events-none select-none">
+        <span className="block w-full text-center text-[clamp(3rem,10vw,11rem)] font-black tracking-[-0.05em] leading-[0.88] uppercase font-[family-name:var(--font-display)] px-4">
+          {heroWords.map((word, i) => (
+            <span key={word.text} className={`${word.className} block`}>
+              {word.text}
+            </span>
+          ))}
+        </span>
+      </h1>
+
       <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-6 pt-20 sm:pt-24 pb-10 min-h-screen flex flex-col justify-center gap-0">
         {/* Image + overlaid headline + buttons */}
         <div className="relative flex items-center justify-center">
-          {/* Headline — BEHIND Luke on desktop (z-0), OVERLAY on his chest on mobile (z-30)
-              Mobile: shifted down to sit over his chest, drop shadow for contrast.
-              Desktop: behind him (z-0), vertically centered, reads around his silhouette. */}
-          <h1 className="absolute left-1/2 top-[68%] sm:top-1/2 -translate-x-1/2 -translate-y-1/2 z-30 sm:z-0 w-full max-w-5xl text-[clamp(1.75rem,7.5vw,5.5rem)] sm:text-[clamp(2.75rem,7vw,6.5rem)] font-black tracking-[-0.04em] leading-[0.9] uppercase font-[family-name:var(--font-display)] text-center pointer-events-none select-none drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)] sm:drop-shadow-none">
+          {/* Mobile-only overlay headline — sits on Luke's chest */}
+          <h1 className="sm:hidden absolute left-1/2 top-[68%] -translate-x-1/2 -translate-y-1/2 z-30 w-full text-[clamp(1.75rem,7.5vw,5.5rem)] font-black tracking-[-0.04em] leading-[0.9] uppercase font-[family-name:var(--font-display)] text-center pointer-events-none select-none drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]">
             {heroWords.map((word) => (
               <span key={word.text} className={`${word.className} block`}>
                 {word.text}
