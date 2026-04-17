@@ -1682,6 +1682,10 @@ function Testimonials() {
       name: "Andrius",
       text: "Working with Luke was a game-changer. His challenging workouts push you beyond what you thought you were capable of, all while being enjoyable and motivating. Highly recommended!",
     },
+    {
+      name: "Ellen",
+      text: "Luke hebt sich als Trainer vor allem durch seine klare, pr\u00E4zise Art zu erkl\u00E4ren hervor. Er schafft es, nicht nur Technik zu vermitteln, sondern auch das Verst\u00E4ndnis daf\u00FCr, warum etwas auf eine bestimmte Weise ausgef\u00FChrt werden sollte. Das f\u00FChrt dazu, dass man bewusster trainiert und die \u00DCbungen deutlich besser umsetzt. Dar\u00FCber hinaus ist Luke auch menschlich eine echte Bereicherung \u2014 aufmerksam, angenehm im Umgang und sehr motivierend.",
+    },
   ];
 
   return (
