@@ -327,7 +327,19 @@ function Hero() {
 
           {/* Cutout wrapper — buttons positioned relative to it */}
           <div className="relative z-10 w-full max-w-[320px] sm:max-w-[340px] lg:max-w-[380px] aspect-[2/3] mx-auto">
-            {/* Base cutout (z-10) */}
+            {/* Soft ambient glow beneath Luke — catches the dissolve so legs
+                don't end on a hard cut. Fades into the dark green atmosphere. */}
+            <div
+              aria-hidden
+              className="absolute inset-x-0 bottom-0 h-[55%] z-[5] pointer-events-none"
+              style={{
+                background:
+                  "radial-gradient(ellipse at 50% 100%, rgba(0,102,51,0.22) 0%, rgba(0,102,51,0.10) 35%, transparent 70%)",
+                filter: "blur(14px)",
+              }}
+            />
+
+            {/* Base cutout (z-10) — long fade from ~60% so legs dissolve gradually */}
             <Image
               src="/luke-cutout-full.png"
               alt="Coach Luki training on gymnastic rings in Berlin"
@@ -337,9 +349,9 @@ function Hero() {
               className="object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] z-10"
               style={{
                 maskImage:
-                  "linear-gradient(to bottom, transparent 0%, black 12%, black 70%, transparent 100%)",
+                  "linear-gradient(to bottom, transparent 0%, black 12%, black 55%, rgba(0,0,0,0.6) 75%, rgba(0,0,0,0.25) 88%, transparent 100%)",
                 WebkitMaskImage:
-                  "linear-gradient(to bottom, transparent 0%, black 12%, black 70%, transparent 100%)",
+                  "linear-gradient(to bottom, transparent 0%, black 12%, black 55%, rgba(0,0,0,0.6) 75%, rgba(0,0,0,0.25) 88%, transparent 100%)",
               }}
             />
 
