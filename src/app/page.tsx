@@ -259,7 +259,7 @@ function Hero() {
         {/* Image + overlaid headline + buttons */}
         <div className="relative flex-1 flex items-center justify-center">
           {/* Headline behind the image */}
-          <h1 className="absolute inset-0 z-0 flex flex-col items-center justify-center text-[clamp(3rem,13vw,11rem)] font-black tracking-[-0.04em] leading-[0.85] uppercase font-[family-name:var(--font-display)] pointer-events-none select-none text-center drop-shadow-[0_4px_20px_rgba(0,0,0,0.8)]">
+          <h1 className="absolute inset-0 z-0 flex flex-col items-center justify-center text-[clamp(3rem,13vw,11rem)] font-black tracking-[-0.04em] leading-[0.85] uppercase font-[family-name:var(--font-display)] pointer-events-none select-none text-center">
             {heroWords.map((word) => (
               <span key={word.text} className={`${word.className} block`}>
                 {word.text}
@@ -268,7 +268,7 @@ function Hero() {
           </h1>
 
           {/* Cutout wrapper — buttons are positioned relative to it so they sit on the rings */}
-          <div className="relative z-10 w-full max-w-[640px] aspect-square mx-auto">
+          <div className="relative z-10 w-full max-w-[500px] aspect-square mx-auto">
             <Image
               src="/luke-cutout.png"
               alt="Coach Luki training on gymnastic rings in Berlin"
