@@ -300,24 +300,21 @@ function Hero() {
       {/* Bottom fade into next section */}
       <div className="absolute bottom-0 left-0 right-0 h-60 bg-gradient-to-t from-[#0C0C0C] to-transparent z-20 pointer-events-none" />
 
-      <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-6 pt-20 sm:pt-24 pb-10 min-h-screen flex flex-col justify-center gap-0">
-        {/* Image + overlaid headline + buttons */}
-        <div className="relative flex items-center justify-center">
-          {/* Headline behind the image — sized so the longest word ("strongest")
-              stays inside the px-6 parent at every breakpoint.
-              Longest word is ~10.2em wide at tracking-[-0.05em]; parent has 48px
-              horizontal padding so available width = vw - 48. */}
-          <h1 className="absolute inset-0 z-0 flex flex-col items-center justify-center text-[clamp(1.5rem,7.5vw,4.5rem)] sm:text-[clamp(3rem,8vw,7rem)] font-black tracking-[-0.05em] leading-[0.9] uppercase font-[family-name:var(--font-display)] pointer-events-none select-none text-center overflow-hidden">
-            {heroWords.map((word) => (
-              <span key={word.text} className={`${word.className} block`}>
-                {word.text}
-              </span>
-            ))}
-          </h1>
+      <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-6 pt-20 sm:pt-24 pb-10 min-h-screen flex flex-col justify-center gap-3 sm:gap-4">
+        {/* Headline — stacked ABOVE Luke for maximum legibility on every breakpoint */}
+        <h1 className="text-[clamp(2rem,9vw,6rem)] sm:text-[clamp(3rem,8vw,7rem)] font-black tracking-[-0.04em] leading-[0.9] uppercase font-[family-name:var(--font-display)] text-center">
+          {heroWords.map((word) => (
+            <span key={word.text} className={`${word.className} block`}>
+              {word.text}
+            </span>
+          ))}
+        </h1>
 
+        {/* Image + buttons */}
+        <div className="relative flex items-center justify-center -mt-2 sm:-mt-4">
           {/* Cutout wrapper — buttons are positioned relative to it so they sit on the rings.
               Aspect ratio matches the full photo (3413x5120 ≈ 2/3). */}
-          <div className="relative z-10 w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[440px] aspect-[2/3] mx-auto">
+          <div className="relative z-10 w-full max-w-[260px] sm:max-w-[340px] lg:max-w-[400px] aspect-[2/3] mx-auto">
             <Image
               src="/luke-cutout-full.png"
               alt="Coach Luki training on gymnastic rings in Berlin"
