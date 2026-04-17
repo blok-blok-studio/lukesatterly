@@ -267,14 +267,15 @@ function Hero() {
             ))}
           </h1>
 
-          {/* Cutout wrapper — buttons are positioned relative to it so they sit on the rings */}
-          <div className="relative z-10 w-full max-w-[500px] aspect-square mx-auto">
+          {/* Cutout wrapper — buttons are positioned relative to it so they sit on the rings.
+              Aspect ratio matches the full photo (3413x5120 ≈ 2/3). */}
+          <div className="relative z-10 w-full max-w-[340px] sm:max-w-[400px] aspect-[2/3] mx-auto">
             <Image
-              src="/luke-cutout.png"
+              src="/luke-cutout-full.png"
               alt="Coach Luki training on gymnastic rings in Berlin"
               fill
               priority
-              sizes="(max-width: 768px) 100vw, 640px"
+              sizes="(max-width: 768px) 100vw, 400px"
               className="object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]"
             />
 
@@ -283,7 +284,7 @@ function Hero() {
               whileHover={{ scale: 1.08, boxShadow: "0 0 30px rgba(0,180,90,0.5)" }}
               whileTap={{ scale: 0.95 }}
               onClick={() => smoothScrollTo("contact")}
-              className="absolute z-20 top-[17%] left-[22%] -translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 bg-accent text-white text-[0.65rem] sm:text-xs font-semibold rounded-full shadow-xl cursor-pointer hover:bg-accent-light transition-colors flex items-center justify-center text-center leading-tight px-2"
+              className="absolute z-20 top-[14%] left-[22%] -translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 bg-accent text-white text-[0.65rem] sm:text-xs font-semibold rounded-full shadow-xl cursor-pointer hover:bg-accent-light transition-colors flex items-center justify-center text-center leading-tight px-2"
             >
               Let&apos;s Get<br />Started
             </motion.button>
@@ -293,7 +294,7 @@ function Hero() {
               whileHover={{ scale: 1.08, boxShadow: "0 0 30px rgba(255,255,255,0.35)" }}
               whileTap={{ scale: 0.95 }}
               onClick={() => smoothScrollTo("about")}
-              className="absolute z-20 top-[20%] right-[22%] translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 bg-white text-black text-[0.65rem] sm:text-xs font-semibold rounded-full shadow-xl cursor-pointer hover:bg-zinc-200 transition-colors flex items-center justify-center text-center leading-tight px-2"
+              className="absolute z-20 top-[18%] right-[22%] translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 bg-white text-black text-[0.65rem] sm:text-xs font-semibold rounded-full shadow-xl cursor-pointer hover:bg-zinc-200 transition-colors flex items-center justify-center text-center leading-tight px-2"
             >
               Learn<br />More
             </motion.button>
