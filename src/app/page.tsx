@@ -312,7 +312,7 @@ function Hero() {
         </span>
       </h1>
 
-      <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-6 pt-20 sm:pt-24 pb-10 min-h-screen flex flex-col justify-center gap-0">
+      <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-6 pt-4 sm:pt-24 pb-10 min-h-screen flex flex-col justify-start sm:justify-center gap-0">
         {/* Image + overlaid headline + buttons */}
         <div className="relative flex items-center justify-center">
           {/* Mobile-only overlay headline — sits on Luke's chest */}
@@ -1208,24 +1208,79 @@ function useScrollThreshold(progress: ReturnType<typeof useTransform<number, num
   return reached;
 }
 
+/* Single mobile Method step — activates when its node enters the viewport */
+function MethodStep({
+  s,
+}: {
+  s: { step: string; title: string; description: string };
+}) {
+  const itemRef = useRef<HTMLDivElement>(null);
+  /* Activate as soon as the node crosses ~35% down from the top of the viewport
+     (so items light up when they're comfortably in view, not when they bottom-out) */
+  const isActive = useInView(itemRef, { once: true, margin: "0px 0px -35% 0px" });
+
+  return (
+    <div ref={itemRef} className="relative flex gap-5 sm:gap-6 pb-8 sm:pb-10">
+      <div className="shrink-0 z-10">
+        <motion.div
+          animate={
+            isActive
+              ? { scale: [1, 1.3, 0.9, 1.1, 1], rotate: [0, -5, 5, -3, 0] }
+              : {}
+          }
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center transition-colors duration-500 ${
+            isActive
+              ? "bg-stone-900 shadow-[0_0_20px_rgba(0,102,51,0.4)]"
+              : "bg-stone-200"
+          }`}
+        >
+          <span
+            className={`text-base sm:text-lg font-bold transition-colors duration-500 ${
+              isActive ? "text-accent" : "text-stone-400"
+            }`}
+          >
+            {s.step}
+          </span>
+        </motion.div>
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0.25, y: 10 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="flex-1 pt-1"
+      >
+        <h3
+          className={`text-lg sm:text-xl font-semibold mb-2 transition-colors duration-500 ${
+            isActive ? "text-stone-900" : "text-stone-300"
+          }`}
+        >
+          {s.title}
+        </h3>
+        <p
+          className={`text-sm sm:text-base leading-relaxed transition-colors duration-500 ${
+            isActive ? "text-zinc-500" : "text-zinc-300"
+          }`}
+        >
+          {s.description}
+        </p>
+      </motion.div>
+    </div>
+  );
+}
+
 function Method() {
   const sectionRef = useRef(null);
   const timelineRef = useRef<HTMLDivElement>(null);
 
-  /* Single scroll tracker for the entire mobile timeline */
+  /* Scroll tracker drives ONLY the vertical line fill. Each step activates via
+     its own useInView for reliable on-center reveal timing. */
   const { scrollYProgress } = useScroll({
     target: timelineRef,
-    offset: ["start 60%", "end 50%"],
+    offset: ["start 70%", "end 60%"],
   });
-  /* Map scroll progress to height percentage for the green fill */
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-
-  /* Each node activates when scroll reaches its fraction of the timeline */
-  const node1Active = useScrollThreshold(scrollYProgress, 0);
-  const node2Active = useScrollThreshold(scrollYProgress, 0.28);
-  const node3Active = useScrollThreshold(scrollYProgress, 0.56);
-  const node4Active = useScrollThreshold(scrollYProgress, 0.82);
-  const nodeStates = [node1Active, node2Active, node3Active, node4Active];
 
   const steps = [
     {
@@ -1315,48 +1370,9 @@ function Method() {
             className="absolute left-[23px] sm:left-[27px] top-0 w-0.5 bg-gradient-to-b from-accent to-accent-dark origin-top"
           />
 
-          {steps.map((s, i) => {
-            const isActive = nodeStates[i];
-            return (
-              <div key={s.step} className="relative flex gap-5 sm:gap-6 pb-8 sm:pb-10">
-                {/* Node */}
-                <div className="shrink-0 z-10">
-                  <motion.div
-                    animate={isActive ? {
-                      scale: [1, 1.3, 0.9, 1.1, 1],
-                      rotate: [0, -5, 5, -3, 0],
-                    } : {}}
-                    transition={{ duration: 0.5, ease: "easeOut" }}
-                    className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center transition-colors duration-500 ${
-                      isActive
-                        ? "bg-stone-900 shadow-[0_0_20px_rgba(0,102,51,0.4)]"
-                        : "bg-stone-200"
-                    }`}
-                  >
-                    <span className={`text-base sm:text-lg font-bold transition-colors duration-500 ${
-                      isActive ? "text-accent" : "text-stone-400"
-                    }`}>
-                      {s.step}
-                    </span>
-                  </motion.div>
-                </div>
-
-                {/* Content */}
-                <div className={`flex-1 pt-1 transition-opacity duration-500 ${isActive ? "opacity-100" : "opacity-30"}`}>
-                  <h3 className={`text-lg sm:text-xl font-semibold mb-2 transition-colors duration-500 ${
-                    isActive ? "text-stone-900" : "text-stone-300"
-                  }`}>
-                    {s.title}
-                  </h3>
-                  <p className={`text-sm sm:text-base leading-relaxed transition-colors duration-500 ${
-                    isActive ? "text-zinc-500" : "text-zinc-300"
-                  }`}>
-                    {s.description}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
+          {steps.map((s) => (
+            <MethodStep key={s.step} s={s} />
+          ))}
         </div>
       </div>
     </section>
