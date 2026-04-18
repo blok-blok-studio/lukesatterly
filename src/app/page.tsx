@@ -384,12 +384,22 @@ function Hero() {
               onClick={() => smoothScrollTo("contact")}
               className="absolute z-20 top-[8%] -left-16 sm:-left-24 md:-left-32 lg:-left-40 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-accent/45 border border-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(0,0,0,0.2),0_8px_24px_rgba(0,102,51,0.35),0_2px_6px_rgba(0,0,0,0.3)]"
             >
-              {/* Top glossy highlight */}
-              <span className="pointer-events-none absolute inset-x-2 top-1 h-1/2 rounded-full bg-gradient-to-b from-white/55 via-white/10 to-transparent" />
+              {/* Radial glossy highlight — soft sphere-like shading, no hard edges */}
+              <span
+                className="pointer-events-none absolute inset-0 rounded-full"
+                style={{
+                  background:
+                    "radial-gradient(circle at 35% 25%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.18) 25%, transparent 55%)",
+                }}
+              />
               {/* Bottom edge glow */}
-              <span className="pointer-events-none absolute inset-x-3 bottom-1 h-1/3 rounded-full bg-gradient-to-t from-accent-light/40 to-transparent blur-[2px]" />
-              {/* Specular shine */}
-              <span className="pointer-events-none absolute -top-1 left-3 right-3 h-2 rounded-full bg-white/40 blur-[2px]" />
+              <span
+                className="pointer-events-none absolute inset-0 rounded-full"
+                style={{
+                  background:
+                    "radial-gradient(circle at 50% 105%, rgba(0,180,90,0.35) 0%, transparent 50%)",
+                }}
+              />
               <span className="relative z-10 flex items-center justify-center w-full h-full text-white text-[0.7rem] sm:text-xs md:text-sm font-semibold text-center leading-tight px-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]">
                 Let&apos;s Get<br />Started
               </span>
@@ -404,9 +414,20 @@ function Hero() {
               onClick={() => smoothScrollTo("about")}
               className="absolute z-20 top-[12%] -right-16 sm:-right-24 md:-right-32 lg:-right-40 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-accent/30 border border-white/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.4),inset_0_-1px_0_rgba(0,0,0,0.2),0_8px_24px_rgba(0,102,51,0.3),0_2px_6px_rgba(0,0,0,0.3)]"
             >
-              <span className="pointer-events-none absolute inset-x-2 top-1 h-1/2 rounded-full bg-gradient-to-b from-white/45 via-white/10 to-transparent" />
-              <span className="pointer-events-none absolute inset-x-3 bottom-1 h-1/3 rounded-full bg-gradient-to-t from-accent-light/30 to-transparent blur-[2px]" />
-              <span className="pointer-events-none absolute -top-1 left-3 right-3 h-2 rounded-full bg-white/35 blur-[2px]" />
+              <span
+                className="pointer-events-none absolute inset-0 rounded-full"
+                style={{
+                  background:
+                    "radial-gradient(circle at 35% 25%, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.15) 25%, transparent 55%)",
+                }}
+              />
+              <span
+                className="pointer-events-none absolute inset-0 rounded-full"
+                style={{
+                  background:
+                    "radial-gradient(circle at 50% 105%, rgba(0,180,90,0.3) 0%, transparent 50%)",
+                }}
+              />
               <span className="relative z-10 flex items-center justify-center w-full h-full text-white text-[0.7rem] sm:text-xs md:text-sm font-semibold text-center leading-tight px-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)]">
                 Learn<br />More
               </span>
