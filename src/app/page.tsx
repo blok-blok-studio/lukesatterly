@@ -1761,6 +1761,14 @@ function Testimonials() {
       name: "Ellen",
       text: "Luke hebt sich als Trainer vor allem durch seine klare, pr\u00E4zise Art zu erkl\u00E4ren hervor. Er schafft es, nicht nur Technik zu vermitteln, sondern auch das Verst\u00E4ndnis daf\u00FCr, warum etwas auf eine bestimmte Weise ausgef\u00FChrt werden sollte. Das f\u00FChrt dazu, dass man bewusster trainiert und die \u00DCbungen deutlich besser umsetzt. Dar\u00FCber hinaus ist Luke auch menschlich eine echte Bereicherung \u2014 aufmerksam, angenehm im Umgang und sehr motivierend.",
     },
+    {
+      name: "Lena",
+      text: "Im Training mit Luke geht es nicht nur um meine k\u00F6rperliche Fitness, sondern vielmehr um ein ganzheitliches Verst\u00E4ndnis \u00FCber den eigenen K\u00F6rper und die richtigen Bewegungsabl\u00E4ufe. Seit wir mein Training umgestellt haben, habe ich im Alltag keine R\u00FCckenschmerzen und f\u00FChle mich insgesamt fitter und gesünder! Luke schafft es auch, mich f\u00FCr eine Session morgens um 7 zu motivieren und so das Training in meine volle Arbeitswoche einzubauen. Das einzige Manko: Der heftige Muskelkater am Tag danach\u2026",
+    },
+    {
+      name: "Emil",
+      text: "Was mir an Luki am meisten gef\u00E4llt: Er h\u00F6rt richtig zu und passt alles 100 % auf mich an. Dank ihm bin ich jetzt st\u00E4rker, fitter und selbstbewusster \u2014 und das ganz ohne Verletzungen oder Burnout. Der beste Coach, den ich in Berlin finden konnte.",
+    },
   ];
 
   return (
