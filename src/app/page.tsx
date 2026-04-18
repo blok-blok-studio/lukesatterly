@@ -382,7 +382,7 @@ function Hero() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => smoothScrollTo("contact")}
-              className="absolute z-20 top-[8%] -left-16 sm:-left-24 md:-left-32 lg:-left-40 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-accent/45 border border-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(0,0,0,0.2),0_8px_24px_rgba(0,102,51,0.35),0_2px_6px_rgba(0,0,0,0.3)]"
+              className="absolute z-20 top-[8%] left-0 sm:-left-4 md:-left-20 lg:-left-32 xl:-left-40 -translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-accent/45 border border-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(0,0,0,0.2),0_8px_24px_rgba(0,102,51,0.35),0_2px_6px_rgba(0,0,0,0.3)]"
             >
               {/* Radial glossy highlight — soft sphere-like shading, no hard edges */}
               <span
@@ -412,7 +412,7 @@ function Hero() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => smoothScrollTo("about")}
-              className="absolute z-20 top-[12%] -right-16 sm:-right-24 md:-right-32 lg:-right-40 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-accent/30 border border-white/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.4),inset_0_-1px_0_rgba(0,0,0,0.2),0_8px_24px_rgba(0,102,51,0.3),0_2px_6px_rgba(0,0,0,0.3)]"
+              className="absolute z-20 top-[12%] right-0 sm:-right-4 md:-right-20 lg:-right-32 xl:-right-40 -translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-accent/30 border border-white/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.4),inset_0_-1px_0_rgba(0,0,0,0.2),0_8px_24px_rgba(0,102,51,0.3),0_2px_6px_rgba(0,0,0,0.3)]"
             >
               <span
                 className="pointer-events-none absolute inset-0 rounded-full"
