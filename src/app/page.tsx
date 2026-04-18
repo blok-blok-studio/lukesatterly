@@ -1790,6 +1790,14 @@ function Testimonials() {
       name: "Emil",
       text: "Was mir an Luki am meisten gef\u00E4llt: Er h\u00F6rt richtig zu und passt alles 100 % auf mich an. Dank ihm bin ich jetzt st\u00E4rker, fitter und selbstbewusster \u2014 und das ganz ohne Verletzungen oder Burnout. Der beste Coach, den ich in Berlin finden konnte.",
     },
+    {
+      name: "Theresa",
+      text: "Bei Luki f\u00FChlt man sich von Anfang an gut aufgehoben. Er nimmt sich Zeit f\u00FCr jedes Detail und hat immer ein offenes Ohr \u2013 egal ob Training, Ern\u00E4hrung oder individuelle Ziele. Sein Ansatz ist ganzheitlich und durchdacht, sodass man nicht nur k\u00F6rperlich Fortschritte macht, sondern sich insgesamt besser f\u00FChlt. Er schafft es, das Beste aus einem herauszuholen und dabei trotzdem realistisch und nachhaltig zu bleiben. Wer einen engagierten, strukturierten und gleichzeitig empathischen Coach sucht, ist hier genau richtig.",
+    },
+    {
+      name: "Hayley",
+      text: "You\u2019ll love training with Coach Luki. Working with him both in person and online has made more confident in the gym, given me a better understanding about the food I eat, and helped me achieve a consistency I always struggled to get on my own. I\u2019m stronger, healthier, and doing exercises I didn\u2019t think I\u2019d ever do, thanks to Luke\u2019s encouragement and support.",
+    },
   ];
 
   return (
