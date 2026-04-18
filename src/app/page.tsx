@@ -382,7 +382,7 @@ function Hero() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => smoothScrollTo("contact")}
-              className="absolute z-20 top-[22%] -left-6 sm:-left-10 md:-left-14 lg:-left-16 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-accent/45 border border-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(0,0,0,0.2),0_8px_24px_rgba(0,102,51,0.35),0_2px_6px_rgba(0,0,0,0.3)]"
+              className="absolute z-20 top-[22%] -left-16 sm:-left-24 md:-left-32 lg:-left-40 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-accent/45 border border-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(0,0,0,0.2),0_8px_24px_rgba(0,102,51,0.35),0_2px_6px_rgba(0,0,0,0.3)]"
             >
               {/* Top glossy highlight */}
               <span className="pointer-events-none absolute inset-x-2 top-1 h-1/2 rounded-full bg-gradient-to-b from-white/55 via-white/10 to-transparent" />
@@ -402,7 +402,7 @@ function Hero() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => smoothScrollTo("about")}
-              className="absolute z-20 top-[30%] -right-6 sm:-right-10 md:-right-14 lg:-right-16 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-accent/30 border border-white/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.4),inset_0_-1px_0_rgba(0,0,0,0.2),0_8px_24px_rgba(0,102,51,0.3),0_2px_6px_rgba(0,0,0,0.3)]"
+              className="absolute z-20 top-[30%] -right-16 sm:-right-24 md:-right-32 lg:-right-40 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-accent/30 border border-white/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.4),inset_0_-1px_0_rgba(0,0,0,0.2),0_8px_24px_rgba(0,102,51,0.3),0_2px_6px_rgba(0,0,0,0.3)]"
             >
               <span className="pointer-events-none absolute inset-x-2 top-1 h-1/2 rounded-full bg-gradient-to-b from-white/45 via-white/10 to-transparent" />
               <span className="pointer-events-none absolute inset-x-3 bottom-1 h-1/3 rounded-full bg-gradient-to-t from-accent-light/30 to-transparent blur-[2px]" />
