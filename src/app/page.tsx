@@ -304,7 +304,7 @@ function Hero() {
       {/* Desktop headline — constrained to the SAME max-w-7xl container as the nav
           so the text aligns with the logo (left) and Apply Now (right). */}
       <h1 className="hidden sm:flex absolute inset-0 z-0 items-center justify-center pointer-events-none select-none">
-        <span className="block w-full max-w-7xl mx-auto px-6 text-center text-[clamp(3rem,8.5vw,8rem)] font-black tracking-[-0.05em] leading-[0.88] uppercase font-[family-name:var(--font-display)]">
+        <span className="block w-full max-w-7xl mx-auto px-6 text-center text-[clamp(3rem,8.5vw,8rem)] font-black tracking-[-0.05em] leading-[0.88] uppercase font-[family-name:var(--font-display)] translate-y-[9vh]">
           {heroWords.map((word) => (
             <span key={word.text} className={`${word.className} block`}>
               {word.text}
@@ -317,7 +317,7 @@ function Hero() {
         {/* Image + overlaid headline + buttons */}
         <div className="relative flex items-center justify-center">
           {/* Mobile-only overlay headline — sits on Luke's chest */}
-          <h1 className="sm:hidden absolute left-1/2 top-[68%] -translate-x-1/2 -translate-y-1/2 z-30 w-full text-[clamp(1.75rem,7.5vw,5.5rem)] font-black tracking-[-0.04em] leading-[0.9] uppercase font-[family-name:var(--font-display)] text-center pointer-events-none select-none drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]">
+          <h1 className="sm:hidden absolute left-1/2 top-[76%] -translate-x-1/2 -translate-y-1/2 z-30 w-full text-[clamp(1.75rem,7.5vw,5.5rem)] font-black tracking-[-0.04em] leading-[0.9] uppercase font-[family-name:var(--font-display)] text-center pointer-events-none select-none drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]">
             {heroWords.map((word) => (
               <span key={word.text} className={`${word.className} block`}>
                 {word.text}
@@ -435,8 +435,8 @@ function Hero() {
           </div>
         </div>
 
-        {/* Subtitle below the image — pulled up close to Luke's legs */}
-        <p className="relative z-10 -mt-4 sm:-mt-6 text-center text-sm sm:text-base lg:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed px-4">
+        {/* Subtitle — pulled up over the legs area so it sits higher on the page */}
+        <p className="relative z-20 -mt-20 sm:-mt-28 lg:-mt-32 text-center text-sm sm:text-base lg:text-lg text-zinc-100 max-w-2xl mx-auto leading-relaxed px-4 drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
           I work with people who want to feel stronger, understand and learn to move
           better, and actually enjoy the progress doing so. Training and nutrition
           online or right&nbsp;here&nbsp;in&nbsp;Berlin.
@@ -447,35 +447,37 @@ function Hero() {
           initial={{ opacity: 1, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 1.1, ease: "easeOut" }}
-          className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-8 sm:gap-16 pointer-events-auto"
+          className="relative z-30 mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-8 sm:gap-16 pointer-events-auto"
         >
           <motion.div
             initial={{ opacity: 1, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 1.2, ease: "easeOut" }}
+            className="text-center"
           >
-            <div className="text-4xl md:text-5xl font-bold text-white">
+            <div className="text-5xl md:text-6xl font-black text-white drop-shadow-[0_4px_18px_rgba(0,0,0,0.9)]">
               <CountUp target={100} suffix="+" />
             </div>
-            <div className="text-sm text-zinc-400 mt-1">Clients</div>
+            <div className="text-xs sm:text-sm font-semibold uppercase tracking-widest text-accent mt-2">Clients</div>
           </motion.div>
-          <div className="w-px h-12 bg-white/20 hidden sm:block" />
+          <div className="w-px h-14 bg-white/30 hidden sm:block" />
           <motion.div
             initial={{ opacity: 1, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 1.35, ease: "easeOut" }}
+            className="text-center"
           >
-            <div className="text-4xl md:text-5xl font-bold text-white">
+            <div className="text-5xl md:text-6xl font-black text-white drop-shadow-[0_4px_18px_rgba(0,0,0,0.9)]">
               <CountUp target={5000} suffix="+" duration={2.5} />
             </div>
-            <div className="text-sm text-zinc-400 mt-1">Hours Coached</div>
+            <div className="text-xs sm:text-sm font-semibold uppercase tracking-widest text-accent mt-2">Hours Coached</div>
           </motion.div>
-          <div className="w-px h-12 bg-white/20 hidden sm:block" />
+          <div className="w-px h-14 bg-white/30 hidden sm:block" />
           <motion.button
             animate={{ y: [0, 6, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
             onClick={() => smoothScrollTo("about")}
-            className="flex items-center gap-2 text-zinc-400 text-sm cursor-pointer hover:text-zinc-200 transition-colors ml-auto"
+            className="flex items-center gap-2 text-zinc-300 text-sm cursor-pointer hover:text-white transition-colors ml-auto"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
