@@ -436,7 +436,7 @@ function Hero() {
         </div>
 
         {/* Subtitle — sits just below the headline on mobile, normal on desktop */}
-        <p className="relative z-20 mt-4 sm:-mt-6 text-center text-sm sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed px-4 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] font-medium" style={{ color: "#ffffff" }}>
+        <p className="relative z-20 -mt-24 sm:-mt-6 text-center text-sm sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed px-4 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] font-medium" style={{ color: "#ffffff" }}>
           I work with people who want to feel stronger, understand and learn to move
           better, and actually enjoy the progress doing so. Training and nutrition
           online or right&nbsp;here&nbsp;in&nbsp;Berlin.
