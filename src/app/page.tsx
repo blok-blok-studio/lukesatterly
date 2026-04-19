@@ -436,7 +436,7 @@ function Hero() {
         </div>
 
         {/* Subtitle — sits just below the headline on mobile, normal on desktop */}
-        <p className="relative z-20 -mt-24 sm:-mt-6 text-center text-sm sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed px-4 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] font-medium" style={{ color: "#ffffff" }}>
+        <p className="relative z-20 -mt-24 sm:-mt-6 text-center text-base sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed px-4 font-semibold" style={{ color: "#ffffff", textShadow: "0 2px 10px rgba(0,0,0,0.9), 0 0 2px rgba(0,0,0,0.8)" }}>
           I work with people who want to feel stronger, understand and learn to move
           better, and actually enjoy the progress doing so. Training and nutrition
           online or right&nbsp;here&nbsp;in&nbsp;Berlin.
@@ -454,10 +454,10 @@ function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 1.2, ease: "easeOut" }}
           >
-            <div className="text-4xl md:text-5xl font-bold drop-shadow-[0_2px_6px_rgba(0,0,0,0.7)]" style={{ color: "#ffffff" }}>
+            <div className="text-4xl md:text-5xl font-black" style={{ color: "#ffffff", textShadow: "0 2px 8px rgba(0,0,0,0.8)" }}>
               <CountUp target={100} suffix="+" />
             </div>
-            <div className="text-sm mt-1 font-medium" style={{ color: "#ffffff" }}>Clients</div>
+            <div className="text-sm mt-1 font-semibold" style={{ color: "#ffffff", textShadow: "0 1px 4px rgba(0,0,0,0.8)" }}>Clients</div>
           </motion.div>
           <div className="w-px h-12 bg-white/20 hidden sm:block" />
           <motion.div
@@ -465,18 +465,18 @@ function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 1.35, ease: "easeOut" }}
           >
-            <div className="text-4xl md:text-5xl font-bold drop-shadow-[0_2px_6px_rgba(0,0,0,0.7)]" style={{ color: "#ffffff" }}>
+            <div className="text-4xl md:text-5xl font-black" style={{ color: "#ffffff", textShadow: "0 2px 8px rgba(0,0,0,0.8)" }}>
               <CountUp target={5000} suffix="+" duration={2.5} />
             </div>
-            <div className="text-sm mt-1 font-medium" style={{ color: "#ffffff" }}>Hours Coached</div>
+            <div className="text-sm mt-1 font-semibold" style={{ color: "#ffffff", textShadow: "0 1px 4px rgba(0,0,0,0.8)" }}>Hours Coached</div>
           </motion.div>
           <div className="w-px h-12 bg-white/20 hidden sm:block" />
           <motion.button
             animate={{ y: [0, 6, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
             onClick={() => smoothScrollTo("about")}
-            className="flex items-center gap-2 text-sm cursor-pointer transition-colors ml-auto font-medium"
-            style={{ color: "#ffffff" }}
+            className="flex items-center gap-2 text-sm cursor-pointer transition-colors ml-auto font-semibold"
+            style={{ color: "#ffffff", textShadow: "0 1px 4px rgba(0,0,0,0.8)" }}
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
