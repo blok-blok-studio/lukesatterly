@@ -437,7 +437,7 @@ function Hero() {
 
         {/* Subtitle — sits just below the headline on mobile, normal on desktop */}
         <p className="relative z-20 -mt-16 sm:-mt-6 text-center text-base sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed px-4 font-semibold" style={{ color: "#ffffff", textShadow: "0 2px 10px rgba(0,0,0,0.9), 0 0 2px rgba(0,0,0,0.8)" }}>
-          Get stronger, move better, enjoy the process. Training &amp; nutrition — online or in Berlin.
+          Get stronger, move better, enjoy the process. Training &amp; nutrition, online or in Berlin.
         </p>
 
         {/* Bottom stats row */}
@@ -557,7 +557,7 @@ function About() {
               <p>
                 My focus is on helping people <strong className="text-stone-900">understand how
                 to move better</strong>. That means teaching you <em>why</em> an exercise works,
-                not just how to do it — so you train smarter, rebuild after pain or injury, and
+                not just how to do it, so you train smarter, rebuild after pain or injury, and
                 actually enjoy the process.
               </p>
               <p>
@@ -724,7 +724,7 @@ function BeforeAfter() {
             The proof is in the <span className="gradient-text">progress</span>
           </h2>
           <p className="text-zinc-500 mt-6 max-w-xl mx-auto text-lg">
-            Real clients, real transformations. No filters, no shortcuts — just consistent work and proper coaching.
+            Real clients, real transformations. No filters, no shortcuts, just consistent work and proper coaching.
           </p>
         </motion.div>
 
@@ -1372,7 +1372,7 @@ function Method() {
   return (
     <section id="method" className="relative py-8 sm:py-12 px-4 sm:px-6">
       <div ref={sectionRef} className="relative max-w-7xl mx-auto rounded-[1.25rem] lg:rounded-[2rem] py-20 sm:py-28 px-6 sm:px-10 lg:px-16 overflow-hidden">
-        {/* Running-pic backdrop */}
+        {/* Running-pic backdrop, visible but not distracting with green hue */}
         <div className="absolute inset-0 z-0">
           <Image
             src="/luke-running.jpeg"
@@ -1381,8 +1381,12 @@ function Method() {
             className="object-cover object-center"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-[#0C0C0C]/75" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0C0C0C]/60 via-[#0C0C0C]/70 to-[#0C0C0C]/90" />
+          {/* Lighter black overlay so the image shows through */}
+          <div className="absolute inset-0 bg-[#0C0C0C]/45" />
+          {/* Subtle green tint for brand hue */}
+          <div className="absolute inset-0 bg-gradient-to-b from-accent-dark/20 via-[#0C0C0C]/25 to-[#0C0C0C]/70" />
+          {/* Gentle vignette toward edges so center content reads clean */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_rgba(12,12,12,0.5)_100%)]" />
         </div>
 
         <div className="relative z-10">
@@ -1779,7 +1783,7 @@ function Testimonials() {
     },
     {
       name: "Andreea",
-      text: "Starting my training journey with Luke as my PT a year ago has been the best investment I ever made for my health and fitness. He knows just when to push me harder and when to take a step back. Our sessions are more than just workouts \u2014 they\u2019re a time where I can laugh, let out a bit of frustration, and achieve things I never thought I could.",
+      text: "Starting my training journey with Luke as my PT a year ago has been the best investment I ever made for my health and fitness. He knows just when to push me harder and when to take a step back. Our sessions are more than just workouts. They\u2019re a time where I can laugh, let out a bit of frustration, and achieve things I never thought I could.",
     },
     {
       name: "Adriano",
@@ -1799,7 +1803,7 @@ function Testimonials() {
     },
     {
       name: "Ellen",
-      text: "Luke hebt sich als Trainer vor allem durch seine klare, pr\u00E4zise Art zu erkl\u00E4ren hervor. Er schafft es, nicht nur Technik zu vermitteln, sondern auch das Verst\u00E4ndnis daf\u00FCr, warum etwas auf eine bestimmte Weise ausgef\u00FChrt werden sollte. Das f\u00FChrt dazu, dass man bewusster trainiert und die \u00DCbungen deutlich besser umsetzt. Dar\u00FCber hinaus ist Luke auch menschlich eine echte Bereicherung \u2014 aufmerksam, angenehm im Umgang und sehr motivierend.",
+      text: "Luke hebt sich als Trainer vor allem durch seine klare, pr\u00E4zise Art zu erkl\u00E4ren hervor. Er schafft es, nicht nur Technik zu vermitteln, sondern auch das Verst\u00E4ndnis daf\u00FCr, warum etwas auf eine bestimmte Weise ausgef\u00FChrt werden sollte. Das f\u00FChrt dazu, dass man bewusster trainiert und die \u00DCbungen deutlich besser umsetzt. Dar\u00FCber hinaus ist Luke auch menschlich eine echte Bereicherung: aufmerksam, angenehm im Umgang und sehr motivierend.",
     },
     {
       name: "Lena",
@@ -1807,7 +1811,7 @@ function Testimonials() {
     },
     {
       name: "Emil",
-      text: "Was mir an Luki am meisten gef\u00E4llt: Er h\u00F6rt richtig zu und passt alles 100 % auf mich an. Dank ihm bin ich jetzt st\u00E4rker, fitter und selbstbewusster \u2014 und das ganz ohne Verletzungen oder Burnout. Der beste Coach, den ich in Berlin finden konnte.",
+      text: "Was mir an Luki am meisten gef\u00E4llt: Er h\u00F6rt richtig zu und passt alles 100 % auf mich an. Dank ihm bin ich jetzt st\u00E4rker, fitter und selbstbewusster, und das ganz ohne Verletzungen oder Burnout. Der beste Coach, den ich in Berlin finden konnte.",
     },
     {
       name: "Johanna",
@@ -1993,23 +1997,23 @@ function FAQ() {
   const faqs = [
     {
       question: "Is personal training right for me and my goals?",
-      answer: "Personal training is right for you if you don\u2019t just want to \u201Cwork out\u201D \u2014 you want a clear plan, structure, and measurable progress. Most people don\u2019t struggle because they\u2019re lazy, but because they\u2019re guessing. I remove that guesswork and give you a system tailored to your body, your schedule, and your goals. Whether you\u2019re just starting out, coming back from an injury, or looking to take your training to the next level \u2014 I meet you where you are and guide you forward.",
+      answer: "Personal training is right for you if you don\u2019t just want to \u201Cwork out\u201D. You want a clear plan, structure, and measurable progress. Most people don\u2019t struggle because they\u2019re lazy, but because they\u2019re guessing. I remove that guesswork and give you a system tailored to your body, your schedule, and your goals. Whether you\u2019re just starting out, coming back from an injury, or looking to take your training to the next level, I meet you where you are and guide you forward.",
     },
     {
       question: "Is online coaching effective for achieving real results?",
-      answer: "Yes \u2014 if it\u2019s done properly. Online coaching isn\u2019t just a PDF plan. It\u2019s ongoing guidance, structured programming, and regular adjustments based on your progress. You\u2019ll know exactly what to do, how to do it, and why you\u2019re doing it \u2014 while having accountability and support along the way. For many clients, online coaching actually works better because it integrates into real life instead of depending on fixed appointments.",
+      answer: "Yes, if it\u2019s done properly. Online coaching isn\u2019t just a PDF plan. It\u2019s ongoing guidance, structured programming, and regular adjustments based on your progress. You\u2019ll know exactly what to do, how to do it, and why you\u2019re doing it, with accountability and support along the way. For many clients, online coaching actually works better because it integrates into real life instead of depending on fixed appointments.",
     },
     {
       question: "Why should I work with a coach instead of training on my own?",
-      answer: "Because results come from consistency and direction \u2014 not just effort. Most people train hard, but not effectively. They repeat the same workouts, lack progression, or don\u2019t adjust when something isn\u2019t working. A coach gives you structure, holds you accountable, and makes sure every session moves you closer to your goal. It\u2019s the difference between being busy and actually making progress.",
+      answer: "Because results come from consistency and direction, not just effort. Most people train hard, but not effectively. They repeat the same workouts, lack progression, or don\u2019t adjust when something isn\u2019t working. A coach gives you structure, holds you accountable, and makes sure every session moves you closer to your goal. It\u2019s the difference between being busy and actually making progress.",
     },
     {
       question: "What makes you different from other personal trainers?",
-      answer: "I don\u2019t just coach workouts \u2014 I build systems that fit into your life. My approach is focused on long-term results, not quick fixes. That means smart programming, honest feedback, and adapting everything to your reality \u2014 not forcing you into a one-size-fits-all plan. I also place a strong emphasis on technique, injury prevention, and sustainable habits, so you don\u2019t just see progress \u2014 you keep it. You\u2019re not just getting a trainer. You\u2019re getting a structured, thought-out process.",
+      answer: "I don\u2019t just coach workouts. I build systems that fit into your life. My approach is focused on long-term results, not quick fixes. That means smart programming, honest feedback, and adapting everything to your reality, not forcing you into a one-size-fits-all plan. I also place a strong emphasis on technique, injury prevention, and sustainable habits, so you don\u2019t just see progress, you keep it. You\u2019re not just getting a trainer. You\u2019re getting a structured, thought-out process.",
     },
     {
       question: "How do you help me stay consistent and accountable?",
-      answer: "Motivation comes and goes \u2014 structure is what keeps you moving. I build your training in a way that fits your schedule and current lifestyle, so it\u2019s realistic to stick to. On top of that, you\u2019ll have regular check-ins, clear targets, and ongoing adjustments \u2014 so you always know where you stand and what\u2019s next. My role is to keep you on track, especially on the days you don\u2019t feel like it.",
+      answer: "Motivation comes and goes. Structure is what keeps you moving. I build your training in a way that fits your schedule and current lifestyle, so it\u2019s realistic to stick to. On top of that, you\u2019ll have regular check-ins, clear targets, and ongoing adjustments, so you always know where you stand and what\u2019s next. My role is to keep you on track, especially on the days you don\u2019t feel like it.",
     },
     {
       question: "I\u2019m vegan. Can you work with that?",
@@ -2017,7 +2021,7 @@ function FAQ() {
     },
     {
       question: "What gyms do you train at?",
-      answer: "My home base is John Reed Bötzow in Prenzlauer Berg, where most of my in-person coaching happens. I can also train you at McFit locations across Berlin — whichever is most convenient for your schedule.",
+      answer: "My home base is John Reed Bötzow in Prenzlauer Berg, where most of my in-person coaching happens. I can also train you at McFit locations across Berlin. Pick whichever is most convenient for your schedule.",
     },
   ];
 
@@ -2219,7 +2223,7 @@ function Contact() {
                   </svg>
                 </div>
                 <h3 className="text-2xl font-bold text-white">Message sent!</h3>
-                <p className="text-zinc-400 mt-2">Thanks for reaching out — I&apos;ll get back to you within 24 hours.</p>
+                <p className="text-zinc-400 mt-2">Thanks for reaching out. I&apos;ll get back to you within 24 hours.</p>
                 <button onClick={() => { setSubmitted(false); setFormState({ name: "", email: "", message: "", goal: "" }); }} className="mt-6 text-accent text-sm cursor-pointer hover:underline">
                   Send another message
                 </button>
@@ -2374,7 +2378,7 @@ function Locations() {
   const gyms = [
     {
       name: "John Reed Bötzow",
-      type: "Home Base — Boutique Fitness Club",
+      type: "Home Base · Boutique Fitness Club",
       address: "Prenzlauer Berg, Berlin",
       description: "Where fitness meets music, art, and design. Great atmosphere and equipment for strength work, functional training, mobility, and ring sessions. This is where most of my in-person coaching happens.",
       featured: true,
@@ -2582,7 +2586,7 @@ function TrustBanner() {
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                 className="text-zinc-400 mt-6 text-lg leading-relaxed"
               >
-                A free consultation is all it takes. No commitment, no pressure — just an honest conversation about your goals and how I can help.
+                A free consultation is all it takes. No commitment, no pressure, just an honest conversation about your goals and how I can help.
               </motion.p>
               <motion.div
                 initial={{ y: 40, scale: 0.85 }}

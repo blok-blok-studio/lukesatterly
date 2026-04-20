@@ -253,7 +253,7 @@ const jsonLd = {
           name: "Is personal training right for me and my goals?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Personal training is right for you if you want a clear plan, structure, and measurable progress. Most people don't struggle because they're lazy — they're guessing. I remove that guesswork and give you a system tailored to your body, your schedule, and your goals.",
+            text: "Personal training is right for you if you want a clear plan, structure, and measurable progress. Most people don't struggle because they're lazy. They're guessing. I remove that guesswork and give you a system tailored to your body, your schedule, and your goals.",
           },
         },
         {

@@ -327,7 +327,7 @@ function FunnelForm() {
                 How soon are you looking to start?
               </h3>
               <p className="text-zinc-400 text-sm mb-8">
-                No pressure — just helps me know how to follow up.
+                No pressure, just helps me know how to follow up.
               </p>
 
               <div className="space-y-3">
@@ -390,7 +390,7 @@ function FunnelForm() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-white text-sm font-medium">Your template is ready</p>
-                    <p className="text-zinc-500 text-xs">4-week workout program — also sent to your email</p>
+                    <p className="text-zinc-500 text-xs">4-week workout program. Also sent to your email.</p>
                   </div>
                 </div>
                 <a
@@ -561,7 +561,7 @@ function VideoSection() {
               className="absolute inset-0 w-full h-full"
               allow="autoplay; fullscreen"
               allowFullScreen
-              title="Coach Luki — 1 Minute Introduction"
+              title="Coach Luki, 1 Minute Introduction"
             /> */}
           </div>
 
@@ -618,7 +618,7 @@ export default function StartPage() {
               <span className="gradient-text">putting off for years</span>
             </h1>
             <p className="text-zinc-400 mt-4 sm:mt-6 text-base sm:text-lg max-w-lg mx-auto leading-relaxed">
-              I&apos;m Coach Luki. I help people in Berlin and online get stronger, leaner, and actually enjoy training again — with a plan built for your body and your life.
+              I&apos;m Coach Luki. I help people in Berlin and online get stronger, leaner, and actually enjoy training again, with a plan built for your body and your life.
             </p>
 
             {/* Trust stats */}
