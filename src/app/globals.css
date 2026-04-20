@@ -36,6 +36,18 @@ body {
   min-width: 280px;
 }
 
+/* Prevent single-word widows/orphans in body copy across the site.
+   `pretty` keeps the last line with at least two words (supported in modern
+   browsers; older browsers just fall back to normal wrapping). */
+p {
+  text-wrap: pretty;
+}
+
+/* Headings benefit from balanced line breaks */
+h1, h2, h3, h4 {
+  text-wrap: balance;
+}
+
 /* ─────────────── ACCESSIBILITY ─────────────── */
 
 /* Screen-reader-only utility (visually hidden but available to assistive tech) */

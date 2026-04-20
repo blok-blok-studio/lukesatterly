@@ -1316,14 +1316,14 @@ function MethodStep({
         className="flex-1 pt-1"
       >
         <h3
-          className={`text-lg sm:text-xl font-semibold mb-2 transition-colors duration-500 ${
+          className={`text-lg sm:text-xl font-semibold mb-2 transition-colors duration-500 [text-wrap:balance] ${
             isActive ? "text-white" : "text-white/60"
           }`}
         >
           {s.title}
         </h3>
         <p
-          className={`text-sm sm:text-base leading-relaxed transition-colors duration-500 ${
+          className={`text-sm sm:text-base leading-relaxed transition-colors duration-500 [text-wrap:pretty] ${
             isActive ? "text-zinc-300" : "text-zinc-400"
           }`}
         >
@@ -1436,8 +1436,8 @@ function Method() {
                 transition={{ duration: 0.5, delay: 0.3 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 className="text-center"
               >
-                <h3 className="text-xl font-semibold text-white mb-3">{s.title}</h3>
-                <p className="text-zinc-300 leading-relaxed">{s.description}</p>
+                <h3 className="text-xl font-semibold text-white mb-3 [text-wrap:balance]">{s.title}</h3>
+                <p className="text-zinc-300 leading-relaxed [text-wrap:pretty]">{s.description}</p>
               </motion.div>
             ))}
           </div>
