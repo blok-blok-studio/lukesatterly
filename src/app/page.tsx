@@ -1872,7 +1872,7 @@ function Testimonials() {
           <div className="absolute right-0 top-0 bottom-0 w-20 lg:w-40 bg-gradient-to-l from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
 
           <motion.div
-            className="flex gap-6 px-6 cursor-grab active:cursor-grabbing"
+            className="flex items-start gap-6 px-6 cursor-grab active:cursor-grabbing"
             style={{ x: desktopX, touchAction: "pan-y" }}
             drag="x"
             dragDirectionLock
@@ -1927,7 +1927,7 @@ function Testimonials() {
           <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
 
           <motion.div
-            className="flex gap-4 px-6 cursor-grab active:cursor-grabbing"
+            className="flex items-start gap-4 px-6 cursor-grab active:cursor-grabbing"
             style={{ touchAction: "pan-y" }}
             drag="x"
             dragDirectionLock
