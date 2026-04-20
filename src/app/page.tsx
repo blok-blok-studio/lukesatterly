@@ -7,6 +7,8 @@ import {
   useScroll,
   useTransform,
   useInView,
+  useMotionValue,
+  animate,
   AnimatePresence,
 } from "framer-motion";
 
@@ -436,7 +438,7 @@ function Hero() {
         </div>
 
         {/* Subtitle — sits just below the headline on mobile, normal on desktop */}
-        <p className="relative z-20 -mt-16 sm:-mt-6 text-center text-base sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed px-4 font-semibold" style={{ color: "#ffffff", textShadow: "0 2px 10px rgba(0,0,0,0.9), 0 0 2px rgba(0,0,0,0.8)" }}>
+        <p className="relative z-20 mt-8 sm:-mt-16 text-center text-base sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed px-4 font-semibold" style={{ color: "#ffffff", textShadow: "0 2px 10px rgba(0,0,0,0.9), 0 0 2px rgba(0,0,0,0.8)" }}>
           Get stronger, move better, enjoy the process. Training &amp; nutrition, online or in Berlin.
         </p>
 
@@ -1767,6 +1769,16 @@ function TestimonialCard({ t, className = "" }: { t: { name: string; text: strin
 /* ─────────────────── TESTIMONIALS (dark, tilted cards) ─────────────────── */
 function Testimonials() {
   const ref = useRef(null);
+  const desktopX = useMotionValue(0);
+  const [desktopIndex, setDesktopIndex] = useState(0);
+  const DESKTOP_CARD_STEP = 444; // card width 420 + gap 24
+
+  /* Animate desktop carousel to a given index */
+  const goToDesktop = (idx: number, total: number) => {
+    const bounded = Math.max(0, Math.min(idx, total - 1));
+    setDesktopIndex(bounded);
+    animate(desktopX, -bounded * DESKTOP_CARD_STEP, { type: "spring", stiffness: 220, damping: 30 });
+  };
 
   const testimonials = [
     {
@@ -1848,29 +1860,58 @@ function Testimonials() {
           </motion.div>
         </div>
 
-        {/* Desktop: swipeable/draggable carousel */}
+        {/* Desktop: swipeable/draggable carousel with arrow controls */}
         <div className="hidden md:block relative overflow-hidden">
           <div className="absolute left-0 top-0 bottom-0 w-20 lg:w-40 bg-gradient-to-r from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-20 lg:w-40 bg-gradient-to-l from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
 
           <motion.div
             className="flex gap-6 px-6 cursor-grab active:cursor-grabbing"
+            style={{ x: desktopX }}
             drag="x"
             dragConstraints={{
-              left: -(testimonials.length - 1) * 440,
+              left: -(testimonials.length - 1) * DESKTOP_CARD_STEP,
               right: 0,
             }}
             dragElastic={0.1}
             dragTransition={{ bounceStiffness: 300, bounceDamping: 30 }}
+            onDragEnd={() => {
+              const x = desktopX.get();
+              const idx = Math.round(-x / DESKTOP_CARD_STEP);
+              goToDesktop(idx, testimonials.length);
+            }}
           >
             {testimonials.map((t) => (
               <TestimonialCard key={`desktop-${t.name}`} t={t} className="w-[380px] lg:w-[420px]" />
             ))}
           </motion.div>
 
-          <p className="text-center text-zinc-400 text-xs mt-6 uppercase tracking-wider">
-            Drag to see more
-          </p>
+          {/* Arrow controls + dot indicator */}
+          <div className="flex items-center justify-center gap-6 mt-8">
+            <button
+              aria-label="Previous testimonial"
+              onClick={() => goToDesktop(desktopIndex - 1, testimonials.length)}
+              disabled={desktopIndex === 0}
+              className="w-11 h-11 rounded-full border border-white/15 bg-white/5 backdrop-blur hover:bg-accent hover:border-accent transition-colors duration-200 text-white flex items-center justify-center cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+              </svg>
+            </button>
+            <span className="text-zinc-400 text-xs uppercase tracking-wider tabular-nums">
+              {desktopIndex + 1} / {testimonials.length}
+            </span>
+            <button
+              aria-label="Next testimonial"
+              onClick={() => goToDesktop(desktopIndex + 1, testimonials.length)}
+              disabled={desktopIndex >= testimonials.length - 1}
+              className="w-11 h-11 rounded-full border border-white/15 bg-white/5 backdrop-blur hover:bg-accent hover:border-accent transition-colors duration-200 text-white flex items-center justify-center cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+              </svg>
+            </button>
+          </div>
         </div>
 
         {/* Mobile: swipeable carousel */}
