@@ -444,7 +444,7 @@ function Hero() {
         </div>
 
         {/* Subtitle — sits just below the headline on mobile, normal on desktop */}
-        <p className="relative z-20 -mt-5 sm:-mt-16 text-center text-base sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed px-4 font-semibold" style={{ color: "#ffffff", textShadow: "0 2px 10px rgba(0,0,0,0.9), 0 0 2px rgba(0,0,0,0.8)" }}>
+        <p className="relative z-20 -mt-12 sm:-mt-16 text-center text-base sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed px-4 font-semibold" style={{ color: "#ffffff", textShadow: "0 2px 10px rgba(0,0,0,0.9), 0 0 2px rgba(0,0,0,0.8)" }}>
           Get stronger, move better, enjoy the process. Training &amp; nutrition, online or in Berlin.
         </p>
 
