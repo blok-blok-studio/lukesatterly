@@ -335,18 +335,6 @@ function Hero() {
 
           {/* Cutout wrapper — buttons positioned relative to it */}
           <div className="relative z-10 w-full max-w-[320px] sm:max-w-[340px] lg:max-w-[380px] aspect-[2/3] mx-auto">
-            {/* Soft ambient glow beneath Luke — catches the dissolve so legs
-                don't end on a hard cut. Fades into the dark green atmosphere. */}
-            <div
-              aria-hidden
-              className="absolute inset-x-0 bottom-0 h-[55%] z-[5] pointer-events-none"
-              style={{
-                background:
-                  "radial-gradient(ellipse at 50% 100%, rgba(0,102,51,0.22) 0%, rgba(0,102,51,0.10) 35%, transparent 70%)",
-                filter: "blur(14px)",
-              }}
-            />
-
             {/* Base cutout (z-10) — long fade from ~60% so legs dissolve gradually */}
             <Image
               src="/luke-cutout-full.png"
