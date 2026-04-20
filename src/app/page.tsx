@@ -509,7 +509,7 @@ function Hero() {
             animate={{ y: [0, 6, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
             onClick={() => smoothScrollTo("about")}
-            className="flex items-center gap-2 text-sm cursor-pointer transition-colors ml-auto font-semibold"
+            className="hidden sm:flex items-center gap-2 text-sm cursor-pointer transition-colors sm:ml-auto font-semibold"
             style={{ color: "#ffffff", textShadow: "0 1px 4px rgba(0,0,0,0.8)" }}
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
