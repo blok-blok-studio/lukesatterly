@@ -438,7 +438,7 @@ function Hero() {
         </div>
 
         {/* Subtitle — sits just below the headline on mobile, normal on desktop */}
-        <p className="relative z-20 -mt-4 sm:-mt-16 text-center text-base sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed px-4 font-semibold" style={{ color: "#ffffff", textShadow: "0 2px 10px rgba(0,0,0,0.9), 0 0 2px rgba(0,0,0,0.8)" }}>
+        <p className="relative z-20 -mt-5 sm:-mt-16 text-center text-base sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed px-4 font-semibold" style={{ color: "#ffffff", textShadow: "0 2px 10px rgba(0,0,0,0.9), 0 0 2px rgba(0,0,0,0.8)" }}>
           Get stronger, move better, enjoy the process. Training &amp; nutrition, online or in Berlin.
         </p>
 
@@ -447,7 +447,7 @@ function Hero() {
           initial={{ opacity: 1, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 1.1, ease: "easeOut" }}
-          className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-8 sm:gap-16 pointer-events-auto"
+          className="mt-5 sm:mt-8 flex flex-wrap items-center justify-center gap-8 sm:gap-16 pointer-events-auto"
         >
           <motion.div
             initial={{ opacity: 1, y: 10 }}
