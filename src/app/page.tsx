@@ -148,7 +148,7 @@ function Navbar() {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-[#0C0C0C]/80 backdrop-blur-2xl border-b border-white/5 shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
+          ? "bg-[#0C0C0C]/90 backdrop-blur-md md:backdrop-blur-2xl border-b border-white/5 shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
           : "bg-transparent"
       }`}
     >
@@ -250,29 +250,35 @@ function Hero() {
   ];
 
   return (
-    <section ref={ref} className="relative min-h-screen overflow-hidden bg-[#0C0C0C]">
+    <section ref={ref} className="relative min-h-[100dvh] overflow-hidden bg-[#0C0C0C]">
       {/* Background: layered atmosphere — deep base, green radial glows, grid, noise, vignette */}
       {/* Base gradient — deep forest-tinged dark */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_#0f1f18_0%,_#0a110d_40%,_#080807_100%)]" />
 
-      {/* Large green aurora glow — behind Luke */}
-      <motion.div
-        animate={{ scale: [1, 1.08, 1], opacity: [0.55, 0.7, 0.55] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[1100px] rounded-full bg-[radial-gradient(circle,_rgba(0,200,100,0.28)_0%,_rgba(0,102,51,0.10)_40%,_transparent_70%)] blur-3xl pointer-events-none"
-      />
+      {/* Aurora orbs — desktop only (heavy blur-3xl kills mobile scroll perf).
+          Mobile gets a single static green wash below to keep the vibe. */}
+      <div className="hidden md:block absolute inset-0 pointer-events-none">
+        {/* Large green aurora glow — behind Luke */}
+        <motion.div
+          animate={{ scale: [1, 1.08, 1], opacity: [0.55, 0.7, 0.55] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[1100px] rounded-full bg-[radial-gradient(circle,_rgba(0,200,100,0.28)_0%,_rgba(0,102,51,0.10)_40%,_transparent_70%)] blur-3xl"
+        />
+        {/* Secondary side accents */}
+        <motion.div
+          animate={{ x: [-20, 30, -20], y: [-10, 20, -10] }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,_rgba(74,222,128,0.12)_0%,_transparent_70%)] blur-3xl"
+        />
+        <motion.div
+          animate={{ x: [20, -30, 20], y: [10, -20, 10] }}
+          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -bottom-40 -right-40 w-[650px] h-[650px] rounded-full bg-[radial-gradient(circle,_rgba(0,128,61,0.18)_0%,_transparent_70%)] blur-3xl"
+        />
+      </div>
 
-      {/* Secondary side accents — add depth */}
-      <motion.div
-        animate={{ x: [-20, 30, -20], y: [-10, 20, -10] }}
-        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,_rgba(74,222,128,0.12)_0%,_transparent_70%)] blur-3xl pointer-events-none"
-      />
-      <motion.div
-        animate={{ x: [20, -30, 20], y: [10, -20, 10] }}
-        transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -bottom-40 -right-40 w-[650px] h-[650px] rounded-full bg-[radial-gradient(circle,_rgba(0,128,61,0.18)_0%,_transparent_70%)] blur-3xl pointer-events-none"
-      />
+      {/* Mobile-only static green wash — cheap, no blur, no animation */}
+      <div className="md:hidden absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,_rgba(0,128,61,0.18)_0%,_transparent_60%)]" />
 
       {/* Subtle grid pattern — pushed well beyond the headline area so it
           doesn't show as boxes behind or inside the text. Transparent center
@@ -315,7 +321,7 @@ function Hero() {
         </span>
       </h1>
 
-      <motion.div style={{ y }} className="relative z-30 max-w-7xl mx-auto px-6 pt-24 sm:pt-24 pb-10 min-h-screen flex flex-col justify-start sm:justify-center gap-0">
+      <motion.div style={{ y }} className="relative z-30 max-w-7xl mx-auto px-6 pt-24 sm:pt-24 pb-10 min-h-[100dvh] flex flex-col justify-start sm:justify-center gap-0">
         {/* Image + overlaid headline + buttons */}
         <div className="relative flex items-center justify-center">
           {/* Mobile-only overlay headline — sits on Luke's chest */}
@@ -384,7 +390,7 @@ function Hero() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => smoothScrollTo("contact")}
-              className="absolute z-40 top-[8%] left-0 sm:-left-4 md:-left-24 lg:-left-36 xl:-left-44 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 md:w-36 md:h-36 lg:w-44 lg:h-44 rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-accent/45 border border-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(0,0,0,0.2),0_8px_24px_rgba(0,102,51,0.35),0_2px_6px_rgba(0,0,0,0.3)]"
+              className="absolute z-40 top-[8%] left-0 sm:-left-4 md:-left-24 lg:-left-36 xl:-left-44 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 md:w-36 md:h-36 lg:w-44 lg:h-44 rounded-full cursor-pointer group overflow-hidden backdrop-blur-sm md:backdrop-blur-xl bg-accent/45 border border-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(0,0,0,0.2),0_8px_24px_rgba(0,102,51,0.35),0_2px_6px_rgba(0,0,0,0.3)]"
             >
               {/* Radial glossy highlight — soft sphere-like shading, no hard edges */}
               <span
@@ -414,7 +420,7 @@ function Hero() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => smoothScrollTo("about")}
-              className="absolute z-40 top-[12%] right-0 sm:-right-4 md:-right-24 lg:-right-36 xl:-right-44 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 md:w-36 md:h-36 lg:w-44 lg:h-44 rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-accent/30 border border-white/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.4),inset_0_-1px_0_rgba(0,0,0,0.2),0_8px_24px_rgba(0,102,51,0.3),0_2px_6px_rgba(0,0,0,0.3)]"
+              className="absolute z-40 top-[12%] right-0 sm:-right-4 md:-right-24 lg:-right-36 xl:-right-44 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 md:w-36 md:h-36 lg:w-44 lg:h-44 rounded-full cursor-pointer group overflow-hidden backdrop-blur-sm md:backdrop-blur-xl bg-accent/30 border border-white/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.4),inset_0_-1px_0_rgba(0,0,0,0.2),0_8px_24px_rgba(0,102,51,0.3),0_2px_6px_rgba(0,0,0,0.3)]"
             >
               <span
                 className="pointer-events-none absolute inset-0 rounded-full"
@@ -1867,8 +1873,9 @@ function Testimonials() {
 
           <motion.div
             className="flex gap-6 px-6 cursor-grab active:cursor-grabbing"
-            style={{ x: desktopX }}
+            style={{ x: desktopX, touchAction: "pan-y" }}
             drag="x"
+            dragDirectionLock
             dragConstraints={{
               left: -(testimonials.length - 1) * DESKTOP_CARD_STEP,
               right: 0,
@@ -1921,7 +1928,9 @@ function Testimonials() {
 
           <motion.div
             className="flex gap-4 px-6 cursor-grab active:cursor-grabbing"
+            style={{ touchAction: "pan-y" }}
             drag="x"
+            dragDirectionLock
             dragConstraints={{ left: -(testimonials.length - 1) * 290, right: 0 }}
             dragElastic={0.1}
             dragTransition={{ bounceStiffness: 300, bounceDamping: 30 }}

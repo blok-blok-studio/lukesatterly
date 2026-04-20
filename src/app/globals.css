@@ -26,6 +26,10 @@
 
 html {
   overflow-x: hidden;
+  /* Smooth native scrolling on iOS + snappier momentum */
+  -webkit-overflow-scrolling: touch;
+  /* Prevent elastic bounce hijack on drag carousels while keeping vertical scroll smooth */
+  overscroll-behavior-y: none;
 }
 
 body {
@@ -34,6 +38,18 @@ body {
   font-family: var(--font-body), system-ui, sans-serif;
   overflow-x: hidden;
   min-width: 280px;
+  /* Contain paint to improve scroll perf on mobile */
+  will-change: auto;
+}
+
+/* Respect user preference — kills all infinite/perf-heavy animations */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Prevent single-word widows/orphans in body copy across the site.
