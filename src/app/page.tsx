@@ -240,7 +240,6 @@ function Hero() {
     offset: ["start start", "end start"],
   });
   const y = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   const heroWords = [
     { text: "Your", className: "text-white", delay: 0.1 },
@@ -273,16 +272,17 @@ function Hero() {
         className="absolute -bottom-40 -right-40 w-[650px] h-[650px] rounded-full bg-[radial-gradient(circle,_rgba(0,128,61,0.18)_0%,_transparent_70%)] blur-3xl pointer-events-none"
       />
 
-      {/* Subtle grid pattern — pushed to the edges so it doesn't show through
-          the area behind Luke (was making him look like a pasted sticker) */}
+      {/* Subtle grid pattern — pushed well beyond the headline area so it
+          doesn't show as boxes behind or inside the text. Transparent center
+          extends past the hero copy; grid only hints at the far edges. */}
       <div
-        className="absolute inset-0 opacity-[0.05] pointer-events-none"
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
           backgroundImage:
             "linear-gradient(rgba(74,222,128,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(74,222,128,0.5) 1px, transparent 1px)",
           backgroundSize: "60px 60px",
-          maskImage: "radial-gradient(ellipse at center, transparent 20%, black 65%, black 80%, transparent 100%)",
-          WebkitMaskImage: "radial-gradient(ellipse at center, transparent 20%, black 65%, black 80%, transparent 100%)",
+          maskImage: "radial-gradient(ellipse at center, transparent 55%, black 85%, transparent 100%)",
+          WebkitMaskImage: "radial-gradient(ellipse at center, transparent 55%, black 85%, transparent 100%)",
         }}
       />
 
@@ -313,7 +313,7 @@ function Hero() {
         </span>
       </h1>
 
-      <motion.div style={{ y, opacity }} className="relative z-10 max-w-7xl mx-auto px-6 pt-24 sm:pt-24 pb-10 min-h-screen flex flex-col justify-start sm:justify-center gap-0">
+      <motion.div style={{ y }} className="relative z-30 max-w-7xl mx-auto px-6 pt-24 sm:pt-24 pb-10 min-h-screen flex flex-col justify-start sm:justify-center gap-0">
         {/* Image + overlaid headline + buttons */}
         <div className="relative flex items-center justify-center">
           {/* Mobile-only overlay headline — sits on Luke's chest */}
@@ -382,7 +382,7 @@ function Hero() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => smoothScrollTo("contact")}
-              className="absolute z-40 top-[8%] left-0 sm:-left-4 md:-left-20 lg:-left-32 xl:-left-40 -translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-accent/45 border border-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(0,0,0,0.2),0_8px_24px_rgba(0,102,51,0.35),0_2px_6px_rgba(0,0,0,0.3)]"
+              className="absolute z-40 top-[8%] left-0 sm:-left-4 md:-left-24 lg:-left-36 xl:-left-44 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 md:w-36 md:h-36 lg:w-44 lg:h-44 rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-accent/45 border border-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(0,0,0,0.2),0_8px_24px_rgba(0,102,51,0.35),0_2px_6px_rgba(0,0,0,0.3)]"
             >
               {/* Radial glossy highlight — soft sphere-like shading, no hard edges */}
               <span
@@ -412,7 +412,7 @@ function Hero() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => smoothScrollTo("about")}
-              className="absolute z-40 top-[12%] right-0 sm:-right-4 md:-right-20 lg:-right-32 xl:-right-40 -translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-accent/30 border border-white/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.4),inset_0_-1px_0_rgba(0,0,0,0.2),0_8px_24px_rgba(0,102,51,0.3),0_2px_6px_rgba(0,0,0,0.3)]"
+              className="absolute z-40 top-[12%] right-0 sm:-right-4 md:-right-24 lg:-right-36 xl:-right-44 -translate-y-1/2 w-20 h-20 sm:w-24 sm:h-24 md:w-36 md:h-36 lg:w-44 lg:h-44 rounded-full cursor-pointer group overflow-hidden backdrop-blur-xl bg-accent/30 border border-white/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.4),inset_0_-1px_0_rgba(0,0,0,0.2),0_8px_24px_rgba(0,102,51,0.3),0_2px_6px_rgba(0,0,0,0.3)]"
             >
               <span
                 className="pointer-events-none absolute inset-0 rounded-full"
@@ -1790,6 +1790,10 @@ function Testimonials() {
     {
       name: "Emil",
       text: "Was mir an Luki am meisten gef\u00E4llt: Er h\u00F6rt richtig zu und passt alles 100 % auf mich an. Dank ihm bin ich jetzt st\u00E4rker, fitter und selbstbewusster \u2014 und das ganz ohne Verletzungen oder Burnout. Der beste Coach, den ich in Berlin finden konnte.",
+    },
+    {
+      name: "Johanna",
+      text: "Ich war anfangs skeptisch gegen\u00FCber Personal Training, weil ich dachte, es geht vor allem um Motivation, doch bei Luki habe ich gelernt, wie man \u00DCbungen wirklich versteht und effektiv ausf\u00FChrt. Sein pr\u00E4zises Verst\u00E4ndnis und seine F\u00E4higkeit, dieses Wissen zu vermitteln, machen Training zu einer Kombination aus K\u00F6rper und Kopf. Dank ihm trainiere ich nicht nur effektiver, sondern auch mit deutlich mehr Selbstvertrauen und Freude.",
     },
   ];
 
