@@ -325,7 +325,7 @@ function Hero() {
         {/* Image + overlaid headline + buttons */}
         <div className="relative flex items-center justify-center">
           {/* Mobile-only overlay headline — sits on Luke's chest */}
-          <h1 className="sm:hidden absolute left-1/2 top-[78%] -translate-x-1/2 -translate-y-1/2 z-30 w-full text-[clamp(1.75rem,7.5vw,5.5rem)] font-black tracking-[-0.04em] leading-[0.9] uppercase font-[family-name:var(--font-display)] text-center pointer-events-none select-none drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]">
+          <h1 className="sm:hidden absolute left-1/2 top-[78%] -translate-x-1/2 -translate-y-1/2 z-30 w-full text-[clamp(1.75rem,7.5vw,5.5rem)] font-black tracking-[-0.04em] leading-[0.9] uppercase font-[family-name:var(--font-display)] text-center pointer-events-none select-none" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.55)" }}>
             {heroWords.map((word) => (
               <span key={word.text} className={`${word.className} block`}>
                 {word.text}
@@ -354,7 +354,7 @@ function Hero() {
               fill
               priority
               sizes="(max-width: 768px) 100vw, 400px"
-              className="object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] z-10"
+              className="object-contain z-10"
               style={{
                 maskImage:
                   "linear-gradient(to bottom, transparent 0%, black 12%, black 55%, rgba(0,0,0,0.6) 75%, rgba(0,0,0,0.25) 88%, transparent 100%)",
