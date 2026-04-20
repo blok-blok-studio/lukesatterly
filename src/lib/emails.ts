@@ -319,7 +319,7 @@ export function coachingPitchEmail(firstName: string, unsubscribeUrl: string): E
       <li>Nutrition coaching that fits your lifestyle (not a diet you'll quit)</li>
       <li>Weekly check-ins and progress tracking</li>
       <li>Direct WhatsApp support between sessions</li>
-      <li>In-person at John Reed Bötzow or EVO Spittelmarkt, or online</li>
+      <li>In-person at John Reed Bötzow or McFit locations, or online</li>
     </ul>
     ${buttonHtml("Book your consultation", CALENDAR_URL)}
     <p style="line-height: 1.7;">
@@ -344,7 +344,7 @@ Here's what 1-on-1 coaching with me looks like:
 - Nutrition coaching that fits your lifestyle (not a diet you'll quit)
 - Weekly check-ins and progress tracking
 - Direct WhatsApp support between sessions
-- In-person at John Reed Bötzow or EVO Spittelmarkt, or online
+- In-person at John Reed Bötzow or McFit locations, or online
 
 Book your consultation: ${CALENDAR_URL}
 

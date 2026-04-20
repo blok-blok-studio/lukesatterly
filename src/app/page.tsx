@@ -317,7 +317,7 @@ function Hero() {
         {/* Image + overlaid headline + buttons */}
         <div className="relative flex items-center justify-center">
           {/* Mobile-only overlay headline — sits on Luke's chest */}
-          <h1 className="sm:hidden absolute left-1/2 top-[68%] -translate-x-1/2 -translate-y-1/2 z-30 w-full text-[clamp(1.75rem,7.5vw,5.5rem)] font-black tracking-[-0.04em] leading-[0.9] uppercase font-[family-name:var(--font-display)] text-center pointer-events-none select-none drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]">
+          <h1 className="sm:hidden absolute left-1/2 top-[78%] -translate-x-1/2 -translate-y-1/2 z-30 w-full text-[clamp(1.75rem,7.5vw,5.5rem)] font-black tracking-[-0.04em] leading-[0.9] uppercase font-[family-name:var(--font-display)] text-center pointer-events-none select-none drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]">
             {heroWords.map((word) => (
               <span key={word.text} className={`${word.className} block`}>
                 {word.text}
@@ -436,10 +436,8 @@ function Hero() {
         </div>
 
         {/* Subtitle — sits just below the headline on mobile, normal on desktop */}
-        <p className="relative z-20 -mt-24 sm:-mt-6 text-center text-base sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed px-4 font-semibold" style={{ color: "#ffffff", textShadow: "0 2px 10px rgba(0,0,0,0.9), 0 0 2px rgba(0,0,0,0.8)" }}>
-          I work with people who want to feel stronger, understand and learn to move
-          better, and actually enjoy the progress doing so. Training and nutrition
-          online or right&nbsp;here&nbsp;in&nbsp;Berlin.
+        <p className="relative z-20 -mt-16 sm:-mt-6 text-center text-base sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed px-4 font-semibold" style={{ color: "#ffffff", textShadow: "0 2px 10px rgba(0,0,0,0.9), 0 0 2px rgba(0,0,0,0.8)" }}>
+          Get stronger, move better, enjoy the process. Training &amp; nutrition — online or in Berlin.
         </p>
 
         {/* Bottom stats row */}
@@ -551,17 +549,22 @@ function About() {
             </h2>
             <div className="mt-8 space-y-5 text-zinc-600 leading-relaxed text-lg">
               <p>
-                I&apos;m Luke Satterly, but most people call me Coach Luki. I train out of{" "}
-                <strong className="text-stone-900">Holmes Place</strong> and{" "}
-                <strong className="text-stone-900">John Reed</strong> here in Berlin,
-                and I also coach people online. I believe that physical and mental well-being
-                are interconnected, and my approach to personal training reflects this philosophy.
+                I&apos;m Luke Satterly, but most people call me Coach Luki. I coach in person at{" "}
+                <strong className="text-stone-900">John Reed Bötzow</strong> in Prenzlauer Berg
+                and at <strong className="text-stone-900">McFit</strong> locations across Berlin,
+                plus online from anywhere.
               </p>
               <p>
-                My mission is to guide my clients towards their fitness goals by providing a safe,
-                supportive, and challenging environment. I empower my clients to push beyond their
-                limits and unleash their full potential — so they don&apos;t just look good but
-                feel good from the inside out. Happiness is derived through progress. Enjoy the progress!
+                My focus is on helping people <strong className="text-stone-900">understand how
+                to move better</strong>. That means teaching you <em>why</em> an exercise works,
+                not just how to do it — so you train smarter, rebuild after pain or injury, and
+                actually enjoy the process.
+              </p>
+              <p>
+                With a background in <strong className="text-stone-900">rehabilitation</strong>{" "}
+                and a degree in Prevention &amp; Health Management, I work with clients recovering
+                from back and neck pain, returning from injury, or simply wanting to move without
+                limits. Happiness is derived through progress. Enjoy the progress.
               </p>
             </div>
 
@@ -607,7 +610,7 @@ function Services() {
         </svg>
       ),
       title: "1-on-1 Personal Training",
-      description: "We train together at Holmes Place or John Reed here in Berlin. Every session is built around your goals, your body, and what actually fits your life.",
+      description: "We train together at John Reed Bötzow in Prenzlauer Berg or at McFit locations across Berlin. Every session is built around your goals, your body, and what actually fits your life.",
       features: ["Custom workout plans", "Form correction", "Progressive overload tracking", "Flexible scheduling"],
     },
     {
@@ -944,34 +947,34 @@ function Pricing() {
             and we&apos;ll get you set up.
           </p>
 
-          {/* Tab toggle */}
-          <div className="mt-10 inline-flex rounded-full bg-stone-100 p-1">
+          {/* Tab toggle — flex on mobile wraps, all three tabs high-contrast so none get missed */}
+          <div className="mt-10 inline-flex flex-wrap justify-center gap-2 rounded-full bg-stone-100 p-1.5 max-w-full">
             <button
               onClick={() => setTab("personal")}
-              className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer ${
+              className={`px-4 sm:px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer border ${
                 tab === "personal"
-                  ? "bg-stone-900 text-white shadow-md"
-                  : "text-stone-500 hover:text-stone-700"
+                  ? "bg-accent text-white shadow-[0_4px_14px_rgba(0,102,51,0.25)] border-accent"
+                  : "bg-white text-accent-dark border-accent/30 hover:bg-accent/5 hover:border-accent/60"
               }`}
             >
               Personal Training
             </button>
             <button
               onClick={() => setTab("online")}
-              className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer ${
+              className={`px-4 sm:px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer border ${
                 tab === "online"
-                  ? "bg-stone-900 text-white shadow-md"
-                  : "text-stone-500 hover:text-stone-700"
+                  ? "bg-accent text-white shadow-[0_4px_14px_rgba(0,102,51,0.25)] border-accent"
+                  : "bg-white text-accent-dark border-accent/30 hover:bg-accent/5 hover:border-accent/60"
               }`}
             >
               Online Coaching
             </button>
             <button
               onClick={() => setTab("corporate")}
-              className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer ${
+              className={`px-4 sm:px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer border ${
                 tab === "corporate"
-                  ? "bg-stone-900 text-white shadow-md"
-                  : "text-stone-500 hover:text-stone-700"
+                  ? "bg-accent text-white shadow-[0_4px_14px_rgba(0,102,51,0.25)] border-accent"
+                  : "bg-white text-accent-dark border-accent/30 hover:bg-accent/5 hover:border-accent/60"
               }`}
             >
               Corporate Fitness
@@ -1290,15 +1293,15 @@ function MethodStep({
               : {}
           }
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center transition-colors duration-500 ${
+          className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center transition-colors duration-500 border ${
             isActive
-              ? "bg-stone-900 shadow-[0_0_20px_rgba(0,102,51,0.4)]"
-              : "bg-stone-200"
+              ? "bg-[#0C0C0C] border-accent/60 shadow-[0_0_20px_rgba(0,180,90,0.45)]"
+              : "bg-white/10 border-white/20"
           }`}
         >
           <span
             className={`text-base sm:text-lg font-bold transition-colors duration-500 ${
-              isActive ? "text-accent" : "text-stone-400"
+              isActive ? "text-accent" : "text-white/50"
             }`}
           >
             {s.step}
@@ -1308,20 +1311,20 @@ function MethodStep({
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
-        animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0.25, y: 10 }}
+        animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0.35, y: 10 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="flex-1 pt-1"
       >
         <h3
           className={`text-lg sm:text-xl font-semibold mb-2 transition-colors duration-500 ${
-            isActive ? "text-stone-900" : "text-stone-300"
+            isActive ? "text-white" : "text-white/60"
           }`}
         >
           {s.title}
         </h3>
         <p
           className={`text-sm sm:text-base leading-relaxed transition-colors duration-500 ${
-            isActive ? "text-zinc-500" : "text-zinc-300"
+            isActive ? "text-zinc-300" : "text-zinc-400"
           }`}
         >
           {s.description}
@@ -1367,8 +1370,22 @@ function Method() {
   ];
 
   return (
-    <section id="method" className="py-8 sm:py-12 px-4 sm:px-6">
-      <div ref={sectionRef} className="max-w-7xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16 overflow-hidden">
+    <section id="method" className="relative py-8 sm:py-12 px-4 sm:px-6">
+      <div ref={sectionRef} className="relative max-w-7xl mx-auto rounded-[1.25rem] lg:rounded-[2rem] py-20 sm:py-28 px-6 sm:px-10 lg:px-16 overflow-hidden">
+        {/* Running-pic backdrop */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/luke-running.jpeg"
+            alt=""
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-[#0C0C0C]/75" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0C0C0C]/60 via-[#0C0C0C]/70 to-[#0C0C0C]/90" />
+        </div>
+
+        <div className="relative z-10">
         <motion.div
           initial={{ y: 40, scale: 0.85 }}
           whileInView={{ y: 0, scale: 1 }}
@@ -1376,13 +1393,13 @@ function Method() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16 sm:mb-20"
         >
-          <span className="text-accent-dark text-sm font-medium uppercase tracking-widest">
+          <span className="text-accent text-sm font-medium uppercase tracking-widest">
             The Process
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4 text-stone-900">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4 text-white">
             The Luki Method
           </h2>
-          <p className="text-zinc-500 mt-6 max-w-lg mx-auto text-lg">
+          <p className="text-zinc-300 mt-6 max-w-lg mx-auto text-lg">
             Here&apos;s how we work together, step by step.
           </p>
         </motion.div>
@@ -1390,8 +1407,8 @@ function Method() {
         {/* ── Desktop: nodes row with connectors, then text below ── */}
         <div className="hidden lg:block">
           <div className="relative flex items-center justify-between max-w-3xl mx-auto mb-12">
-            <div className="absolute top-1/2 left-[10px] right-[10px] h-0.5 -translate-y-1/2 bg-stone-200 rounded-full" />
-            <div className="absolute top-1/2 left-[10px] right-[10px] h-0.5 -translate-y-1/2 bg-gradient-to-r from-accent via-accent-dark to-accent rounded-full shadow-[0_0_8px_rgba(0,102,51,0.3)]" />
+            <div className="absolute top-1/2 left-[10px] right-[10px] h-0.5 -translate-y-1/2 bg-white/15 rounded-full" />
+            <div className="absolute top-1/2 left-[10px] right-[10px] h-0.5 -translate-y-1/2 bg-gradient-to-r from-accent via-accent-light to-accent rounded-full shadow-[0_0_8px_rgba(0,180,90,0.5)]" />
             {steps.map((s, i) => (
               <motion.div
                 key={s.step}
@@ -1399,7 +1416,7 @@ function Method() {
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
-                className="relative z-10 w-20 h-20 rounded-2xl bg-stone-900 flex items-center justify-center shadow-[0_0_25px_rgba(0,102,51,0.2)]"
+                className="relative z-10 w-20 h-20 rounded-2xl bg-[#0C0C0C] flex items-center justify-center shadow-[0_0_25px_rgba(0,180,90,0.35)] border border-accent/40"
               >
                 <span className="text-2xl font-bold text-accent">{s.step}</span>
               </motion.div>
@@ -1415,8 +1432,8 @@ function Method() {
                 transition={{ duration: 0.5, delay: 0.3 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 className="text-center"
               >
-                <h3 className="text-xl font-semibold text-stone-900 mb-3">{s.title}</h3>
-                <p className="text-zinc-500 leading-relaxed">{s.description}</p>
+                <h3 className="text-xl font-semibold text-white mb-3">{s.title}</h3>
+                <p className="text-zinc-300 leading-relaxed">{s.description}</p>
               </motion.div>
             ))}
           </div>
@@ -1425,15 +1442,16 @@ function Method() {
         {/* ── Mobile / Tablet: single continuous timeline ── */}
         <div ref={timelineRef} className="lg:hidden relative max-w-md mx-auto">
           {/* Line centered on node: w-12 = 48px → center at 23px (48/2 - 1px for line width) */}
-          <div className="absolute left-[23px] sm:left-[27px] top-0 bottom-0 w-0.5 bg-stone-200" />
+          <div className="absolute left-[23px] sm:left-[27px] top-0 bottom-0 w-0.5 bg-white/15" />
           <motion.div
             style={{ height: lineHeight }}
-            className="absolute left-[23px] sm:left-[27px] top-0 w-0.5 bg-gradient-to-b from-accent to-accent-dark origin-top"
+            className="absolute left-[23px] sm:left-[27px] top-0 w-0.5 bg-gradient-to-b from-accent to-accent-light origin-top"
           />
 
           {steps.map((s) => (
             <MethodStep key={s.step} s={s} />
           ))}
+        </div>
         </div>
       </div>
     </section>
@@ -1645,14 +1663,14 @@ function Experience() {
 
   const experiences = [
     {
-      company: "Holmes Place & John Reed, Berlin",
-      period: "2022 - Present",
+      company: "John Reed Bötzow & McFit, Berlin",
+      period: "2023 - Present",
       role: "Personal Trainer",
-      description: "Helping clients reach their fitness goals in a structured and supportive environment. One-on-one coaching focused on strength, mobility, and lasting results.",
+      description: "One-on-one coaching focused on strength, mobility, rehab, and helping clients truly understand how to move better. In-person and online.",
     },
     {
-      company: "Surf & Strength, Morocco",
-      period: "2022",
+      company: "Surf & Strength, Sri Lanka",
+      period: "2025",
       role: "Strength Coach",
       description: "Led strength classes with surfers, combining functional training with an active outdoor lifestyle.",
     },
@@ -1670,7 +1688,7 @@ function Experience() {
     },
     {
       company: "Duale Hochschule für Prävention und Gesundheit",
-      period: "2019 - 2021",
+      period: "2019 - 2023",
       role: "Degree in Prevention & Health",
       description: "Earned my degree in prevention and health management, building the scientific foundation behind my coaching approach.",
     },
@@ -1826,20 +1844,29 @@ function Testimonials() {
           </motion.div>
         </div>
 
-        {/* Desktop: auto-scrolling marquee */}
+        {/* Desktop: swipeable/draggable carousel */}
         <div className="hidden md:block relative overflow-hidden">
-          <div className="absolute left-0 top-0 bottom-0 w-40 lg:w-60 bg-gradient-to-r from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-40 lg:w-60 bg-gradient-to-l from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-20 lg:w-40 bg-gradient-to-r from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-20 lg:w-40 bg-gradient-to-l from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
 
           <motion.div
-            className="flex gap-6 px-6"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+            className="flex gap-6 px-6 cursor-grab active:cursor-grabbing"
+            drag="x"
+            dragConstraints={{
+              left: -(testimonials.length - 1) * 440,
+              right: 0,
+            }}
+            dragElastic={0.1}
+            dragTransition={{ bounceStiffness: 300, bounceDamping: 30 }}
           >
-            {[...testimonials, ...testimonials].map((t, i) => (
-              <TestimonialCard key={`desktop-${t.name}-${i}`} t={t} className="w-[380px] lg:w-[420px]" />
+            {testimonials.map((t) => (
+              <TestimonialCard key={`desktop-${t.name}`} t={t} className="w-[380px] lg:w-[420px]" />
             ))}
           </motion.div>
+
+          <p className="text-center text-zinc-400 text-xs mt-6 uppercase tracking-wider">
+            Drag to see more
+          </p>
         </div>
 
         {/* Mobile: swipeable carousel */}
@@ -1990,7 +2017,7 @@ function FAQ() {
     },
     {
       question: "What gyms do you train at?",
-      answer: "I train clients at Holmes Place and John Reed here in Berlin. You pick whichever location is more convenient for you.",
+      answer: "My home base is John Reed Bötzow in Prenzlauer Berg, where most of my in-person coaching happens. I can also train you at McFit locations across Berlin — whichever is most convenient for your schedule.",
     },
   ];
 
@@ -2346,16 +2373,18 @@ function Locations() {
 
   const gyms = [
     {
-      name: "Holmes Place",
-      type: "Premium Fitness Club",
-      address: "Berlin",
-      description: "A premium fitness environment with top-tier equipment. Ideal for focused strength work, functional training, and personal coaching sessions.",
+      name: "John Reed Bötzow",
+      type: "Home Base — Boutique Fitness Club",
+      address: "Prenzlauer Berg, Berlin",
+      description: "Where fitness meets music, art, and design. Great atmosphere and equipment for strength work, functional training, mobility, and ring sessions. This is where most of my in-person coaching happens.",
+      featured: true,
     },
     {
-      name: "John Reed",
-      type: "Boutique Fitness Club",
-      address: "Berlin",
-      description: "Where fitness meets music, art, and design. Great atmosphere and equipment for strength work, functional training, and ring sessions.",
+      name: "McFit",
+      type: "Flexible Locations",
+      address: "Multiple Berlin locations",
+      description: "Convenient spots across the city with everything you need for strength and conditioning work. Pick whichever is easiest for your schedule.",
+      featured: false,
     },
   ];
 
@@ -2380,12 +2409,12 @@ function Locations() {
             Where I <span className="gradient-text">train</span>
           </h2>
           <p className="text-zinc-400 mt-6 max-w-lg mx-auto text-lg">
-            Two great gyms in Berlin. Pick whichever one works better for you.
+            I coach out of John Reed Bötzow in Prenzlauer Berg, plus McFit locations across Berlin.
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          {gyms.map((gym, i) => (
+          {gyms.map((gym) => (
             <motion.div
               key={gym.name}
               initial={{ y: 40, scale: 0.85 }}
@@ -2395,8 +2424,17 @@ function Locations() {
               viewport={{ once: true }}
 
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="group p-8 sm:p-10 rounded-2xl bg-surface border border-white/[0.04] hover:border-accent/20 transition-all duration-500"
+              className={`relative group p-8 sm:p-10 rounded-2xl bg-surface transition-all duration-500 ${
+                gym.featured
+                  ? "border-2 border-accent/60 shadow-[0_0_40px_rgba(0,102,51,0.15)]"
+                  : "border border-white/[0.04] hover:border-accent/20"
+              }`}
             >
+              {gym.featured && (
+                <span className="absolute -top-3 right-6 px-3 py-1 rounded-full bg-accent text-white text-xs font-semibold uppercase tracking-wider">
+                  Home Base
+                </span>
+              )}
               <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent mb-5">
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />

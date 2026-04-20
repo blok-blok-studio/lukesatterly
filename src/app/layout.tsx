@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     template: "%s | Coach Luki",
   },
   description:
-    "Personal training and nutrition coaching in Berlin with Coach Luki. In-person sessions at John Reed Bötzow and EVO Spittelmarkt, plus online coaching. Vegan-friendly, bilingual (EN/DE).",
+    "Personal training and nutrition coaching in Berlin with Coach Luki. In-person sessions at John Reed Bötzow and McFit locations, plus online coaching. Vegan-friendly, bilingual (EN/DE).",
   keywords: [
     "personal trainer berlin",
     "personal training berlin",
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     siteName: "Coach Luki",
     title: "Coach Luki | Personal Trainer & Nutritionist in Berlin",
     description:
-      "Train in person at John Reed Bötzow or EVO Spittelmarkt, or work with me online from anywhere. Custom training programs, nutrition coaching, and real results.",
+      "Train in person at John Reed Bötzow or McFit locations, or work with me online from anywhere. Custom training programs, nutrition coaching, and real results.",
     images: [
       {
         url: "/luke.jpg",
@@ -84,7 +84,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Coach Luki | Personal Trainer & Nutritionist in Berlin",
     description:
-      "Personal training and nutrition coaching in Berlin. In-person at John Reed Bötzow & EVO Spittelmarkt, plus online coaching worldwide.",
+      "Personal training and nutrition coaching in Berlin. In-person at John Reed Bötzow & McFit, plus online coaching worldwide.",
     images: ["/luke.jpg"],
     creator: "@coachluki",
   },
@@ -113,7 +113,7 @@ const jsonLd = {
       name: "Coach Luki - Personal Training & Nutrition",
       alternateName: "Coach Luki",
       description:
-        "Personal training and nutrition coaching in Berlin. In-person sessions at John Reed Bötzow and EVO Spittelmarkt, plus online coaching worldwide.",
+        "Personal training and nutrition coaching in Berlin. In-person sessions at John Reed Bötzow and McFit locations, plus online coaching worldwide.",
       url: siteUrl,
       image: `${siteUrl}/luke.jpg`,
       telephone: "+4915129633927",
@@ -130,12 +130,10 @@ const jsonLd = {
         },
         {
           "@type": "PostalAddress",
-          streetAddress: "Spittelmarkt",
           addressLocality: "Berlin",
           addressRegion: "Berlin",
-          postalCode: "10117",
           addressCountry: "DE",
-          name: "EVO Spittelmarkt",
+          name: "McFit Berlin (multiple locations)",
         },
       ],
       geo: {
@@ -303,7 +301,7 @@ const jsonLd = {
           name: "What gyms do you train at?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "I train clients at Holmes Place and John Reed in Berlin. You pick whichever location is more convenient for you.",
+            text: "My home base is John Reed Bötzow in Prenzlauer Berg. I also train clients at McFit locations across Berlin.",
           },
         },
       ],
