@@ -400,7 +400,7 @@ function Hero() {
                     "radial-gradient(circle at 50% 105%, rgba(0,180,90,0.35) 0%, transparent 50%)",
                 }}
               />
-              <span className="relative z-10 flex items-center justify-center w-full h-full text-white text-[0.7rem] sm:text-xs md:text-sm font-semibold text-center leading-tight px-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]">
+              <span className="relative z-10 flex items-center justify-center w-full h-full text-white text-[0.7rem] sm:text-xs md:text-base lg:text-xl xl:text-xl font-semibold text-center leading-tight px-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]">
                 Let&apos;s Get<br />Started
               </span>
             </motion.button>
@@ -428,7 +428,7 @@ function Hero() {
                     "radial-gradient(circle at 50% 105%, rgba(0,180,90,0.3) 0%, transparent 50%)",
                 }}
               />
-              <span className="relative z-10 flex items-center justify-center w-full h-full text-white text-[0.7rem] sm:text-xs md:text-sm font-semibold text-center leading-tight px-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)]">
+              <span className="relative z-10 flex items-center justify-center w-full h-full text-white text-[0.7rem] sm:text-xs md:text-base lg:text-xl xl:text-xl font-semibold text-center leading-tight px-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)]">
                 Learn<br />More
               </span>
             </motion.button>
