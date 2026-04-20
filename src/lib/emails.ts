@@ -16,6 +16,7 @@
 const BRAND_COLOR = "#006633";
 const SITE_URL = "https://coachluki.com";
 const CALENDAR_URL = "https://calendar.app.google/pascCaTPLUFBJspR6";
+const GUIDE_URL = `${SITE_URL}/coach-luki-training-guide.pdf`;
 const BUSINESS_NAME = "Coach Luki, Personal Training & Nutrition";
 const BUSINESS_LOCATION = "Berlin, Germany";
 
@@ -107,7 +108,7 @@ export function welcomeEmail(
       programming I use with my 1-on-1 coaching clients. Real structure, real
       progressive overload, no fluff.
     </p>
-    ${buttonHtml("Download your template", CALENDAR_URL)}
+    ${buttonHtml("Download your template", GUIDE_URL)}
     <p style="line-height: 1.7;">
       Inside you'll find a 4-week program, exercise cues, a nutrition framework,
       and a progress tracking sheet. Give it a real go for at least 2 weeks
@@ -124,7 +125,7 @@ export function welcomeEmail(
 
 Thanks for grabbing the workout template. This is the same kind of programming I use with my 1-on-1 coaching clients. Real structure, real progressive overload, no fluff.
 
-Download your template: ${CALENDAR_URL}
+Download your template: ${GUIDE_URL}
 
 Inside you'll find a 4-week program, exercise cues, a nutrition framework, and a progress tracking sheet. Give it a real go for at least 2 weeks before judging it.
 
