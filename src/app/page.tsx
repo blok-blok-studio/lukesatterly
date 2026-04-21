@@ -1326,9 +1326,18 @@ function MethodStep({
 
   return (
     <div ref={itemRef} className={`relative flex gap-5 sm:gap-6 ${isLast ? "" : "pb-8 sm:pb-10"}`}>
-      {/* Column holds the dot + connector line BELOW it. No connector on the
-          last step so the timeline visually terminates at the final dot. */}
-      <div className="shrink-0 z-10 flex flex-col items-center">
+      {/* Connector — absolute so it bridges through the pb padding to the
+          next item's dot (flex-1 would be capped to the content box). */}
+      {!isLast && (
+        <div
+          aria-hidden
+          className={`absolute left-[23px] sm:left-[27px] top-14 sm:top-16 bottom-0 w-0.5 -translate-x-px transition-colors duration-700 ${
+            isActive ? "bg-gradient-to-b from-accent to-accent-light" : "bg-white/15"
+          }`}
+        />
+      )}
+
+      <div className="shrink-0 z-10">
         <motion.div
           animate={
             isActive
@@ -1350,13 +1359,6 @@ function MethodStep({
             {s.step}
           </span>
         </motion.div>
-        {!isLast && (
-          <div
-            className={`w-0.5 flex-1 mt-2 transition-colors duration-700 ${
-              isActive ? "bg-gradient-to-b from-accent to-accent-light" : "bg-white/15"
-            }`}
-          />
-        )}
       </div>
 
       <motion.div
@@ -1612,10 +1614,20 @@ function ExperienceItem({
   const isActive = useInView(itemRef, { once: true, margin: "0px 0px -35% 0px" });
 
   return (
-    <div ref={itemRef} className={`relative ${isLast ? "" : "mb-16"}`}>
+    <div ref={itemRef} className="relative">
       {/* ── Mobile layout ── */}
-      <div className="flex gap-5 sm:hidden">
-        <div className="shrink-0 w-4 flex flex-col items-center z-10">
+      <div className={`relative flex gap-5 sm:hidden ${isLast ? "" : "pb-12"}`}>
+        {/* Connector — absolute so it bridges the padding down to the next
+            item's dot. Dot column is w-4 centered → line at 7px. */}
+        {!isLast && (
+          <div
+            aria-hidden
+            className={`absolute left-[7px] top-7 bottom-0 w-0.5 transition-colors duration-700 ${
+              isActive ? "bg-gradient-to-b from-accent to-accent-dark" : "bg-stone-200"
+            }`}
+          />
+        )}
+        <div className="shrink-0 w-4 flex justify-center z-10">
           <motion.div
             animate={
               isActive
@@ -1623,19 +1635,12 @@ function ExperienceItem({
                 : {}
             }
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className={`w-4 h-4 rounded-full mt-1 shrink-0 transition-colors duration-500 ${
+            className={`w-4 h-4 rounded-full mt-1 transition-colors duration-500 ${
               isActive
                 ? "bg-stone-900 border-[3px] border-accent shadow-[0_0_12px_rgba(0,102,51,0.4)]"
                 : "bg-white border-[3px] border-stone-300"
             }`}
           />
-          {!isLast && (
-            <div
-              className={`w-0.5 flex-1 mt-2 transition-colors duration-700 ${
-                isActive ? "bg-gradient-to-b from-accent to-accent-dark" : "bg-stone-200"
-              }`}
-            />
-          )}
         </div>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
