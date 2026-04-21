@@ -363,11 +363,12 @@ function Hero() {
             />
 
             {/* Gradient tint on Luke ONLY (z-20) — uses the cutout PNG as a
-                mask so the gradient is clipped to his silhouette; the
-                transparent area around him stays untouched. Intersected with
-                the same bottom fade as the base image so the tint also
-                dissolves with his legs. mix-blend-mode: overlay keeps his
-                photo details while shifting tones toward brand green. */}
+                single mask so the gradient is clipped to his silhouette; the
+                transparent area around him stays untouched. mix-blend-mode:
+                overlay keeps his photo details while shifting tones toward
+                brand green. We skip a composited second mask because iOS
+                Safari's mask-composite support is unreliable and fell back
+                to painting a horizontal band across the wrapper. */}
             <div
               aria-hidden
               className="absolute inset-0 z-20 pointer-events-none"
@@ -375,18 +376,14 @@ function Hero() {
                 background:
                   "linear-gradient(to bottom, rgba(0,180,90,0.55) 0%, rgba(0,128,61,0.20) 45%, rgba(0,60,28,0.55) 100%)",
                 mixBlendMode: "overlay",
-                maskImage:
-                  "url(/luke-cutout-full.png), linear-gradient(to bottom, transparent 0%, black 12%, black 55%, rgba(0,0,0,0.6) 75%, rgba(0,0,0,0.25) 88%, transparent 100%)",
-                maskSize: "contain, 100% 100%",
-                maskPosition: "center, center",
-                maskRepeat: "no-repeat, no-repeat",
-                maskComposite: "intersect",
-                WebkitMaskImage:
-                  "url(/luke-cutout-full.png), linear-gradient(to bottom, transparent 0%, black 12%, black 55%, rgba(0,0,0,0.6) 75%, rgba(0,0,0,0.25) 88%, transparent 100%)",
-                WebkitMaskSize: "contain, 100% 100%",
-                WebkitMaskPosition: "center, center",
-                WebkitMaskRepeat: "no-repeat, no-repeat",
-                WebkitMaskComposite: "source-in",
+                maskImage: "url(/luke-cutout-full.png)",
+                maskSize: "contain",
+                maskPosition: "center",
+                maskRepeat: "no-repeat",
+                WebkitMaskImage: "url(/luke-cutout-full.png)",
+                WebkitMaskSize: "contain",
+                WebkitMaskPosition: "center",
+                WebkitMaskRepeat: "no-repeat",
               }}
             />
 
