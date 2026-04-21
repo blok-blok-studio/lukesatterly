@@ -362,31 +362,6 @@ function Hero() {
               }}
             />
 
-            {/* Gradient tint on Luke ONLY (z-20) — uses the cutout PNG as a
-                single mask so the gradient is clipped to his silhouette; the
-                transparent area around him stays untouched. mix-blend-mode:
-                overlay keeps his photo details while shifting tones toward
-                brand green. We skip a composited second mask because iOS
-                Safari's mask-composite support is unreliable and fell back
-                to painting a horizontal band across the wrapper. */}
-            <div
-              aria-hidden
-              className="absolute inset-0 z-20 pointer-events-none"
-              style={{
-                background:
-                  "linear-gradient(to bottom, rgba(0,180,90,0.55) 0%, rgba(0,128,61,0.20) 45%, rgba(0,60,28,0.55) 100%)",
-                mixBlendMode: "overlay",
-                maskImage: "url(/luke-cutout-full.png)",
-                maskSize: "contain",
-                maskPosition: "center",
-                maskRepeat: "no-repeat",
-                WebkitMaskImage: "url(/luke-cutout-full.png)",
-                WebkitMaskSize: "contain",
-                WebkitMaskPosition: "center",
-                WebkitMaskRepeat: "no-repeat",
-              }}
-            />
-
             {/* Hands + rings overlay (z-30) — same image, masked to ONLY show
                 the top portion (rings + hands + forearms) so they appear IN FRONT
                 of the buttons. The mask fades out below the rings so nothing else
