@@ -334,9 +334,15 @@ function Hero() {
       <h1 className="hidden sm:flex absolute inset-0 z-0 items-center justify-center pointer-events-none select-none">
         <span className="block w-full max-w-7xl mx-auto px-6 text-center text-[clamp(3rem,8.5vw,8rem)] font-black tracking-[-0.05em] leading-[0.88] uppercase font-[family-name:var(--font-display)]">
           {heroWords.map((word) => (
-            <span key={word.text} className={`${word.className} block`}>
+            <motion.span
+              key={word.text}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: word.delay, ease: [0.16, 1, 0.3, 1] }}
+              className={`${word.className} block`}
+            >
               {word.text}
-            </span>
+            </motion.span>
           ))}
         </span>
       </h1>
@@ -357,9 +363,15 @@ function Hero() {
               const mobileClass =
                 word.className === "gradient-text" ? "text-accent-light" : word.className;
               return (
-                <span key={word.text} className={`${mobileClass} block`}>
+                <motion.span
+                  key={word.text}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: word.delay, ease: [0.16, 1, 0.3, 1] }}
+                  className={`${mobileClass} block`}
+                >
                   {word.text}
-                </span>
+                </motion.span>
               );
             })}
           </h1>
