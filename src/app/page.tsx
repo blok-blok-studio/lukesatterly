@@ -326,11 +326,22 @@ function Hero() {
         <div className="relative flex items-center justify-center">
           {/* Mobile-only overlay headline — sits on Luke's chest */}
           <h1 className="sm:hidden absolute left-1/2 top-[78%] -translate-x-1/2 -translate-y-1/2 z-30 w-full text-[clamp(1.75rem,7.5vw,5.5rem)] font-black tracking-[-0.04em] leading-[0.9] uppercase font-[family-name:var(--font-display)] text-center pointer-events-none select-none">
-            {heroWords.map((word) => (
-              <span key={word.text} className={`${word.className} block`}>
-                {word.text}
-              </span>
-            ))}
+            {heroWords.map((word) => {
+              // On mobile the headline lives inside a parallaxing motion.div
+              // (transform ancestor), which trips an iOS Safari bug where
+              // background-clip:text (used by .gradient-text) fails on first
+              // paint and renders a black box around the word until a scroll
+              // forces a repaint. Swap the chapter gradient for a solid
+              // accent-light on mobile only — desktop h1 is outside the
+              // transform and keeps the gradient.
+              const mobileClass =
+                word.className === "gradient-text" ? "text-accent-light" : word.className;
+              return (
+                <span key={word.text} className={`${mobileClass} block`}>
+                  {word.text}
+                </span>
+              );
+            })}
           </h1>
 
           {/* Cutout wrapper — buttons positioned relative to it */}
