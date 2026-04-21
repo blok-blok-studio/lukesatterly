@@ -1770,7 +1770,7 @@ function Experience() {
 /* ─────────────────── TESTIMONIAL CARD ─────────────────── */
 function TestimonialCard({ t, className = "" }: { t: { name: string; text: string }; className?: string }) {
   return (
-    <div className={`flex-shrink-0 bg-surface border border-white/[0.06] rounded-2xl p-8 hover:border-accent/20 transition-all duration-500 ${className}`}>
+    <div className={`flex-shrink-0 flex flex-col h-full bg-surface border border-white/[0.06] rounded-2xl p-8 hover:border-accent/20 transition-all duration-500 ${className}`}>
       <div className="flex items-center gap-1 mb-4">
         {[...Array(5)].map((_, j) => (
           <svg key={j} className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
@@ -1781,7 +1781,7 @@ function TestimonialCard({ t, className = "" }: { t: { name: string; text: strin
       <p className="text-zinc-300 leading-relaxed italic mb-6">
         &ldquo;{t.text}&rdquo;
       </p>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 mt-auto">
         <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
           <span className="text-accent font-semibold text-sm">{t.name[0]}</span>
         </div>
@@ -1891,7 +1891,7 @@ function Testimonials() {
           <div className="absolute right-0 top-0 bottom-0 w-20 lg:w-40 bg-gradient-to-l from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
 
           <motion.div
-            className="flex items-start gap-6 px-6 cursor-grab active:cursor-grabbing"
+            className="flex items-stretch gap-6 px-6 cursor-grab active:cursor-grabbing"
             style={{ x: desktopX, touchAction: "pan-y" }}
             drag="x"
             dragDirectionLock
@@ -1946,7 +1946,7 @@ function Testimonials() {
           <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
 
           <motion.div
-            className="flex items-start gap-4 px-6 cursor-grab active:cursor-grabbing"
+            className="flex items-stretch gap-4 px-6 cursor-grab active:cursor-grabbing"
             style={{ touchAction: "pan-y" }}
             drag="x"
             dragDirectionLock
