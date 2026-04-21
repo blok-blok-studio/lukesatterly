@@ -259,21 +259,3 @@ h1, h2, h3 {
   z-index: 10;
 }
 
-/* Outlined / stroke text for hero punch */
-.text-outline {
-  -webkit-text-stroke: 1.5px var(--accent);
-  -webkit-text-fill-color: transparent;
-}
-
-@media (min-width: 640px) {
-  .text-outline {
-    /* Thicker stroke on desktop for better legibility — same brand green */
-    -webkit-text-stroke: 3px var(--accent);
-  }
-}
-
-@media (min-width: 1024px) {
-  .text-outline {
-    -webkit-text-stroke: 4px var(--accent);
-  }
-}

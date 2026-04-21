@@ -243,9 +243,29 @@ function Hero() {
   });
   const y = useTransform(scrollYProgress, [0, 1], [0, 150]);
 
+  // Parallax is desktop-only. On mobile the y transform makes the wrapper
+  // a GPU compositor layer, which triggers an iOS WebKit paint bug on any
+  // descendant using mask-image / mix-blend-mode / background-clip:text —
+  // those elements render incorrectly until the first scroll forces a
+  // repaint (visible as a dark box under CHAPTER on load). No ancestor
+  // transform = no bug.
+  const [enableParallax, setEnableParallax] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 640px)");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setEnableParallax(mq.matches && !reduce.matches);
+    update();
+    mq.addEventListener("change", update);
+    reduce.addEventListener("change", update);
+    return () => {
+      mq.removeEventListener("change", update);
+      reduce.removeEventListener("change", update);
+    };
+  }, []);
+
   const heroWords = [
     { text: "Your", className: "text-white", delay: 0.1 },
-    { text: "strongest", className: "text-outline", delay: 0.3 },
+    { text: "strongest", className: "text-accent", delay: 0.3 },
     { text: "chapter", className: "gradient-text", delay: 0.5 },
   ];
 
@@ -321,32 +341,31 @@ function Hero() {
         </span>
       </h1>
 
-      <motion.div style={{ y }} className="relative z-30 max-w-7xl mx-auto px-6 pt-24 sm:pt-24 pb-10 min-h-[100dvh] flex flex-col justify-start sm:justify-center gap-0">
+      <motion.div style={enableParallax ? { y } : undefined} className="relative z-30 max-w-7xl mx-auto px-6 pt-24 sm:pt-24 pb-10 min-h-[100dvh] flex flex-col justify-start sm:justify-center gap-0">
         {/* Image + overlaid headline + buttons */}
         <div className="relative flex items-center justify-center">
           {/* Mobile-only overlay headline — sits on Luke's chest */}
-          <h1 className="sm:hidden absolute left-1/2 top-[78%] -translate-x-1/2 -translate-y-1/2 z-30 w-full text-[clamp(1.75rem,7.5vw,5.5rem)] font-black tracking-[-0.04em] leading-[0.9] uppercase font-[family-name:var(--font-display)] text-center pointer-events-none select-none drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]">
-            {heroWords.map((word) => (
-              <span key={word.text} className={`${word.className} block`}>
-                {word.text}
-              </span>
-            ))}
+          <h1 className="sm:hidden absolute left-1/2 top-[78%] -translate-x-1/2 -translate-y-1/2 z-30 w-full text-[clamp(1.75rem,7.5vw,5.5rem)] font-black tracking-[-0.04em] leading-[0.9] uppercase font-[family-name:var(--font-display)] text-center pointer-events-none select-none">
+            {heroWords.map((word) => {
+              // On mobile the headline lives inside a parallaxing motion.div
+              // (transform ancestor), which trips an iOS Safari bug where
+              // background-clip:text (used by .gradient-text) fails on first
+              // paint and renders a black box around the word until a scroll
+              // forces a repaint. Swap the chapter gradient for a solid
+              // accent-light on mobile only — desktop h1 is outside the
+              // transform and keeps the gradient.
+              const mobileClass =
+                word.className === "gradient-text" ? "text-accent-light" : word.className;
+              return (
+                <span key={word.text} className={`${mobileClass} block`}>
+                  {word.text}
+                </span>
+              );
+            })}
           </h1>
 
           {/* Cutout wrapper — buttons positioned relative to it */}
           <div className="relative z-10 w-full max-w-[320px] sm:max-w-[340px] lg:max-w-[380px] aspect-[2/3] mx-auto">
-            {/* Soft ambient glow beneath Luke — catches the dissolve so legs
-                don't end on a hard cut. Fades into the dark green atmosphere. */}
-            <div
-              aria-hidden
-              className="absolute inset-x-0 bottom-0 h-[55%] z-[5] pointer-events-none"
-              style={{
-                background:
-                  "radial-gradient(ellipse at 50% 100%, rgba(0,102,51,0.22) 0%, rgba(0,102,51,0.10) 35%, transparent 70%)",
-                filter: "blur(14px)",
-              }}
-            />
-
             {/* Base cutout (z-10) — long fade from ~60% so legs dissolve gradually */}
             <Image
               src="/luke-cutout-full.png"
@@ -354,7 +373,7 @@ function Hero() {
               fill
               priority
               sizes="(max-width: 768px) 100vw, 400px"
-              className="object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] z-10"
+              className="object-contain z-10"
               style={{
                 maskImage:
                   "linear-gradient(to bottom, transparent 0%, black 12%, black 55%, rgba(0,0,0,0.6) 75%, rgba(0,0,0,0.25) 88%, transparent 100%)",
@@ -444,7 +463,7 @@ function Hero() {
         </div>
 
         {/* Subtitle — sits just below the headline on mobile, normal on desktop */}
-        <p className="relative z-20 -mt-5 sm:-mt-16 text-center text-base sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed px-4 font-semibold" style={{ color: "#ffffff", textShadow: "0 2px 10px rgba(0,0,0,0.9), 0 0 2px rgba(0,0,0,0.8)" }}>
+        <p className="relative z-20 -mt-28 sm:-mt-16 text-center text-base sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed px-4 font-semibold" style={{ color: "#ffffff", textShadow: "0 2px 10px rgba(0,0,0,0.9), 0 0 2px rgba(0,0,0,0.8)" }}>
           Get stronger, move better, enjoy the process. Training &amp; nutrition, online or in Berlin.
         </p>
 
@@ -481,7 +500,7 @@ function Hero() {
             animate={{ y: [0, 6, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
             onClick={() => smoothScrollTo("about")}
-            className="flex items-center gap-2 text-sm cursor-pointer transition-colors ml-auto font-semibold"
+            className="hidden sm:flex items-center gap-2 text-sm cursor-pointer transition-colors sm:ml-auto font-semibold"
             style={{ color: "#ffffff", textShadow: "0 1px 4px rgba(0,0,0,0.8)" }}
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
