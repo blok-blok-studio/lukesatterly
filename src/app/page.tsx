@@ -243,6 +243,26 @@ function Hero() {
   });
   const y = useTransform(scrollYProgress, [0, 1], [0, 150]);
 
+  // Parallax is desktop-only. On mobile the y transform makes the wrapper
+  // a GPU compositor layer, which triggers an iOS WebKit paint bug on any
+  // descendant using mask-image / mix-blend-mode / background-clip:text —
+  // those elements render incorrectly until the first scroll forces a
+  // repaint (visible as a dark box under CHAPTER on load). No ancestor
+  // transform = no bug.
+  const [enableParallax, setEnableParallax] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 640px)");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setEnableParallax(mq.matches && !reduce.matches);
+    update();
+    mq.addEventListener("change", update);
+    reduce.addEventListener("change", update);
+    return () => {
+      mq.removeEventListener("change", update);
+      reduce.removeEventListener("change", update);
+    };
+  }, []);
+
   const heroWords = [
     { text: "Your", className: "text-white", delay: 0.1 },
     { text: "strongest", className: "text-accent", delay: 0.3 },
@@ -321,7 +341,7 @@ function Hero() {
         </span>
       </h1>
 
-      <motion.div style={{ y }} className="relative z-30 max-w-7xl mx-auto px-6 pt-24 sm:pt-24 pb-10 min-h-[100dvh] flex flex-col justify-start sm:justify-center gap-0">
+      <motion.div style={enableParallax ? { y } : undefined} className="relative z-30 max-w-7xl mx-auto px-6 pt-24 sm:pt-24 pb-10 min-h-[100dvh] flex flex-col justify-start sm:justify-center gap-0">
         {/* Image + overlaid headline + buttons */}
         <div className="relative flex items-center justify-center">
           {/* Mobile-only overlay headline — sits on Luke's chest */}
