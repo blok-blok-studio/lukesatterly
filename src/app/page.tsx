@@ -1314,8 +1314,10 @@ function useScrollThreshold(progress: ReturnType<typeof useTransform<number, num
 /* Single mobile Method step — activates when its node enters the viewport */
 function MethodStep({
   s,
+  isLast,
 }: {
   s: { step: string; title: string; description: string };
+  isLast: boolean;
 }) {
   const itemRef = useRef<HTMLDivElement>(null);
   /* Activate as soon as the node crosses ~35% down from the top of the viewport
@@ -1323,8 +1325,10 @@ function MethodStep({
   const isActive = useInView(itemRef, { once: true, margin: "0px 0px -35% 0px" });
 
   return (
-    <div ref={itemRef} className="relative flex gap-5 sm:gap-6 pb-8 sm:pb-10">
-      <div className="shrink-0 z-10">
+    <div ref={itemRef} className={`relative flex gap-5 sm:gap-6 ${isLast ? "" : "pb-8 sm:pb-10"}`}>
+      {/* Column holds the dot + connector line BELOW it. No connector on the
+          last step so the timeline visually terminates at the final dot. */}
+      <div className="shrink-0 z-10 flex flex-col items-center">
         <motion.div
           animate={
             isActive
@@ -1346,6 +1350,13 @@ function MethodStep({
             {s.step}
           </span>
         </motion.div>
+        {!isLast && (
+          <div
+            className={`w-0.5 flex-1 mt-2 transition-colors duration-700 ${
+              isActive ? "bg-gradient-to-b from-accent to-accent-light" : "bg-white/15"
+            }`}
+          />
+        )}
       </div>
 
       <motion.div
@@ -1375,15 +1386,6 @@ function MethodStep({
 
 function Method() {
   const sectionRef = useRef(null);
-  const timelineRef = useRef<HTMLDivElement>(null);
-
-  /* Scroll tracker drives ONLY the vertical line fill. Each step activates via
-     its own useInView for reliable on-center reveal timing. */
-  const { scrollYProgress } = useScroll({
-    target: timelineRef,
-    offset: ["start 70%", "end 60%"],
-  });
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   const steps = [
     {
@@ -1482,17 +1484,13 @@ function Method() {
           </div>
         </div>
 
-        {/* ── Mobile / Tablet: single continuous timeline ── */}
-        <div ref={timelineRef} className="lg:hidden relative max-w-md mx-auto">
-          {/* Line centered on node: w-12 = 48px → center at 23px (48/2 - 1px for line width) */}
-          <div className="absolute left-[23px] sm:left-[27px] top-0 bottom-0 w-0.5 bg-white/15" />
-          <motion.div
-            style={{ height: lineHeight }}
-            className="absolute left-[23px] sm:left-[27px] top-0 w-0.5 bg-gradient-to-b from-accent to-accent-light origin-top"
-          />
-
-          {steps.map((s) => (
-            <MethodStep key={s.step} s={s} />
+        {/* ── Mobile / Tablet: per-step connector lines so the timeline
+            starts at the first dot and terminates at the last dot. No
+            spanning absolute line / scroll tracker — activation colors
+            each connector via its step's useInView. ── */}
+        <div className="lg:hidden relative max-w-md mx-auto">
+          {steps.map((s, i) => (
+            <MethodStep key={s.step} s={s} isLast={i === steps.length - 1} />
           ))}
         </div>
         </div>
@@ -1604,18 +1602,20 @@ function Philosophy() {
 function ExperienceItem({
   exp,
   index,
+  isLast,
 }: {
   exp: { company: string; period: string; role: string; description: string };
   index: number;
+  isLast: boolean;
 }) {
   const itemRef = useRef<HTMLDivElement>(null);
   const isActive = useInView(itemRef, { once: true, margin: "0px 0px -35% 0px" });
 
   return (
-    <div ref={itemRef} className="relative mb-16 last:mb-0">
+    <div ref={itemRef} className={`relative ${isLast ? "" : "mb-16"}`}>
       {/* ── Mobile layout ── */}
       <div className="flex gap-5 sm:hidden">
-        <div className="shrink-0 w-4 flex justify-center z-10">
+        <div className="shrink-0 w-4 flex flex-col items-center z-10">
           <motion.div
             animate={
               isActive
@@ -1623,12 +1623,19 @@ function ExperienceItem({
                 : {}
             }
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className={`w-4 h-4 rounded-full mt-1 transition-colors duration-500 ${
+            className={`w-4 h-4 rounded-full mt-1 shrink-0 transition-colors duration-500 ${
               isActive
                 ? "bg-stone-900 border-[3px] border-accent shadow-[0_0_12px_rgba(0,102,51,0.4)]"
                 : "bg-white border-[3px] border-stone-300"
             }`}
           />
+          {!isLast && (
+            <div
+              className={`w-0.5 flex-1 mt-2 transition-colors duration-700 ${
+                isActive ? "bg-gradient-to-b from-accent to-accent-dark" : "bg-stone-200"
+              }`}
+            />
+          )}
         </div>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -1650,7 +1657,7 @@ function ExperienceItem({
       </div>
 
       {/* ── Desktop layout: alternating sides, dot absolutely centered on line ── */}
-      <div className="hidden sm:block relative min-h-[140px]">
+      <div className={`hidden sm:block relative min-h-[140px] ${isLast ? "" : "pb-16"}`}>
         <motion.div
           initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30, y: 10 }}
           animate={isActive ? { opacity: 1, x: 0, y: 0 } : { opacity: 0.25 }}
@@ -1670,6 +1677,17 @@ function ExperienceItem({
             isActive ? "text-zinc-500" : "text-zinc-300"
           }`}>{exp.description}</p>
         </motion.div>
+
+        {/* Per-item connector line — sits below the dot and extends to the
+            bottom of the item. Skipped on the last item so the timeline
+            terminates at the final dot. */}
+        {!isLast && (
+          <div
+            className={`absolute left-1/2 top-[28px] bottom-0 w-0.5 -translate-x-px transition-colors duration-700 ${
+              isActive ? "bg-gradient-to-b from-accent to-accent-dark" : "bg-stone-200"
+            }`}
+          />
+        )}
 
         {/* Dot — absolute, centered on the timeline */}
         <div className="absolute left-1/2 top-2 -translate-x-1/2 z-10">
@@ -1694,15 +1712,6 @@ function ExperienceItem({
 
 function Experience() {
   const ref = useRef(null);
-  const timelineRef = useRef<HTMLDivElement>(null);
-
-  /* Scroll tracker drives ONLY the central line fill. Node activation is per-item
-     via useInView so each entry reliably lights up when its dot is in view. */
-  const { scrollYProgress } = useScroll({
-    target: timelineRef,
-    offset: ["start 75%", "end 60%"],
-  });
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   const experiences = [
     {
@@ -1755,23 +1764,16 @@ function Experience() {
           </h2>
         </motion.div>
 
-        {/* Timeline */}
-        <div ref={timelineRef} className="relative max-w-3xl mx-auto">
-          {/* ── Mobile: line centered on 16px dot → center at 7px ── */}
-          <div className="sm:hidden absolute left-[7px] top-0 bottom-0 w-0.5 bg-stone-200" />
-          <motion.div
-            style={{ height: lineHeight }}
-            className="sm:hidden absolute left-[7px] top-0 w-0.5 bg-gradient-to-b from-accent to-accent-dark origin-top"
-          />
-          {/* ── Desktop: line centered at 50% ── */}
-          <div className="hidden sm:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-stone-200 -translate-x-px" />
-          <motion.div
-            style={{ height: lineHeight }}
-            className="hidden sm:block absolute left-1/2 top-0 w-0.5 bg-gradient-to-b from-accent to-accent-dark origin-top -translate-x-px"
-          />
-
+        {/* Timeline — per-item connectors start at the first dot and
+            terminate at the last dot (no leading/trailing stub line). */}
+        <div className="relative max-w-3xl mx-auto">
           {experiences.map((exp, i) => (
-            <ExperienceItem key={exp.company} exp={exp} index={i} />
+            <ExperienceItem
+              key={exp.company}
+              exp={exp}
+              index={i}
+              isLast={i === experiences.length - 1}
+            />
           ))}
         </div>
       </div>
@@ -1807,14 +1809,24 @@ function TestimonialCard({ t, className = "" }: { t: { name: string; text: strin
 function Testimonials() {
   const ref = useRef(null);
   const desktopX = useMotionValue(0);
+  const mobileX = useMotionValue(0);
   const [desktopIndex, setDesktopIndex] = useState(0);
   const DESKTOP_CARD_STEP = 444; // card width 420 + gap 24
+  const MOBILE_CARD_STEP = 296; // card width 280 + gap 16
 
   /* Animate desktop carousel to a given index */
   const goToDesktop = (idx: number, total: number) => {
     const bounded = Math.max(0, Math.min(idx, total - 1));
     setDesktopIndex(bounded);
     animate(desktopX, -bounded * DESKTOP_CARD_STEP, { type: "spring", stiffness: 220, damping: 30 });
+  };
+
+  /* Snap mobile carousel to the nearest card on drag end so it never rests
+     mid-card (which reads as 'glitchy' swipe). */
+  const snapMobile = (total: number) => {
+    const x = mobileX.get();
+    const idx = Math.max(0, Math.min(Math.round(-x / MOBILE_CARD_STEP), total - 1));
+    animate(mobileX, -idx * MOBILE_CARD_STEP, { type: "spring", stiffness: 260, damping: 32 });
   };
 
   const testimonials = [
@@ -1959,12 +1971,13 @@ function Testimonials() {
 
           <motion.div
             className="flex items-stretch gap-4 px-6 cursor-grab active:cursor-grabbing"
-            style={{ touchAction: "pan-y" }}
+            style={{ x: mobileX, touchAction: "pan-y" }}
             drag="x"
             dragDirectionLock
-            dragConstraints={{ left: -(testimonials.length - 1) * 290, right: 0 }}
-            dragElastic={0.1}
-            dragTransition={{ bounceStiffness: 300, bounceDamping: 30 }}
+            dragConstraints={{ left: -(testimonials.length - 1) * MOBILE_CARD_STEP, right: 0 }}
+            dragElastic={0.08}
+            dragMomentum={false}
+            onDragEnd={() => snapMobile(testimonials.length)}
           >
             {testimonials.map((t, i) => (
               <TestimonialCard key={`mobile-${t.name}-${i}`} t={t} className="w-[280px]" />
