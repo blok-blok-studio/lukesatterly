@@ -1789,7 +1789,7 @@ function Experience() {
 /* ─────────────────── TESTIMONIAL CARD ─────────────────── */
 function TestimonialCard({ t, className = "" }: { t: { name: string; text: string }; className?: string }) {
   return (
-    <div className={`flex-shrink-0 flex flex-col h-full bg-surface border border-white/[0.06] rounded-2xl p-8 hover:border-accent/20 transition-all duration-500 ${className}`}>
+    <div className={`flex-shrink-0 flex flex-col bg-surface border border-white/[0.06] rounded-2xl p-8 hover:border-accent/20 transition-all duration-500 ${className}`}>
       <div className="flex items-center gap-1 mb-4">
         {[...Array(5)].map((_, j) => (
           <svg key={j} className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
