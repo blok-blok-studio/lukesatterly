@@ -1813,6 +1813,7 @@ function TestimonialCard({ t, className = "" }: { t: { name: string; text: strin
 /* ─────────────────── TESTIMONIALS (dark, tilted cards) ─────────────────── */
 function Testimonials() {
   const ref = useRef(null);
+  const nudgeRef = useRef<HTMLDivElement>(null);
   const desktopX = useMotionValue(0);
   const mobileX = useMotionValue(0);
   const [desktopIndex, setDesktopIndex] = useState(0);
@@ -1833,6 +1834,26 @@ function Testimonials() {
     const idx = Math.max(0, Math.min(Math.round(-x / MOBILE_CARD_STEP), total - 1));
     animate(mobileX, -idx * MOBILE_CARD_STEP, { type: "spring", stiffness: 260, damping: 32 });
   };
+
+  /* One-time "this is interactive" nudge when the section first enters view.
+     Slides each carousel ~24px left, then back, so users see the row move
+     and realize it's swipeable. Skipped under prefers-reduced-motion. */
+  const inView = useInView(nudgeRef, { once: true, margin: "0px 0px -20% 0px" });
+  useEffect(() => {
+    if (!inView) return;
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const nudge = (mv: ReturnType<typeof useMotionValue<number>>) => {
+      animate(mv, -24, { duration: 0.55, ease: [0.22, 1, 0.36, 1] }).then(() => {
+        animate(mv, 0, { duration: 0.7, ease: [0.22, 1, 0.36, 1] });
+      });
+    };
+    const t = setTimeout(() => {
+      nudge(desktopX);
+      nudge(mobileX);
+    }, 350);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView]);
 
   const testimonials = [
     {
@@ -1891,7 +1912,7 @@ function Testimonials() {
       <div className="absolute inset-0 bg-grid opacity-20" />
 
       <div ref={ref} className="relative">
-        <div className="max-w-7xl mx-auto px-6">
+        <div ref={nudgeRef} className="max-w-7xl mx-auto px-6">
           <motion.div
             initial={{ y: 40, scale: 0.85 }}
 
