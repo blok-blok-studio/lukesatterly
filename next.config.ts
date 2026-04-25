@@ -7,11 +7,10 @@ const securityHeaders = [
     key: "Strict-Transport-Security",
     value: "max-age=63072000; includeSubDomains; preload",
   },
-  // Prevent clickjacking (legacy header; CSP frame-ancestors is the modern equivalent)
-  {
-    key: "X-Frame-Options",
-    value: "DENY",
-  },
+  // X-Frame-Options removed in favor of CSP frame-ancestors below, which
+  // allows specifying multiple permitted origins. The legacy header only
+  // supports DENY/SAMEORIGIN and would override frame-ancestors in some
+  // browsers, blocking the BlokBlok Studio portfolio embed.
   // Prevent MIME sniffing
   {
     key: "X-Content-Type-Options",
@@ -51,7 +50,7 @@ const securityHeaders = [
       "media-src 'self' https:",
       "connect-src 'self' https://vitals.vercel-insights.com https://va.vercel-scripts.com",
       "frame-src 'self' https://calendar.google.com https://buy.stripe.com https://js.stripe.com",
-      "frame-ancestors 'none'",
+      "frame-ancestors 'self' https://blokblokstudio.com https://www.blokblokstudio.com https://*.vercel.app",
       "form-action 'self' https://buy.stripe.com",
       "base-uri 'self'",
       "object-src 'none'",
