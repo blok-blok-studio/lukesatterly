@@ -448,18 +448,18 @@ function BeforeAfter() {
       result: "Body recomposition & strength gains",
     },
     {
-      before: "/eric-fitness-transformation-before.jpg",
-      after: "/eric-fitness-transformation-after.jpg",
-      name: "Eric",
-      duration: "7 months",
-      result: "Body recomposition & visible muscle definition",
-    },
-    {
       before: "/diren-fitness-transformation-before.jpg",
       after: "/diren-fitness-transformation-after.jpg",
       name: "Diren",
       duration: "8 months",
       result: "Lean muscle build & fat loss",
+    },
+    {
+      before: "/james-fitness-transformation-before.jpg",
+      after: "/james-fitness-transformation-after.jpg",
+      name: "James",
+      duration: "1 year",
+      result: "Body recomposition & visible muscle definition",
     },
   ];
 
