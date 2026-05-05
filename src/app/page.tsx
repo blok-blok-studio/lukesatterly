@@ -741,9 +741,20 @@ function BeforeAfter() {
   const ref = useRef(null);
 
   const transformations = [
-    { before: "/transformation-before.jpg", after: "/transformation-after.jpg", name: "Luki", duration: "6 months", result: "Complete body recomposition" },
-    // Add more pairs here as Luke sends them:
-    // { before: "/transform-2-before.jpg", after: "/transform-2-after.jpg", name: "Client Name", duration: "X months", result: "Result description" },
+    {
+      before: "/hayley-fitness-transformation-before.jpg",
+      after: "/hayley-fitness-transformation-after.jpg",
+      name: "Hayley",
+      duration: "6 months",
+      result: "Body recomposition & strength gains",
+    },
+    {
+      before: "/diren-fitness-transformation-before.jpg",
+      after: "/diren-fitness-transformation-after.jpg",
+      name: "Diren",
+      duration: "8 months",
+      result: "Lean muscle build & fat loss",
+    },
   ];
 
   return (
@@ -781,7 +792,7 @@ function BeforeAfter() {
                 <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-stone-200">
                   <Image
                     src={t.before}
-                    alt={`${t.name} before training`}
+                    alt={`${t.name} fitness transformation before — starting point of ${t.duration} personal training with Coach Luki`}
                     fill
                     className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     sizes="(max-width: 768px) 50vw, 25vw"
@@ -793,7 +804,7 @@ function BeforeAfter() {
                 <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-stone-200">
                   <Image
                     src={t.after}
-                    alt={`${t.name} after training`}
+                    alt={`${t.name} fitness transformation after ${t.duration} of personal training with Coach Luki — ${t.result}`}
                     fill
                     className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     sizes="(max-width: 768px) 50vw, 25vw"

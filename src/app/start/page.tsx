@@ -439,6 +439,23 @@ function BeforeAfter() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
+  const transformations = [
+    {
+      before: "/hayley-fitness-transformation-before.jpg",
+      after: "/hayley-fitness-transformation-after.jpg",
+      name: "Hayley",
+      duration: "6 months",
+      result: "Body recomposition & strength gains",
+    },
+    {
+      before: "/diren-fitness-transformation-before.jpg",
+      after: "/diren-fitness-transformation-after.jpg",
+      name: "Diren",
+      duration: "8 months",
+      result: "Lean muscle build & fat loss",
+    },
+  ];
+
   return (
     <section className="py-12 sm:py-20">
       <div ref={ref} className="max-w-5xl mx-auto px-4 sm:px-6">
@@ -459,55 +476,51 @@ function BeforeAfter() {
           </p>
         </motion.div>
 
-        <motion.div
-          initial={{ y: 30, opacity: 0, scale: 0.95 }}
-          animate={isInView ? { y: 0, opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-lg mx-auto"
-        >
-          <div className="grid grid-cols-2 gap-3">
-            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-white/[0.08]">
-              <Image
-                src="/transformation-before.jpg"
-                alt="Coach Luki client before training — starting point"
-                fill
-                sizes="(max-width: 768px) 50vw, 300px"
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-              <div className="absolute bottom-3 left-3 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-sm text-xs font-semibold text-white">
-                Before
+        <div className="grid sm:grid-cols-2 gap-8 sm:gap-10 max-w-3xl mx-auto">
+          {transformations.map((t, i) => (
+            <motion.div
+              key={t.name}
+              initial={{ y: 30, opacity: 0, scale: 0.95 }}
+              animate={isInView ? { y: 0, opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.7, delay: 0.2 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="grid grid-cols-2 gap-3">
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-white/[0.08]">
+                  <Image
+                    src={t.before}
+                    alt={`${t.name} fitness transformation before — starting point of ${t.duration} personal training with Coach Luki`}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 300px"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  <div className="absolute bottom-3 left-3 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-sm text-xs font-semibold text-white">
+                    Before
+                  </div>
+                </div>
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-accent/20">
+                  <Image
+                    src={t.after}
+                    alt={`${t.name} fitness transformation after ${t.duration} of personal training with Coach Luki — ${t.result}`}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 300px"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  <div className="absolute bottom-3 left-3 px-3 py-1.5 rounded-full bg-accent/80 backdrop-blur-sm text-xs font-semibold text-white">
+                    After
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-accent/20">
-              <Image
-                src="/transformation-after.jpg"
-                alt="Coach Luki client after training — transformation results"
-                fill
-                sizes="(max-width: 768px) 50vw, 300px"
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-              <div className="absolute bottom-3 left-3 px-3 py-1.5 rounded-full bg-accent/80 backdrop-blur-sm text-xs font-semibold text-white">
-                After
+              <div className="text-center mt-4">
+                <p className="font-semibold text-white">{t.name}</p>
+                <p className="text-sm text-zinc-400 mt-1">
+                  {t.duration} &mdash; {t.result}
+                </p>
               </div>
-            </div>
-          </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-3 mt-6">
-            {[
-              { label: "Body Fat Lost", value: "12%" },
-              { label: "Muscle Gained", value: "8kg" },
-              { label: "Duration", value: "6 mo" },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center p-3 rounded-xl bg-surface border border-white/[0.04]">
-                <div className="text-lg font-bold text-accent">{stat.value}</div>
-                <div className="text-xs text-zinc-500 mt-0.5">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
