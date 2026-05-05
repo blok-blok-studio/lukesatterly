@@ -749,6 +749,13 @@ function BeforeAfter() {
       result: "Body recomposition & strength gains",
     },
     {
+      before: "/eric-fitness-transformation-before.jpg",
+      after: "/eric-fitness-transformation-after.jpg",
+      name: "Eric",
+      duration: "7 months",
+      result: "Body recomposition & visible muscle definition",
+    },
+    {
       before: "/diren-fitness-transformation-before.jpg",
       after: "/diren-fitness-transformation-after.jpg",
       name: "Diren",
@@ -778,7 +785,7 @@ function BeforeAfter() {
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 gap-10 max-w-3xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {transformations.map((t, i) => (
             <motion.div
               key={t.name}
