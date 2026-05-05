@@ -265,7 +265,7 @@ function Hero() {
 
   const heroWords = [
     { text: "Your", className: "text-white", delay: 0.1 },
-    { text: "strongest", className: "text-accent", delay: 0.3 },
+    { text: "strongest", className: "text-transparent [-webkit-text-stroke:2px_var(--accent)]", delay: 0.3 },
     { text: "chapter", className: "gradient-text", delay: 0.5 },
   ];
 
