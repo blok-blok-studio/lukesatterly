@@ -102,10 +102,18 @@ export const metadata: Metadata = {
       { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
       { url: "/favicon.ico", sizes: "any" },
       { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/logo-icon-green.svg", type: "image/svg+xml" },
     ],
     apple: "/apple-touch-icon.png",
   },
+  manifest: "/manifest.json",
   category: "fitness",
+  // Search engine verification — fill in codes from each console then redeploy.
+  // verification: {
+  //   google: "GOOGLE_SEARCH_CONSOLE_CODE",
+  //   yandex: "YANDEX_VERIFICATION_CODE",
+  //   other: { "msvalidate.01": "BING_WEBMASTER_CODE" },
+  // },
 };
 
 // JSON-LD Structured Data
