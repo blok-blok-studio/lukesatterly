@@ -960,9 +960,9 @@ function Pricing() {
   ];
 
   const packages = [
-    { sessions: 6, price: "630", href: "https://buy.stripe.com/test_dRm6oIg7Xdyj9LictJ4F202" },
-    { sessions: 12, price: "1,260", href: "https://buy.stripe.com/test_9B64gA6xn0Lx2iQ9hx4F201" },
-    { sessions: 24, price: "2,260", href: "https://buy.stripe.com/test_8x25kEf3T1PBbTq9hx4F200" },
+    { sessions: 6, price: "630", href: "https://buy.stripe.com/test_dRm6oIg7Xdyj9LictJ4F202", popular: false },
+    { sessions: 12, price: "1,260", href: "https://buy.stripe.com/test_9B64gA6xn0Lx2iQ9hx4F201", popular: true },
+    { sessions: 24, price: "2,260", href: "https://buy.stripe.com/test_8x25kEf3T1PBbTq9hx4F200", popular: false },
   ];
 
   const CheckIcon = ({ dark }: { dark: boolean }) => (
@@ -1290,12 +1290,33 @@ function Pricing() {
                         href={pkg.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group flex flex-col items-center rounded-xl border border-stone-200 bg-white p-6 hover:border-accent-dark/30 hover:shadow-lg transition-all duration-300 cursor-pointer"
+                        className={`group relative flex flex-col items-center rounded-xl p-6 transition-all duration-300 cursor-pointer ${
+                          pkg.popular
+                            ? "border-2 border-accent-dark bg-white shadow-lg sm:scale-[1.04] hover:shadow-xl"
+                            : "border border-stone-200 bg-white hover:border-accent-dark/30 hover:shadow-lg"
+                        }`}
                       >
-                        <span className="text-3xl font-bold text-stone-900 group-hover:text-accent-dark transition-colors">
+                        {pkg.popular && (
+                          <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] font-bold uppercase tracking-wider bg-accent-dark text-white rounded-full px-3 py-1 shadow-md">
+                            Most Popular
+                          </span>
+                        )}
+                        <span
+                          className={`text-3xl font-bold transition-colors ${
+                            pkg.popular
+                              ? "text-accent-dark"
+                              : "text-stone-900 group-hover:text-accent-dark"
+                          }`}
+                        >
                           &euro;{pkg.price}
                         </span>
-                        <span className="mt-2 text-xs font-bold uppercase tracking-wider bg-stone-900 text-white rounded-full px-4 py-1.5">
+                        <span
+                          className={`mt-2 text-xs font-bold uppercase tracking-wider rounded-full px-4 py-1.5 ${
+                            pkg.popular
+                              ? "bg-accent-dark text-white"
+                              : "bg-stone-900 text-white"
+                          }`}
+                        >
                           {pkg.sessions} sessions
                         </span>
                       </a>
