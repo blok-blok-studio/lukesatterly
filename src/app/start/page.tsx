@@ -23,7 +23,7 @@ function FunnelNav() {
           href="/"
           className="flex items-center gap-2.5 cursor-pointer"
         >
-          <Image src="/logo-icon-green.png" alt="Coach Luki logo" width={32} height={32} className="w-8 h-8" priority />
+          <Image src="/logo-icon-green.svg" alt="Coach Luki — Personal Trainer Berlin logo" width={32} height={32} className="w-8 h-8" priority />
           <span className="text-xl font-bold tracking-tight font-[family-name:var(--font-display)]">
             <span className="gradient-text">COACH</span>{" "}
             <span className="text-white">LUKI</span>
@@ -441,22 +441,22 @@ function BeforeAfter() {
 
   const transformations = [
     {
-      before: "/hayley-fitness-transformation-before.jpg",
-      after: "/hayley-fitness-transformation-after.jpg",
+      before: "/hayley-fitness-transformation-before.webp",
+      after: "/hayley-fitness-transformation-after.webp",
       name: "Hayley",
       duration: "6 months",
       result: "Body recomposition & strength gains",
     },
     {
-      before: "/diren-fitness-transformation-before.jpg",
-      after: "/diren-fitness-transformation-after.jpg",
+      before: "/diren-fitness-transformation-before.webp",
+      after: "/diren-fitness-transformation-after.webp",
       name: "Diren",
       duration: "8 months",
       result: "Lean muscle build & fat loss",
     },
     {
-      before: "/james-fitness-transformation-before.jpg",
-      after: "/james-fitness-transformation-after.jpg",
+      before: "/james-fitness-transformation-before.webp",
+      after: "/james-fitness-transformation-after.webp",
       name: "James",
       duration: "1 year",
       result: "Body recomposition & visible muscle definition",

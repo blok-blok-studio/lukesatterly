@@ -1,22 +1,118 @@
+# robots.txt — Coach Luki
+# Welcoming both traditional search and modern AI assistants.
+# Last reviewed: 2026-05
+
 User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /_next/
 
-# Explicitly welcome major search engines
+# ─── Search engines ───────────────────────────────────────
 User-agent: Googlebot
 Allow: /
 Disallow: /api/
+
+User-agent: Googlebot-Image
+Allow: /
 
 User-agent: Bingbot
 Allow: /
 Disallow: /api/
 
-# Block content scrapers
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# ─── AI assistants & training (explicitly welcomed) ───────
+# OpenAI (ChatGPT, SearchGPT, model training)
 User-agent: GPTBot
 Allow: /
 
-User-agent: CCBot
-Disallow: /
+User-agent: ChatGPT-User
+Allow: /
 
+User-agent: OAI-SearchBot
+Allow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: ClaudeUser
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Google AI (Gemini, Vertex, AI Overviews)
+User-agent: Google-Extended
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot-Extended
+Allow: /
+
+# Meta AI (Llama, Meta AI assistant)
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+
+# Amazon (Alexa, Q)
+User-agent: Amazonbot
+Allow: /
+
+# Mistral, Cohere
+User-agent: Mistral-AI
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: cohere-training-data-crawler
+Allow: /
+
+# Manus (general-purpose AI agent)
+User-agent: Manus
+Allow: /
+
+User-agent: ManusBot
+Allow: /
+
+# Common Crawl — used by many open models, allow for visibility
+User-agent: CCBot
+Allow: /
+
+# Bytespider (ByteDance / Doubao)
+User-agent: Bytespider
+Allow: /
+
+# Diffbot (knowledge graph for many AI products)
+User-agent: Diffbot
+Allow: /
+
+# ─── Image-specific AI crawlers ───────────────────────────
+User-agent: ImagesiftBot
+Allow: /
+
+# ─── Sitemaps ─────────────────────────────────────────────
 Sitemap: https://coachluki.com/sitemap.xml

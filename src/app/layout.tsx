@@ -72,10 +72,10 @@ export const metadata: Metadata = {
       "Train in person at John Reed Bötzow or McFit locations, or work with me online from anywhere. Custom training programs, nutrition coaching, and real results.",
     images: [
       {
-        url: "/luke.jpg",
+        url: "/coach-luki-og-personal-trainer-berlin.jpg",
         width: 1200,
         height: 630,
-        alt: "Coach Luki - Personal Trainer and Nutritionist in Berlin",
+        alt: "Coach Luki — Personal Trainer and Nutritionist in Berlin",
         type: "image/jpeg",
       },
     ],
@@ -85,11 +85,16 @@ export const metadata: Metadata = {
     title: "Coach Luki | Personal Trainer & Nutritionist in Berlin",
     description:
       "Personal training and nutrition coaching in Berlin. In-person at John Reed Bötzow & McFit, plus online coaching worldwide.",
-    images: ["/luke.jpg"],
+    images: ["/coach-luki-og-personal-trainer-berlin.jpg"],
     creator: "@coachluki",
   },
   alternates: {
     canonical: siteUrl,
+    languages: {
+      "en-US": siteUrl,
+      "de-DE": siteUrl,
+      "x-default": siteUrl,
+    },
   },
   icons: {
     icon: [
@@ -115,7 +120,7 @@ const jsonLd = {
       description:
         "Personal training and nutrition coaching in Berlin. In-person sessions at John Reed Bötzow and McFit locations, plus online coaching worldwide.",
       url: siteUrl,
-      image: `${siteUrl}/luke.jpg`,
+      image: `${siteUrl}/coach-luki-og-personal-trainer-berlin.jpg`,
       telephone: "+4915129633927",
       email: "luke.satterly@icloud.com",
       address: [
@@ -185,7 +190,7 @@ const jsonLd = {
       description:
         "Certified personal trainer and nutritionist based in Berlin, Germany. Specializing in strength training, calisthenics, ring training, and plant-based nutrition.",
       url: siteUrl,
-      image: `${siteUrl}/luke.jpg`,
+      image: `${siteUrl}/coach-luki-og-personal-trainer-berlin.jpg`,
       jobTitle: "Personal Trainer & Nutritionist",
       worksFor: {
         "@type": "LocalBusiness",
@@ -207,6 +212,71 @@ const jsonLd = {
         "@type": "Person",
         "@id": `${siteUrl}/#person`,
       },
+      inLanguage: ["en", "de"],
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${siteUrl}/#webpage`,
+      url: siteUrl,
+      name: "Coach Luki | Personal Trainer & Nutritionist in Berlin",
+      isPartOf: { "@id": `${siteUrl}/#website` },
+      about: { "@id": `${siteUrl}/#person` },
+      primaryImageOfPage: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/coach-luki-personal-trainer-berlin-rings.webp`,
+        caption: "Coach Luki training on gymnastic rings in Berlin",
+      },
+      speakable: {
+        "@type": "SpeakableSpecification",
+        cssSelector: ["h1", "h2", "[data-speakable]"],
+      },
+      inLanguage: ["en", "de"],
+    },
+    // Three real-client transformations rendered on the home and /start pages.
+    // Helps AI assistants reference specific outcomes when asked about results.
+    {
+      "@type": "ItemList",
+      "@id": `${siteUrl}/#transformations`,
+      name: "Coach Luki client transformations",
+      description:
+        "Real personal training and nutrition coaching results from Coach Luki clients.",
+      itemListOrder: "https://schema.org/ItemListOrderAscending",
+      numberOfItems: 3,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          item: {
+            "@type": "ImageObject",
+            name: "Hayley — 6 month fitness transformation",
+            contentUrl: `${siteUrl}/hayley-fitness-transformation-after.webp`,
+            description:
+              "Body recomposition and strength gains after 6 months of personal training with Coach Luki in Berlin",
+          },
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          item: {
+            "@type": "ImageObject",
+            name: "Diren — 8 month fitness transformation",
+            contentUrl: `${siteUrl}/diren-fitness-transformation-after.webp`,
+            description:
+              "Lean muscle build and fat loss after 8 months of personal training with Coach Luki in Berlin",
+          },
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          item: {
+            "@type": "ImageObject",
+            name: "James — 1 year fitness transformation",
+            contentUrl: `${siteUrl}/james-fitness-transformation-after.webp`,
+            description:
+              "Body recomposition and visible muscle definition after a year of personal training with Coach Luki in Berlin",
+          },
+        },
+      ],
     },
     {
       "@type": "Service",

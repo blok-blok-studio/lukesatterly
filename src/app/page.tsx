@@ -157,7 +157,7 @@ function Navbar() {
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="flex items-center gap-2.5 cursor-pointer"
         >
-          <Image src="/logo-icon-green.png" alt="Coach Luki" width={32} height={32} className="w-8 h-8" />
+          <Image src="/logo-icon-green.svg" alt="Coach Luki — Personal Trainer Berlin logo" width={32} height={32} className="w-8 h-8" priority />
           <span className="text-xl font-bold tracking-tight font-[family-name:var(--font-display)]">
             <span className="gradient-text">COACH</span>{" "}
             <span className="text-white">LUKI</span>
@@ -380,7 +380,7 @@ function Hero() {
           <div className="relative z-10 w-full max-w-[320px] sm:max-w-[340px] lg:max-w-[380px] aspect-[2/3] mx-auto">
             {/* Base cutout (z-10) — long fade from ~60% so legs dissolve gradually */}
             <Image
-              src="/luke-cutout-full.png"
+              src="/coach-luki-personal-trainer-berlin-rings.webp"
               alt="Coach Luki training on gymnastic rings in Berlin"
               fill
               priority
@@ -399,7 +399,7 @@ function Hero() {
                 of the buttons. The mask fades out below the rings so nothing else
                 doubles up. */}
             <Image
-              src="/luke-cutout-full.png"
+              src="/coach-luki-personal-trainer-berlin-rings.webp"
               alt=""
               aria-hidden
               fill
@@ -546,8 +546,8 @@ function About() {
           >
             <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-stone-100">
               <Image
-                src="/luke-profile.jpeg"
-                alt="Luke Satterly - Coach Luki, Personal Trainer in Berlin"
+                src="/coach-luki-trainer-berlin-portrait.webp"
+                alt="Luke Satterly (Coach Luki) — certified personal trainer and nutritionist in Berlin"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
@@ -742,22 +742,22 @@ function BeforeAfter() {
 
   const transformations = [
     {
-      before: "/hayley-fitness-transformation-before.jpg",
-      after: "/hayley-fitness-transformation-after.jpg",
+      before: "/hayley-fitness-transformation-before.webp",
+      after: "/hayley-fitness-transformation-after.webp",
       name: "Hayley",
       duration: "6 months",
       result: "Body recomposition & strength gains",
     },
     {
-      before: "/diren-fitness-transformation-before.jpg",
-      after: "/diren-fitness-transformation-after.jpg",
+      before: "/diren-fitness-transformation-before.webp",
+      after: "/diren-fitness-transformation-after.webp",
       name: "Diren",
       duration: "8 months",
       result: "Lean muscle build & fat loss",
     },
     {
-      before: "/james-fitness-transformation-before.jpg",
-      after: "/james-fitness-transformation-after.jpg",
+      before: "/james-fitness-transformation-before.webp",
+      after: "/james-fitness-transformation-after.webp",
       name: "James",
       duration: "1 year",
       result: "Body recomposition & visible muscle definition",
@@ -1436,8 +1436,9 @@ function Method() {
         {/* Running-pic backdrop, visible but not distracting with green hue */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/luke-running.jpeg"
+            src="/coach-luki-conditioning-running-berlin.webp"
             alt=""
+            aria-hidden="true"
             fill
             className="object-cover object-center"
             sizes="100vw"
@@ -2610,8 +2611,8 @@ function ActionBanner() {
       {/* Parallax background image */}
       <motion.div style={{ y: imgY }} className="absolute inset-0 scale-110">
         <Image
-          src="/luke-running-street.jpeg"
-          alt="Coach Luki running through the streets of Berlin at night"
+          src="/coach-luki-running-berlin-streets-night.webp"
+          alt="Coach Luki running through the streets of Berlin at night — outdoor conditioning with personal trainer"
           fill
           className="object-cover object-center blur-[5px]"
         />
@@ -2678,8 +2679,8 @@ function TrustBanner() {
           {/* Image side */}
           <div className="relative h-[400px] lg:h-auto">
             <Image
-              src="/luke-urban.jpeg"
-              alt="Coach Luki in Berlin — Personal Trainer ready to help you reach your goals"
+              src="/coach-luki-personal-trainer-prenzlauer-berg.webp"
+              alt="Coach Luki in urban Berlin — book a personal training session in Prenzlauer Berg or Mitte"
               fill
               className="object-cover object-top"
             />
