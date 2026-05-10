@@ -3,6 +3,8 @@ import { Syne, Outfit } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
+import { I18nProvider } from "@/lib/i18n/context";
+import { SkipToMain } from "@/components/SkipToMain";
 
 const syne = Syne({
   variable: "--font-display",
@@ -445,17 +447,14 @@ export default function RootLayout({
       <body
         className={`${syne.variable} ${outfit.variable} antialiased`}
       >
-        {/* Skip link for keyboard and screen reader users (WCAG 2.4.1) */}
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-accent focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-white"
-        >
-          Skip to main content
-        </a>
-        <div className="noise-overlay" aria-hidden="true" />
-        <main id="main">{children}</main>
-        <Analytics />
-        <SpeedInsights />
+        <I18nProvider>
+          {/* Skip link for keyboard and screen reader users (WCAG 2.4.1) */}
+          <SkipToMain />
+          <div className="noise-overlay" aria-hidden="true" />
+          <main id="main">{children}</main>
+          <Analytics />
+          <SpeedInsights />
+        </I18nProvider>
       </body>
     </html>
   );

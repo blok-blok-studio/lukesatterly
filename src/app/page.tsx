@@ -11,6 +11,8 @@ import {
   animate,
   AnimatePresence,
 } from "framer-motion";
+import { useT } from "@/lib/i18n/context";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 /* ─────────────────── ANIMATED COUNTER ─────────────────── */
 function CountUp({ target, suffix = "", duration = 2 }: { target: number; suffix?: string; duration?: number }) {
@@ -118,6 +120,7 @@ function smoothScrollTo(targetId: string) {
 
 /* ─────────────────── NAV ─────────────────── */
 function Navbar() {
+  const t = useT();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -128,11 +131,11 @@ function Navbar() {
   }, []);
 
   const links = [
-    { label: "About", href: "about" },
-    { label: "Services", href: "services" },
-    { label: "Pricing", href: "pricing" },
-    { label: "Locations", href: "locations" },
-    { label: "FAQ", href: "faq" },
+    { label: t.nav.about, href: "about" },
+    { label: t.nav.services, href: "services" },
+    { label: t.nav.pricing, href: "pricing" },
+    { label: t.nav.locations, href: "locations" },
+    { label: t.nav.faq, href: "faq" },
   ];
 
   const handleNavClick = (e: React.MouseEvent, targetId: string) => {
@@ -178,14 +181,17 @@ function Navbar() {
             onClick={(e) => handleNavClick(e, "contact")}
             className="bg-accent text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)] transition-all duration-300 cursor-pointer"
           >
-            Apply Now
+            {t.nav.applyNow}
           </button>
+          <LanguageSwitcher />
         </div>
 
+        <div className="md:hidden flex items-center gap-2">
+          <LanguageSwitcher compact />
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden flex flex-col gap-1.5 p-2"
-          aria-label="Toggle menu"
+          className="flex flex-col gap-1.5 p-2"
+          aria-label={t.a11y.toggleMenu}
         >
           <motion.span
             animate={menuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
@@ -200,6 +206,7 @@ function Navbar() {
             className="block w-6 h-0.5 bg-white"
           />
         </button>
+        </div>
       </div>
 
       <AnimatePresence>
@@ -224,7 +231,7 @@ function Navbar() {
                 onClick={(e) => handleNavClick(e, "contact")}
                 className="bg-accent text-white px-5 py-3 rounded-full text-center font-semibold mt-2 cursor-pointer"
               >
-                Apply Now
+                {t.nav.applyNow}
               </button>
             </div>
           </motion.div>
@@ -236,6 +243,7 @@ function Navbar() {
 
 /* ─────────────────── HERO ─────────────────── */
 function Hero() {
+  const t = useT();
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -264,9 +272,9 @@ function Hero() {
   }, []);
 
   const heroWords = [
-    { text: "Your", className: "text-white", delay: 0.1 },
-    { text: "strongest", className: "text-transparent [-webkit-text-stroke:2px_var(--accent)]", delay: 0.3 },
-    { text: "chapter", className: "gradient-text", delay: 0.5 },
+    { text: t.hero.word1, className: "text-white", delay: 0.1 },
+    { text: t.hero.word2, className: "text-transparent [-webkit-text-stroke:2px_var(--accent)]", delay: 0.3 },
+    { text: t.hero.word3, className: "gradient-text", delay: 0.5 },
   ];
 
   return (
@@ -439,8 +447,8 @@ function Hero() {
                     "radial-gradient(circle at 50% 105%, rgba(0,180,90,0.35) 0%, transparent 50%)",
                 }}
               />
-              <span className="relative z-10 flex items-center justify-center w-full h-full text-white text-[0.7rem] sm:text-xs md:text-base lg:text-xl xl:text-xl font-semibold text-center leading-tight px-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]">
-                Let&apos;s Get<br />Started
+              <span className="relative z-10 flex items-center justify-center w-full h-full text-white text-[0.7rem] sm:text-xs md:text-base lg:text-xl xl:text-xl font-semibold text-center leading-tight px-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)] whitespace-pre-line">
+                {t.hero.ctaPrimary}
               </span>
             </motion.button>
 
@@ -467,8 +475,8 @@ function Hero() {
                     "radial-gradient(circle at 50% 105%, rgba(0,180,90,0.3) 0%, transparent 50%)",
                 }}
               />
-              <span className="relative z-10 flex items-center justify-center w-full h-full text-white text-[0.7rem] sm:text-xs md:text-base lg:text-xl xl:text-xl font-semibold text-center leading-tight px-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)]">
-                Learn<br />More
+              <span className="relative z-10 flex items-center justify-center w-full h-full text-white text-[0.7rem] sm:text-xs md:text-base lg:text-xl xl:text-xl font-semibold text-center leading-tight px-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)] whitespace-pre-line">
+                {t.hero.ctaSecondary}
               </span>
             </motion.button>
           </div>
@@ -476,7 +484,7 @@ function Hero() {
 
         {/* Subtitle — sits just below the headline on mobile, normal on desktop */}
         <p className="relative z-20 -mt-10 sm:-mt-16 text-center text-base sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed px-4 font-semibold" style={{ color: "#ffffff", textShadow: "0 2px 10px rgba(0,0,0,0.9), 0 0 2px rgba(0,0,0,0.8)" }}>
-          Get stronger, move better, enjoy the process. Training &amp; nutrition, online or in Berlin.
+          {t.hero.subtitle}
         </p>
 
         {/* Bottom stats row */}
@@ -494,7 +502,7 @@ function Hero() {
             <div className="text-4xl md:text-5xl font-black" style={{ color: "#ffffff", textShadow: "0 2px 8px rgba(0,0,0,0.8)" }}>
               <CountUp target={100} suffix="+" />
             </div>
-            <div className="text-sm mt-1 font-semibold" style={{ color: "#ffffff", textShadow: "0 1px 4px rgba(0,0,0,0.8)" }}>Clients</div>
+            <div className="text-sm mt-1 font-semibold" style={{ color: "#ffffff", textShadow: "0 1px 4px rgba(0,0,0,0.8)" }}>{t.hero.statClients}</div>
           </motion.div>
           <div className="w-px h-12 bg-white/20 hidden sm:block" />
           <motion.div
@@ -505,7 +513,7 @@ function Hero() {
             <div className="text-4xl md:text-5xl font-black" style={{ color: "#ffffff", textShadow: "0 2px 8px rgba(0,0,0,0.8)" }}>
               <CountUp target={5000} suffix="+" duration={2.5} />
             </div>
-            <div className="text-sm mt-1 font-semibold" style={{ color: "#ffffff", textShadow: "0 1px 4px rgba(0,0,0,0.8)" }}>Hours Coached</div>
+            <div className="text-sm mt-1 font-semibold" style={{ color: "#ffffff", textShadow: "0 1px 4px rgba(0,0,0,0.8)" }}>{t.hero.statHours}</div>
           </motion.div>
           <div className="w-px h-12 bg-white/20 hidden sm:block" />
           <motion.button
@@ -518,7 +526,7 @@ function Hero() {
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
             </svg>
-            Scroll to explore
+            {t.hero.scrollExplore}
           </motion.button>
         </motion.div>
       </motion.div>
@@ -529,6 +537,7 @@ function Hero() {
 
 /* ─────────────────── ABOUT (light bg) ─────────────────── */
 function About() {
+  const t = useT();
   const ref = useRef(null);
 
   return (
@@ -569,8 +578,8 @@ function About() {
                   </svg>
                 </div>
                 <div>
-                  <div className="text-sm font-semibold text-stone-800">Vegan Athlete</div>
-                  <div className="text-xs text-zinc-500">Plant-powered coaching</div>
+                  <div className="text-sm font-semibold text-stone-800">{t.about.badge}</div>
+                  <div className="text-xs text-zinc-500">{t.about.badgeSubtitle}</div>
                 </div>
               </div>
             </motion.div>
@@ -584,37 +593,32 @@ function About() {
             transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
           >
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-stone-900">
-              Hi, I&apos;m <span className="gradient-text">Luki</span>
+              {t.about.headingPrefix} <span className="gradient-text">{t.about.headingName}</span>
             </h2>
             <div className="mt-8 space-y-5 text-zinc-600 leading-relaxed text-lg">
               <p>
-                I&apos;m Luke Satterly, but most people call me Coach Luki. I coach in person at{" "}
-                <strong className="text-stone-900">John Reed Bötzow</strong> in Prenzlauer Berg
-                and at <strong className="text-stone-900">McFit</strong> locations across Berlin,
-                plus online from anywhere.
+                {t.about.paragraph1Pre}
+                <strong className="text-stone-900">{t.about.paragraph1Gym1}</strong>
+                {t.about.paragraph1Mid}
+                <strong className="text-stone-900">{t.about.paragraph1Gym2}</strong>
+                {t.about.paragraph1Post}
               </p>
               <p>
-                My focus is on helping people <strong className="text-stone-900">understand how
-                to move better</strong>. That means teaching you <em>why</em> an exercise works,
-                not just how to do it, so you train smarter, rebuild after pain or injury, and
-                actually enjoy the process.
+                {t.about.paragraph2Pre}
+                <strong className="text-stone-900">{t.about.paragraph2Strong}</strong>
+                {t.about.paragraph2Mid}
+                <em>{t.about.paragraph2Em}</em>
+                {t.about.paragraph2Post}
               </p>
               <p>
-                With a background in <strong className="text-stone-900">rehabilitation</strong>{" "}
-                and a degree in Prevention &amp; Health Management, I work with clients recovering
-                from back and neck pain, returning from injury, or simply wanting to move without
-                limits. Happiness is derived through progress. Enjoy the progress.
+                {t.about.paragraph3Pre}
+                <strong className="text-stone-900">{t.about.paragraph3Strong}</strong>
+                {t.about.paragraph3Post}
               </p>
             </div>
 
             <ul className="mt-8 space-y-3">
-              {[
-                "Certified Personal Trainer & Nutritionist",
-                "Fluent in German and English",
-                "Plant-based / vegan fitness specialist",
-                "In-person & online coaching available",
-                "Ring training & calisthenics focus",
-              ].map((item, i) => (
+              {t.about.bullets.map((item, i) => (
                 <motion.li
                   key={item}
                   initial={{ x: 10 }}
@@ -639,40 +643,21 @@ function About() {
 
 /* ─────────────────── SERVICES (dark container) ─────────────────── */
 function Services() {
+  const t = useT();
   const ref = useRef(null);
 
-  const services = [
-    {
-      icon: (
-        <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-        </svg>
-      ),
-      title: "1-on-1 Personal Training",
-      description: "We train together at John Reed Bötzow in Prenzlauer Berg or at McFit locations across Berlin. Every session is built around your goals, your body, and what actually fits your life.",
-      features: ["Custom workout plans", "Form correction", "Progressive overload tracking", "Flexible scheduling"],
-    },
-    {
-      icon: (
-        <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
-        </svg>
-      ),
-      title: "Nutrition Coaching",
-      description: "Real food, real results. I help you build eating habits that actually stick, with a focus on plant-forward nutrition. No crash diets, no nonsense.",
-      features: ["Personalized meal plans", "Macro optimization", "Vegan guidance", "Habit building"],
-    },
-    {
-      icon: (
-        <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
-        </svg>
-      ),
-      title: "Online Coaching",
-      description: "Can\u2019t make it to Berlin? No problem. I\u2019ll write your programs, dial in your nutrition, and check in with you every week, wherever you are.",
-      features: ["Remote training programs", "Video form checks", "Weekly check-ins", "App-based tracking"],
-    },
+  const serviceIcons = [
+    <svg key="i0" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+    </svg>,
+    <svg key="i1" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+    </svg>,
+    <svg key="i2" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+    </svg>,
   ];
+  const services = t.services.items.map((item, i) => ({ ...item, icon: serviceIcons[i] }));
 
   return (
     <section id="services" className="py-24 sm:py-32 radial-glow-green scroll-mt-20">
@@ -685,14 +670,13 @@ function Services() {
           className="text-center mb-20"
         >
           <span className="text-accent text-sm font-medium uppercase tracking-widest">
-            Services
+            {t.services.eyebrow}
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4">
-            How I can <span className="gradient-text">help you</span>
+            {t.services.headingPrefix} <span className="gradient-text">{t.services.headingAccent}</span>
           </h2>
           <p className="text-zinc-400 mt-6 max-w-xl mx-auto text-lg">
-            Train with me in person at one of my Berlin gyms or work with me
-            online from anywhere. Either way, everything is tailored to you.
+            {t.services.intro}
           </p>
         </motion.div>
 
@@ -738,31 +722,19 @@ function Services() {
 
 /* ─────────────────── BEFORE & AFTER ─────────────────── */
 function BeforeAfter() {
+  const t = useT();
   const ref = useRef(null);
 
-  const transformations = [
-    {
-      before: "/hayley-fitness-transformation-before.webp",
-      after: "/hayley-fitness-transformation-after.webp",
-      name: "Hayley",
-      duration: "6 months",
-      result: "Body recomposition & strength gains",
-    },
-    {
-      before: "/diren-fitness-transformation-before.webp",
-      after: "/diren-fitness-transformation-after.webp",
-      name: "Diren",
-      duration: "8 months",
-      result: "Lean muscle build & fat loss",
-    },
-    {
-      before: "/james-fitness-transformation-before.webp",
-      after: "/james-fitness-transformation-after.webp",
-      name: "James",
-      duration: "1 year",
-      result: "Body recomposition & visible muscle definition",
-    },
+  const beforeAfterImages = [
+    { before: "/hayley-fitness-transformation-before.webp", after: "/hayley-fitness-transformation-after.webp" },
+    { before: "/diren-fitness-transformation-before.webp", after: "/diren-fitness-transformation-after.webp" },
+    { before: "/james-fitness-transformation-before.webp", after: "/james-fitness-transformation-after.webp" },
   ];
+  const transformations = t.beforeAfter.transformations.map((tr, i) => ({
+    ...tr,
+    before: beforeAfterImages[i].before,
+    after: beforeAfterImages[i].after,
+  }));
 
   return (
     <section className="py-8 sm:py-12 px-4 sm:px-6 scroll-mt-20">
@@ -775,20 +747,20 @@ function BeforeAfter() {
           className="text-center mb-12 sm:mb-16"
         >
           <span className="text-accent-dark text-sm font-medium uppercase tracking-widest">
-            Real Results
+            {t.beforeAfter.eyebrow}
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4 text-stone-900">
-            The proof is in the <span className="gradient-text">progress</span>
+            {t.beforeAfter.headingPrefix} <span className="gradient-text">{t.beforeAfter.headingAccent}</span>
           </h2>
           <p className="text-zinc-500 mt-6 max-w-xl mx-auto text-lg">
-            Real clients, real transformations. No filters, no shortcuts, just consistent work and proper coaching.
+            {t.beforeAfter.intro}
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {transformations.map((t, i) => (
+          {transformations.map((tr, i) => (
             <motion.div
-              key={t.name}
+              key={tr.name}
               initial={{ y: 50, scale: 0.8 }}
               whileInView={{ y: 0, scale: 1 }}
               viewport={{ once: true }}
@@ -798,32 +770,32 @@ function BeforeAfter() {
               <div className="grid grid-cols-2 gap-3 mb-4">
                 <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-stone-200">
                   <Image
-                    src={t.before}
-                    alt={`${t.name} fitness transformation before — starting point of ${t.duration} personal training with Coach Luki`}
+                    src={tr.before}
+                    alt={`${tr.name} fitness transformation before — starting point of ${tr.duration} personal training with Coach Luki`}
                     fill
                     className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     sizes="(max-width: 768px) 50vw, 25vw"
                   />
                   <div className="absolute bottom-2 left-2 px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-sm text-[11px] font-medium text-white">
-                    Before
+                    {t.beforeAfter.beforeLabel}
                   </div>
                 </div>
                 <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-stone-200">
                   <Image
-                    src={t.after}
-                    alt={`${t.name} fitness transformation after ${t.duration} of personal training with Coach Luki — ${t.result}`}
+                    src={tr.after}
+                    alt={`${tr.name} fitness transformation after ${tr.duration} of personal training with Coach Luki — ${tr.result}`}
                     fill
                     className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     sizes="(max-width: 768px) 50vw, 25vw"
                   />
                   <div className="absolute bottom-2 left-2 px-2.5 py-1 rounded-md bg-accent/80 backdrop-blur-sm text-[11px] font-medium text-white">
-                    After
+                    {t.beforeAfter.afterLabel}
                   </div>
                 </div>
               </div>
               <div className="text-center">
-                <p className="font-semibold text-stone-800">{t.name}</p>
-                <p className="text-sm text-zinc-500">{t.duration} &mdash; {t.result}</p>
+                <p className="font-semibold text-stone-800">{tr.name}</p>
+                <p className="text-sm text-zinc-500">{tr.duration} &mdash; {tr.result}</p>
               </div>
             </motion.div>
           ))}
@@ -847,7 +819,7 @@ function BeforeAfter() {
             }}
             className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-white font-semibold rounded-full hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)] transition-all duration-300 cursor-pointer"
           >
-            Start Your Transformation
+            {t.beforeAfter.cta}
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
             </svg>
@@ -860,58 +832,43 @@ function BeforeAfter() {
 
 /* ─────────────────── PRICING ─────────────────── */
 function Pricing() {
+  const t = useT();
   const ref = useRef(null);
   const [tab, setTab] = useState<"online" | "personal" | "corporate">("personal");
 
   const onlinePlans = [
     {
-      name: "Remote Program",
+      name: t.pricing.online.remote.name,
       price: "95",
-      period: "/month",
-      note: "Min. 6 months",
-      description: "Structured online coaching with monthly guidance. Perfect if you want a solid plan and regular accountability.",
-      features: [
-        "Goal analysis",
-        "Custom training plan",
-        "Custom nutrition plan",
-        "Monthly check-in & feedback",
-        "Monthly workout updates & adjustments",
-      ],
-      cta: "Get Started",
+      period: t.pricing.perMonth,
+      note: t.pricing.minMonths6,
+      description: t.pricing.online.remote.description,
+      features: t.pricing.online.remote.features,
+      cta: t.pricing.online.remote.cta,
       href: "https://buy.stripe.com/test_28EfZi3lb8dZ6z62T94F205",
       popular: false,
       dark: false,
     },
     {
-      name: "Advanced",
+      name: t.pricing.online.advanced.name,
       price: "240",
-      period: "/month",
-      note: "Starter pack: \u20AC1,097 for 3 months (everything included)",
-      description: "The full remote coaching experience. Weekly check-ins, WhatsApp access, and a video library to keep your form on point.",
-      features: [
-        "Goal analysis",
-        "Custom training plan",
-        "Custom nutrition plan",
-        "Weekly check-in with technique feedback",
-        "Ongoing WhatsApp support",
-        "Access to exercise library",
-      ],
-      cta: "Go Advanced",
+      period: t.pricing.perMonth,
+      note: t.pricing.online.advanced.note,
+      description: t.pricing.online.advanced.description,
+      features: t.pricing.online.advanced.features,
+      cta: t.pricing.online.advanced.cta,
       href: "https://buy.stripe.com/test_aFaeVe5tjcuf5v28dt4F204",
       popular: true,
       dark: true,
     },
     {
-      name: "Elite",
+      name: t.pricing.online.elite.name,
       price: "480",
-      period: "/month",
-      note: null,
-      description: "Everything from Advanced plus a weekly 1-on-1 coaching call. The closest thing to in-person training, from anywhere.",
-      features: [
-        "Everything from Advanced",
-        "Weekly 60 min coaching call (consultation/training)",
-      ],
-      cta: "Go Elite",
+      period: t.pricing.perMonth,
+      note: null as string | null,
+      description: t.pricing.online.elite.description,
+      features: t.pricing.online.elite.features,
+      cta: t.pricing.online.elite.cta,
       href: "https://buy.stripe.com/test_4gM14odZP1PBf5CalB4F203",
       popular: false,
       dark: false,
@@ -920,39 +877,27 @@ function Pricing() {
 
   const personalPlans = [
     {
-      name: "Elevate",
+      name: t.pricing.personal.elevate.name,
       price: "390",
-      period: "/month",
-      note: "Min. 3 months",
-      sessions: "4 sessions / month",
-      description: "Once a week, in person. For people who want hands-on coaching with a plan built around them.",
-      features: [
-        "Goal analysis",
-        "Custom training plan",
-        "Custom nutrition plan",
-        "Weekly check-in",
-        "Ongoing WhatsApp support",
-      ],
-      cta: "Get Started",
+      period: t.pricing.perMonth,
+      note: t.pricing.minMonths3,
+      sessions: t.pricing.sessionsPerMonth4,
+      description: t.pricing.personal.elevate.description,
+      features: t.pricing.personal.elevate.features,
+      cta: t.pricing.personal.elevate.cta,
       href: "https://buy.stripe.com/test_4gM28s2h7am72iQalB4F207",
       popular: true,
       dark: true,
     },
     {
-      name: "Intensive",
+      name: t.pricing.personal.intensive.name,
       price: "780",
-      period: "/month",
-      note: "Min. 3 months",
-      sessions: "8 sessions / month",
-      description: "Twice a week for serious results. The full coaching experience with maximum hands-on support.",
-      features: [
-        "Goal analysis",
-        "Custom training plan",
-        "Custom nutrition plan",
-        "Weekly check-in",
-        "Ongoing WhatsApp support",
-      ],
-      cta: "Go Intensive",
+      period: t.pricing.perMonth,
+      note: t.pricing.minMonths3,
+      sessions: t.pricing.sessionsPerMonth8,
+      description: t.pricing.personal.intensive.description,
+      features: t.pricing.personal.intensive.features,
+      cta: t.pricing.personal.intensive.cta,
       href: "https://buy.stripe.com/test_8x200kaND0Lx8HebpF4F206",
       popular: false,
       dark: false,
@@ -985,23 +930,23 @@ function Pricing() {
           className="text-center mb-16"
         >
           <span className="text-accent-dark text-sm font-medium uppercase tracking-widest">
-            Services & Pricing
+            {t.pricing.eyebrow}
           </span>
           <h2 className="text-3xl lg:text-5xl font-bold mt-4 text-stone-900">
-            Find the right <span className="gradient-text">plan</span>
+            {t.pricing.headingPrefix} <span className="gradient-text">{t.pricing.headingAccent}</span>
           </h2>
           <p className="text-zinc-500 mt-6 max-w-lg mx-auto text-lg">
-            Whether we train in person or online, every plan is built around your goals.
+            {t.pricing.intro}
           </p>
           <p className="text-zinc-500 mt-4 max-w-xl mx-auto text-sm">
-            Every plan starts with a free consultation call.{" "}
+            {t.pricing.consultPre}{" "}
             <button
               onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
               className="text-accent-dark font-semibold underline underline-offset-2 hover:text-accent transition-colors cursor-pointer"
             >
-              Book yours here
+              {t.pricing.consultLink}
             </button>{" "}
-            and we&apos;ll get you set up.
+            {t.pricing.consultPost}
           </p>
 
           {/* Tab toggle — flex on mobile wraps, all three tabs high-contrast so none get missed */}
@@ -1014,7 +959,7 @@ function Pricing() {
                   : "bg-white text-accent-dark border-accent/30 hover:bg-accent/5 hover:border-accent/60"
               }`}
             >
-              Personal Training
+              {t.pricing.tabPersonal}
             </button>
             <button
               onClick={() => setTab("online")}
@@ -1024,7 +969,7 @@ function Pricing() {
                   : "bg-white text-accent-dark border-accent/30 hover:bg-accent/5 hover:border-accent/60"
               }`}
             >
-              Online Coaching
+              {t.pricing.tabOnline}
             </button>
             <button
               onClick={() => setTab("corporate")}
@@ -1034,7 +979,7 @@ function Pricing() {
                   : "bg-white text-accent-dark border-accent/30 hover:bg-accent/5 hover:border-accent/60"
               }`}
             >
-              Corporate Fitness
+              {t.pricing.tabCorporate}
             </button>
           </div>
         </motion.div>
@@ -1058,32 +1003,15 @@ function Pricing() {
                 >
                   <div className="text-center">
                     <h3 className="text-2xl sm:text-3xl font-bold">
-                      Corporate Fitness Programs
+                      {t.pricing.corporate.heading}
                     </h3>
                     <p className="mt-4 text-zinc-300 leading-relaxed max-w-xl mx-auto">
-                      Invest in your team&apos;s health, performance, and morale. I design tailored fitness programs for companies of all sizes &mdash; from startups to established organizations.
+                      {t.pricing.corporate.intro}
                     </p>
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-4 mt-10">
-                    {[
-                      {
-                        title: "On-Site Group Training",
-                        desc: "Energizing team sessions at your office or a nearby gym, scheduled around your workday.",
-                      },
-                      {
-                        title: "Wellness Workshops",
-                        desc: "Interactive sessions on movement, nutrition, stress management, and recovery for your team.",
-                      },
-                      {
-                        title: "Ongoing Programs",
-                        desc: "Weekly or bi-weekly recurring sessions to build long-term health habits across your company.",
-                      },
-                      {
-                        title: "Team Challenges",
-                        desc: "Custom fitness challenges that bring your team together and boost engagement.",
-                      },
-                    ].map((item) => (
+                    {t.pricing.corporate.cards.map((item) => (
                       <div
                         key={item.title}
                         className="rounded-xl border border-zinc-700 bg-zinc-800/50 p-5"
@@ -1096,13 +1024,13 @@ function Pricing() {
 
                   <div className="mt-10 text-center">
                     <p className="text-sm text-zinc-400 mb-6">
-                      Every program is customized to your team size, goals, and schedule. Get in touch and let&apos;s build something that works for your company.
+                      {t.pricing.corporate.footer}
                     </p>
                     <button
                       onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
                       className="inline-block bg-accent text-white px-8 py-4 rounded-xl font-semibold hover:bg-accent-light hover:shadow-[0_0_30px_rgba(0,102,51,0.3)] transition-all duration-300 cursor-pointer"
                     >
-                      Contact for More Info
+                      {t.pricing.corporate.cta}
                     </button>
                   </div>
                 </motion.div>
@@ -1136,7 +1064,7 @@ function Pricing() {
                     {plan.popular && (
                       <div className="absolute -top-4 left-1/2 -translate-x-1/2">
                         <span className="bg-accent text-white text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full whitespace-nowrap">
-                          Most Popular
+                          {t.pricing.mostPopular}
                         </span>
                       </div>
                     )}
@@ -1212,7 +1140,7 @@ function Pricing() {
                     {plan.popular && (
                       <div className="absolute -top-4 left-1/2 -translate-x-1/2">
                         <span className="bg-accent text-white text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full whitespace-nowrap">
-                          Most Popular
+                          {t.pricing.mostPopular}
                         </span>
                       </div>
                     )}
@@ -1276,11 +1204,11 @@ function Pricing() {
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
                     <div>
-                      <h3 className="text-xl font-bold text-stone-900">Flexible Packages</h3>
-                      <p className="text-zinc-500 text-sm mt-1">No commitment. Buy sessions and use them at your own pace.</p>
+                      <h3 className="text-xl font-bold text-stone-900">{t.pricing.packages.heading}</h3>
+                      <p className="text-zinc-500 text-sm mt-1">{t.pricing.packages.subheading}</p>
                     </div>
                     <span className="text-xs font-medium uppercase tracking-wider text-accent-dark bg-accent-dark/10 rounded-full px-4 py-1.5 self-start">
-                      No minimum
+                      {t.pricing.packages.noMinimum}
                     </span>
                   </div>
                   <div className="grid sm:grid-cols-3 gap-4">
@@ -1298,7 +1226,7 @@ function Pricing() {
                       >
                         {pkg.popular && (
                           <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] font-bold uppercase tracking-wider bg-accent-dark text-white rounded-full px-3 py-1 shadow-md">
-                            Most Popular
+                            {t.pricing.mostPopular}
                           </span>
                         )}
                         <span
@@ -1317,7 +1245,7 @@ function Pricing() {
                               : "bg-stone-900 text-white"
                           }`}
                         >
-                          {pkg.sessions} sessions
+                          {pkg.sessions} {t.pricing.packages.sessionsLabel}
                         </span>
                       </a>
                     ))}
@@ -1329,7 +1257,7 @@ function Pricing() {
         </AnimatePresence>
 
         <p className="text-center text-zinc-400 text-sm mt-10">
-          Secure payments. All plans include a free initial consultation.
+          {t.pricing.secureNote}
         </p>
       </div>
     </section>
@@ -1426,30 +1354,10 @@ function MethodStep({
 }
 
 function Method() {
+  const t = useT();
   const sectionRef = useRef(null);
 
-  const steps = [
-    {
-      step: "01",
-      title: "Assessment",
-      description: "First, we sit down and talk. I want to know your goals, how you move, what your day looks like, and what you eat. This is where everything starts.",
-    },
-    {
-      step: "02",
-      title: "Custom Programming",
-      description: "Based on what I learn about you, I put together a training and nutrition plan that makes sense for your body, your schedule, and where you want to go.",
-    },
-    {
-      step: "03",
-      title: "Train Together",
-      description: "Whether we\u2019re in the gym together or working remotely, I\u2019m coaching you through every rep. I\u2019ll fix your form, push you when you need it, and keep things fun.",
-    },
-    {
-      step: "04",
-      title: "Track & Adapt",
-      description: "We check in every week, track your progress, and adjust the plan as you grow. Your body changes, so your program should too.",
-    },
-  ];
+  const steps = t.method.steps;
 
   return (
     <section id="method" className="relative py-8 sm:py-12 px-4 sm:px-6">
@@ -1481,13 +1389,13 @@ function Method() {
           className="text-center mb-16 sm:mb-20"
         >
           <span className="text-accent text-sm font-medium uppercase tracking-widest">
-            The Process
+            {t.method.eyebrow}
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4 text-white">
-            The Luki Method
+            {t.method.heading}
           </h2>
           <p className="text-zinc-300 mt-6 max-w-lg mx-auto text-lg">
-            Here&apos;s how we work together, step by step.
+            {t.method.intro}
           </p>
         </motion.div>
 
@@ -1543,30 +1451,10 @@ function Method() {
 
 /* ─────────────────── PHILOSOPHY (dark, layered) ─────────────────── */
 function Philosophy() {
+  const t = useT();
   const ref = useRef(null);
 
-  const principles = [
-    {
-      number: "01",
-      title: "Progressive Overload",
-      description: "Every session builds on the last one. I track everything so your training keeps moving forward, not just spinning wheels.",
-    },
-    {
-      number: "02",
-      title: "Sustainable Nutrition",
-      description: "I\u2019m not going to put you on some crazy diet you\u2019ll quit in two weeks. We build eating habits that work for your life and that you can keep up long term.",
-    },
-    {
-      number: "03",
-      title: "Pain-Free Movement",
-      description: "The whole point of training is to make your life better, not to leave you broken. We focus on moving well so you feel good outside the gym too.",
-    },
-    {
-      number: "04",
-      title: "Enjoy the Progress",
-      description: "Fitness isn\u2019t a destination, it\u2019s something you do every day. Celebrate the small wins, show up consistently, and trust the work you\u2019re putting in.",
-    },
-  ];
+  const principles = t.philosophy.principles;
 
   return (
     <section className="py-24 sm:py-32 relative">
@@ -1586,10 +1474,10 @@ function Philosophy() {
           className="text-center mb-16"
         >
           <span className="text-accent text-sm font-medium uppercase tracking-widest">
-            Philosophy
+            {t.philosophy.eyebrow}
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4">
-            How I <span className="gradient-text">train</span>
+            {t.philosophy.headingPrefix} <span className="gradient-text">{t.philosophy.headingAccent}</span>
           </h2>
         </motion.div>
 
@@ -1628,9 +1516,9 @@ function Philosophy() {
         >
           <div className="inline-block px-10 py-8 rounded-2xl bg-surface border border-accent/10 glow">
             <p className="text-2xl sm:text-3xl font-medium text-white italic">
-              &ldquo;Enjoy the progress. Embrace the suck.&rdquo;
+              &ldquo;{t.philosophy.quote}&rdquo;
             </p>
-            <p className="text-accent text-sm mt-4">Coach Luki</p>
+            <p className="text-accent text-sm mt-4">{t.philosophy.quoteAuthor}</p>
           </div>
         </motion.div>
       </div>
@@ -1756,40 +1644,10 @@ function ExperienceItem({
 }
 
 function Experience() {
+  const t = useT();
   const ref = useRef(null);
 
-  const experiences = [
-    {
-      company: "John Reed Bötzow & McFit, Berlin",
-      period: "2023 - Present",
-      role: "Personal Trainer",
-      description: "One-on-one coaching focused on strength, mobility, rehab, and helping clients truly understand how to move better. In-person and online.",
-    },
-    {
-      company: "Surf & Strength, Sri Lanka",
-      period: "2025",
-      role: "Strength Coach",
-      description: "Led strength classes with surfers, combining functional training with an active outdoor lifestyle.",
-    },
-    {
-      company: "TUI Cruises",
-      period: "2022",
-      role: "Personal Trainer Abroad",
-      description: "Supported guests in staying active and healthy while traveling, delivering personal training sessions aboard cruise ships.",
-    },
-    {
-      company: "Rehabilitation Center",
-      period: "2019 - 2021",
-      role: "Back & Neck Pain Therapist",
-      description: "Helped clients reduce discomfort, improve mobility, and restore functional movement through targeted rehabilitation programs.",
-    },
-    {
-      company: "Duale Hochschule für Prävention und Gesundheit",
-      period: "2019 - 2023",
-      role: "Degree in Prevention & Health",
-      description: "Earned my degree in prevention and health management, building the scientific foundation behind my coaching approach.",
-    },
-  ];
+  const experiences = t.experience.items;
 
   return (
     <section id="experience" className="py-8 sm:py-12 px-4 sm:px-6">
@@ -1802,10 +1660,10 @@ function Experience() {
           className="text-center mb-20"
         >
           <span className="text-accent-dark text-sm font-medium uppercase tracking-widest">
-            Background
+            {t.experience.eyebrow}
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4 text-stone-900">
-            My Experience
+            {t.experience.heading}
           </h2>
         </motion.div>
 
@@ -1852,6 +1710,7 @@ function TestimonialCard({ t, className = "" }: { t: { name: string; text: strin
 
 /* ─────────────────── TESTIMONIALS (dark, tilted cards) ─────────────────── */
 function Testimonials() {
+  const dict = useT();
   const ref = useRef(null);
   const nudgeRef = useRef<HTMLDivElement>(null);
   const desktopX = useMotionValue(0);
@@ -1895,56 +1754,7 @@ function Testimonials() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView]);
 
-  const testimonials = [
-    {
-      name: "Rasmus",
-      text: "Luke is what a personal trainer should be. He encourages, motivates and pushes you. He pushes you when you need it, and pushes you more when you don\u2019t know you need it. He has extensive physiological knowledge and has not left a question unanswered. I can only recommend working with him!",
-    },
-    {
-      name: "Ali",
-      text: "I worked with Luke in private coaching sessions. He was very curious about my goals and tailored a great coaching program for me where I started seeing results quickly. He provided great advice and helped me commit to my program and motivated me to keep going.",
-    },
-    {
-      name: "Marion",
-      text: "Luke hat mein Selbstvertrauen gest\u00E4rkt, indem er mich herausfordert und mich bei meinem Wunsch, trotz Arthrose fit und beweglich zu bleiben, durch gezielte \u00DCbungen unterst\u00FCtzt. Er zeigt mir, dass ich Kraft habe und diese auch steigern kann. Deshalb f\u00FChle ich mich gut aufgehoben bei ihm.",
-    },
-    {
-      name: "Andreea",
-      text: "Starting my training journey with Luke as my PT a year ago has been the best investment I ever made for my health and fitness. He knows just when to push me harder and when to take a step back. Our sessions are more than just workouts. They\u2019re a time where I can laugh, let out a bit of frustration, and achieve things I never thought I could.",
-    },
-    {
-      name: "Adriano",
-      text: "Luke Satterly ist ein wahnsinnig netter, aufmerksamer und am\u00FCsanter Mensch und Trainer. Sein Repertoire und sein Fachwissen sind gewaltig. Vor allem aber kriegt Luke es hin, dass ich jedes Mal besser gelaunt vom Training komme als ich hingegangen bin. Das ist die ganz gro\u00DFe Kunst.",
-    },
-    {
-      name: "\u00D8ystein",
-      text: "I\u2019ve worked with Luke periodically for over 8 months now, and it\u2019s been a great experience. He\u2019s very knowledgeable on both the practical and theoretical side of things, and always positive and friendly, while pushing me to do my best. The value of continuing working with Luke exceeded my expectations.",
-    },
-    {
-      name: "Jim",
-      text: "Luke takes the time to tailor my workouts to my goals, and changes it up to keep me interested and motivated. I really appreciate how he pushes me beyond my limits, to get the best results. I always leave our sessions feeling better than when I walked into the gym. He\u2019s great!",
-    },
-    {
-      name: "Andrius",
-      text: "Working with Luke was a game-changer. His challenging workouts push you beyond what you thought you were capable of, all while being enjoyable and motivating. Highly recommended!",
-    },
-    {
-      name: "Ellen",
-      text: "Luke hebt sich als Trainer vor allem durch seine klare, pr\u00E4zise Art zu erkl\u00E4ren hervor. Er schafft es, nicht nur Technik zu vermitteln, sondern auch das Verst\u00E4ndnis daf\u00FCr, warum etwas auf eine bestimmte Weise ausgef\u00FChrt werden sollte. Das f\u00FChrt dazu, dass man bewusster trainiert und die \u00DCbungen deutlich besser umsetzt. Dar\u00FCber hinaus ist Luke auch menschlich eine echte Bereicherung: aufmerksam, angenehm im Umgang und sehr motivierend.",
-    },
-    {
-      name: "Lena",
-      text: "Im Training mit Luke geht es nicht nur um meine k\u00F6rperliche Fitness, sondern vielmehr um ein ganzheitliches Verst\u00E4ndnis \u00FCber den eigenen K\u00F6rper und die richtigen Bewegungsabl\u00E4ufe. Seit wir mein Training umgestellt haben, habe ich im Alltag keine R\u00FCckenschmerzen und f\u00FChle mich insgesamt fitter und gesünder! Luke schafft es auch, mich f\u00FCr eine Session morgens um 7 zu motivieren und so das Training in meine volle Arbeitswoche einzubauen. Das einzige Manko: Der heftige Muskelkater am Tag danach\u2026",
-    },
-    {
-      name: "Emil",
-      text: "Was mir an Luki am meisten gef\u00E4llt: Er h\u00F6rt richtig zu und passt alles 100 % auf mich an. Dank ihm bin ich jetzt st\u00E4rker, fitter und selbstbewusster, und das ganz ohne Verletzungen oder Burnout. Der beste Coach, den ich in Berlin finden konnte.",
-    },
-    {
-      name: "Johanna",
-      text: "Ich war anfangs skeptisch gegen\u00FCber Personal Training, weil ich dachte, es geht vor allem um Motivation, doch bei Luki habe ich gelernt, wie man \u00DCbungen wirklich versteht und effektiv ausf\u00FChrt. Sein pr\u00E4zises Verst\u00E4ndnis und seine F\u00E4higkeit, dieses Wissen zu vermitteln, machen Training zu einer Kombination aus K\u00F6rper und Kopf. Dank ihm trainiere ich nicht nur effektiver, sondern auch mit deutlich mehr Selbstvertrauen und Freude.",
-    },
-  ];
+  const testimonials = dict.testimonials.items;
 
   return (
     <section id="testimonials" className="py-24 sm:py-32 relative scroll-mt-20">
@@ -1964,13 +1774,13 @@ function Testimonials() {
             className="text-center mb-20"
           >
             <span className="text-accent text-sm font-medium uppercase tracking-widest">
-              Testimonials
+              {dict.testimonials.eyebrow}
             </span>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4">
-              What clients <span className="gradient-text">say</span>
+              {dict.testimonials.headingPrefix} <span className="gradient-text">{dict.testimonials.headingAccent}</span>
             </h2>
             <p className="text-zinc-400 mt-6 max-w-lg mx-auto text-lg">
-              Real people, real results. Here&apos;s what they have to say.
+              {dict.testimonials.intro}
             </p>
           </motion.div>
         </div>
@@ -2005,7 +1815,7 @@ function Testimonials() {
           {/* Arrow controls + dot indicator */}
           <div className="flex items-center justify-center gap-6 mt-8">
             <button
-              aria-label="Previous testimonial"
+              aria-label={dict.a11y.prevTestimonial}
               onClick={() => goToDesktop(desktopIndex - 1, testimonials.length)}
               disabled={desktopIndex === 0}
               className="w-11 h-11 rounded-full border border-white/15 bg-white/5 backdrop-blur hover:bg-accent hover:border-accent transition-colors duration-200 text-white flex items-center justify-center cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
@@ -2018,7 +1828,7 @@ function Testimonials() {
               {desktopIndex + 1} / {testimonials.length}
             </span>
             <button
-              aria-label="Next testimonial"
+              aria-label={dict.a11y.nextTestimonial}
               onClick={() => goToDesktop(desktopIndex + 1, testimonials.length)}
               disabled={desktopIndex >= testimonials.length - 1}
               className="w-11 h-11 rounded-full border border-white/15 bg-white/5 backdrop-blur hover:bg-accent hover:border-accent transition-colors duration-200 text-white flex items-center justify-center cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
@@ -2051,7 +1861,7 @@ function Testimonials() {
           </motion.div>
 
           <p className="text-center text-zinc-600 text-xs mt-6 uppercase tracking-wider">
-            Swipe to see more
+            {dict.testimonials.swipeHint}
           </p>
         </div>
       </div>
@@ -2061,13 +1871,14 @@ function Testimonials() {
 
 /* ─────────────────── SOCIAL CTA ─────────────────── */
 function SocialCTA() {
+  const t = useT();
   const ref = useRef(null);
 
   const socials = [
     {
       platform: "Instagram",
       handle: "@coachluki",
-      description: "Workouts, client wins, and behind the scenes from my Berlin gyms.",
+      description: t.socialCta.instagramDescription,
       url: "https://www.instagram.com/coachluki/",
       icon: (
         <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
@@ -2078,7 +1889,7 @@ function SocialCTA() {
     {
       platform: "Threads",
       handle: "@coachluki",
-      description: "Quick tips, thoughts on training, and real talk about the fitness game.",
+      description: t.socialCta.threadsDescription,
       url: "https://www.threads.com/@coachluki",
       icon: (
         <svg className="w-8 h-8 flex-shrink-0" fill="currentColor" viewBox="0 0 16 16">
@@ -2103,13 +1914,13 @@ function SocialCTA() {
           className="text-center mb-16"
         >
           <span className="text-accent text-sm font-medium uppercase tracking-widest">
-            Stay Connected
+            {t.socialCta.eyebrow}
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4">
-            Follow the <span className="gradient-text">journey</span>
+            {t.socialCta.headingPrefix} <span className="gradient-text">{t.socialCta.headingAccent}</span>
           </h2>
           <p className="text-zinc-400 mt-6 max-w-lg mx-auto text-lg">
-            Training clips, nutrition tips, and the occasional gym selfie. Come hang out.
+            {t.socialCta.intro}
           </p>
         </motion.div>
 
@@ -2151,39 +1962,11 @@ function SocialCTA() {
 
 /* ─────────────────── FAQ ─────────────────── */
 function FAQ() {
+  const t = useT();
   const ref = useRef(null);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const faqs = [
-    {
-      question: "Is personal training right for me and my goals?",
-      answer: "Personal training is right for you if you don\u2019t just want to \u201Cwork out\u201D. You want a clear plan, structure, and measurable progress. Most people don\u2019t struggle because they\u2019re lazy, but because they\u2019re guessing. I remove that guesswork and give you a system tailored to your body, your schedule, and your goals. Whether you\u2019re just starting out, coming back from an injury, or looking to take your training to the next level, I meet you where you are and guide you forward.",
-    },
-    {
-      question: "Is online coaching effective for achieving real results?",
-      answer: "Yes, if it\u2019s done properly. Online coaching isn\u2019t just a PDF plan. It\u2019s ongoing guidance, structured programming, and regular adjustments based on your progress. You\u2019ll know exactly what to do, how to do it, and why you\u2019re doing it, with accountability and support along the way. For many clients, online coaching actually works better because it integrates into real life instead of depending on fixed appointments.",
-    },
-    {
-      question: "Why should I work with a coach instead of training on my own?",
-      answer: "Because results come from consistency and direction, not just effort. Most people train hard, but not effectively. They repeat the same workouts, lack progression, or don\u2019t adjust when something isn\u2019t working. A coach gives you structure, holds you accountable, and makes sure every session moves you closer to your goal. It\u2019s the difference between being busy and actually making progress.",
-    },
-    {
-      question: "What makes you different from other personal trainers?",
-      answer: "I don\u2019t just coach workouts. I build systems that fit into your life. My approach is focused on long-term results, not quick fixes. That means smart programming, honest feedback, and adapting everything to your reality, not forcing you into a one-size-fits-all plan. I also place a strong emphasis on technique, injury prevention, and sustainable habits, so you don\u2019t just see progress, you keep it. You\u2019re not just getting a trainer. You\u2019re getting a structured, thought-out process.",
-    },
-    {
-      question: "How do you help me stay consistent and accountable?",
-      answer: "Motivation comes and goes. Structure is what keeps you moving. I build your training in a way that fits your schedule and current lifestyle, so it\u2019s realistic to stick to. On top of that, you\u2019ll have regular check-ins, clear targets, and ongoing adjustments, so you always know where you stand and what\u2019s next. My role is to keep you on track, especially on the days you don\u2019t feel like it.",
-    },
-    {
-      question: "I\u2019m vegan. Can you work with that?",
-      answer: "Absolutely. I\u2019m vegan myself, so plant-based nutrition is kind of my thing. I\u2019ll help you hit your protein targets, optimize your meals, and make sure you\u2019re not just surviving on pasta and hummus.",
-    },
-    {
-      question: "What gyms do you train at?",
-      answer: "My home base is John Reed Bötzow in Prenzlauer Berg, where most of my in-person coaching happens. I can also train you at McFit locations across Berlin. Pick whichever is most convenient for your schedule.",
-    },
-  ];
+  const faqs = t.faq.items;
 
   return (
     <section id="faq" className="py-8 sm:py-12 px-4 sm:px-6 scroll-mt-20">
@@ -2199,13 +1982,13 @@ function FAQ() {
           className="text-center mb-16"
         >
           <span className="text-accent-dark text-sm font-medium uppercase tracking-widest">
-            FAQ
+            {t.faq.eyebrow}
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4 text-stone-900">
-            Got questions?
+            {t.faq.heading}
           </h2>
           <p className="text-zinc-500 mt-6 text-lg">
-            Here are the ones I get asked the most.
+            {t.faq.intro}
           </p>
         </motion.div>
 
@@ -2265,6 +2048,7 @@ function FAQ() {
 
 /* ─────────────────── WHATSAPP FLOATING BUTTON ─────────────────── */
 function WhatsAppButton() {
+  const t = useT();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -2284,7 +2068,7 @@ function WhatsAppButton() {
           exit={{ scale: 0, opacity: 0 }}
           transition={{ type: "spring", stiffness: 260, damping: 20 }}
           className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(37,211,102,0.4)] hover:shadow-[0_4px_30px_rgba(37,211,102,0.6)] hover:scale-110 transition-all duration-300"
-          aria-label="Chat on WhatsApp"
+          aria-label={t.a11y.chatWhatsApp}
         >
           <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
@@ -2297,6 +2081,7 @@ function WhatsAppButton() {
 
 /* ─────────────────── CONTACT CTA (dark container on dark bg) ─────────────────── */
 function Contact() {
+  const t = useT();
   const ref = useRef(null);
   const [formState, setFormState] = useState({
     name: "",
@@ -2325,11 +2110,11 @@ function Contact() {
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        throw new Error(data.error || "Something went wrong. Please try again.");
+        throw new Error(data.error || t.contact.errorGeneric);
       }
       setSubmitted(true);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+      setError(err instanceof Error ? err.message : t.contact.errorGeneric);
     } finally {
       setSubmitting(false);
     }
@@ -2354,14 +2139,13 @@ function Contact() {
             className="text-center mb-12"
           >
             <span className="text-accent text-sm font-medium uppercase tracking-widest">
-              Get Started
+              {t.contact.eyebrow}
             </span>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4">
-              Ready to <span className="gradient-text">transform</span>?
+              {t.contact.headingPrefix} <span className="gradient-text">{t.contact.headingAccent}</span>{t.contact.headingSuffix}
             </h2>
             <p className="text-zinc-400 mt-6 max-w-lg mx-auto text-lg">
-              Whether you want to train in person here in Berlin or work with me online,
-              just send me a message and we&apos;ll go from there.
+              {t.contact.intro}
             </p>
           </motion.div>
 
@@ -2382,43 +2166,43 @@ function Contact() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold text-white">Message sent!</h3>
-                <p className="text-zinc-400 mt-2">Thanks for reaching out. I&apos;ll get back to you within 24 hours.</p>
+                <h3 className="text-2xl font-bold text-white">{t.contact.successTitle}</h3>
+                <p className="text-zinc-400 mt-2">{t.contact.successBody}</p>
                 <button onClick={() => { setSubmitted(false); setFormState({ name: "", email: "", message: "", goal: "" }); }} className="mt-6 text-accent text-sm cursor-pointer hover:underline">
-                  Send another message
+                  {t.contact.sendAnother}
                 </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm text-zinc-400 mb-2">Name</label>
+                    <label className="block text-sm text-zinc-400 mb-2">{t.contact.nameLabel}</label>
                     <input
                       type="text"
                       required
                       value={formState.name}
                       onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                       className="w-full px-4 py-3.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-white placeholder-zinc-600 focus:outline-none focus:border-accent/50 transition-colors"
-                      placeholder="Your name"
+                      placeholder={t.contact.namePlaceholder}
                     />
                   </div>
                   <div>
-                    <label className="block text-sm text-zinc-400 mb-2">Email</label>
+                    <label className="block text-sm text-zinc-400 mb-2">{t.contact.emailLabel}</label>
                     <input
                       type="email"
                       required
                       value={formState.email}
                       onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                       className="w-full px-4 py-3.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-white placeholder-zinc-600 focus:outline-none focus:border-accent/50 transition-colors"
-                      placeholder="your@email.com"
+                      placeholder={t.contact.emailPlaceholder}
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm text-zinc-400 mb-2">What&apos;s your goal?</label>
+                  <label className="block text-sm text-zinc-400 mb-2">{t.contact.goalLabel}</label>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    {["Build Muscle", "Lose Weight", "Get Stronger", "Move Pain-Free"].map((goal) => (
+                    {t.contact.goals.map((goal) => (
                       <button
                         key={goal}
                         type="button"
@@ -2436,13 +2220,13 @@ function Contact() {
                 </div>
 
                 <div>
-                  <label className="block text-sm text-zinc-400 mb-2">Message</label>
+                  <label className="block text-sm text-zinc-400 mb-2">{t.contact.messageLabel}</label>
                   <textarea
                     rows={4}
                     value={formState.message}
                     onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                     className="w-full px-4 py-3.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-white placeholder-zinc-600 focus:outline-none focus:border-accent/50 transition-colors resize-none"
-                    placeholder="Tell me about your fitness goals..."
+                    placeholder={t.contact.messagePlaceholder}
                   />
                 </div>
 
@@ -2454,7 +2238,7 @@ function Contact() {
                   disabled={submitting}
                   className="w-full py-4 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light hover:shadow-[0_0_40px_rgba(0,102,51,0.3)] transition-all duration-300 text-lg cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  {submitting ? "Sending..." : "Let's Work Together"}
+                  {submitting ? t.contact.submitting : t.contact.submit}
                 </button>
               </form>
             )}
@@ -2497,7 +2281,7 @@ function Contact() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
               </svg>
-              Berlin, Germany
+              {t.contact.location}
             </span>
           </div>
         </div>
@@ -2508,10 +2292,11 @@ function Contact() {
 
 /* ─────────────────── FOOTER ─────────────────── */
 function Footer() {
+  const t = useT();
   return (
     <footer className="py-10">
       <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-zinc-600">
-        <p>&copy; {new Date().getFullYear()} Coach Luki. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Coach Luki. {t.footer.rights}</p>
         <div className="flex items-center gap-6">
           <a href="https://www.instagram.com/coachluki/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors cursor-pointer">
             Instagram
@@ -2533,24 +2318,11 @@ function Footer() {
 
 /* ─────────────────── LOCATIONS ─────────────────── */
 function Locations() {
+  const t = useT();
   const ref = useRef(null);
 
-  const gyms = [
-    {
-      name: "John Reed Bötzow",
-      type: "Home Base · Boutique Fitness Club",
-      address: "Prenzlauer Berg, Berlin",
-      description: "Where fitness meets music, art, and design. Great atmosphere and equipment for strength work, functional training, mobility, and ring sessions. This is where most of my in-person coaching happens.",
-      featured: true,
-    },
-    {
-      name: "McFit",
-      type: "Flexible Locations",
-      address: "Multiple Berlin locations",
-      description: "Convenient spots across the city with everything you need for strength and conditioning work. Pick whichever is easiest for your schedule.",
-      featured: false,
-    },
-  ];
+  const featured = [true, false];
+  const gyms = t.locations.items.map((g, i) => ({ ...g, featured: featured[i] }));
 
   return (
     <section id="locations" className="py-24 sm:py-32 relative scroll-mt-20">
@@ -2567,13 +2339,13 @@ function Locations() {
           className="text-center mb-16"
         >
           <span className="text-accent text-sm font-medium uppercase tracking-widest">
-            Locations
+            {t.locations.eyebrow}
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4">
-            Where I <span className="gradient-text">train</span>
+            {t.locations.headingPrefix} <span className="gradient-text">{t.locations.headingAccent}</span>
           </h2>
           <p className="text-zinc-400 mt-6 max-w-lg mx-auto text-lg">
-            I coach out of John Reed Bötzow in Prenzlauer Berg, plus McFit locations across Berlin.
+            {t.locations.intro}
           </p>
         </motion.div>
 
@@ -2596,7 +2368,7 @@ function Locations() {
             >
               {gym.featured && (
                 <span className="absolute -top-3 right-6 px-3 py-1 rounded-full bg-accent text-white text-xs font-semibold uppercase tracking-wider">
-                  Home Base
+                  {t.locations.homeBase}
                 </span>
               )}
               <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent mb-5">
@@ -2619,6 +2391,7 @@ function Locations() {
 
 /* ─────────────────── ACTION BANNER (conversion CTA) ─────────────────── */
 function ActionBanner() {
+  const t = useT();
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -2653,7 +2426,7 @@ function ActionBanner() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-accent text-sm font-medium uppercase tracking-widest mb-4"
         >
-          Stop waiting. Start moving.
+          {t.actionBanner.eyebrow}
         </motion.p>
         <motion.h2
           initial={{ y: 40, scale: 0.85 }}
@@ -2665,7 +2438,7 @@ function ActionBanner() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white max-w-3xl leading-tight"
         >
-          Your body is capable of more than you think
+          {t.actionBanner.heading}
         </motion.h2>
         <motion.div
           initial={{ y: 40, scale: 0.85 }}
@@ -2680,7 +2453,7 @@ function ActionBanner() {
             onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })}
             className="mt-8 px-10 py-4 bg-accent text-white font-semibold rounded-full hover:bg-accent-light hover:shadow-[0_0_40px_rgba(0,102,51,0.3)] transition-all duration-300 text-lg cursor-pointer"
           >
-            See Plans & Pricing
+            {t.actionBanner.cta}
           </button>
         </motion.div>
       </div>
@@ -2691,6 +2464,7 @@ function ActionBanner() {
 
 /* ─────────────────── TRUST BANNER (final push before contact) ─────────────────── */
 function TrustBanner() {
+  const t = useT();
   const ref = useRef(null);
 
   return (
@@ -2722,7 +2496,7 @@ function TrustBanner() {
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                 className="text-accent text-sm font-medium uppercase tracking-widest mb-4"
               >
-                Let&apos;s work together
+                {t.trustBanner.eyebrow}
               </motion.p>
               <motion.h2
                 initial={{ y: 40, scale: 0.85 }}
@@ -2734,8 +2508,8 @@ function TrustBanner() {
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight"
               >
-                The best time to start was yesterday. The next best time is{" "}
-                <span className="gradient-text">right now.</span>
+                {t.trustBanner.headingPre}{" "}
+                <span className="gradient-text">{t.trustBanner.headingAccent}</span>
               </motion.h2>
               <motion.p
                 initial={{ y: 40, scale: 0.85 }}
@@ -2747,7 +2521,7 @@ function TrustBanner() {
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                 className="text-zinc-400 mt-6 text-lg leading-relaxed"
               >
-                A free consultation is all it takes. No commitment, no pressure, just an honest conversation about your goals and how I can help.
+                {t.trustBanner.intro}
               </motion.p>
               <motion.div
                 initial={{ y: 40, scale: 0.85 }}
@@ -2763,7 +2537,7 @@ function TrustBanner() {
                   onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
                   className="px-10 py-4 bg-accent text-white font-semibold rounded-full hover:bg-accent-light hover:shadow-[0_0_40px_rgba(0,102,51,0.3)] transition-all duration-300 text-lg cursor-pointer"
                 >
-                  Book Free Consultation
+                  {t.trustBanner.ctaPrimary}
                 </button>
                 <a
                   href="https://wa.me/4915129633927"
@@ -2771,7 +2545,7 @@ function TrustBanner() {
                   rel="noopener noreferrer"
                   className="px-10 py-4 border border-white/10 text-white rounded-full hover:bg-white/5 transition-all duration-300 text-lg cursor-pointer text-center"
                 >
-                  WhatsApp Me
+                  {t.trustBanner.ctaWhatsApp}
                 </a>
               </motion.div>
             </div>
