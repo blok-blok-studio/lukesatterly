@@ -62,14 +62,14 @@ function getResend() {
 
 export async function POST(request: Request) {
   try {
-    // 1. Origin check
+    // 1. Origin check — reject cross-site and missing-origin requests.
     const origin = request.headers.get("origin");
     const allowedOrigins = [
       "https://coachluki.com",
       "https://www.coachluki.com",
-      "http://localhost:3000",
+      ...(process.env.NODE_ENV !== "production" ? ["http://localhost:3000", "http://localhost:3001"] : []),
     ];
-    if (origin && !allowedOrigins.includes(origin)) {
+    if (!origin || !allowedOrigins.includes(origin)) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 

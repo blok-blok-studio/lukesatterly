@@ -42,15 +42,6 @@ body {
   will-change: auto;
 }
 
-/* Respect user preference — kills all infinite/perf-heavy animations */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
-}
 
 /* Prevent single-word widows/orphans in body copy across the site.
    `pretty` keeps the last line with at least two words (supported in modern
@@ -138,29 +129,6 @@ h1, h2, h3 {
   box-shadow: 0 0 60px rgba(0, 102, 51, 0.12);
 }
 
-/* Background variations */
-.bg-dark {
-  background: #0C0C0C;
-}
-
-.bg-darker {
-  background: #070707;
-}
-
-.bg-surface {
-  background: #161616;
-}
-
-.bg-light {
-  background: #EDEAE3;
-  color: #1A1A1A;
-}
-
-.bg-white-section {
-  background: #F7F5F0;
-  color: #1A1A1A;
-}
-
 /* Rounded dark container */
 .dark-container {
   background: #0C0C0C;
@@ -214,12 +182,6 @@ h1, h2, h3 {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
-/* Section divider */
-.section-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0, 102, 51, 0.2), transparent);
-}
-
 /* Radial glow backgrounds */
 .radial-glow-green {
   background: radial-gradient(ellipse at 50% 0%, rgba(0, 102, 51, 0.08) 0%, transparent 60%);
@@ -229,33 +191,5 @@ h1, h2, h3 {
   background: radial-gradient(ellipse at 50% 100%, rgba(0, 102, 51, 0.06) 0%, transparent 50%);
 }
 
-/* Testimonial card tilt */
-.testimonial-card:nth-child(1) { transform: rotate(-2deg); }
-.testimonial-card:nth-child(2) { transform: rotate(1.5deg); }
-.testimonial-card:nth-child(3) { transform: rotate(-1deg); }
-.testimonial-card:nth-child(4) { transform: rotate(2deg); }
-.testimonial-card:hover { transform: rotate(0deg) scale(1.02) !important; }
 
-/* Timeline line */
-.timeline-line {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(to bottom, transparent, rgba(0, 102, 51, 0.3), transparent);
-  transform: translateX(-50%);
-}
-
-.timeline-dot {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #0C0C0C;
-  border: 2px solid var(--accent);
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-}
 

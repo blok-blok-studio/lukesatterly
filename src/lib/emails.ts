@@ -15,8 +15,8 @@
 
 const BRAND_COLOR = "#006633";
 const SITE_URL = "https://coachluki.com";
-const CALENDAR_URL = "https://calendar.app.google/pascCaTPLUFBJspR6";
-const GUIDE_URL = `${SITE_URL}/coach-luki-training-guide.pdf`;
+const CALENDAR_URL = process.env.CALENDAR_URL || "https://calendar.app.google/pascCaTPLUFBJspR6";
+const GUIDE_URL = process.env.GUIDE_URL || `${SITE_URL}/coach-luki-training-guide.pdf`;
 const BUSINESS_NAME = "Coach Luki, Personal Training & Nutrition";
 const BUSINESS_LOCATION = "Berlin, Germany";
 

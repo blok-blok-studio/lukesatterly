@@ -3,29 +3,20 @@ import crypto from "node:crypto";
 /**
  * HMAC-signed unsubscribe tokens.
  *
- * We don't store tokens in the DB — instead we sign `email` with a server
- * secret and verify the signature on click. This means the link is stable
- * per-email (no DB write needed on send) and cannot be forged without
- * knowing the secret.
- *
- * Uses CRON_SECRET as a fallback since it already exists in env. For
- * stronger isolation, set UNSUBSCRIBE_SECRET explicitly.
+ * We sign `email` with UNSUBSCRIBE_SECRET and verify the signature on click.
+ * The link is stable per-email (no DB write needed on send) and cannot be
+ * forged without knowing the secret.
  */
 
 const SITE_URL = "https://coachluki.com";
 
 function getSecret(): string {
-  const secret =
-    process.env.UNSUBSCRIBE_SECRET ||
-    process.env.CRON_SECRET ||
-    // Dev-only fallback — will throw on prod-like envs so we never accidentally
-    // ship with an unguessable-but-hardcoded secret.
-    (process.env.NODE_ENV === "production" ? "" : "dev-secret-not-for-prod");
-
+  const secret = process.env.UNSUBSCRIBE_SECRET;
   if (!secret) {
-    throw new Error(
-      "Neither UNSUBSCRIBE_SECRET nor CRON_SECRET is configured — unsubscribe tokens cannot be signed"
-    );
+    if (process.env.NODE_ENV === "production") {
+      throw new Error("UNSUBSCRIBE_SECRET is not configured");
+    }
+    return "dev-secret-not-for-prod";
   }
   return secret;
 }

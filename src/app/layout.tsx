@@ -15,7 +15,7 @@ const syne = Syne({
 const outfit = Outfit({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 const siteUrl = "https://coachluki.com"; // Update when domain is live
@@ -66,7 +66,6 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    alternateLocale: "de_DE",
     url: siteUrl,
     siteName: "Coach Luki",
     title: "Coach Luki | Personal Trainer & Nutritionist in Berlin",
@@ -190,6 +189,52 @@ const jsonLd = {
         "https://www.instagram.com/coachluki/",
         "https://www.threads.com/@coachluki",
         "https://linktr.ee/coachluki",
+        "https://www.linkedin.com/in/coachluki/",
+      ],
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "5.0",
+        bestRating: "5",
+        worstRating: "1",
+        reviewCount: "12",
+      },
+      review: [
+        {
+          "@type": "Review",
+          reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+          author: { "@type": "Person", name: "Rasmus" },
+          reviewBody: "Luke is what a personal trainer should be. He encourages, motivates and pushes you. He has extensive physiological knowledge and has not left a question unanswered. I can only recommend working with him.",
+        },
+        {
+          "@type": "Review",
+          reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+          author: { "@type": "Person", name: "Andreea" },
+          reviewBody: "Starting my training journey with Luke as my PT a year ago has been the best investment I ever made for my health and fitness. He knows just when to push me harder and when to take a step back.",
+        },
+        {
+          "@type": "Review",
+          reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+          author: { "@type": "Person", name: "Ali" },
+          reviewBody: "Luke was very curious about my goals and tailored a great coaching program for me where I started seeing results quickly. He provided great advice and motivated me to keep going.",
+        },
+        {
+          "@type": "Review",
+          reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+          author: { "@type": "Person", name: "Øystein" },
+          reviewBody: "I've worked with Luke periodically for over 8 months now. He's very knowledgeable on both the practical and theoretical side of things, and always positive and friendly, while pushing me to do my best.",
+        },
+        {
+          "@type": "Review",
+          reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+          author: { "@type": "Person", name: "Emil" },
+          reviewBody: "He listens properly and adjusts everything 100% to me. Thanks to him I'm now stronger, fitter and more confident — without injuries or burnout. The best coach I could find in Berlin.",
+        },
+        {
+          "@type": "Review",
+          reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+          author: { "@type": "Person", name: "Jim" },
+          reviewBody: "Luke takes the time to tailor my workouts to my goals, and changes it up to keep me interested and motivated. I always leave our sessions feeling better than when I walked into the gym.",
+        },
       ],
     },
     {
@@ -211,6 +256,7 @@ const jsonLd = {
         "https://www.instagram.com/coachluki/",
         "https://www.threads.com/@coachluki",
         "https://linktr.ee/coachluki",
+        "https://www.linkedin.com/in/coachluki/",
       ],
     },
     {
@@ -386,43 +432,6 @@ const jsonLd = {
         },
       ],
     },
-    // Aggregate rating + testimonials for star-rating rich result.
-    // Review count reflects the 8 testimonials shown on the page.
-    {
-      "@type": "LocalBusiness",
-      "@id": `${siteUrl}/#business-reviews`,
-      name: "Coach Luki - Personal Training & Nutrition",
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: "5.0",
-        bestRating: "5",
-        worstRating: "1",
-        reviewCount: "8",
-      },
-      review: [
-        {
-          "@type": "Review",
-          reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
-          author: { "@type": "Person", name: "Rasmus" },
-          reviewBody:
-            "Luke is what a personal trainer should be. He encourages, motivates and pushes you. He has extensive physiological knowledge and has not left a question unanswered. I can only recommend working with him.",
-        },
-        {
-          "@type": "Review",
-          reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
-          author: { "@type": "Person", name: "Andreea" },
-          reviewBody:
-            "Starting my training journey with Luke as my PT a year ago has been the best investment I ever made for my health and fitness. He knows just when to push me harder and when to take a step back.",
-        },
-        {
-          "@type": "Review",
-          reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
-          author: { "@type": "Person", name: "Ali" },
-          reviewBody:
-            "Luke was very curious about my goals and tailored a great coaching program for me where I started seeing results quickly. He provided great advice and motivated me to keep going.",
-        },
-      ],
-    },
   ],
 };
 
@@ -438,6 +447,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#0C0C0C" />
         <meta name="geo.region" content="DE-BE" />
         <meta name="geo.placename" content="Berlin" />

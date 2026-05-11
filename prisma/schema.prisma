@@ -20,4 +20,8 @@ model Subscriber {
   unsubscribed Boolean   @default(false)
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
+
+  @@index([sequenceStep])
+  @@index([subscribedAt])
+  @@index([unsubscribed, sequenceStep])
 }

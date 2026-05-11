@@ -111,7 +111,7 @@ function FunnelForm() {
   const submitToApi = async () => {
     try {
       setSubmitting(true);
-      await fetch("/api/subscribe", {
+      const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -119,8 +119,11 @@ function FunnelForm() {
           goal: formData.goals.join(", "),
         }),
       });
-    } catch {
-      // Fail silently — don't block the user from getting the PDF
+      if (!res.ok) {
+        console.error("Subscribe failed:", res.status, await res.text().catch(() => ""));
+      }
+    } catch (err) {
+      console.error("Subscribe error:", err);
     } finally {
       setSubmitting(false);
     }
