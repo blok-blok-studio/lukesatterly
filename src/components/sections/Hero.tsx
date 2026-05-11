@@ -1,13 +1,47 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { CountUp } from "@/components/sections/CountUp";
 import { smoothScrollTo } from "@/lib/scroll";
+import { useI18n } from "@/lib/i18n/context";
+
+function renderLines(text: string) {
+  const lines = text.split("\n");
+  return lines.map((line, i) => (
+    <span key={i}>
+      {line}
+      {i < lines.length - 1 && <br />}
+    </span>
+  ));
+}
 
 export function Hero() {
+  const { locale, dict: t } = useI18n();
   const ref = useRef(null);
+
+  // CJK characters fill the full em-square so they render much larger visually
+  // than Latin at the same px size. Complex scripts (Devanagari, Arabic) also
+  // need more line-height. Long Latin (German 9-char words, Polish, etc.) needs
+  // a slightly smaller cap to avoid overflow.
+  const COMPLEX_SCRIPT = new Set(["zh", "ja", "ko", "hi", "ar"]);
+  const LONG_LATIN = new Set(["de", "pl", "nl", "ru"]);
+  const isComplex = COMPLEX_SCRIPT.has(locale);
+  const isLongLatin = LONG_LATIN.has(locale);
+
+  const desktopFontStyle: React.CSSProperties = isComplex
+    ? { fontSize: "clamp(1.5rem, 2.75vw, 3.25rem)", letterSpacing: "0.06em", lineHeight: 1.45 }
+    : isLongLatin
+    ? { fontSize: "clamp(1.75rem, 3.5vw, 4.25rem)", letterSpacing: "0.04em", lineHeight: 1.25 }
+    : { fontSize: "clamp(2.5rem, 5.5vw, 6rem)", letterSpacing: "-0.02em", lineHeight: 1.05 };
+
+  const mobileFontStyle: React.CSSProperties = isComplex
+    ? { fontSize: "clamp(1.2rem, 4.5vw, 2.75rem)", letterSpacing: "0.06em", lineHeight: 1.45 }
+    : isLongLatin
+    ? { fontSize: "clamp(1.25rem, 5vw, 3.25rem)", letterSpacing: "0.02em", lineHeight: 1.25 }
+    : { fontSize: "clamp(1.5rem, 6.5vw, 4.5rem)", letterSpacing: "-0.02em", lineHeight: 1.1 };
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -35,9 +69,9 @@ export function Hero() {
   }, []);
 
   const heroWords = [
-    { text: "Your", className: "text-white", delay: 0.1 },
-    { text: "strongest", className: "text-accent", delay: 0.3 },
-    { text: "chapter", className: "gradient-text", delay: 0.5 },
+    { text: t.hero.word1, className: "text-white", delay: 0.1 },
+    { text: t.hero.word2, className: "text-accent", delay: 0.3 },
+    { text: t.hero.word3, className: "gradient-text", delay: 0.5 },
   ];
 
   return (
@@ -96,7 +130,7 @@ export function Hero() {
 
       {/* Desktop headline — outside the parallax transform to avoid iOS WebKit bug */}
       <h1 className="hidden sm:flex absolute inset-0 z-0 items-center justify-center pointer-events-none select-none">
-        <span className="block w-full max-w-7xl mx-auto px-6 text-center text-[clamp(3rem,8.5vw,8rem)] font-black tracking-[-0.05em] leading-[0.88] uppercase font-[family-name:var(--font-display)]">
+        <span className="block w-full max-w-7xl mx-auto px-6 text-center font-black uppercase font-[family-name:var(--font-display)]" style={desktopFontStyle}>
           {heroWords.map((word) => (
             <motion.span
               key={word.text}
@@ -116,7 +150,7 @@ export function Hero() {
           {/* Mobile-only overlay headline — sits inside the parallax wrapper,
               uses text-accent-light instead of gradient-text to avoid the iOS
               background-clip:text paint bug on first load */}
-          <h1 className="sm:hidden absolute left-1/2 top-[78%] -translate-x-1/2 -translate-y-1/2 z-30 w-full text-[clamp(1.75rem,7.5vw,5.5rem)] font-black tracking-[-0.04em] leading-[0.9] uppercase font-[family-name:var(--font-display)] text-center pointer-events-none select-none">
+          <h1 className="sm:hidden absolute left-1/2 top-[78%] -translate-x-1/2 -translate-y-1/2 z-30 w-full font-black uppercase font-[family-name:var(--font-display)] text-center pointer-events-none select-none" style={mobileFontStyle}>
             {heroWords.map((word) => {
               const mobileClass =
                 word.className === "gradient-text" ? "text-accent-light" : word.className;
@@ -194,7 +228,7 @@ export function Hero() {
                 }}
               />
               <span className="relative z-10 flex items-center justify-center w-full h-full text-white text-[0.7rem] sm:text-xs md:text-base lg:text-xl xl:text-xl font-semibold text-center leading-tight px-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]">
-                Let&apos;s Get<br />Started
+                {renderLines(t.hero.ctaPrimary)}
               </span>
             </motion.button>
 
@@ -222,14 +256,14 @@ export function Hero() {
                 }}
               />
               <span className="relative z-10 flex items-center justify-center w-full h-full text-white text-[0.7rem] sm:text-xs md:text-base lg:text-xl xl:text-xl font-semibold text-center leading-tight px-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)]">
-                Learn<br />More
+                {renderLines(t.hero.ctaSecondary)}
               </span>
             </motion.button>
           </div>
         </div>
 
         <p className="relative z-20 -mt-10 sm:-mt-16 text-center text-base sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed px-4 font-semibold" style={{ color: "#ffffff", textShadow: "0 2px 10px rgba(0,0,0,0.9), 0 0 2px rgba(0,0,0,0.8)" }}>
-          Get stronger, move better, enjoy the process. Training &amp; nutrition, online or in Berlin.
+          {t.hero.subtitle}
         </p>
 
         <motion.div
@@ -246,7 +280,7 @@ export function Hero() {
             <div className="text-4xl md:text-5xl font-black" style={{ color: "#ffffff", textShadow: "0 2px 8px rgba(0,0,0,0.8)" }}>
               <CountUp target={100} suffix="+" />
             </div>
-            <div className="text-sm mt-1 font-semibold" style={{ color: "#ffffff", textShadow: "0 1px 4px rgba(0,0,0,0.8)" }}>Clients</div>
+            <div className="text-sm mt-1 font-semibold" style={{ color: "#ffffff", textShadow: "0 1px 4px rgba(0,0,0,0.8)" }}>{t.hero.statClients}</div>
           </motion.div>
           <div className="w-px h-12 bg-white/20 hidden sm:block" />
           <motion.div
@@ -257,7 +291,7 @@ export function Hero() {
             <div className="text-4xl md:text-5xl font-black" style={{ color: "#ffffff", textShadow: "0 2px 8px rgba(0,0,0,0.8)" }}>
               <CountUp target={5000} suffix="+" duration={2.5} />
             </div>
-            <div className="text-sm mt-1 font-semibold" style={{ color: "#ffffff", textShadow: "0 1px 4px rgba(0,0,0,0.8)" }}>Hours Coached</div>
+            <div className="text-sm mt-1 font-semibold" style={{ color: "#ffffff", textShadow: "0 1px 4px rgba(0,0,0,0.8)" }}>{t.hero.statHours}</div>
           </motion.div>
           <div className="w-px h-12 bg-white/20 hidden sm:block" />
           <motion.button
@@ -270,7 +304,7 @@ export function Hero() {
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
             </svg>
-            Scroll to explore
+            {t.hero.scrollExplore}
           </motion.button>
         </motion.div>
       </motion.div>
