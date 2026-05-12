@@ -11,7 +11,7 @@ import {
   animate,
   AnimatePresence,
 } from "framer-motion";
-import { useT } from "@/lib/i18n/context";
+import { useT, useI18n } from "@/lib/i18n/context";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 /* ─────────────────── ANIMATED COUNTER ─────────────────── */
@@ -243,7 +243,11 @@ function Navbar() {
 
 /* ─────────────────── HERO ─────────────────── */
 function Hero() {
-  const t = useT();
+  const { locale, dict: t } = useI18n();
+  const DIACRITIC_LOCALES = new Set(["de", "pl", "nl", "ru", "vi", "uk"]);
+  const OVERFLOW_LOCALES = new Set(["pl"]);
+  const needsDiacriticLeading = DIACRITIC_LOCALES.has(locale);
+  const isLongLatin = OVERFLOW_LOCALES.has(locale);
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -340,7 +344,7 @@ function Hero() {
       {/* Desktop headline — constrained to the SAME max-w-7xl container as the nav
           so the text aligns with the logo (left) and Apply Now (right). */}
       <h1 className="hidden sm:flex absolute inset-0 z-0 items-center justify-center pointer-events-none select-none">
-        <span className="block w-full max-w-7xl mx-auto px-6 text-center text-[clamp(3rem,8.5vw,8rem)] font-black tracking-[-0.05em] leading-[0.88] uppercase font-[family-name:var(--font-display)]">
+        <span className={`block w-full max-w-7xl mx-auto px-6 text-center font-black uppercase font-[family-name:var(--font-display)] ${isLongLatin ? "text-[clamp(2rem,5vw,5.25rem)] tracking-[-0.03em]" : "text-[clamp(3rem,8.5vw,8rem)] tracking-[-0.05em]"} ${needsDiacriticLeading ? "leading-[0.96]" : "leading-[0.88]"}`}>
           {heroWords.map((word) => (
             <motion.span
               key={word.text}
@@ -359,7 +363,7 @@ function Hero() {
         {/* Image + overlaid headline + buttons */}
         <div className="relative flex items-center justify-center">
           {/* Mobile-only overlay headline — sits on Luke's chest */}
-          <h1 className="sm:hidden absolute left-1/2 top-[78%] -translate-x-1/2 -translate-y-1/2 z-30 w-full text-[clamp(1.75rem,7.5vw,5.5rem)] font-black tracking-[-0.04em] leading-[0.9] uppercase font-[family-name:var(--font-display)] text-center pointer-events-none select-none">
+          <h1 className={`sm:hidden absolute left-1/2 top-[78%] -translate-x-1/2 -translate-y-1/2 z-30 w-full font-black uppercase font-[family-name:var(--font-display)] text-center pointer-events-none select-none ${isLongLatin ? "text-[clamp(1.25rem,5vw,3.5rem)] tracking-[-0.02em]" : "text-[clamp(1.75rem,7.5vw,5.5rem)] tracking-[-0.04em]"} ${needsDiacriticLeading ? "leading-[0.96]" : "leading-[0.9]"}`}>
             {heroWords.map((word) => {
               // On mobile the headline lives inside a parallaxing motion.div
               // (transform ancestor), which trips an iOS Safari bug where

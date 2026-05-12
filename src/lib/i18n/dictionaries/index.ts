@@ -13,20 +13,24 @@ import ja from "./ja";
 import zh from "./zh";
 import ko from "./ko";
 import hi from "./hi";
+import vi from "./vi";
+import uk from "./uk";
 
 import type { Locale } from "../config";
 
 export const dictionaries: Record<Locale, Dictionary> = {
-  en,
   de,
+  en,
+  vi,
+  uk,
+  ar,
+  ru,
   es,
   fr,
   it,
   pt,
   nl,
   pl,
-  ru,
-  ar,
   ja,
   zh,
   ko,
