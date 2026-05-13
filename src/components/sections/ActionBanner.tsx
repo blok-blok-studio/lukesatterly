@@ -21,7 +21,7 @@ export function ActionBanner() {
             alt="Coach Luki running through the streets of Berlin at night"
             fill
             unoptimized
-            className="object-cover object-center"
+            className="object-contain"
           />
         </motion.div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/30" />
