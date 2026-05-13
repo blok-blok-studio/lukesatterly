@@ -35,10 +35,10 @@ const testimonials = [
   { name: "Øystein", text: "I've worked with Luke periodically for over 8 months now, and it's been a great experience. He's very knowledgeable on both the practical and theoretical side of things, and always positive and friendly, while pushing me to do my best. The value of continuing working with Luke exceeded my expectations." },
   { name: "Jim", text: "Luke takes the time to tailor my workouts to my goals, and changes it up to keep me interested and motivated. I really appreciate how he pushes me beyond my limits, to get the best results. I always leave our sessions feeling better than when I walked into the gym. He's great!" },
   { name: "Andrius", text: "Working with Luke was a game-changer. His challenging workouts push you beyond what you thought you were capable of, all while being enjoyable and motivating. Highly recommended!" },
-  { name: "Ellen", text: "Luke hebt sich als Trainer vor allem durch seine klare, präzise Art zu erklären hervor. Er schafft es, nicht nur Technik zu vermitteln, sondern auch das Verständnis dafür, warum etwas auf eine bestimmte Weise ausgeführt werden sollte. Das führt dazu, dass man bewusster trainiert und die Übungen deutlich besser umsetzt. Darüber hinaus ist Luke auch menschlich eine echte Bereicherung: aufmerksam, angenehm im Umgang und sehr motivierend." },
   { name: "Lena", text: "Im Training mit Luke geht es nicht nur um meine körperliche Fitness, sondern vielmehr um ein ganzheitliches Verständnis über den eigenen Körper und die richtigen Bewegungsabläufe. Seit wir mein Training umgestellt haben, habe ich im Alltag keine Rückenschmerzen und fühle mich insgesamt fitter und gesünder! Luke schafft es auch, mich für eine Session morgens um 7 zu motivieren und so das Training in meine volle Arbeitswoche einzubauen. Das einzige Manko: Der heftige Muskelkater am Tag danach…" },
   { name: "Emil", text: "Was mir an Luki am meisten gefällt: Er hört richtig zu und passt alles 100 % auf mich an. Dank ihm bin ich jetzt stärker, fitter und selbstbewusster, und das ganz ohne Verletzungen oder Burnout. Der beste Coach, den ich in Berlin finden konnte." },
   { name: "Johanna", text: "Ich war anfangs skeptisch gegenüber Personal Training, weil ich dachte, es geht vor allem um Motivation, doch bei Luki habe ich gelernt, wie man Übungen wirklich versteht und effektiv ausführt. Sein präzises Verständnis und seine Fähigkeit, dieses Wissen zu vermitteln, machen Training zu einer Kombination aus Körper und Kopf. Dank ihm trainiere ich nicht nur effektiver, sondern auch mit deutlich mehr Selbstvertrauen und Freude." },
+  { name: "Ellen", text: "Luke hebt sich als Trainer vor allem durch seine klare, präzise Art zu erklären hervor. Er schafft es, nicht nur Technik zu vermitteln, sondern auch das Verständnis dafür, warum etwas auf eine bestimmte Weise ausgeführt werden sollte. Das führt dazu, dass man bewusster trainiert und die Übungen deutlich besser umsetzt. Darüber hinaus ist Luke auch menschlich eine echte Bereicherung: aufmerksam, angenehm im Umgang und sehr motivierend." },
 ];
 
 const DESKTOP_CARD_STEP = 444;
@@ -46,7 +46,11 @@ const DESKTOP_CARD_STEP = 444;
 export function Testimonials() {
   const ref = useRef(null);
   const desktopX = useMotionValue(0);
+  const mobileX = useMotionValue(0);
   const [desktopIndex, setDesktopIndex] = useState(0);
+  const [mobileIndex, setMobileIndex] = useState(0);
+
+  const MOBILE_CARD_STEP = 290;
 
   const goToDesktop = (idx: number) => {
     const bounded = Math.max(0, Math.min(idx, testimonials.length - 1));
@@ -137,20 +141,26 @@ export function Testimonials() {
 
           <motion.div
             className="flex items-stretch gap-4 px-6 cursor-grab active:cursor-grabbing"
-            style={{ touchAction: "pan-y" }}
+            style={{ x: mobileX, touchAction: "pan-y" }}
             drag="x"
             dragDirectionLock
-            dragConstraints={{ left: -(testimonials.length - 1) * 290, right: 0 }}
+            dragConstraints={{ left: -(testimonials.length - 1) * MOBILE_CARD_STEP, right: 0 }}
             dragElastic={0.1}
             dragTransition={{ bounceStiffness: 300, bounceDamping: 30 }}
+            onDragEnd={() => {
+              const x = mobileX.get();
+              const idx = Math.max(0, Math.min(Math.round(-x / MOBILE_CARD_STEP), testimonials.length - 1));
+              setMobileIndex(idx);
+              animate(mobileX, -idx * MOBILE_CARD_STEP, { type: "spring", stiffness: 220, damping: 30 });
+            }}
           >
             {testimonials.map((t, i) => (
               <TestimonialCard key={`mobile-${t.name}-${i}`} t={t} className="w-[280px]" />
             ))}
           </motion.div>
 
-          <p className="text-center text-zinc-600 text-xs mt-6 uppercase tracking-wider">
-            Swipe to see more
+          <p className="text-center text-zinc-400 text-xs mt-6 uppercase tracking-wider tabular-nums">
+            {mobileIndex + 1} / {testimonials.length}
           </p>
         </div>
       </div>

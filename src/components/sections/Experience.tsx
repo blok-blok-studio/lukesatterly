@@ -117,7 +117,7 @@ export function Experience() {
 
   return (
     <section id="experience" className="py-8 sm:py-12 px-4 sm:px-6">
-      <div ref={ref} className="max-w-7xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16">
+      <div ref={ref} className="max-w-7xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16 shadow-[inset_0_0_120px_rgba(0,0,0,0.12)] [background:radial-gradient(ellipse_at_top_left,rgba(0,80,40,0.08)_0%,transparent_55%),radial-gradient(ellipse_at_bottom_right,rgba(0,80,40,0.08)_0%,transparent_55%),radial-gradient(ellipse_at_top_right,rgba(0,0,0,0.05)_0%,transparent_50%),radial-gradient(ellipse_at_bottom_left,rgba(0,0,0,0.05)_0%,transparent_50%),white]">
         <motion.div
           initial={{ y: 40, scale: 0.85 }}
           whileInView={{ y: 0, scale: 1 }}

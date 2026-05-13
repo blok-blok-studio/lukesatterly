@@ -20,12 +20,12 @@ export function ActionBanner() {
             src="/luke-running-street.webp"
             alt="Coach Luki running through the streets of Berlin at night"
             fill
-            className="object-cover object-center blur-[5px]"
+            quality={100}
+            className="object-cover object-center"
           />
         </motion.div>
-        <div className="absolute inset-0 bg-black/65" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.3)_0%,transparent_70%)]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40" />
+        <div className="absolute inset-0 bg-black/35" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20" />
 
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
           <motion.p
