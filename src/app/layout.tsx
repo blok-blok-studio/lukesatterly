@@ -189,7 +189,7 @@ const jsonLd = {
         "https://www.instagram.com/coachluki/",
         "https://www.threads.com/@coachluki",
         "https://linktr.ee/coachluki",
-        "https://www.linkedin.com/in/coachluki/",
+        "https://www.linkedin.com/in/luke-satterly-9085011b5/",
       ],
       aggregateRating: {
         "@type": "AggregateRating",
@@ -256,7 +256,7 @@ const jsonLd = {
         "https://www.instagram.com/coachluki/",
         "https://www.threads.com/@coachluki",
         "https://linktr.ee/coachluki",
-        "https://www.linkedin.com/in/coachluki/",
+        "https://www.linkedin.com/in/luke-satterly-9085011b5/",
       ],
     },
     {

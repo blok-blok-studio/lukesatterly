@@ -699,7 +699,7 @@ export default function StartPage() {
           <div className="flex items-center gap-6">
             <Link href="/" className="hover:text-white transition-colors cursor-pointer">Home</Link>
             <a href="https://www.instagram.com/coachluki/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Instagram</a>
-            <a href="https://www.threads.com/@coachluki" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Threads</a>
+            <a href="https://www.linkedin.com/in/luke-satterly-9085011b5/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">LinkedIn</a>
           </div>
         </div>
       </footer>

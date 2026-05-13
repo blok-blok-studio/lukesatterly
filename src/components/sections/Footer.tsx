@@ -9,13 +9,10 @@ export function Footer() {
           <a href="https://www.instagram.com/coachluki/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors cursor-pointer">
             Instagram
           </a>
-          <a href="https://www.threads.com/@coachluki" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors cursor-pointer">
-            Threads
-          </a>
           <a href="https://linktr.ee/coachluki" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors cursor-pointer">
             Linktree
           </a>
-          <a href="https://www.linkedin.com/in/coachluki/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors cursor-pointer">
+          <a href="https://www.linkedin.com/in/luke-satterly-9085011b5/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors cursor-pointer">
             LinkedIn
           </a>
         </div>

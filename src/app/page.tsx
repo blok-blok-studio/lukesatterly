@@ -1548,7 +1548,7 @@ function ExperienceItem({
   return (
     <div ref={itemRef} className="relative">
       {/* ── Mobile layout ── */}
-      <div className={`relative flex gap-5 sm:hidden ${isLast ? "" : "pb-12"}`}>
+      <div className={`relative flex gap-4 sm:hidden ${isLast ? "" : "pb-8"}`}>
         {/* Connector — absolute so it bridges the padding down to the next
             item's dot. Dot column is w-4 centered → line at 7px. */}
         {!isLast && (
@@ -1580,14 +1580,14 @@ function ExperienceItem({
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="flex-1"
         >
-          <span className="text-zinc-400 text-sm">{exp.period}</span>
-          <h3 className={`text-xl font-bold mt-1 transition-colors duration-500 ${
+          <span className="text-zinc-400 text-xs sm:text-sm">{exp.period}</span>
+          <h3 className={`text-lg font-bold mt-1 transition-colors duration-500 ${
             isActive ? "text-stone-900" : "text-stone-300"
           }`}>{exp.company}</h3>
-          <p className={`font-medium text-sm mt-1 transition-colors duration-500 ${
+          <p className={`font-medium text-xs mt-1 transition-colors duration-500 ${
             isActive ? "text-accent-dark" : "text-stone-300"
           }`}>{exp.role}</p>
-          <p className={`mt-3 leading-relaxed transition-colors duration-500 ${
+          <p className={`mt-2 text-sm leading-relaxed transition-colors duration-500 ${
             isActive ? "text-zinc-500" : "text-zinc-300"
           }`}>{exp.description}</p>
         </motion.div>
@@ -1655,25 +1655,45 @@ function Experience() {
 
   return (
     <section id="experience" className="py-8 sm:py-12 px-4 sm:px-6">
-      <div ref={ref} className="max-w-7xl mx-auto light-container py-20 sm:py-28 px-6 sm:px-10 lg:px-16">
+      <div ref={ref} className="max-w-7xl mx-auto light-container relative py-12 sm:py-28 px-5 sm:px-10 lg:px-16">
+        <div aria-hidden className="pointer-events-none absolute inset-0">
+          {/* Gradient base */}
+          <div className="absolute inset-0 bg-[linear-gradient(160deg,#ffffff_0%,#F7F5F0_35%,#e8f0ea_100%)]" />
+          {/* Dot grid texture */}
+          <div className="absolute inset-0 opacity-[0.12]" style={{ backgroundImage: 'radial-gradient(circle, #006633 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
+          {/* Animated blob — bottom left */}
+          <motion.div
+            className="absolute -bottom-16 -left-16 w-[320px] h-[320px] sm:w-[700px] sm:h-[700px] rounded-full bg-[radial-gradient(circle,rgba(0,102,51,0.45)_0%,transparent_60%)]"
+            animate={{ scale: [1, 1.1, 1], x: [0, 24, 0], y: [0, -20, 0] }}
+            transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+          />
+          {/* Animated blob — top center */}
+          <motion.div
+            className="absolute -top-16 left-1/4 w-[280px] h-[280px] sm:w-[550px] sm:h-[550px] rounded-full bg-[radial-gradient(circle,rgba(0,102,51,0.3)_0%,transparent_60%)]"
+            animate={{ scale: [1, 1.12, 1], x: [0, -28, 0], y: [0, 18, 0] }}
+            transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          />
+          {/* White highlight — top right */}
+          <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.95)_0%,transparent_55%)]" />
+        </div>
         <motion.div
           initial={{ y: 40, scale: 0.85 }}
           whileInView={{ y: 0, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mb-20"
+          className="relative z-10 text-center mb-10 sm:mb-20"
         >
-          <span className="text-accent-dark text-sm font-medium uppercase tracking-widest">
+          <span className="text-accent-dark text-xs sm:text-sm font-medium uppercase tracking-widest">
             {t.experience.eyebrow}
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4 text-stone-900">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold mt-3 sm:mt-4 text-stone-900">
             {t.experience.heading}
           </h2>
         </motion.div>
 
         {/* Timeline — per-item connectors start at the first dot and
             terminate at the last dot (no leading/trailing stub line). */}
-        <div className="relative max-w-3xl mx-auto">
+        <div className="relative z-10 max-w-3xl mx-auto">
           {experiences.map((exp, i) => (
             <ExperienceItem
               key={exp.company}
@@ -1891,13 +1911,13 @@ function SocialCTA() {
       ),
     },
     {
-      platform: "Threads",
-      handle: "@coachluki",
-      description: t.socialCta.threadsDescription,
-      url: "https://www.threads.com/@coachluki",
+      platform: "LinkedIn",
+      handle: "coachluki",
+      description: "The professional side — corporate fitness, client wins, and the business of coaching.",
+      url: "https://www.linkedin.com/in/luke-satterly-9085011b5/",
       icon: (
-        <svg className="w-8 h-8 flex-shrink-0" fill="currentColor" viewBox="0 0 16 16">
-          <path d="M6.321 6.016c-.27-.18-1.166-.802-1.166-.802.756-1.081 1.753-1.502 3.132-1.502.975 0 1.803.327 2.394.948s.928 1.509 1.005 2.644q.492.207.905.484c1.109.745 1.719 1.86 1.719 3.137 0 2.716-2.226 5.075-6.256 5.075C4.594 16 1 13.987 1 7.994 1 2.034 4.482 0 8.044 0 9.69 0 13.55.243 15 5.036l-1.36.353C12.516 1.974 10.163 1.43 8.006 1.43c-3.565 0-5.582 2.171-5.582 6.79 0 4.143 2.254 6.343 5.63 6.343 2.777 0 4.847-1.443 4.847-3.556 0-1.438-1.208-2.127-1.27-2.127-.236 1.234-.868 3.31-3.644 3.31-1.618 0-3.013-1.118-3.013-2.582 0-2.09 1.984-2.847 3.55-2.847.586 0 1.294.04 1.663.114 0-.637-.54-1.728-1.9-1.728-1.25 0-1.566.405-1.967.868ZM8.716 8.19c-2.04 0-2.304.87-2.304 1.416 0 .878 1.043 1.168 1.6 1.168 1.02 0 2.067-.282 2.232-2.423a6.2 6.2 0 0 0-1.528-.161" />
+        <svg className="w-8 h-8 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
         </svg>
       ),
     },
@@ -2259,13 +2279,6 @@ function Contact() {
               @coachluki
             </a>
             <span className="text-stone-700">|</span>
-            <a href="https://www.threads.com/@coachluki" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-white transition-colors">
-              <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 16 16">
-                <path d="M6.321 6.016c-.27-.18-1.166-.802-1.166-.802.756-1.081 1.753-1.502 3.132-1.502.975 0 1.803.327 2.394.948s.928 1.509 1.005 2.644q.492.207.905.484c1.109.745 1.719 1.86 1.719 3.137 0 2.716-2.226 5.075-6.256 5.075C4.594 16 1 13.987 1 7.994 1 2.034 4.482 0 8.044 0 9.69 0 13.55.243 15 5.036l-1.36.353C12.516 1.974 10.163 1.43 8.006 1.43c-3.565 0-5.582 2.171-5.582 6.79 0 4.143 2.254 6.343 5.63 6.343 2.777 0 4.847-1.443 4.847-3.556 0-1.438-1.208-2.127-1.27-2.127-.236 1.234-.868 3.31-3.644 3.31-1.618 0-3.013-1.118-3.013-2.582 0-2.09 1.984-2.847 3.55-2.847.586 0 1.294.04 1.663.114 0-.637-.54-1.728-1.9-1.728-1.25 0-1.566.405-1.967.868ZM8.716 8.19c-2.04 0-2.304.87-2.304 1.416 0 .878 1.043 1.168 1.6 1.168 1.02 0 2.067-.282 2.232-2.423a6.2 6.2 0 0 0-1.528-.161" />
-              </svg>
-              Threads
-            </a>
-            <span className="text-stone-700">|</span>
             <a href="https://linktr.ee/coachluki" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-white transition-colors">
               <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M13.511 5.853l4.005-4.117 2.325 2.381-4.201 4.005h5.909v3.305h-5.937l4.229 4.108-2.325 2.334-5.741-5.769-5.741 5.769-2.325-2.325 4.229-4.108H2V8.122h5.909L3.708 4.117l2.325-2.381 4.005 4.117V0h3.473v5.853zM10.038 16.16h3.473v7.84h-3.473v-7.84z" />
@@ -2273,7 +2286,7 @@ function Contact() {
               Linktree
             </a>
             <span className="text-stone-700">|</span>
-            <a href="https://www.linkedin.com/in/coachluki/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-white transition-colors">
+            <a href="https://www.linkedin.com/in/luke-satterly-9085011b5/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-white transition-colors">
               <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
               </svg>
@@ -2305,13 +2318,10 @@ function Footer() {
           <a href="https://www.instagram.com/coachluki/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors cursor-pointer">
             Instagram
           </a>
-          <a href="https://www.threads.com/@coachluki" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors cursor-pointer">
-            Threads
-          </a>
           <a href="https://linktr.ee/coachluki" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors cursor-pointer">
             Linktree
           </a>
-          <a href="https://www.linkedin.com/in/coachluki/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors cursor-pointer">
+          <a href="https://www.linkedin.com/in/luke-satterly-9085011b5/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors cursor-pointer">
             LinkedIn
           </a>
         </div>
@@ -2412,12 +2422,12 @@ function ActionBanner() {
           src="/coach-luki-running-berlin-streets-night.webp"
           alt="Coach Luki running through the streets of Berlin at night — outdoor conditioning with personal trainer"
           fill
-          className="object-cover object-center blur-[5px]"
+          className="object-cover object-center"
         />
       </motion.div>
-      <div className="absolute inset-0 bg-black/65" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.3)_0%,transparent_70%)]" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40" />
+      <div className="absolute inset-0 bg-black/40" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.15)_0%,transparent_70%)]" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20" />
 
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
         <motion.p
