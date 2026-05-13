@@ -24,8 +24,7 @@ export function ActionBanner() {
             className="object-cover object-center"
           />
         </motion.div>
-        <div className="absolute inset-0 bg-black/35" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/30" />
 
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
           <motion.p
