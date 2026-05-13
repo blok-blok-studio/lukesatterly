@@ -38,29 +38,58 @@ function CountUp({ target, suffix = "", duration = 2 }: { target: number; suffix
   return <span ref={ref}>{count}{suffix}</span>;
 }
 
+/* ─────────────────── SHARED ANIMATION VARIANTS ─────────────────── */
+const cardVariant = {
+  hidden: { y: 50, scale: 0.82, opacity: 0 },
+  show: {
+    y: 0, scale: 1, opacity: 1,
+    transition: { type: "spring" as const, stiffness: 280, damping: 22 },
+  },
+};
+
+const containerVariant = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
+};
+
+function StaggerGrid({ children, className }: { children: React.ReactNode; className?: string }) {
+  return (
+    <motion.div
+      variants={containerVariant}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, margin: "-60px" }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 /* ─────────────────── SCROLL-DRIVEN ZOOM WRAPPER ─────────────────── */
-/**
- * Wraps a section with a scroll-driven scale + fade-in animation.
- * Disabled on mobile (< 768px) and when `prefers-reduced-motion` is set
- * to avoid jank and respect user preferences. On those configurations
- * the children render as a plain block with no motion hooks attached.
- */
 function ScrollZoom({ children, className = "", intensity = 0.75 }: { children: React.ReactNode; className?: string; intensity?: number }) {
-  const [enabled, setEnabled] = useState(false);
+  const [ready, setReady] = useState(false);
+  const [activeIntensity, setActiveIntensity] = useState(intensity);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const mq = window.matchMedia("(min-width: 768px) and (prefers-reduced-motion: no-preference)");
-    const update = () => setEnabled(mq.matches);
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const wide = window.matchMedia("(min-width: 768px)");
+    const update = () => {
+      if (reduced.matches) { setReady(false); return; }
+      setReady(true);
+      setActiveIntensity(wide.matches ? intensity : 1 - (1 - intensity) * 0.45);
+    };
     update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, []);
+    reduced.addEventListener("change", update);
+    wide.addEventListener("change", update);
+    return () => { reduced.removeEventListener("change", update); wide.removeEventListener("change", update); };
+  }, [intensity]);
 
-  if (!enabled) {
+  if (!ready) {
     return <div className={className}>{children}</div>;
   }
-  return <ScrollZoomInner className={className} intensity={intensity}>{children}</ScrollZoomInner>;
+  return <ScrollZoomInner className={className} intensity={activeIntensity}>{children}</ScrollZoomInner>;
 }
 
 function ScrollZoomInner({ children, className, intensity }: { children: React.ReactNode; className: string; intensity: number }) {
@@ -684,14 +713,11 @@ function Services() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {services.map((service, i) => (
+        <StaggerGrid className="grid md:grid-cols-3 gap-6">
+          {services.map((service) => (
             <motion.div
               key={service.title}
-              initial={{ y: 50, scale: 0.8 }}
-              whileInView={{ y: 0, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+              variants={cardVariant}
               whileHover={{ y: -6, scale: 1.02 }}
               className="group relative bg-surface border border-white/[0.04] rounded-2xl p-8 hover:border-accent/20 transition-shadow duration-500 hover:shadow-[0_0_50px_rgba(0,102,51,0.06)]"
             >
@@ -718,7 +744,7 @@ function Services() {
               <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </motion.div>
           ))}
-        </div>
+        </StaggerGrid>
       </div>
     </section>
   );
@@ -761,14 +787,11 @@ function BeforeAfter() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {transformations.map((tr, i) => (
+        <StaggerGrid className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {transformations.map((tr) => (
             <motion.div
               key={tr.name}
-              initial={{ y: 50, scale: 0.8 }}
-              whileInView={{ y: 0, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+              variants={cardVariant}
               className="group"
             >
               <div className="grid grid-cols-2 gap-3 mb-4">
@@ -803,7 +826,7 @@ function BeforeAfter() {
               </div>
             </motion.div>
           ))}
-        </div>
+        </StaggerGrid>
 
         {/* CTA */}
         <motion.div
@@ -1048,17 +1071,11 @@ function Pricing() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="grid lg:grid-cols-3 gap-6 max-w-5xl mx-auto items-start">
-                {onlinePlans.map((plan, i) => (
+              <StaggerGrid className="grid lg:grid-cols-3 gap-6 max-w-5xl mx-auto items-start">
+                {onlinePlans.map((plan) => (
                   <motion.div
                     key={plan.name}
-                    initial={{ y: 40, scale: 0.85 }}
-
-                    whileInView={{ y: 0, scale: 1 }}
-
-                    viewport={{ once: true }}
-
-                    transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                    variants={cardVariant}
                     className={`relative rounded-2xl p-8 sm:p-10 transition-all duration-500 ${
                       plan.dark
                         ? "bg-stone-900 text-white ring-2 ring-accent/50 shadow-[0_0_60px_rgba(0,102,51,0.1)] lg:scale-[1.02]"
@@ -1113,7 +1130,7 @@ function Pricing() {
                     </a>
                   </motion.div>
                 ))}
-              </div>
+              </StaggerGrid>
             </motion.div>
           ) : (
             <motion.div
@@ -1124,17 +1141,11 @@ function Pricing() {
               transition={{ duration: 0.3 }}
             >
               {/* Monthly plans */}
-              <div className="grid lg:grid-cols-2 gap-6 max-w-4xl mx-auto items-start">
-                {personalPlans.map((plan, i) => (
+              <StaggerGrid className="grid lg:grid-cols-2 gap-6 max-w-4xl mx-auto items-start">
+                {personalPlans.map((plan) => (
                   <motion.div
                     key={plan.name}
-                    initial={{ y: 40, scale: 0.85 }}
-
-                    whileInView={{ y: 0, scale: 1 }}
-
-                    viewport={{ once: true }}
-
-                    transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                    variants={cardVariant}
                     className={`relative rounded-2xl p-8 sm:p-10 transition-all duration-500 ${
                       plan.dark
                         ? "bg-stone-900 text-white ring-2 ring-accent/50 shadow-[0_0_60px_rgba(0,102,51,0.1)] lg:scale-[1.02]"
@@ -1192,7 +1203,7 @@ function Pricing() {
                     </a>
                   </motion.div>
                 ))}
-              </div>
+              </StaggerGrid>
 
               {/* Flexible packages */}
               <div className="max-w-4xl mx-auto mt-8">
@@ -1485,17 +1496,11 @@ function Philosophy() {
           </h2>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 gap-6">
-          {principles.map((p, i) => (
+        <StaggerGrid className="grid sm:grid-cols-2 gap-6">
+          {principles.map((p) => (
             <motion.div
               key={p.number}
-              initial={{ y: 40, scale: 0.85 }}
-
-              whileInView={{ y: 0, scale: 1 }}
-
-              viewport={{ once: true }}
-
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              variants={cardVariant}
               className="group relative p-8 sm:p-10 rounded-2xl border border-white/[0.04] bg-surface/80 hover:border-accent/20 transition-all duration-500"
             >
               <span className="text-6xl font-bold text-accent/[0.07] absolute top-6 right-8 group-hover:text-accent/15 transition-colors">
@@ -1505,7 +1510,7 @@ function Philosophy() {
               <p className="text-zinc-400 leading-relaxed">{p.description}</p>
             </motion.div>
           ))}
-        </div>
+        </StaggerGrid>
 
         {/* Quote */}
         <motion.div
@@ -1948,20 +1953,14 @@ function SocialCTA() {
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 gap-6">
-          {socials.map((social, i) => (
+        <StaggerGrid className="grid sm:grid-cols-2 gap-6">
+          {socials.map((social) => (
             <motion.a
               key={social.platform}
               href={social.url}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ y: 40, scale: 0.85 }}
-
-              whileInView={{ y: 0, scale: 1 }}
-
-              viewport={{ once: true }}
-
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              variants={cardVariant}
               className="group relative p-8 sm:p-10 rounded-2xl bg-surface border border-white/[0.04] hover:border-accent/20 transition-all duration-500 hover:shadow-[0_0_50px_rgba(0,102,51,0.06)]"
             >
               <div className="flex items-start justify-between mb-6">
@@ -1978,7 +1977,7 @@ function SocialCTA() {
               <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </motion.a>
           ))}
-        </div>
+        </StaggerGrid>
       </div>
     </section>
   );
@@ -2016,17 +2015,11 @@ function FAQ() {
           </p>
         </motion.div>
 
-        <div className="space-y-3">
+        <StaggerGrid className="space-y-3">
           {faqs.map((faq, i) => (
             <motion.div
               key={i}
-              initial={{ y: 40, scale: 0.85 }}
-
-              whileInView={{ y: 0, scale: 1 }}
-
-              viewport={{ once: true }}
-
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              variants={cardVariant}
             >
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
@@ -2064,7 +2057,7 @@ function FAQ() {
               </AnimatePresence>
             </motion.div>
           ))}
-        </div>
+        </StaggerGrid>
       </div>
     </section>
   );
@@ -2363,17 +2356,11 @@ function Locations() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <StaggerGrid className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {gyms.map((gym) => (
             <motion.div
               key={gym.name}
-              initial={{ y: 40, scale: 0.85 }}
-
-              whileInView={{ y: 0, scale: 1 }}
-
-              viewport={{ once: true }}
-
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              variants={cardVariant}
               className={`relative group p-8 sm:p-10 rounded-2xl bg-surface transition-all duration-500 ${
                 gym.featured
                   ? "border-2 border-accent/60 shadow-[0_0_40px_rgba(0,102,51,0.15)]"
@@ -2397,7 +2384,7 @@ function Locations() {
               <p className="text-zinc-400 mt-4 leading-relaxed">{gym.description}</p>
             </motion.div>
           ))}
-        </div>
+        </StaggerGrid>
       </div>
     </section>
   );
