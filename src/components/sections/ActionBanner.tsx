@@ -15,12 +15,12 @@ export function ActionBanner() {
   return (
     <section ref={ref} className="py-8 sm:py-12 px-4 sm:px-6">
       <div className="relative h-[60vh] sm:h-[70vh] overflow-hidden rounded-[1.25rem] lg:rounded-[2rem] max-w-7xl mx-auto">
-        <motion.div style={{ y: imgY }} className="absolute inset-0 scale-110">
+        <motion.div style={{ y: imgY }} className="absolute -top-[10%] -bottom-[10%] -left-[10%] -right-[10%]">
           <Image
             src="/luke-running-street.webp"
             alt="Coach Luki running through the streets of Berlin at night"
             fill
-            quality={100}
+            unoptimized
             className="object-cover object-center"
           />
         </motion.div>
