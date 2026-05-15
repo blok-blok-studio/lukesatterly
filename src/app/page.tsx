@@ -1717,7 +1717,7 @@ function Experience() {
 const CLIENT_DATA: Record<string, { image?: string; age?: number; objectPosition?: string; scale?: number }> = {
   "Mario":   { image: "/testimonial-mario-personal-trainer-berlin-client.webp",    age: 48, objectPosition: "center top" },
   "Andreea": { image: "/testimonial-andreea-personal-trainer-berlin-client.webp",  age: 36, objectPosition: "center top" },
-  "Leni":    { image: "/testimonial-leni-personal-trainer-berlin-client.webp",     age: 43, objectPosition: "53% 14%", scale: 2 },
+  "Leni":    { image: "/testimonial-leni-personal-trainer-berlin-client.webp",     age: 43, objectPosition: "center 28%", scale: 1.5 },
   "Markus":  { image: "/testimonial-markus-personal-trainer-berlin-client.webp",   age: 41, objectPosition: "center 38%" },
 };
 
