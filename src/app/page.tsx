@@ -1806,7 +1806,11 @@ function Testimonials() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView]);
 
-  const testimonials = dict.testimonials.items;
+  const testimonials = [...dict.testimonials.items].sort((a, b) => {
+    const aPhoto = !!CLIENT_DATA[a.name]?.image;
+    const bPhoto = !!CLIENT_DATA[b.name]?.image;
+    return aPhoto === bPhoto ? 0 : aPhoto ? -1 : 1;
+  });
 
   return (
     <section id="testimonials" className="py-24 sm:py-32 relative scroll-mt-20">
