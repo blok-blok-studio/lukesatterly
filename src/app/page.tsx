@@ -1721,10 +1721,10 @@ const CLIENT_DATA: Record<string, { image?: string; age?: number; objectPosition
   "Markus":  { image: "/testimonial-markus-personal-trainer-berlin-client.webp",   age: 41, objectPosition: "center 38%" },
 };
 
-function TestimonialCard({ t, className = "" }: { t: { name: string; text: string }; className?: string }) {
+function TestimonialCard({ t, className = "", style }: { t: { name: string; text: string }; className?: string; style?: React.CSSProperties }) {
   const client = CLIENT_DATA[t.name] ?? {};
   return (
-    <div className={`flex-shrink-0 flex flex-col bg-surface border border-white/[0.06] rounded-2xl p-5 sm:p-8 hover:border-accent/20 transition-all duration-500 ${className}`}>
+    <div style={style} className={`flex-shrink-0 flex flex-col bg-surface border border-white/[0.06] rounded-2xl p-5 sm:p-8 hover:border-accent/20 transition-all duration-500 ${className}`}>
       <div className="flex items-center gap-1 mb-3 sm:mb-4">
         {[...Array(5)].map((_, j) => (
           <svg key={j} className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
@@ -1771,8 +1771,8 @@ function Testimonials() {
   const dict = useT();
   const ref = useRef(null);
   const nudgeRef = useRef<HTMLDivElement>(null);
+  const mobileScrollRef = useRef<HTMLDivElement>(null);
   const desktopX = useMotionValue(0);
-  const mobileX = useMotionValue(0);
   const [desktopIndex, setDesktopIndex] = useState(0);
   const [mobileIndex, setMobileIndex] = useState(0);
   const DESKTOP_CARD_STEP = 444; // card width 420 + gap 24
@@ -1785,18 +1785,8 @@ function Testimonials() {
     animate(desktopX, -bounded * DESKTOP_CARD_STEP, { type: "spring", stiffness: 220, damping: 30 });
   };
 
-  /* Snap mobile carousel to the nearest card on drag end so it never rests
-     mid-card (which reads as 'glitchy' swipe). */
-  const snapMobile = (total: number) => {
-    const x = mobileX.get();
-    const idx = Math.max(0, Math.min(Math.round(-x / MOBILE_CARD_STEP), total - 1));
-    setMobileIndex(idx);
-    animate(mobileX, -idx * MOBILE_CARD_STEP, { type: "spring", stiffness: 260, damping: 32 });
-  };
-
   /* One-time "this is interactive" nudge when the section first enters view.
-     Slides each carousel ~24px left, then back, so users see the row move
-     and realize it's swipeable. Skipped under prefers-reduced-motion. */
+     Slides desktop carousel ~24px left, then back. Skipped under prefers-reduced-motion. */
   const inView = useInView(nudgeRef, { once: true, margin: "0px 0px -20% 0px" });
   useEffect(() => {
     if (!inView) return;
@@ -1808,7 +1798,6 @@ function Testimonials() {
     };
     const t = setTimeout(() => {
       nudge(desktopX);
-      nudge(mobileX);
     }, 350);
     return () => clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -1819,6 +1808,12 @@ function Testimonials() {
     const bPhoto = !!CLIENT_DATA[b.name]?.image;
     return aPhoto === bPhoto ? 0 : aPhoto ? -1 : 1;
   });
+
+  const onMobileScroll = () => {
+    if (!mobileScrollRef.current) return;
+    const idx = Math.round(mobileScrollRef.current.scrollLeft / MOBILE_CARD_STEP);
+    setMobileIndex(Math.max(0, Math.min(idx, testimonials.length - 1)));
+  };
 
   return (
     <section id="testimonials" className="py-24 sm:py-32 relative scroll-mt-20">
@@ -1904,25 +1899,26 @@ function Testimonials() {
           </div>
         </div>
 
-        {/* Mobile: swipeable carousel */}
+        {/* Mobile/tablet: native CSS scroll-snap — no Framer drag, zero jitter */}
         <div className="md:hidden relative">
           <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
 
-          <motion.div
-            className="flex items-stretch gap-4 px-6 cursor-grab active:cursor-grabbing"
-            style={{ x: mobileX, touchAction: "pan-y" }}
-            drag="x"
-            dragDirectionLock
-            dragConstraints={{ left: -(testimonials.length - 1) * MOBILE_CARD_STEP, right: 0 }}
-            dragElastic={0.08}
-            dragMomentum={false}
-            onDragEnd={() => snapMobile(testimonials.length)}
+          <div
+            ref={mobileScrollRef}
+            onScroll={onMobileScroll}
+            className="flex items-stretch gap-4 px-6 overflow-x-auto scrollbar-none"
+            style={{ scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch" }}
           >
             {testimonials.map((t, i) => (
-              <TestimonialCard key={`mobile-${t.name}-${i}`} t={t} className="w-[280px]" />
+              <TestimonialCard
+                key={`mobile-${t.name}-${i}`}
+                t={t}
+                className="w-[280px]"
+                style={{ scrollSnapAlign: "start" }}
+              />
             ))}
-          </motion.div>
+          </div>
 
           <p className="text-center text-zinc-500 text-xs mt-6 uppercase tracking-wider tabular-nums">
             {mobileIndex + 1} / {testimonials.length}
