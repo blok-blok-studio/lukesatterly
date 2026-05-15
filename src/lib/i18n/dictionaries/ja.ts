@@ -330,7 +330,7 @@ const ja: Dictionary = {
         text: "Lukeはトレーナーとして、明確で正確な説明の仕方で際立っています。テクニックを伝えるだけでなく、なぜそのように行うべきかの理解も伝えてくれます。結果として、より意識的にトレーニングし、エクササイズの実行が格段に良くなります。さらにLukeは人としても大きな魅力:配慮深く、付き合いやすく、強くモチベートしてくれます。",
       },
       {
-        name: "Lena",
+        name: "Leni",
         text: "Lukeとのトレーニングは身体的な体力だけでなく、自分の身体と正しい動きの全体的な理解です。トレーニングを変えてから、日常生活で腰痛がなくなり、全体的にもっと元気で健康になったと感じます!Lukeは朝7時のセッションへのモチベーションも引き出してくれて、忙しい仕事週にトレーニングを組み込めるようにしてくれます。唯一の難点:翌日のひどい筋肉痛…",
       },
       {
@@ -340,6 +340,14 @@ const ja: Dictionary = {
       {
         name: "Johanna",
         text: "最初はパーソナルトレーニングに懐疑的でした。モチベーションが中心だと思っていたから。でもLukiでは、エクササイズを本当に理解して効果的に実行する方法を学べました。彼の正確な理解とその知識を伝える能力により、トレーニングは身体と頭の組み合わせになります。彼のおかげで、より効果的にトレーニングするだけでなく、はるかに自信と喜びを持って取り組めます。",
+      },
+      {
+        name: "Laura",
+        text: "I made a conscious decision to work with Luke because I wanted to sculpt my body and take it to a new level. With him it was never just about training — it was about developing a completely new sense of my own body. Through his detail-oriented approach and high standards for clean execution, I learned to truly control my body and perform movements with intention. Luke gave me a clear structure that fits me perfectly — in training as well as nutrition. Today I feel stronger, more confident, and much more comfortable in my body. For me this wasn't classic personal training — it was a genuine physical and mental upgrade.",
+      },
+      {
+        name: "Markus",
+        text: "I'm very satisfied with Luke. Having three individually designed training plans — machines, free weights, and bodyweight — lets me train flexibly, location-independently, and with variety. The early-morning sessions fit perfectly into my daily routine. I especially appreciate the combination of expertise, motivation, and precise corrections on execution. From the start I wanted intensive guidance to build a solid foundation and then be able to train independently — and that's exactly what he helped me achieve. Clear recommendation!",
       },
     ],
   },

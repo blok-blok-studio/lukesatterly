@@ -330,7 +330,7 @@ const uk: Dictionary = {
         text: "Luke виділяється як тренер насамперед чіткою і точною манерою пояснювати. Він не просто вчить техніці, а й розумінню того, чому щось потрібно виконувати саме так. У підсумку тренуєшся усвідомленіше і виконуєш вправи значно краще. Крім того, Luke як людина — справжня знахідка: уважний, приємний у спілкуванні і дуже мотивуючий.",
       },
       {
-        name: "Lena",
+        name: "Leni",
         text: "Тренуватися з Luke — це не лише фізична форма, а й цілісне розуміння власного тіла і правильних патернів руху. Відтоді як ми змінили тренування, у мене зник повсякденний біль у спині, і загалом я почуваюся свіжіше і здоровіше! Luke вміє підняти мене на сесію о 7 ранку. Єдиний мінус — жорстокий м'язовий біль на наступний день…",
       },
       {
@@ -340,6 +340,14 @@ const uk: Dictionary = {
       {
         name: "Johanna",
         text: "Спочатку я скептично ставилась до персональних тренувань, бо думала, що це переважно про мотивацію, але з Luki я навчилась справді розуміти вправи і ефективно їх виконувати. Його точне розуміння і вміння передати знання перетворюють тренування на роботу тіла і голови. Завдяки йому я тренуюсь не лише ефективніше, але й з набагато більшою впевненістю і радістю.",
+      },
+      {
+        name: "Laura",
+        text: "I made a conscious decision to work with Luke because I wanted to sculpt my body and take it to a new level. With him it was never just about training — it was about developing a completely new sense of my own body. Through his detail-oriented approach and high standards for clean execution, I learned to truly control my body and perform movements with intention. Luke gave me a clear structure that fits me perfectly — in training as well as nutrition. Today I feel stronger, more confident, and much more comfortable in my body. For me this wasn't classic personal training — it was a genuine physical and mental upgrade.",
+      },
+      {
+        name: "Markus",
+        text: "I'm very satisfied with Luke. Having three individually designed training plans — machines, free weights, and bodyweight — lets me train flexibly, location-independently, and with variety. The early-morning sessions fit perfectly into my daily routine. I especially appreciate the combination of expertise, motivation, and precise corrections on execution. From the start I wanted intensive guidance to build a solid foundation and then be able to train independently — and that's exactly what he helped me achieve. Clear recommendation!",
       },
     ],
   },

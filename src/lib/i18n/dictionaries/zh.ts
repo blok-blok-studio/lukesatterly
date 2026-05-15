@@ -330,7 +330,7 @@ const zh: Dictionary = {
         text: "Luke 作为教练最突出的地方在于他清晰、精准的讲解方式。他不仅教技术,还让你理解为什么应该用某种方式去做。结果是你训练得更有意识,动作执行得也更好。除此之外,Luke 在为人方面也是真正的加分项:细心、相处舒服、非常激励人。",
       },
       {
-        name: "Lena",
+        name: "Leni",
         text: "和 Luke 训练不只是关于身体素质,而是对自己身体和正确动作模式的整体理解。自从我们调整了训练后,我日常生活中不再有背痛,整体感觉更健康、更有活力!Luke 甚至能让我在早上 7 点的课程上保持动力,把训练融入忙碌的工作周。唯一的缺点:第二天严重的肌肉酸痛……",
       },
       {
@@ -340,6 +340,14 @@ const zh: Dictionary = {
       {
         name: "Johanna",
         text: "起初我对私人教练持怀疑态度,因为我以为主要是关于动力,但和 Luki 在一起,我学会了如何真正理解并有效执行动作。他对动作精准的理解和传达知识的能力,让训练变成身体与头脑的结合。多亏他,我训练不仅更高效,也更自信、更有乐趣。",
+      },
+      {
+        name: "Laura",
+        text: "I made a conscious decision to work with Luke because I wanted to sculpt my body and take it to a new level. With him it was never just about training — it was about developing a completely new sense of my own body. Through his detail-oriented approach and high standards for clean execution, I learned to truly control my body and perform movements with intention. Luke gave me a clear structure that fits me perfectly — in training as well as nutrition. Today I feel stronger, more confident, and much more comfortable in my body. For me this wasn't classic personal training — it was a genuine physical and mental upgrade.",
+      },
+      {
+        name: "Markus",
+        text: "I'm very satisfied with Luke. Having three individually designed training plans — machines, free weights, and bodyweight — lets me train flexibly, location-independently, and with variety. The early-morning sessions fit perfectly into my daily routine. I especially appreciate the combination of expertise, motivation, and precise corrections on execution. From the start I wanted intensive guidance to build a solid foundation and then be able to train independently — and that's exactly what he helped me achieve. Clear recommendation!",
       },
     ],
   },

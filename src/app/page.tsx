@@ -1714,7 +1714,15 @@ function Experience() {
 }
 
 /* ─────────────────── TESTIMONIAL CARD ─────────────────── */
+const CLIENT_DATA: Record<string, { image?: string; age?: number }> = {
+  "Mario":   { image: "/testimonial-mario-personal-trainer-berlin-client.webp",    age: 48 },
+  "Andreea": { image: "/testimonial-andreea-personal-trainer-berlin-client.webp",  age: 36 },
+  "Leni":    { image: "/testimonial-leni-personal-trainer-berlin-client.webp",     age: 43 },
+  "Markus":  { image: "/testimonial-markus-personal-trainer-berlin-client.webp",   age: 41 },
+};
+
 function TestimonialCard({ t, className = "" }: { t: { name: string; text: string }; className?: string }) {
+  const client = CLIENT_DATA[t.name] ?? {};
   return (
     <div className={`flex-shrink-0 flex flex-col bg-surface border border-white/[0.06] rounded-2xl p-8 hover:border-accent/20 transition-all duration-500 ${className}`}>
       <div className="flex items-center gap-1 mb-4">
@@ -1728,10 +1736,25 @@ function TestimonialCard({ t, className = "" }: { t: { name: string; text: strin
         &ldquo;{t.text}&rdquo;
       </p>
       <div className="flex items-center gap-3 mt-auto">
-        <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
-          <span className="text-accent font-semibold text-sm">{t.name[0]}</span>
+        <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 bg-accent/10">
+          {client.image ? (
+            <Image
+              src={client.image}
+              alt={`${t.name}, client of Luke Satterly personal trainer Berlin`}
+              width={40}
+              height={40}
+              className="w-full h-full object-cover object-top"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center">
+              <span className="text-accent font-semibold text-sm">{t.name[0]}</span>
+            </div>
+          )}
         </div>
-        <span className="font-semibold text-white">{t.name}</span>
+        <div>
+          <span className="font-semibold text-white">{t.name}</span>
+          {client.age && <span className="text-zinc-500 text-xs ml-1.5">{client.age}</span>}
+        </div>
       </div>
     </div>
   );

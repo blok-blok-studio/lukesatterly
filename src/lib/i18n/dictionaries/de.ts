@@ -330,7 +330,7 @@ const de: Dictionary = {
         text: "Luke hebt sich als Trainer vor allem durch seine klare, präzise Art zu erklären hervor. Er schafft es, nicht nur Technik zu vermitteln, sondern auch das Verständnis dafür, warum etwas auf eine bestimmte Weise ausgeführt werden sollte. Das führt dazu, dass man bewusster trainiert und die Übungen deutlich besser umsetzt. Darüber hinaus ist Luke auch menschlich eine echte Bereicherung: aufmerksam, angenehm im Umgang und sehr motivierend.",
       },
       {
-        name: "Lena",
+        name: "Leni",
         text: "Im Training mit Luke geht es nicht nur um meine körperliche Fitness, sondern vielmehr um ein ganzheitliches Verständnis über den eigenen Körper und die richtigen Bewegungsabläufe. Seit wir mein Training umgestellt haben, habe ich im Alltag keine Rückenschmerzen und fühle mich insgesamt fitter und gesünder! Luke schafft es auch, mich für eine Session morgens um 7 zu motivieren und so das Training in meine volle Arbeitswoche einzubauen. Das einzige Manko: Der heftige Muskelkater am Tag danach…",
       },
       {
@@ -340,6 +340,14 @@ const de: Dictionary = {
       {
         name: "Johanna",
         text: "Ich war anfangs skeptisch gegenüber Personal Training, weil ich dachte, es geht vor allem um Motivation, doch bei Luki habe ich gelernt, wie man Übungen wirklich versteht und effektiv ausführt. Sein präzises Verständnis und seine Fähigkeit, dieses Wissen zu vermitteln, machen Training zu einer Kombination aus Körper und Kopf. Dank ihm trainiere ich nicht nur effektiver, sondern auch mit deutlich mehr Selbstvertrauen und Freude.",
+      },
+      {
+        name: "Laura",
+        text: "Ich habe mich ganz bewusst für Luke entschieden, weil ich meinen Körper gezielt formen und auf ein neues Level bringen wollte. Bei ihm ging es nie nur um Training, sondern darum, ein ganz neues Körpergefühl zu entwickeln. Durch seine detailorientierte Art und seinen hohen Anspruch an saubere Ausführung habe ich gelernt, meinen Körper wirklich zu kontrollieren und Bewegungen bewusst umzusetzen. Luke hat mir eine klare Struktur gegeben, die perfekt zu mir passt – im Training genauso wie bei der Ernährung. Dadurch fühle ich mich heute stärker, sicherer und deutlich wohler in meinem Körper. Für mich war das kein klassisches Personal Training, sondern ein echtes körperliches und mentales Upgrade.",
+      },
+      {
+        name: "Markus",
+        text: "Ich bin sehr zufrieden mit Luke. Durch die drei individuell erstellten Trainingspläne (Geräte, Freihanteln und Körpergewicht) kann ich flexibel, ortsungebunden und abwechslungsreich trainieren. Die Einheiten am frühen Morgen passen perfekt in meinen Alltag. Besonders schätze ich die Kombination aus Fachwissen, Motivation und den präzisen Korrekturen bei der Ausführung. Ich wollte von Anfang an intensiv betreut werden, um eine gute Grundlage zu schaffen und danach selbstständig weitertrainieren zu können – genau dabei hat er mich optimal unterstützt. Klare Empfehlung!",
       },
     ],
   },

@@ -330,7 +330,7 @@ const pt: Dictionary = {
         text: "O Luke destaca-se como treinador sobretudo pela forma clara e precisa de explicar. Consegue não só transmitir a técnica, mas também a compreensão de porque é que algo deve ser executado de uma certa maneira. O resultado é que se treina de forma mais consciente e os exercícios são executados claramente melhor. Para além disso, o Luke é uma mais-valia humana: atento, agradável e muito motivador.",
       },
       {
-        name: "Lena",
+        name: "Leni",
         text: "Treinar com o Luke não é apenas sobre a minha forma física, mas sobre uma compreensão global do próprio corpo e dos padrões de movimento corretos. Desde que mudámos o meu treino, deixei de ter dores nas costas no dia-a-dia e sinto-me mais em forma e saudável! O Luke também consegue motivar-me para uma sessão às 7 da manhã. O único ponto negativo: as dores musculares brutais do dia seguinte…",
       },
       {
@@ -340,6 +340,14 @@ const pt: Dictionary = {
       {
         name: "Johanna",
         text: "Era cética em relação ao personal training no início, porque pensava que era sobretudo motivação, mas com o Luki aprendi a perceber mesmo os exercícios e a executá-los de forma eficaz. A sua compreensão precisa e a capacidade de transmitir esse conhecimento fazem do treino uma combinação de corpo e mente. Graças a ele, treino não só de forma mais eficaz, mas também com bastante mais confiança e prazer.",
+      },
+      {
+        name: "Laura",
+        text: "I made a conscious decision to work with Luke because I wanted to sculpt my body and take it to a new level. With him it was never just about training — it was about developing a completely new sense of my own body. Through his detail-oriented approach and high standards for clean execution, I learned to truly control my body and perform movements with intention. Luke gave me a clear structure that fits me perfectly — in training as well as nutrition. Today I feel stronger, more confident, and much more comfortable in my body. For me this wasn't classic personal training — it was a genuine physical and mental upgrade.",
+      },
+      {
+        name: "Markus",
+        text: "I'm very satisfied with Luke. Having three individually designed training plans — machines, free weights, and bodyweight — lets me train flexibly, location-independently, and with variety. The early-morning sessions fit perfectly into my daily routine. I especially appreciate the combination of expertise, motivation, and precise corrections on execution. From the start I wanted intensive guidance to build a solid foundation and then be able to train independently — and that's exactly what he helped me achieve. Clear recommendation!",
       },
     ],
   },

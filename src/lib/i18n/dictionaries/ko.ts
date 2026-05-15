@@ -330,7 +330,7 @@ const ko: Dictionary = {
         text: "Luke는 트레이너로서 무엇보다 명확하고 정확한 설명 방식이 돋보입니다. 단순히 기술을 가르치는 것이 아니라 왜 그 방식으로 해야 하는지 이해까지 전달합니다. 그 결과 더 의식적으로 훈련하고 운동을 훨씬 잘 수행하게 됩니다. 게다가 인간적으로도 정말 풍부합니다: 세심하고, 함께 있기 편하며, 강한 동기를 줍니다.",
       },
       {
-        name: "Lena",
+        name: "Leni",
         text: "Luke와의 트레이닝은 제 신체적 컨디션만이 아니라, 자신의 몸과 올바른 움직임 패턴에 대한 전체적인 이해에 관한 것입니다. 트레이닝을 바꾼 이후 일상에서 허리 통증이 사라졌고, 전반적으로 더 건강하고 활기차게 느껴집니다! Luke는 아침 7시 세션도 하도록 동기를 주고, 바쁜 업무 주에 트레이닝을 끼워넣게 해줍니다. 유일한 단점: 다음 날 엄청난 근육통…",
       },
       {
@@ -340,6 +340,14 @@ const ko: Dictionary = {
       {
         name: "Johanna",
         text: "처음에는 퍼스널 트레이닝이 주로 동기 부여라고 생각해서 회의적이었지만, Luki와 함께 하면서 운동을 진정으로 이해하고 효과적으로 수행하는 법을 배웠습니다. 정확한 이해와 그것을 전달하는 능력이 트레이닝을 몸과 마음의 결합으로 만듭니다. 덕분에 더 효과적으로뿐만 아니라 훨씬 더 자신감과 즐거움을 가지고 운동합니다.",
+      },
+      {
+        name: "Laura",
+        text: "I made a conscious decision to work with Luke because I wanted to sculpt my body and take it to a new level. With him it was never just about training — it was about developing a completely new sense of my own body. Through his detail-oriented approach and high standards for clean execution, I learned to truly control my body and perform movements with intention. Luke gave me a clear structure that fits me perfectly — in training as well as nutrition. Today I feel stronger, more confident, and much more comfortable in my body. For me this wasn't classic personal training — it was a genuine physical and mental upgrade.",
+      },
+      {
+        name: "Markus",
+        text: "I'm very satisfied with Luke. Having three individually designed training plans — machines, free weights, and bodyweight — lets me train flexibly, location-independently, and with variety. The early-morning sessions fit perfectly into my daily routine. I especially appreciate the combination of expertise, motivation, and precise corrections on execution. From the start I wanted intensive guidance to build a solid foundation and then be able to train independently — and that's exactly what he helped me achieve. Clear recommendation!",
       },
     ],
   },

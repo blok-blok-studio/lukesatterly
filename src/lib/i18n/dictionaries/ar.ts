@@ -330,7 +330,7 @@ const ar: Dictionary = {
         text: "ما يميّز Luke كمدرّب أكثر من غيره أسلوبه الواضح والدقيق في الشرح. ينجح ليس فقط بنقل التقنية، بل أيضاً بفهم \"لماذا\" يجب أداء شيء بطريقة معينة. النتيجة: تتمرّن بوعي أكبر وتنفّذ التمارين بشكل أفضل بكثير. كما أنه إضافة إنسانية حقيقية: متنبّه، لطيف ومحفّز جداً.",
       },
       {
-        name: "Lena",
+        name: "Leni",
         text: "التدريب مع Luke ليس عن لياقتي البدنية فحسب، بل عن فهم شامل لجسدي وأنماط الحركة الصحيحة. منذ أن غيّرنا تدريبي، اختفت آلام ظهري في الحياة اليومية وأشعر بصحة ولياقة أفضل! يستطيع Luke أيضاً تحفيزي لجلسة في السابعة صباحاً وإدراج التدريب في أسبوعي المزدحم. العيب الوحيد: ألم العضلات الشديد في اليوم التالي…",
       },
       {
@@ -340,6 +340,14 @@ const ar: Dictionary = {
       {
         name: "Johanna",
         text: "كنت متشككة في التدريب الشخصي في البداية لأنّي ظننت أنه يدور حول الحماس فقط، لكنّي تعلّمت مع Luki كيف أفهم التمارين فعلاً وأنفّذها بفعالية. فهمه الدقيق وقدرته على نقل المعرفة يجعلان التدريب مزيجاً من جسد وعقل. بفضله أتمرّن بفعالية أعلى وثقة وفرح أكبر.",
+      },
+      {
+        name: "Laura",
+        text: "I made a conscious decision to work with Luke because I wanted to sculpt my body and take it to a new level. With him it was never just about training — it was about developing a completely new sense of my own body. Through his detail-oriented approach and high standards for clean execution, I learned to truly control my body and perform movements with intention. Luke gave me a clear structure that fits me perfectly — in training as well as nutrition. Today I feel stronger, more confident, and much more comfortable in my body. For me this wasn't classic personal training — it was a genuine physical and mental upgrade.",
+      },
+      {
+        name: "Markus",
+        text: "I'm very satisfied with Luke. Having three individually designed training plans — machines, free weights, and bodyweight — lets me train flexibly, location-independently, and with variety. The early-morning sessions fit perfectly into my daily routine. I especially appreciate the combination of expertise, motivation, and precise corrections on execution. From the start I wanted intensive guidance to build a solid foundation and then be able to train independently — and that's exactly what he helped me achieve. Clear recommendation!",
       },
     ],
   },
