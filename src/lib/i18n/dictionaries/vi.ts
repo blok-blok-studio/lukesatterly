@@ -300,7 +300,7 @@ const vi = {
         text: "Tôi đã làm việc với Luke trong các buổi huấn luyện riêng. Anh ấy rất quan tâm đến mục tiêu của tôi và đã xây dựng một chương trình huấn luyện tuyệt vời giúp tôi thấy kết quả nhanh chóng. Anh ấy đưa ra lời khuyên tuyệt vời và giúp tôi cam kết với chương trình, thúc đẩy tôi tiếp tục.",
       },
       {
-        name: "Marion",
+        name: "Mario",
         text: "Luke đã tăng cường sự tự tin của tôi bằng cách thách thức và hỗ trợ tôi với các bài tập có mục tiêu trong mong muốn duy trì sức khỏe và linh hoạt dù bị viêm khớp. Anh ấy cho tôi thấy rằng tôi có sức mạnh và có thể tăng cường nó. Đó là lý do tại sao tôi cảm thấy được chăm sóc tốt khi ở bên anh ấy.",
       },
       {

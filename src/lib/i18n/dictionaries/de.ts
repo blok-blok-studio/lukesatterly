@@ -302,7 +302,7 @@ const de: Dictionary = {
         text: "Ich habe in privaten Coaching-Einheiten mit Luke gearbeitet. Er war sehr neugierig auf meine Ziele und hat mir ein super Programm geschneidert, mit dem ich schnell Ergebnisse sah. Er gab mir tolle Tipps, hat mich an meinem Programm festgehalten und mich motiviert weiterzumachen.",
       },
       {
-        name: "Marion",
+        name: "Mario",
         text: "Luke hat mein Selbstvertrauen gestärkt, indem er mich herausfordert und mich bei meinem Wunsch, trotz Arthrose fit und beweglich zu bleiben, durch gezielte Übungen unterstützt. Er zeigt mir, dass ich Kraft habe und diese auch steigern kann. Deshalb fühle ich mich gut aufgehoben bei ihm.",
       },
       {

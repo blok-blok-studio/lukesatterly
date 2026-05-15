@@ -302,7 +302,7 @@ const es: Dictionary = {
         text: "Trabajé con Luke en sesiones privadas. Mostró mucha curiosidad por mis objetivos y me preparó un programa estupendo con el que vi resultados rápido. Me dio buenos consejos, me ayudó a comprometerme con el plan y a seguir adelante.",
       },
       {
-        name: "Marion",
+        name: "Mario",
         text: "Luke fortaleció mi confianza al desafiarme y apoyarme con ejercicios específicos en mi deseo de mantenerme en forma y móvil pese a la artrosis. Me muestra que tengo fuerza y que puedo aumentarla. Por eso me siento muy bien cuidada con él.",
       },
       {

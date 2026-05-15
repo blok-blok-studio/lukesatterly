@@ -300,7 +300,7 @@ const en = {
         text: "I worked with Luke in private coaching sessions. He was very curious about my goals and tailored a great coaching program for me where I started seeing results quickly. He provided great advice and helped me commit to my program and motivated me to keep going.",
       },
       {
-        name: "Marion",
+        name: "Mario",
         text: "Luke strengthened my self-confidence by challenging me and supporting me with targeted exercises in my desire to stay fit and mobile despite arthritis. He shows me that I have strength and that I can also increase it. That's why I feel so well taken care of with him.",
       },
       {

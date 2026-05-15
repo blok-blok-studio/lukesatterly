@@ -302,7 +302,7 @@ const nl: Dictionary = {
         text: "Ik heb privé-coachingsessies met Luke gedaan. Hij was erg nieuwsgierig naar mijn doelen en stelde een uitstekend programma voor me samen waarmee ik snel resultaten zag. Hij gaf goede adviezen, hielp me bij mijn programma en motiveerde me door te gaan.",
       },
       {
-        name: "Marion",
+        name: "Mario",
         text: "Luke heeft mijn zelfvertrouwen versterkt door me uit te dagen en me met gerichte oefeningen te ondersteunen in mijn wens om fit en mobiel te blijven, ondanks artrose. Hij laat me zien dat ik kracht heb en die ook kan opbouwen. Daarom voel ik me bij hem in goede handen.",
       },
       {
