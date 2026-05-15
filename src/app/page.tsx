@@ -1724,25 +1724,26 @@ const CLIENT_DATA: Record<string, { image?: string; age?: number; objectPosition
 function TestimonialCard({ t, className = "" }: { t: { name: string; text: string }; className?: string }) {
   const client = CLIENT_DATA[t.name] ?? {};
   return (
-    <div className={`flex-shrink-0 flex flex-col bg-surface border border-white/[0.06] rounded-2xl p-8 hover:border-accent/20 transition-all duration-500 ${className}`}>
-      <div className="flex items-center gap-1 mb-4">
+    <div className={`flex-shrink-0 flex flex-col bg-surface border border-white/[0.06] rounded-2xl p-5 sm:p-8 hover:border-accent/20 transition-all duration-500 ${className}`}>
+      <div className="flex items-center gap-1 mb-3 sm:mb-4">
         {[...Array(5)].map((_, j) => (
-          <svg key={j} className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
+          <svg key={j} className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
           </svg>
         ))}
       </div>
-      <p className="text-zinc-300 leading-relaxed italic mb-6">
+      <p className="text-zinc-300 text-sm sm:text-base leading-relaxed italic mb-5 sm:mb-6">
         &ldquo;{t.text}&rdquo;
       </p>
       <div className="flex items-center gap-3 mt-auto">
-        <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 bg-accent/10">
+        <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden flex-shrink-0 bg-accent/10">
           {client.image ? (
             <Image
               src={client.image}
               alt={`${t.name}, client of Luke Satterly personal trainer Berlin`}
               width={40}
               height={40}
+              sizes="40px"
               className="w-full h-full object-cover"
               style={{
                 objectPosition: client.objectPosition ?? "center top",
@@ -1757,7 +1758,7 @@ function TestimonialCard({ t, className = "" }: { t: { name: string; text: strin
           )}
         </div>
         <div>
-          <span className="font-semibold text-white">{t.name}</span>
+          <span className="font-semibold text-white text-sm sm:text-base">{t.name}</span>
           {client.age && <span className="text-zinc-500 text-xs ml-1.5">{client.age}</span>}
         </div>
       </div>
@@ -1773,6 +1774,7 @@ function Testimonials() {
   const desktopX = useMotionValue(0);
   const mobileX = useMotionValue(0);
   const [desktopIndex, setDesktopIndex] = useState(0);
+  const [mobileIndex, setMobileIndex] = useState(0);
   const DESKTOP_CARD_STEP = 444; // card width 420 + gap 24
   const MOBILE_CARD_STEP = 296; // card width 280 + gap 16
 
@@ -1788,6 +1790,7 @@ function Testimonials() {
   const snapMobile = (total: number) => {
     const x = mobileX.get();
     const idx = Math.max(0, Math.min(Math.round(-x / MOBILE_CARD_STEP), total - 1));
+    setMobileIndex(idx);
     animate(mobileX, -idx * MOBILE_CARD_STEP, { type: "spring", stiffness: 260, damping: 32 });
   };
 
@@ -1921,8 +1924,8 @@ function Testimonials() {
             ))}
           </motion.div>
 
-          <p className="text-center text-zinc-600 text-xs mt-6 uppercase tracking-wider">
-            {dict.testimonials.swipeHint}
+          <p className="text-center text-zinc-500 text-xs mt-6 uppercase tracking-wider tabular-nums">
+            {mobileIndex + 1} / {testimonials.length}
           </p>
         </div>
       </div>
