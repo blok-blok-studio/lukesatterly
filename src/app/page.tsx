@@ -1717,7 +1717,7 @@ function Experience() {
 const CLIENT_DATA: Record<string, { image?: string; age?: number; objectPosition?: string; scale?: number }> = {
   "Mario":   { image: "/testimonial-mario-personal-trainer-berlin-client.webp",    age: 48, objectPosition: "center top" },
   "Andreea": { image: "/testimonial-andreea-personal-trainer-berlin-client.webp",  age: 36, objectPosition: "center top" },
-  "Leni":    { image: "/testimonial-leni-personal-trainer-berlin-client.webp",     age: 43, objectPosition: "center 12%", scale: 2.8 },
+  "Leni":    { image: "/testimonial-leni-personal-trainer-berlin-client.webp",     age: 43, objectPosition: "center 32%", scale: 2.2 },
   "Markus":  { image: "/testimonial-markus-personal-trainer-berlin-client.webp",   age: 41, objectPosition: "center center" },
 };
 
@@ -1747,7 +1747,7 @@ function TestimonialCard({ t, className = "" }: { t: { name: string; text: strin
               style={{
                 objectPosition: client.objectPosition ?? "center top",
                 transform: client.scale ? `scale(${client.scale})` : undefined,
-                transformOrigin: client.objectPosition ?? "center top",
+                transformOrigin: "center center",
               }}
             />
           ) : (
