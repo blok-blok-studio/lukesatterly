@@ -1,29 +1,26 @@
 // Generates public/coach-luki-og-personal-trainer-berlin.jpg
-// 1200x630 social card: Luke (rings photo) on the left, dark panel with
-// logo wordmark + slogan on the right. Run with: node scripts/build-og-image.mjs
+// 1200x630 full-bleed social card: Luke (rings photo) fills the whole frame,
+// logo + slogan overlaid directly so they survive WhatsApp/iMessage
+// square-crop thumbnails. Run with: node scripts/build-og-image.mjs
 import sharp from "sharp";
-import { readFile, writeFile } from "node:fs/promises";
 import { Buffer } from "node:buffer";
 
 const W = 1200;
 const H = 630;
-const PHOTO_W = 680;
-const PANEL_X = PHOTO_W;
-const PANEL_W = W - PHOTO_W;
 
-const SLOGAN = "Train smarter.\nLive stronger.\nBerlin.";
+const SLOGAN_LINES = ["Train smarter.", "Live stronger."];
+const TAG = "Personal Trainer · Berlin";
 const URL_TEXT = "coachluki.com";
 
-// Extract a region from the 1067x1600 source that frames his face + the rings.
-// Output aspect is 680/630 ≈ 1.08, so width 1067 needs height 1067/1.08 ≈ 988.
-// Pull from y=180 to keep rings visible up top and face roughly centered.
+// Source is 1067x1600. Pull a region that keeps Luke's face and the rings
+// in frame, then fit-cover into 1200x630.
 const photoBuf = await sharp("public/coach-luki-personal-trainer-berlin-rings.webp")
-  .extract({ left: 0, top: 180, width: 1067, height: 988 })
-  .resize({ width: PHOTO_W, height: H, fit: "cover" })
+  .extract({ left: 0, top: 200, width: 1067, height: 950 })
+  .resize({ width: W, height: H, fit: "cover", position: "center" })
   .toBuffer();
 
 const logoBuf = await sharp("public/logo-wordmark-white.png")
-  .resize({ width: 320 })
+  .resize({ width: 260 })
   .toBuffer();
 const logoMeta = await sharp(logoBuf).metadata();
 
@@ -33,15 +30,13 @@ const syneTtf = await fetchFont(
 const outfitTtf = await fetchFont(
   "https://github.com/google/fonts/raw/main/ofl/outfit/Outfit%5Bwght%5D.ttf",
 );
-
 const syne64 = syneTtf.toString("base64");
 const outfit64 = outfitTtf.toString("base64");
 
-const sloganLines = SLOGAN.split("\n");
-const sloganStartY = 340;
-const sloganLineH = 60;
-
-const svg = `
+// Two gradient overlays for legibility:
+// - subtle top gradient behind the logo
+// - stronger bottom gradient behind the slogan + url
+const overlaySvg = `
 <svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <style>
@@ -58,54 +53,53 @@ const svg = `
       .slogan {
         font-family: 'Syne', sans-serif;
         font-weight: 800;
-        font-size: 52px;
+        font-size: 64px;
         fill: #ffffff;
         letter-spacing: -1.5px;
       }
       .url {
         font-family: 'Outfit', sans-serif;
         font-weight: 500;
-        font-size: 22px;
+        font-size: 24px;
         fill: #8ee63d;
         letter-spacing: 0.5px;
       }
       .tag {
         font-family: 'Outfit', sans-serif;
-        font-weight: 400;
+        font-weight: 500;
         font-size: 18px;
-        fill: #a3a3a3;
-        letter-spacing: 1.5px;
+        fill: #e5e5e5;
+        letter-spacing: 2px;
         text-transform: uppercase;
       }
     </style>
-    <linearGradient id="photoFade" x1="0" x2="1" y1="0" y2="0">
-      <stop offset="0.78" stop-color="#0C0C0C" stop-opacity="0"/>
-      <stop offset="1" stop-color="#0C0C0C" stop-opacity="1"/>
+    <linearGradient id="topShade" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#000000" stop-opacity="0.65"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="bottomShade" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#000000" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.92"/>
     </linearGradient>
   </defs>
 
-  <!-- dark panel background (right side only — left side stays transparent so the photo shows) -->
-  <rect x="${PANEL_X}" y="0" width="${PANEL_W}" height="${H}" fill="#0C0C0C"/>
+  <!-- top shade behind logo -->
+  <rect x="0" y="0" width="${W}" height="200" fill="url(#topShade)"/>
 
-  <!-- gradient fade on right edge of photo into panel -->
-  <rect x="0" y="0" width="${PHOTO_W}" height="${H}" fill="url(#photoFade)"/>
+  <!-- bottom shade behind slogan -->
+  <rect x="0" y="280" width="${W}" height="${H - 280}" fill="url(#bottomShade)"/>
 
-  <!-- subtle green accent line -->
-  <rect x="${PANEL_X + 60}" y="240" width="48" height="3" fill="#8ee63d"/>
+  <!-- slogan two-line -->
+  <text x="60" y="450" class="slogan">${SLOGAN_LINES[0]}</text>
+  <text x="60" y="520" class="slogan">${SLOGAN_LINES[1]}</text>
 
-  <!-- tagline above slogan -->
-  <text x="${PANEL_X + 60}" y="280" class="tag">Personal Trainer · Berlin</text>
+  <!-- green accent + tagline -->
+  <rect x="60" y="555" width="36" height="3" fill="#8ee63d"/>
+  <text x="60" y="588" class="tag">${TAG}</text>
 
-  <!-- slogan, multi-line -->
-  ${sloganLines
-    .map(
-      (line, i) =>
-        `<text x="${PANEL_X + 60}" y="${sloganStartY + i * sloganLineH}" class="slogan">${line}</text>`,
-    )
-    .join("\n  ")}
-
-  <!-- url at bottom -->
-  <text x="${PANEL_X + 60}" y="${H - 60}" class="url">${URL_TEXT}</text>
+  <!-- url bottom right -->
+  <text x="${W - 60}" y="588" class="url" text-anchor="end">${URL_TEXT}</text>
 </svg>
 `;
 
@@ -114,12 +108,9 @@ await sharp({
 })
   .composite([
     { input: photoBuf, left: 0, top: 0 },
-    { input: Buffer.from(svg), left: 0, top: 0 },
-    {
-      input: logoBuf,
-      left: PANEL_X + 60,
-      top: 90,
-    },
+    { input: Buffer.from(overlaySvg), left: 0, top: 0 },
+    // logo top-left over the dark top-shade
+    { input: logoBuf, left: 60, top: 60 },
   ])
   .jpeg({ quality: 88, mozjpeg: true })
   .toFile("public/coach-luki-og-personal-trainer-berlin.jpg");
