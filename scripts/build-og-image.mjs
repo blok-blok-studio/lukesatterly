@@ -19,8 +19,8 @@ const photoBuf = await sharp("public/coach-luki-personal-trainer-berlin-rings.we
   .resize({ width: PHOTO_W, height: H, fit: "cover" })
   .toBuffer();
 
-// Black wordmark for the green panel (high contrast on green).
-const panelLogoBuf = await sharp("public/logo-wordmark-black.png")
+// White wordmark on the deep-forest green panel — high contrast, on-brand.
+const panelLogoBuf = await sharp("public/logo-wordmark-white.png")
   .resize({ width: 380 })
   .toBuffer();
 const panelLogoMeta = await sharp(panelLogoBuf).metadata();
@@ -61,34 +61,35 @@ const svg = `
         font-family: 'Syne', sans-serif;
         font-weight: 800;
         font-size: 48px;
-        fill: #0a1a05;
+        fill: #F0EDE6;
         letter-spacing: -1.2px;
       }
       .url {
         font-family: 'Outfit', sans-serif;
         font-weight: 600;
         font-size: 22px;
-        fill: #0a1a05;
+        fill: #F0EDE6;
         letter-spacing: 0.5px;
       }
       .tag {
         font-family: 'Outfit', sans-serif;
         font-weight: 500;
         font-size: 16px;
-        fill: #0a1a05;
+        fill: #F0EDE6;
         opacity: 0.7;
         letter-spacing: 1.5px;
         text-transform: uppercase;
       }
     </style>
-    <linearGradient id="greenPanel" x1="0" x2="0.4" y1="0" y2="1">
-      <stop offset="0" stop-color="#b7f25e"/>
-      <stop offset="0.6" stop-color="#8ee63d"/>
-      <stop offset="1" stop-color="#5fae20"/>
+    <!-- Matches site's .gradient-text: 135deg, #00803D → #006633 → #005528 -->
+    <linearGradient id="greenPanel" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#00803D"/>
+      <stop offset="0.5" stop-color="#006633"/>
+      <stop offset="1" stop-color="#005528"/>
     </linearGradient>
     <linearGradient id="photoFade" x1="0" x2="1" y1="0" y2="0">
-      <stop offset="0.78" stop-color="#8ee63d" stop-opacity="0"/>
-      <stop offset="1" stop-color="#8ee63d" stop-opacity="0.9"/>
+      <stop offset="0.78" stop-color="#00803D" stop-opacity="0"/>
+      <stop offset="1" stop-color="#00803D" stop-opacity="0.85"/>
     </linearGradient>
     <linearGradient id="logoShade" x1="0" x2="0" y1="0" y2="1">
       <stop offset="0" stop-color="#000000" stop-opacity="0.55"/>
@@ -106,7 +107,7 @@ const svg = `
   <rect x="0" y="0" width="${PHOTO_W}" height="160" fill="url(#logoShade)"/>
 
   <!-- subtle accent line under the wordmark -->
-  <rect x="${PANEL_X + 60}" y="270" width="48" height="3" fill="#0a1a05"/>
+  <rect x="${PANEL_X + 60}" y="270" width="48" height="3" fill="#F0EDE6" opacity="0.6"/>
 
   <!-- tagline -->
   <text x="${PANEL_X + 60}" y="305" class="tag">Personal Trainer · Berlin</text>
