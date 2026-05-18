@@ -1,7 +1,6 @@
 // Generates public/coach-luki-og-personal-trainer-berlin.jpg
-// 1200x630 split card: Luke (rings photo) on the left with a small logo
-// baked into the photo corner (so it survives WhatsApp/iMessage square
-// crops), dark panel with full logo + slogan on the right.
+// 1200x630 split card: Luke (rings photo) on the left with a corner logo,
+// green-gradient panel on the right with a big wordmark + slogan inside it.
 // Run with: node scripts/build-og-image.mjs
 import sharp from "sharp";
 import { Buffer } from "node:buffer";
@@ -15,24 +14,21 @@ const PANEL_W = W - PHOTO_W;
 const SLOGAN = "Train smarter.\nLive stronger.\nBerlin.";
 const URL_TEXT = "coachluki.com";
 
-// Pull a region from the 1067x1600 source that frames Luke's face + rings,
-// then fit-cover into the 680x630 photo panel.
 const photoBuf = await sharp("public/coach-luki-personal-trainer-berlin-rings.webp")
   .extract({ left: 0, top: 180, width: 1067, height: 988 })
   .resize({ width: PHOTO_W, height: H, fit: "cover" })
   .toBuffer();
 
-// Full-size wordmark for the right-side panel.
-const logoBuf = await sharp("public/logo-wordmark-white.png")
-  .resize({ width: 320 })
+// Black wordmark for the green panel (high contrast on green).
+const panelLogoBuf = await sharp("public/logo-wordmark-black.png")
+  .resize({ width: 380 })
   .toBuffer();
-const logoMeta = await sharp(logoBuf).metadata();
+const panelLogoMeta = await sharp(panelLogoBuf).metadata();
 
-// Smaller logo baked into the photo corner — survives square thumbnail crops.
+// Small white wordmark baked onto the photo corner — crop-safe.
 const photoLogoBuf = await sharp("public/logo-wordmark-white.png")
   .resize({ width: 160 })
   .toBuffer();
-const photoLogoMeta = await sharp(photoLogoBuf).metadata();
 
 const syneTtf = await fetchFont(
   "https://github.com/google/fonts/raw/main/ofl/syne/Syne%5Bwght%5D.ttf",
@@ -40,13 +36,12 @@ const syneTtf = await fetchFont(
 const outfitTtf = await fetchFont(
   "https://github.com/google/fonts/raw/main/ofl/outfit/Outfit%5Bwght%5D.ttf",
 );
-
 const syne64 = syneTtf.toString("base64");
 const outfit64 = outfitTtf.toString("base64");
 
 const sloganLines = SLOGAN.split("\n");
-const sloganStartY = 340;
-const sloganLineH = 60;
+const sloganStartY = 360;
+const sloganLineH = 56;
 
 const svg = `
 <svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
@@ -65,29 +60,35 @@ const svg = `
       .slogan {
         font-family: 'Syne', sans-serif;
         font-weight: 800;
-        font-size: 52px;
-        fill: #ffffff;
-        letter-spacing: -1.5px;
+        font-size: 48px;
+        fill: #0a1a05;
+        letter-spacing: -1.2px;
       }
       .url {
         font-family: 'Outfit', sans-serif;
-        font-weight: 500;
+        font-weight: 600;
         font-size: 22px;
-        fill: #8ee63d;
+        fill: #0a1a05;
         letter-spacing: 0.5px;
       }
       .tag {
         font-family: 'Outfit', sans-serif;
-        font-weight: 400;
-        font-size: 18px;
-        fill: #a3a3a3;
+        font-weight: 500;
+        font-size: 16px;
+        fill: #0a1a05;
+        opacity: 0.7;
         letter-spacing: 1.5px;
         text-transform: uppercase;
       }
     </style>
+    <linearGradient id="greenPanel" x1="0" x2="0.4" y1="0" y2="1">
+      <stop offset="0" stop-color="#b7f25e"/>
+      <stop offset="0.6" stop-color="#8ee63d"/>
+      <stop offset="1" stop-color="#5fae20"/>
+    </linearGradient>
     <linearGradient id="photoFade" x1="0" x2="1" y1="0" y2="0">
-      <stop offset="0.78" stop-color="#0C0C0C" stop-opacity="0"/>
-      <stop offset="1" stop-color="#0C0C0C" stop-opacity="1"/>
+      <stop offset="0.78" stop-color="#8ee63d" stop-opacity="0"/>
+      <stop offset="1" stop-color="#8ee63d" stop-opacity="0.9"/>
     </linearGradient>
     <linearGradient id="logoShade" x1="0" x2="0" y1="0" y2="1">
       <stop offset="0" stop-color="#000000" stop-opacity="0.55"/>
@@ -95,22 +96,22 @@ const svg = `
     </linearGradient>
   </defs>
 
-  <!-- dark panel background (right side only) -->
-  <rect x="${PANEL_X}" y="0" width="${PANEL_W}" height="${H}" fill="#0C0C0C"/>
+  <!-- green gradient panel on the right -->
+  <rect x="${PANEL_X}" y="0" width="${PANEL_W}" height="${H}" fill="url(#greenPanel)"/>
 
-  <!-- gradient fade on right edge of photo into panel -->
+  <!-- soft green bleed from the photo edge into the panel -->
   <rect x="0" y="0" width="${PHOTO_W}" height="${H}" fill="url(#photoFade)"/>
 
-  <!-- subtle top shade behind the photo-side logo for legibility -->
+  <!-- top shade behind the photo-side logo -->
   <rect x="0" y="0" width="${PHOTO_W}" height="160" fill="url(#logoShade)"/>
 
-  <!-- subtle green accent line -->
-  <rect x="${PANEL_X + 60}" y="240" width="48" height="3" fill="#8ee63d"/>
+  <!-- subtle accent line under the wordmark -->
+  <rect x="${PANEL_X + 60}" y="270" width="48" height="3" fill="#0a1a05"/>
 
-  <!-- tagline above slogan -->
-  <text x="${PANEL_X + 60}" y="280" class="tag">Personal Trainer · Berlin</text>
+  <!-- tagline -->
+  <text x="${PANEL_X + 60}" y="305" class="tag">Personal Trainer · Berlin</text>
 
-  <!-- slogan, multi-line -->
+  <!-- slogan, three-line -->
   ${sloganLines
     .map(
       (line, i) =>
@@ -119,7 +120,7 @@ const svg = `
     .join("\n  ")}
 
   <!-- url at bottom -->
-  <text x="${PANEL_X + 60}" y="${H - 60}" class="url">${URL_TEXT}</text>
+  <text x="${PANEL_X + 60}" y="${H - 50}" class="url">${URL_TEXT}</text>
 </svg>
 `;
 
@@ -129,21 +130,20 @@ await sharp({
   .composite([
     { input: photoBuf, left: 0, top: 0 },
     { input: Buffer.from(svg), left: 0, top: 0 },
-    // small logo baked onto the photo (top-left) — crop-safe for square thumbs
+    // small white logo on photo corner — crop-safe
     { input: photoLogoBuf, left: 36, top: 36 },
-    // full logo on the right panel
+    // big black wordmark sitting inside the green gradient
     {
-      input: logoBuf,
+      input: panelLogoBuf,
       left: PANEL_X + 60,
-      top: 90,
+      top: 110,
     },
   ])
   .jpeg({ quality: 88, mozjpeg: true })
   .toFile("public/coach-luki-og-personal-trainer-berlin.jpg");
 
 console.log("Wrote public/coach-luki-og-personal-trainer-berlin.jpg (1200x630)");
-console.log("Panel logo:", logoMeta.width, "x", logoMeta.height);
-console.log("Photo-overlay logo:", photoLogoMeta.width, "x", photoLogoMeta.height);
+console.log("Panel logo:", panelLogoMeta.width, "x", panelLogoMeta.height);
 
 async function fetchFont(url) {
   const res = await fetch(url, { redirect: "follow" });
