@@ -25,9 +25,9 @@ const panelLogoBuf = await sharp("public/logo-wordmark-white.png")
   .toBuffer();
 const panelLogoMeta = await sharp(panelLogoBuf).metadata();
 
-// Small white wordmark baked onto the photo corner — crop-safe.
-const photoLogoBuf = await sharp("public/logo-wordmark-white.png")
-  .resize({ width: 160 })
+// Icon mark (favicon) baked onto the photo corner — crop-safe.
+const photoLogoBuf = await sharp("public/logo-icon-green.png")
+  .resize({ width: 110, height: 110, fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
   .toBuffer();
 
 const syneTtf = await fetchFont(
