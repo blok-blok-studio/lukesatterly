@@ -1719,6 +1719,7 @@ const CLIENT_DATA: Record<string, { image?: string; age?: number; objectPosition
   "Andreea": { image: "/testimonial-andreea-personal-trainer-berlin-client.webp",  age: 36, objectPosition: "center top" },
   "Leni":    { image: "/testimonial-leni-personal-trainer-berlin-client.webp",     age: 43, objectPosition: "center 28%", scale: 1.5 },
   "Markus":  { image: "/testimonial-markus-personal-trainer-berlin-client.webp",   age: 41, objectPosition: "center 38%" },
+  "Laura":   { image: "/testimonial-laura-personal-trainer-berlin-client.webp",    age: 36, objectPosition: "center 18%" },
 };
 
 function TestimonialCard({ t, className = "", style }: { t: { name: string; text: string }; className?: string; style?: React.CSSProperties }) {

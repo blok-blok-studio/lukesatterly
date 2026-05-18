@@ -342,12 +342,12 @@ const fr: Dictionary = {
         text: "J'étais sceptique au départ vis-à-vis du personal training, parce que je pensais que c'était surtout une question de motivation. Avec Luki, j'ai appris à vraiment comprendre les exercices et à les exécuter efficacement. Sa compréhension précise et sa capacité à transmettre ce savoir font de l'entraînement une combinaison du corps et de l'esprit. Grâce à lui, je m'entraîne non seulement plus efficacement, mais aussi avec beaucoup plus de confiance et de plaisir.",
       },
       {
-        name: "Laura",
-        text: "I made a conscious decision to work with Luke because I wanted to sculpt my body and take it to a new level. With him it was never just about training — it was about developing a completely new sense of my own body. Through his detail-oriented approach and high standards for clean execution, I learned to truly control my body and perform movements with intention. Luke gave me a clear structure that fits me perfectly — in training as well as nutrition. Today I feel stronger, more confident, and much more comfortable in my body. For me this wasn't classic personal training — it was a genuine physical and mental upgrade.",
-      },
-      {
         name: "Markus",
         text: "I'm very satisfied with Luke. Having three individually designed training plans — machines, free weights, and bodyweight — lets me train flexibly, location-independently, and with variety. The early-morning sessions fit perfectly into my daily routine. I especially appreciate the combination of expertise, motivation, and precise corrections on execution. From the start I wanted intensive guidance to build a solid foundation and then be able to train independently — and that's exactly what he helped me achieve. Clear recommendation!",
+      },
+      {
+        name: "Laura",
+        text: "I made a conscious decision to work with Luke because I wanted to sculpt my body and take it to a new level. With him it was never just about training — it was about developing a completely new sense of my own body. Through his detail-oriented approach and high standards for clean execution, I learned to truly control my body and perform movements with intention. Luke gave me a clear structure that fits me perfectly — in training as well as nutrition. Today I feel stronger, more confident, and much more comfortable in my body. For me this wasn't classic personal training — it was a genuine physical and mental upgrade.",
       },
     ],
   },
