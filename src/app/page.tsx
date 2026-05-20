@@ -425,6 +425,7 @@ function Hero() {
               alt="Coach Luki training on gymnastic rings in Berlin"
               fill
               priority
+              fetchPriority="high"
               sizes="(max-width: 768px) 100vw, 400px"
               className="object-contain z-10"
               style={{
@@ -445,6 +446,7 @@ function Hero() {
               aria-hidden
               fill
               priority
+              fetchPriority="high"
               sizes="(max-width: 768px) 100vw, 400px"
               className="object-contain z-30 pointer-events-none"
               style={{
@@ -591,6 +593,7 @@ function About() {
                 src="/coach-luki-trainer-berlin-portrait.webp"
                 alt="Luke Satterly (Coach Luki) — certified personal trainer and nutritionist in Berlin"
                 fill
+                quality={60}
                 sizes="(max-width: 768px) calc(100vw - 3rem), (max-width: 1280px) calc(50vw - 5rem), 544px"
                 className="object-cover"
               />

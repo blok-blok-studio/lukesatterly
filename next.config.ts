@@ -78,7 +78,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [],
     // Modern formats for smaller payloads and faster LCP (SEO)
     formats: ["image/avif", "image/webp"],
-    qualities: [75, 90, 100],
+    qualities: [60, 75, 90, 100],
   },
 };
 

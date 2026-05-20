@@ -40,7 +40,7 @@ export function LanguageSwitcher({ compact = false }: { compact?: boolean }) {
     <div ref={wrapperRef} className="relative">
       <button
         type="button"
-        aria-label={dict.a11y.languageSwitcher}
+        aria-label={`${dict.a11y.languageSwitcher}: ${locale.toUpperCase()}`}
         aria-haspopup="listbox"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}

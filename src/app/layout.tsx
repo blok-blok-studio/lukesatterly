@@ -443,13 +443,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link
-          rel="preload"
-          as="image"
-          href="/coach-luki-personal-trainer-berlin-rings.webp"
-          fetchPriority="high"
-          imageSizes="(max-width: 768px) 100vw, 400px"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
