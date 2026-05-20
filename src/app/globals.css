@@ -6,6 +6,7 @@
   --accent: #006633;
   --accent-dark: #005528;
   --accent-light: #00803D;
+  --accent-on-dark: #00B352;
   --surface: #161616;
   --surface-light: #EDEAE3;
   --muted: #8A8A85;
@@ -17,6 +18,7 @@
   --color-accent: var(--accent);
   --color-accent-dark: var(--accent-dark);
   --color-accent-light: var(--accent-light);
+  --color-accent-on-dark: var(--accent-on-dark);
   --color-surface: var(--surface);
   --color-surface-light: var(--surface-light);
   --color-muted: var(--muted);

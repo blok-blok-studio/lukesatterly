@@ -591,7 +591,7 @@ function About() {
                 src="/coach-luki-trainer-berlin-portrait.webp"
                 alt="Luke Satterly (Coach Luki) — certified personal trainer and nutritionist in Berlin"
                 fill
-                sizes="(max-width: 768px) 100vw, 50vw"
+                sizes="(max-width: 768px) calc(100vw - 3rem), (max-width: 1280px) calc(50vw - 5rem), 544px"
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
@@ -801,7 +801,7 @@ function BeforeAfter() {
                     alt={`${tr.name} fitness transformation before — starting point of ${tr.duration} personal training with Coach Luki`}
                     fill
                     className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 768px) 50vw, 25vw"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 160px"
                   />
                   <div className="absolute bottom-2 left-2 px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-sm text-[11px] font-medium text-white">
                     {t.beforeAfter.beforeLabel}
@@ -813,7 +813,7 @@ function BeforeAfter() {
                     alt={`${tr.name} fitness transformation after ${tr.duration} of personal training with Coach Luki — ${tr.result}`}
                     fill
                     className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 768px) 50vw, 25vw"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 160px"
                   />
                   <div className="absolute bottom-2 left-2 px-2.5 py-1 rounded-md bg-accent/80 backdrop-blur-sm text-[11px] font-medium text-white">
                     {t.beforeAfter.afterLabel}
@@ -2337,7 +2337,7 @@ function Footer() {
   const t = useT();
   return (
     <footer className="py-10">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-zinc-600">
+      <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-zinc-400">
         <p>&copy; {new Date().getFullYear()} Coach Luki. {t.footer.rights}</p>
         <div className="flex items-center gap-6">
           <a href="https://www.instagram.com/coachluki/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors cursor-pointer">
@@ -2441,6 +2441,7 @@ function ActionBanner() {
           src="/coach-luki-running-berlin-streets-night.webp"
           alt="Coach Luki running through the streets of Berlin at night — outdoor conditioning with personal trainer"
           fill
+          sizes="(max-width: 768px) 100vw, 1280px"
           className="object-cover object-center"
         />
       </motion.div>
@@ -2527,7 +2528,7 @@ function TrustBanner() {
                 viewport={{ once: true }}
 
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="text-accent text-sm font-medium uppercase tracking-widest mb-4"
+                className="text-accent-on-dark text-sm font-medium uppercase tracking-widest mb-4"
               >
                 {t.trustBanner.eyebrow}
               </motion.p>
