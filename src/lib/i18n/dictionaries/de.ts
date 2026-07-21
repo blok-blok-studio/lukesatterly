@@ -247,7 +247,7 @@ const de: Dictionary = {
         description: "Fitness ist kein Ziel, sondern etwas, das du jeden Tag machst. Feiere die kleinen Erfolge, sei konsequent und vertraue der Arbeit, die du investierst.",
       },
     ],
-    quote: "Genieße den Fortschritt. Umarme die Anstrengung.",
+    quote: "Genieße den Fortschritt und umarme die Herausforderung.",
     quoteAuthor: "Coach Luki",
   },
   experience: {

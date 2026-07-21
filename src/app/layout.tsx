@@ -245,7 +245,15 @@ const jsonLd = {
       description:
         "Certified personal trainer and nutritionist based in Berlin, Germany. Specializing in strength training, calisthenics, ring training, and plant-based nutrition.",
       url: siteUrl,
-      image: `${siteUrl}/coach-luki-og-personal-trainer-berlin.jpg`,
+      image: [
+        `${siteUrl}/coach-luki-og-personal-trainer-berlin.jpg`,
+        {
+          "@type": "ImageObject",
+          url: `${siteUrl}/coach-luki-personal-trainer-berlin-smiling-portrait.webp`,
+          caption:
+            "Luke Satterly (Coach Luki), certified personal trainer and nutritionist in Berlin",
+        },
+      ],
       jobTitle: "Personal Trainer & Nutritionist",
       worksFor: {
         "@type": "LocalBusiness",

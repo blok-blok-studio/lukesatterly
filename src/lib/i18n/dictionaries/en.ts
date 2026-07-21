@@ -245,7 +245,7 @@ const en = {
         description: "Fitness isn't a destination, it's something you do every day. Celebrate the small wins, show up consistently, and trust the work you're putting in.",
       },
     ],
-    quote: "Enjoy the progress. Embrace the suck.",
+    quote: "Enjoy the progress and embrace the challenge.",
     quoteAuthor: "Coach Luki",
   },
   experience: {

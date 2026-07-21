@@ -590,8 +590,8 @@ function About() {
           >
             <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-stone-100">
               <Image
-                src="/coach-luki-trainer-berlin-portrait.webp"
-                alt="Luke Satterly (Coach Luki) — certified personal trainer and nutritionist in Berlin"
+                src="/coach-luki-personal-trainer-berlin-smiling-portrait.webp"
+                alt="Luke Satterly (Coach Luki) smiling in a Coach Luki training shirt — certified personal trainer and nutritionist in Berlin"
                 fill
                 quality={60}
                 sizes="(max-width: 768px) calc(100vw - 3rem), (max-width: 1280px) calc(50vw - 5rem), 544px"
@@ -1526,11 +1526,23 @@ function Philosophy() {
           transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="mt-20 text-center"
         >
-          <div className="inline-block px-10 py-8 rounded-2xl bg-surface border border-accent/10 glow">
-            <p className="text-2xl sm:text-3xl font-medium text-white italic">
-              &ldquo;{t.philosophy.quote}&rdquo;
-            </p>
-            <p className="text-accent text-sm mt-4">{t.philosophy.quoteAuthor}</p>
+          <div className="relative max-w-3xl mx-auto rounded-2xl overflow-hidden bg-surface border border-accent/10 glow">
+            <Image
+              src="/coach-luki-back-muscles-strength-training-berlin.webp"
+              alt=""
+              aria-hidden
+              fill
+              quality={60}
+              sizes="(max-width: 768px) calc(100vw - 2rem), 768px"
+              className="object-cover object-[50%_30%]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/60 to-black/45" />
+            <div className="relative px-8 sm:px-12 py-14 sm:py-20">
+              <p className="text-2xl sm:text-3xl font-medium text-white italic">
+                &ldquo;{t.philosophy.quote}&rdquo;
+              </p>
+              <p className="text-accent-on-dark text-sm mt-4">{t.philosophy.quoteAuthor}</p>
+            </div>
           </div>
         </motion.div>
       </div>
@@ -1683,6 +1695,23 @@ function Experience() {
           />
           {/* White highlight — top right */}
           <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.95)_0%,transparent_55%)]" />
+          {/* Photo backdrop behind the timeline — fades out toward the left */}
+          <div
+            className="absolute bottom-0 right-0 h-full w-[260px] sm:w-[400px] lg:w-[520px]"
+            style={{
+              maskImage: "linear-gradient(to left, black 55%, transparent 100%)",
+              WebkitMaskImage: "linear-gradient(to left, black 55%, transparent 100%)",
+            }}
+          >
+            <Image
+              src="/coach-luki-athletic-training-berlin-studio.webp"
+              alt=""
+              fill
+              quality={60}
+              sizes="(max-width: 640px) 260px, (max-width: 1024px) 400px, 520px"
+              className="object-contain object-right-bottom opacity-25 sm:opacity-30"
+            />
+          </div>
         </div>
         <motion.div
           initial={{ y: 40, scale: 0.85 }}
@@ -2511,8 +2540,8 @@ function TrustBanner() {
           {/* Image side */}
           <div className="relative h-[400px] lg:h-auto">
             <Image
-              src="/coach-luki-personal-trainer-prenzlauer-berg.webp"
-              alt="Coach Luki in urban Berlin — book a personal training session in Prenzlauer Berg or Mitte"
+              src="/coach-luki-personal-trainer-berlin-back-portrait.webp"
+              alt="Coach Luki looking over his shoulder, back and shoulder muscles defined — book a personal training session in Berlin"
               fill
               className="object-cover object-top"
             />
