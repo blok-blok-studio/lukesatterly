@@ -1534,10 +1534,10 @@ function Philosophy() {
               fill
               quality={60}
               sizes="(max-width: 768px) calc(100vw - 2rem), 768px"
-              className="object-cover object-[50%_30%]"
+              className="object-cover object-[50%_15%]"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/60 to-black/45" />
-            <div className="relative px-8 sm:px-12 py-14 sm:py-20">
+            <div className="relative px-8 sm:px-12 py-16 sm:py-28">
               <p className="text-2xl sm:text-3xl font-medium text-white italic">
                 &ldquo;{t.philosophy.quote}&rdquo;
               </p>
@@ -1709,7 +1709,7 @@ function Experience() {
               fill
               quality={60}
               sizes="(max-width: 640px) 260px, (max-width: 1024px) 400px, 520px"
-              className="object-contain object-right-bottom opacity-25 sm:opacity-30"
+              className="object-cover object-[55%_50%] opacity-25 sm:opacity-30"
             />
           </div>
         </div>
